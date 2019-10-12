@@ -58,66 +58,66 @@
 </template>
 
 <script>
-import axios from "axios";
-import baseURL from "@/assets/js/config";
-import {aside} from "@/api/login.js";
-import { validUsername } from "@/utils/validate";
-import { setToken } from "@/utils/auth";
-import { constantRoutes, asyncRoutes,resetRouter } from '@/router'
+import axios from 'axios'
+import baseURL from '@/assets/js/config'
+import { aside } from '@/api/login.js'
+import { validUsername } from '@/utils/validate'
+import { setToken } from '@/utils/auth'
+import { constantRoutes, asyncRoutes, resetRouter } from '@/router'
 
 export default {
-    name: "Login",
-    components: { },
+    name: 'Login',
+    components: {},
     data() {
         const validateUsername = (rule, value, callback) => {
-            if (value == "") {
-                callback("请输入用户名");
+            if (value == '') {
+                callback('请输入用户名')
             } else {
-                callback();
+                callback()
             }
-        };
+        }
         const validatePassword = (rule, value, callback) => {
-            if (value == "") {
-                callback("请输入密码");
+            if (value == '') {
+                callback('请输入密码')
             } else {
-                callback();
+                callback()
             }
-        };
+        }
         return {
             loginForm: {
-                username: "admin",
-                password: "admin"
+                username: 'admin',
+                password: 'admin'
             },
             loginRules: {
                 username: [
                     {
                         required: true,
-                        trigger: "blur",
+                        trigger: 'blur',
                         validator: validateUsername
                     }
                 ],
                 password: [
                     {
                         required: true,
-                        trigger: "blur",
+                        trigger: 'blur',
                         validator: validatePassword
                     }
                 ]
             },
-            passwordType: "password",
+            passwordType: 'password',
             capsTooltip: false,
             loading: false,
             redirect: undefined,
             otherQuery: {}
-        };
+        }
     },
     watch: {
         $route: {
             handler: function(route) {
-                const query = route.query;
+                const query = route.query
                 if (query) {
-                    this.redirect = query.redirect;
-                    this.otherQuery = this.getOtherQuery(query);
+                    this.redirect = query.redirect
+                    this.otherQuery = this.getOtherQuery(query)
                 }
             },
             immediate: true
@@ -125,10 +125,10 @@ export default {
     },
     created() {},
     mounted() {
-        if (this.loginForm.username === "") {
-            this.$refs.username.focus();
-        } else if (this.loginForm.password === "") {
-            this.$refs.password.focus();
+        if (this.loginForm.username === '') {
+            this.$refs.username.focus()
+        } else if (this.loginForm.password === '') {
+            this.$refs.password.focus()
         }
     },
     destroyed() {},
@@ -136,42 +136,72 @@ export default {
         checkCapslock({ shiftKey, key } = {}) {
             if (key && key.length === 1) {
                 if (
-                    (shiftKey && (key >= "a" && key <= "z")) ||
-                    (!shiftKey && (key >= "A" && key <= "Z"))
+                    (shiftKey && (key >= 'a' && key <= 'z')) ||
+                    (!shiftKey && (key >= 'A' && key <= 'Z'))
                 ) {
-                    this.capsTooltip = true;
+                    this.capsTooltip = true
                 } else {
-                    this.capsTooltip = false;
+                    this.capsTooltip = false
                 }
             }
-            if (key === "CapsLock" && this.capsTooltip === true) {
-                this.capsTooltip = false;
+            if (key === 'CapsLock' && this.capsTooltip === true) {
+                this.capsTooltip = false
             }
         },
         handleLogin() {
             this.$refs.loginForm.validate(valid => {
                 if (valid) {
-                    this.loading = true;
+                    this.loading = true
                     let url = `${baseURL}/tbSysUser/login.do?loginName=${this.loginForm.username}&password=${this.loginForm.password}`
-                    axios.get(url).then(({data}) => {
+                    axios.get(url).then(({ data }) => {
                         this.loading = false
                         if (data.status === 200) {
-                            sessionStorage.setItem('GYWL2RoleId',data.entity.roleId)
-                            this.$store.dispatch("user/get_ruleId", data.entity.roleId)
-                            sessionStorage.setItem('GYWL2UserId',data.entity.userId)
-                            this.$cookies.set('GYWL2UserName',data.entity.userName,'1D')
-                            this.$cookies.set('GYWL2Account',this.loginForm.password,'1D')
-                            this.$cookies.set('GYWL2Checked',this.checked,'1D')
+                            sessionStorage.setItem(
+                                'GYWL2RoleId',
+                                data.entity.roleId
+                            )
+                            this.$store.dispatch(
+                                'user/get_ruleId',
+                                data.entity.roleId
+                            )
+                            sessionStorage.setItem(
+                                'GYWL2UserId',
+                                data.entity.userId
+                            )
+                            this.$cookies.set(
+                                'GYWL2UserName',
+                                data.entity.userName,
+                                '1D'
+                            )
+                            this.$cookies.set(
+                                'GYWL2Account',
+                                this.loginForm.password,
+                                '1D'
+                            )
+                            this.$cookies.set(
+                                'GYWL2Checked',
+                                this.checked,
+                                '1D'
+                            )
                             resetRouter()
-                            this.$store.dispatch("permission/Action_GET_SIDE").then((RouterData) => {
-                                this.$router.addRoutes(RouterData)
-                                if (RouterData[1].path != "/") {
-                                    this.$router.push({path: RouterData[1].path +"/"+RouterData[1].children[0].path})
-                                } else {
-                                    this.$router.push({path: RouterData[1].path})
-                                }
-                            })
-                        } else if(data.status === 400) {
+                            this.$store
+                                .dispatch('permission/Action_GET_SIDE')
+                                .then(RouterData => {
+                                    this.$router.addRoutes(RouterData)
+                                    if (RouterData[1].path != '/') {
+                                        this.$router.push({
+                                            path:
+                                                RouterData[1].path +
+                                                '/' +
+                                                RouterData[1].children[0].path
+                                        })
+                                    } else {
+                                        this.$router.push({
+                                            path: RouterData[1].path
+                                        })
+                                    }
+                                })
+                        } else if (data.status === 400) {
                             this.$message({
                                 message: '账号或密码错误',
                                 type: 'error'
@@ -180,21 +210,21 @@ export default {
                         }
                     })
                 } else {
-                    console.log("error submit!!");
-                    return false;
+                    console.log('error submit!!')
+                    return false
                 }
-            });
+            })
         },
         getOtherQuery(query) {
             return Object.keys(query).reduce((acc, cur) => {
-                if (cur !== "redirect") {
-                    acc[cur] = query[cur];
+                if (cur !== 'redirect') {
+                    acc[cur] = query[cur]
                 }
-                return acc;
-            }, {});
+                return acc
+            }, {})
         }
     }
-};
+}
 </script>
 
 <style lang="scss">
@@ -241,7 +271,6 @@ $cursor: #fff;
         border-radius: 5px;
         color: #454545;
     }
-    
 }
 </style>
 
