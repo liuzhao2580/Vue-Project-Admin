@@ -54,7 +54,121 @@ export const constantRoutes = [
                 meta: { title: '404' }
             },
         ]
-    }
+    },
+    {
+        path: "/errorPage",
+        component: Layout,
+        meta: { title: "error" },
+        children: [
+            {
+                path: '401',
+                component: () => import('@/views/error_page/401_page'),
+                name: '401_page',
+                meta: { title: '401' }
+            },
+            {
+                path: '404',
+                component: () => import('@/views/error_page/404_page'),
+                name: '404_page',
+                meta: { title: '404' }
+            },
+        ]
+    },
+    {
+        path: "/errorPage",
+        component: Layout,
+        meta: { title: "error" },
+        children: [
+            {
+                path: '401',
+                component: () => import('@/views/error_page/401_page'),
+                name: '401_page',
+                meta: { title: '401' }
+            },
+            {
+                path: '404',
+                component: () => import('@/views/error_page/404_page'),
+                name: '404_page',
+                meta: { title: '404' }
+            },
+        ]
+    },
+    {
+        path: "/errorPage",
+        component: Layout,
+        meta: { title: "error" },
+        children: [
+            {
+                path: '401',
+                component: () => import('@/views/error_page/401_page'),
+                name: '401_page',
+                meta: { title: '401' }
+            },
+            {
+                path: '404',
+                component: () => import('@/views/error_page/404_page'),
+                name: '404_page',
+                meta: { title: '404' }
+            },
+        ]
+    },
+    {
+        path: "/errorPage",
+        component: Layout,
+        meta: { title: "error" },
+        children: [
+            {
+                path: '401',
+                component: () => import('@/views/error_page/401_page'),
+                name: '401_page',
+                meta: { title: '401' }
+            },
+            {
+                path: '404',
+                component: () => import('@/views/error_page/404_page'),
+                name: '404_page',
+                meta: { title: '404' }
+            },
+        ]
+    },
+    {
+        path: "/errorPage",
+        component: Layout,
+        meta: { title: "error" },
+        children: [
+            {
+                path: '401',
+                component: () => import('@/views/error_page/401_page'),
+                name: '401_page',
+                meta: { title: '401' }
+            },
+            {
+                path: '404',
+                component: () => import('@/views/error_page/404_page'),
+                name: '404_page',
+                meta: { title: '404' }
+            },
+        ]
+    },
+    {
+        path: "/errorPage",
+        component: Layout,
+        meta: { title: "error" },
+        children: [
+            {
+                path: '401',
+                component: () => import('@/views/error_page/401_page'),
+                name: '401_page',
+                meta: { title: '401' }
+            },
+            {
+                path: '404',
+                component: () => import('@/views/error_page/404_page'),
+                name: '404_page',
+                meta: { title: '404' }
+            },
+        ]
+    },
 ]
 // 需要权限的页面
 export const asyncRoutes = [

@@ -4,7 +4,7 @@
             <el-aside width="200px" class="sider-box">
                 <Sidebar />
             </el-aside>
-            <el-main>
+            <el-main class="main-box">
                 <AppMain />
             </el-main>
         </el-container>
