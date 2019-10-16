@@ -5,7 +5,6 @@
             <el-menu
                 :collapse="isCollapse"
                 :default-active="activeMenu"
-                class="el-menu-vertical-demo"
                 :background-color="variables.menuBg"
                 :text-color="variables.menuText"
                 :active-text-color="variables.menuActiveText"

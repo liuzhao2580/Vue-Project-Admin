@@ -4,35 +4,42 @@
         <template v-if="checkMoreRouter(item.children)">
             <!-- 说明只有一级菜单 -->
             <template v-if="!item.meta">
-                 <el-menu-item :index="basePath">
+                 <el-menu-item :index="resolvePath(item.children[0].path)">
                     <i class="el-icon-menu"></i>
                     <span slot="title">{{item.children[0].meta.title}}</span>
                 </el-menu-item>
             </template>
             <!-- 说明存在二级菜单 -->
             <template v-else>
-                <el-submenu :index="item.path">
+                <el-submenu :index="item.path" class="submenu-side">
                     <template slot="title">
                         <i class="el-icon-location"></i>
                         <span slot="title">{{item.meta.title}}</span>
                     </template>
-                    <el-menu-item-group v-for="groupItem in item.children" :key="groupItem.path">
-                        <el-menu-item :index="item.path + '/' +groupItem.path">
-                            <i class="el-icon-menu"></i>
-                            <span slot="title">{{groupItem.meta.title}}</span>
-                        </el-menu-item>
-                    </el-menu-item-group>
+                    <el-menu-item v-for="groupItem in item.children" :key="groupItem.path" :index="resolvePath(groupItem.path)">
+                        <i class="el-icon-menu"></i>
+                        <span slot="title">{{groupItem.meta.title}}</span>
+                    </el-menu-item>
                 </el-submenu>
             </template>
         </template>
         <!-- 说明存在 多级 菜单 -->
         <template v-else>
-            
+            <sidebar-item
+                v-for="child in item.children"
+                :key="child.path"
+                :is-nest="true"
+                :item="child"
+                :base-path="resolvePath(child.path)"
+                class="nest-menu"
+            />
         </template>
 	</div>
 </template>
 
 <script>
+// 引入 path 模块 用于拼接url地址
+import path from 'path'
 export default {
 	name: "SidebarItem",
 	components: {},
@@ -58,6 +65,10 @@ export default {
                 return false
             }
             return true
+        },
+        // 用于拼接 url 地址
+        resolvePath(routePath) {
+            return path.resolve(this.basePath, routePath)
         }
     },
 	watch: {}

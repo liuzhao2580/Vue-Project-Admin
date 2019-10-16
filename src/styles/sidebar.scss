@@ -18,11 +18,27 @@
                 .SideBar-box {
                     height: 100%;
                     overflow-x: hidden;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
                     .SideBar-scrollbar {
-                        padding-bottom: 20px;
                         height: 100%;
                         .el-scrollbar__wrap {
                             overflow-x: hidden;
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
+                            // 二级侧边栏的背景色
+                            .SidebarItem-box {
+                                .submenu-side {
+                                    .el-menu-item {
+                                        background-color:$subMenuBg !important;
+                                        &:hover {
+                                            background-color: $subMenuHover !important;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
