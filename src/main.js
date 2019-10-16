@@ -8,7 +8,6 @@ Vue.use(ElementUI)
 import "@/permission"   // 权限验证
 import "@/styles/index.scss" // 公共的样式
 Vue.config.productionTip = false
-
 new Vue({
     router,
     store,

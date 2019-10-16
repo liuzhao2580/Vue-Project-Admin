@@ -8,6 +8,7 @@
 			background-color="#545c64"
 			text-color="#fff"
 			active-text-color="#ffd04b"
+            :router="true"
 		>
 			<SidebarItem
                 v-for="route in this.$router.options.routes"
@@ -30,16 +31,13 @@ export default {
     computed: {
         activeMenu() {
             const route = this.$route
-            const {meta, path} = route
-            if (meta.activeMenu) {
-                return meta.activeMenu
-            }
+            const { path } = route
             return path
         }
     },
 	data() {
 		return {
-            isCollapse: true
+            isCollapse: false
         };
 	},
 	created() {},

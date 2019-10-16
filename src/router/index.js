@@ -70,4 +70,9 @@ export function resetRouter() {
     const newRouter = createRouter()
     router.matcher = newRouter.matcher // reset router
 }
+// 解决 点击路由的是否报错问题
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+}
 export default router
