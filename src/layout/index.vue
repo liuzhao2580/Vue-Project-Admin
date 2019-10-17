@@ -1,10 +1,11 @@
 <template>
 	<div class="app-warpper">
         <el-container class="container-box">
-            <el-aside width="200px" class="sider-box">
+            <el-aside :width="asideWidth" class="sider-box">
                 <Sidebar />
             </el-aside>
-            <el-main class="main-box">
+            <el-main class="main-box" :style="{marginLeft: (side_status? '64px':'200px')}">
+                <Navbar />
                 <AppMain />
             </el-main>
         </el-container>
@@ -12,20 +13,42 @@
 </template>
 
 <script>
-import { AppMain, Sidebar } from './components'
+import { AppMain, Sidebar, Navbar } from './components'
+import {mapGetters} from 'vuex'
+import { userInfoApi } from '@/api/user'
+import axios from "axios"
 export default {
 	name: "layout",
 	components: {
         AppMain,
-        Sidebar
+        Sidebar,
+        Navbar
+    },
+    computed: {
+        ...mapGetters(["side_status"]),
+        asideWidth() {
+            if (this.side_status) return "64px"
+            return "200px"
+        },
+        
     },
 	props: {},
 	data() {
 		return {};
 	},
 	created() {},
-	mounted() {},
-	methods: {},
+	mounted() {
+        // 初始化
+        this.init()
+    },
+	methods: {
+        init() {
+            console.log(userInfoApi)
+            axios.get("/api/user/info").then((res) => {
+                console.log(res)
+            })
+        }
+    },
 	watch: {}
 };
 </script>

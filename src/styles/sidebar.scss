@@ -10,33 +10,59 @@
             .sider-box {
                 padding: 0;
                 margin-bottom: 0;
-                position: absolute;
+                position: fixed;
                 top: 0;
                 bottom: 0;
                 border-radius: 0;
-                height: 100%;
-                .SideBar-box {
+                transition: width 0.3s;
+                .SideBar-scrollbar {
                     height: 100%;
-                    overflow-x: hidden;
-                    &::-webkit-scrollbar {
-                        display: none;
-                    }
-                    .SideBar-scrollbar {
-                        height: 100%;
-                        .el-scrollbar__wrap {
-                            overflow-x: hidden;
-                            &::-webkit-scrollbar {
-                                display: none;
+                    .el-scrollbar__wrap {
+                        overflow-x: hidden;
+                        // 标题
+                        .SideBar-title {
+                            padding-top: 5px;
+                            white-space: nowrap;
+                            transition: padding-left 0.3s;
+                            
+                            img {
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 50%;
+                                vertical-align: bottom;
                             }
-                            // 二级侧边栏的背景色
-                            .SidebarItem-box {
-                                .submenu-side {
-                                    .el-menu-item {
-                                        background-color:$subMenuBg !important;
-                                        &:hover {
-                                            background-color: $subMenuHover !important;
+
+                            span {
+                                font-size: 20px;
+                                margin-left: 10px;
+                                color: #fff;
+                                transition: display 0.3s;
+                            }
+                        }
+                        .el-menu {
+                            border: 0;
+                        }
+
+                        // 二级侧边栏的背景色
+                        .SidebarItem-box {
+                            .submenu-side {
+                                // 二级菜单 中的子菜单被选中
+                                &.is-active {
+                                    .el-submenu__title {
+                                        span {
+                                            color: $subMenuActiveText;
                                         }
                                     }
+                                }
+                                .el-menu-item {
+                                    background-color: $subMenuBg !important;
+
+                                    &:hover {
+                                        background-color: $subMenuHover !important;
+                                    }
+                                }
+                                /deep/ .el-icon-arrow-right {
+                                    display: none;
                                 }
                             }
                         }
@@ -44,7 +70,7 @@
                 }
             }
             .main-box {
-                margin-left: 200px;
+                transition: margin-left 0.3s;
                 padding: 0;
                 >div {
                     width: 100%;

@@ -11,10 +11,10 @@
             </template>
             <!-- 说明存在二级菜单 -->
             <template v-else>
-                <el-submenu :index="item.path" class="submenu-side">
+                <el-submenu :index="item.path" class="submenu-side" popper-append-to-body>
                     <template slot="title">
                         <i class="el-icon-location"></i>
-                        <span slot="title">{{item.meta.title}}</span>
+                        <span slot="title" v-show="!side_status">{{item.meta.title}}</span>
                     </template>
                     <el-menu-item v-for="groupItem in item.children" :key="groupItem.path" :index="resolvePath(groupItem.path)">
                         <i class="el-icon-menu"></i>
@@ -25,7 +25,7 @@
         </template>
         <!-- 说明存在 多级 菜单 -->
         <template v-else>
-            <sidebar-item
+            <SidebarItem
                 v-for="child in item.children"
                 :key="child.path"
                 :is-nest="true"
@@ -38,11 +38,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 // 引入 path 模块 用于拼接url地址
 import path from 'path'
 export default {
 	name: "SidebarItem",
-	components: {},
+    components: {},
+    computed: {
+        ...mapGetters(["side_status"])
+    },
 	props: {
 		item: {
 			type: Object

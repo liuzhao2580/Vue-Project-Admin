@@ -3,7 +3,7 @@ const path = require("path")
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
-
+const port = 9527
 module.exports = {
     publicPath: "./",
     outputDir: process.env.VUE_APP_TITLE === "production" ? "dist" : "test",
@@ -24,13 +24,15 @@ module.exports = {
         }
     },
     devServer: {
-        port: 8080,
-        host: "0.0.0.0",
+        port: port,
         open: true,
         https: false,
         overlay: {
             warnings: true,
             errors: true
+        },
+        proxy: {
+            "/api": { target: `http://localhost:${port}` }
         }
     }
 }
