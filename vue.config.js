@@ -32,7 +32,13 @@ module.exports = {
             errors: true
         },
         proxy: {
-            "/api": { target: `http://localhost:${port}` }
+            "/mock": {
+                target: `http://localhost:${port}`,
+                changeOrigin: true,
+                pathRewrite: {
+                    ["^" + process.env.VUE_APP_BASE_API]: ""
+                }
+            }
         }
     }
 }

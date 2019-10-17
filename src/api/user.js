@@ -1,5 +1,5 @@
-import axios from '@/assets/js/axiosConfig'
+import axios from 'axios'
 
 export const userInfoApi = () => {
-    return axios.get("/api/user/info")
+    return axios.get("/user/info")
 }

@@ -1,10 +1,9 @@
 <template>
 	<el-scrollbar class="SideBar-scrollbar">
-		<div class="SideBar-title" :style="{paddingLeft: (!side_status ? '20px': '10px')}">
-            <div class="SideBar-open">
-                <img src="../../../assets/images/welcom.gif" alt="">
-                <span v-show="!side_status">欢迎访问</span>
-            </div>
+		<div class="SideBar-title" :style="{paddingLeft: (!side_status ? '20px': '10px')}" @click="$router.push({path: '/'})">
+            <img src="../../../assets/images/welcom.gif" alt="">
+            <span v-show="!side_status">欢迎访问</span>
+            <svg-icon icon-class="index" />
         </div>
 		<el-menu
 			:collapse="side_status"

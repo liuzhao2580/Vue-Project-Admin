@@ -16,7 +16,6 @@
 import { AppMain, Sidebar, Navbar } from './components'
 import {mapGetters} from 'vuex'
 import { userInfoApi } from '@/api/user'
-import axios from "axios"
 export default {
 	name: "layout",
 	components: {
@@ -43,8 +42,7 @@ export default {
     },
 	methods: {
         init() {
-            console.log(userInfoApi)
-            axios.get("/api/user/info").then((res) => {
+            userInfoApi().then((res) => {
                 console.log(res)
             })
         }

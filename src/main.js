@@ -8,8 +8,9 @@ Vue.use(ElementUI)
 import "@/permission"   // 权限验证
 import "@/styles/index.scss" // 公共的样式
 
-// eslint-disable-next-line no-unused-vars
 import '@/mock' // 导入 mock  不需要的时候注释
+
+import "./Icon"  // 道路 icon 字体
 Vue.config.productionTip = false
 new Vue({
     router,

@@ -24,6 +24,7 @@
                             padding-top: 5px;
                             white-space: nowrap;
                             transition: padding-left 0.3s;
+                            cursor: pointer;
                             
                             img {
                                 width: 40px;
@@ -61,7 +62,7 @@
                                         background-color: $subMenuHover !important;
                                     }
                                 }
-                                /deep/ .el-icon-arrow-right {
+                                .el-icon-arrow-right {
                                     display: none;
                                 }
                             }

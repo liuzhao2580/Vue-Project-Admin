@@ -1,13 +1,9 @@
-const tokens = {
-    token: "token-admin"
-}
+import Mock from "mockjs"
 
-export default {
-    userInfo: {
-        url: '/user/info',
-        type: 'get',
-        response: () => {
-            return tokens
-        }
-    }
-}
+// const tokens = {
+//     token: "token-admin"
+// }
+
+Mock.mock("/user/info", "get", {
+    data: 1111
+})
