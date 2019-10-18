@@ -3,7 +3,6 @@
 		<div class="SideBar-title" :style="{paddingLeft: (!side_status ? '20px': '10px')}" @click="$router.push({path: '/'})">
             <img src="../../../assets/images/welcom.gif" alt="">
             <span v-show="!side_status">欢迎访问</span>
-            <svg-icon icon-class="index" />
         </div>
 		<el-menu
 			:collapse="side_status"
@@ -11,8 +10,8 @@
 			:background-color="variables.menuBg"
 			:text-color="variables.menuText"
 			:active-text-color="variables.menuActiveText"
+            :collapse-transition="false"
 			:router="true"
-            class="el-menu-vertical-demo"
 		>
 			<SidebarItem
 				v-for="route in this.$router.options.routes"
@@ -59,4 +58,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>

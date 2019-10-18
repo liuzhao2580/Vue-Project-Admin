@@ -1,79 +1,91 @@
 <template>
 	<div v-if="!item.hidden" class="SidebarItem-box">
-        <!-- 首先判断有没有 三级 四级... 多级路由 -->
-        <template v-if="checkMoreRouter(item.children)">
-            <!-- 说明只有一级菜单 -->
-            <template v-if="!item.meta">
-                 <el-menu-item :index="resolvePath(item.children[0].path)">
-                    <i class="el-icon-menu"></i>
-                    <span slot="title">{{item.children[0].meta.title}}</span>
-                </el-menu-item>
-            </template>
-            <!-- 说明存在二级菜单 -->
-            <template v-else>
-                <el-submenu :index="item.path" class="submenu-side" popper-append-to-body>
-                    <template slot="title">
-                        <i class="el-icon-location"></i>
-                        <span slot="title" v-show="!side_status">{{item.meta.title}}</span>
-                    </template>
-                    <el-menu-item v-for="groupItem in item.children" :key="groupItem.path" :index="resolvePath(groupItem.path)">
-                        <i class="el-icon-menu"></i>
-                        <span slot="title">{{groupItem.meta.title}}</span>
-                    </el-menu-item>
-                </el-submenu>
-            </template>
+        <!-- 首先判断 当级路由下不存在多级路由 -->
+        <template v-if="checkMoreRouter(item.children, item)">
+            <el-menu-item :index="resolvePath(onlyOneChild.path)">
+                <MenuItem :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title" />
+            </el-menu-item>
         </template>
-        <!-- 说明存在 多级 菜单 -->
-        <template v-else>
-            <SidebarItem
-                v-for="child in item.children"
-                :key="child.path"
-                :is-nest="true"
-                :item="child"
-                :base-path="resolvePath(child.path)"
-                class="nest-menu"
-            />
-        </template>
+        <!-- 当级路由下存在多级路由 -->
+        <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body>
+            <template slot="title">
+                <MenuItem :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title" />
+            </template>
+            <template v-if="item.children">
+                <SidebarItem
+                    v-for="child in item.children"
+                    :key="child.path"
+                    :item="child"
+                    :isMoreChild="true"
+                    :base-path="resolvePath(child.path)"
+                    class="More-Sildbar"
+                />
+            </template>
+        </el-submenu>
 	</div>
 </template>
 
 <script>
+/* eslint-disable */
 import { mapGetters } from 'vuex'
 // 引入 path 模块 用于拼接url地址
 import path from 'path'
+import MenuItem from './Item'
 export default {
 	name: "SidebarItem",
-    components: {},
+    components: {
+        MenuItem
+    },
     computed: {
         ...mapGetters(["side_status"])
     },
 	props: {
 		item: {
-			type: Object
+			require: true
 		},
 		basePath: {
 			type: String,
 			default: ""
-		}
+        },
+        isMoreChild: {
+            type:Boolean,
+            default: false
+        }
 	},
 	data() {
-		return {};
+		return {
+            onlyOneChild: null
+        };
 	},
 	created() {},
 	mounted() {},
 	methods: {
-        // 用户判断多级路由
-        checkMoreRouter(Citem) {
-            // 说明存在多级路由
-            if (Citem.children) {
-                return false
-            }
-            return true
-        },
         // 用于拼接 url 地址
         resolvePath(routePath) {
             return path.resolve(this.basePath, routePath)
-        }
+        },
+        // 用户判断多级路由
+        checkMoreRouter(children = [], parent) {
+            // 判断 是否含有多级路由
+            // 当 children 和 meta 同时存在时, 说明还存在子路由
+            if (parent.children && parent.meta) {
+                this.onlyOneChild = parent
+                return false
+            }
+            // 说明当前路由不存在子路由 
+            else {
+                // 如果 isMoreChild 存在 说明当前的路由是通过递归传递的数据
+                if (this.isMoreChild) {
+                    // 重新定义 path 
+                    this.onlyOneChild = {...parent,path:""}
+                }
+                // 说明 当前的路由是一级路由 
+                else {
+                    this.onlyOneChild = children[0]
+                }
+                return true
+            }
+        },
     },
 	watch: {}
 };

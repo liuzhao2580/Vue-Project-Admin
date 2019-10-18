@@ -1,13 +1,10 @@
 <template>
-	<div>
-        401
-        <router-view></router-view>
-    </div>
+	<div>4011</div>
 </template>
 
 <script>
 export default {
-	name: "",
+	name: "page4011",
 	components: {},
 	props: {},
 	data() {

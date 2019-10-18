@@ -11,6 +11,7 @@ export const constantRoutes = [
         hidden: true,
         component: () => import("@/views/login")
     },
+    // 首页
     {
         path: "/",
         component: Layout,
@@ -20,10 +21,11 @@ export const constantRoutes = [
                 path: 'dashboard',
                 component: () => import('@/views/dashboard/index'),
                 name: 'Dashboard',
-                meta: { title: '首页' }
+                meta: { title: '首页',icon: "index" }
             }
         ]
     },
+    // 文档页
     {
         path: "/documentation",
         component: Layout,
@@ -32,29 +34,40 @@ export const constantRoutes = [
                 path: 'index',
                 component: () => import('@/views/documentation/index'),
                 name: 'documentation',
-                meta: { title: '文档' }
+                meta: { title: '文档', icon: "wendang" }
             }
         ]
     },
+    // 错误页
     {
         path: "/errorPage",
         component: Layout,
-        meta: {title: "error"},
+        meta: { title: "error", icon: "index"},
         children: [
             {
                 path: '401',
                 component: () => import('@/views/error_page/401_page'),
                 name: '401_page',
-                meta: { title: '401' }
+                meta: { title: '401', icon: "index" },
+                children: [
+                    {
+                        path: '4011',
+                        component: () => import('@/views/error_page/4011_page'),
+                        name: 'page4011',
+                        meta: { title: '4011', icon: "index" },
+                    }
+                ]
             },
             {
                 path: '404',
                 component: () => import('@/views/error_page/404_page'),
                 name: '404_page',
-                meta: { title: '404' }
+                meta: { title: '404', icon: "index" }
             },
         ]
-    }
+    },
+    // 404
+    { path: "*", hidden:true, component: () => import("@/views/error_page/404_page") }
 ]
 // 需要权限的页面
 export const asyncRoutes = [

@@ -10,7 +10,7 @@ import "@/styles/index.scss" // 公共的样式
 
 import '@/mock' // 导入 mock  不需要的时候注释
 
-import "./Icon"  // 道路 icon 字体
+import "./icons"  // 导入 icon 字体
 Vue.config.productionTip = false
 new Vue({
     router,

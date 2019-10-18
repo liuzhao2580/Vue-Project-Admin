@@ -1,6 +1,6 @@
 <template>
-    <svg class="SvgIcon" aria-hidden="true">
-        <use :href="IconName" />
+    <svg :class="SvgIcon" aria-hidden="true">
+        <use :xlink:href="IconName" />
     </svg>
 </template>
 
@@ -16,13 +16,16 @@ export default {
     computed: {
         IconName() {
             return `#icon-${this.iconClass}`
+        },
+        SvgIcon() {
+            return "icon-svg"
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-.SvgIcon {
+.icon-svg {
     width: 1em;
     height: 1em;
     vertical-align: -0.15em;

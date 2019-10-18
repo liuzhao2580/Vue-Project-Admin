@@ -1,5 +1,7 @@
 <template>
-	<div class="dashboard-box">dashboard</div>
+	<div class="dashboard-box">dashboard
+        <svg-icon icon-class="index" />
+    </div>
 </template>
 
 <script>

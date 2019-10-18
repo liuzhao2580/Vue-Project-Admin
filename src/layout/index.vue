@@ -28,8 +28,7 @@ export default {
         asideWidth() {
             if (this.side_status) return "64px"
             return "200px"
-        },
-        
+        }
     },
 	props: {},
 	data() {
