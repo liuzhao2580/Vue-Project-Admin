@@ -1,7 +1,8 @@
 import Vue from "vue"
 import Router from "vue-router"
 import Layout from '@/layout'
-
+// 使用 modules 引入嵌套过多的路由
+import error_page from "./modules/error"
 Vue.use(Router)
 // 公共的页面
 export const constantRoutes = [
@@ -39,33 +40,7 @@ export const constantRoutes = [
         ]
     },
     // 错误页
-    {
-        path: "/errorPage",
-        component: Layout,
-        meta: { title: "error", icon: "index"},
-        children: [
-            {
-                path: '401',
-                component: () => import('@/views/error_page/401_page'),
-                name: '401_page',
-                meta: { title: '401', icon: "index" },
-                children: [
-                    {
-                        path: '4011',
-                        component: () => import('@/views/error_page/4011_page'),
-                        name: 'page4011',
-                        meta: { title: '4011', icon: "index" },
-                    }
-                ]
-            },
-            {
-                path: '404',
-                component: () => import('@/views/error_page/404_page'),
-                name: '404_page',
-                meta: { title: '404', icon: "index" }
-            },
-        ]
-    },
+    error_page,
     // 404
     { path: "*", hidden:true, component: () => import("@/views/error_page/404_page") }
 ]

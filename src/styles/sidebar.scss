@@ -46,6 +46,21 @@
 
                         // 二级侧边栏的背景色
                         .SidebarItem-box {
+                            // 用于解决 出现的侧边栏收起 但是侧边栏文字和右箭头不隐藏的bug
+                            .MenuitemClass {
+                                .el-submenu__title {
+                                    span,
+                                    .el-icon-arrow-right {
+                                        display: none;
+                                    }
+                                    
+                                }
+                            }
+                            .icon-svg {
+                                margin-right: 10px;
+                                vertical-align: middle;
+                                font-size: 18px;
+                            }
                             .submenu-side {
                                 // 二级菜单 中的子菜单被选中
                                 &.is-active {
@@ -73,10 +88,19 @@
             .main-box {
                 transition: margin-left 0.3s;
                 padding: 0;
+                overflow-x: hidden;
                 >div {
                     width: 100%;
                 }
             }
         }
+    }
+}
+// 侧边栏收起的样式
+.el-menu--vertical {
+    .icon-svg {
+        margin-right: 10px;
+        vertical-align: middle;
+        font-size: 18px;
     }
 }

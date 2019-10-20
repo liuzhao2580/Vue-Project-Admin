@@ -1,4 +1,3 @@
-
 <script>
 export default {
 	name: "MenuItem",
@@ -11,7 +10,7 @@ export default {
 		title: {
 			type: String,
 			default: ""
-		}
+        }
     },
     /* eslint-disable */
 	render(h, context) {

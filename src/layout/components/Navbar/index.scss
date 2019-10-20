@@ -1,4 +1,7 @@
 .Navbar-box {
+    display: flex;
+    align-items: center;
+    // 侧边栏展开 收缩按钮
     .side-btn {
         display: inline-block;
         width: 50px;
@@ -11,5 +14,9 @@
         &:hover {
             background-color: #ebe7e7;
         }
+    }
+    // 面包屑
+    .breadcrumb-box {
+        flex: 1;
     }
 }

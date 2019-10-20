@@ -3,13 +3,17 @@
         <div class="side-btn" @click="side_Btn">
             <i class="el-icon-s-operation"></i>
         </div>
+        <Breadcrumb />
     </div>
 </template>
 
 <script>
+import Breadcrumb from "../Breadcrumb"
 export default {
 	name: "Navbar",
-	components: {},
+	components: {
+        Breadcrumb
+    },
 	props: {},
 	data() {
 		return {};
