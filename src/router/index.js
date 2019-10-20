@@ -5,6 +5,12 @@ import Layout from '@/layout'
 import error_page from "./modules/error"
 Vue.use(Router)
 // 公共的页面
+/**
+ * 参数说明
+ * hidden: true,  该路由不在侧边栏显示
+ * redirect: 'noRedirect' , 说明该路由显示在面包屑中 但是不能被点击
+ * breadcrumb: false   说明该路由不显示在面包屑中
+ */
 export const constantRoutes = [
     {
         path: "/login",

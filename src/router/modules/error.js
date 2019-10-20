@@ -2,13 +2,15 @@ import Layout from '@/layout'
 const error_page = {
     path: "/errorPage",
     component: Layout,
-    meta: { title: "error", icon: "error" },
+    meta: { title: "Error", icon: "error" },
+    redirect: "/errorPage/401",
     children: [
         {
             path: '401',
             component: () => import('@/views/error_page/401_page'),
             name: '401_page',
-            meta: { title: '401', icon: "401" },
+            meta: { title: '401', icon: "401", breadcrumb: false },
+            redirect: "/errorPage/401/4011",
             children: [
                 {
                     path: '4011',

@@ -2,7 +2,7 @@
     <div class="breadcrumb-box">
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">{{breadcrumbTitle}}</el-breadcrumb-item>
-            <el-breadcrumb-item v-for="item in getMatched" :key="item.path">{{item.meta.title}}</el-breadcrumb-item>
+            <el-breadcrumb-item v-for="item in getMatched" :key="item.path" :to="handleClick(item)">{{item.meta.title}}</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
 </template>
@@ -26,7 +26,7 @@ export default {
     methods: {
         init() {
             const nowRoute = this.$route
-            console.log(nowRoute)
+            // 说明只有一级路由
             if (nowRoute.matched.length == 2) {
                 this.getMatched = nowRoute.matched.filter(item => {
                     if (item.name) {
@@ -38,10 +38,26 @@ export default {
                         }
                     }
                 })
-            } else if (nowRoute.matched.length > 2){
-                this.getMatched = nowRoute.matched
+            } 
+            // 说明存在多级路由
+            else if (nowRoute.matched.length > 2){
+                // 用于判断当前的路由是否显示在面包屑中
+                this.getMatched = nowRoute.matched.filter(item => {
+                    if (item.meta.breadcrumb == false) {
+                        return false
+                    } else {
+                        return true
+                    }
+                })
             }
-            console.log(this.getMatched)
+        },
+        // 面包屑点击
+        handleClick(item) {
+            if (item.redirect !== "noRedirect") {
+                return item.redirect
+            } else {
+                return
+            }
         }
     },
     watch: {
