@@ -1,27 +1,24 @@
 /*eslint-disable*/
 const state = {
     // 存放 tags 的数组
-    tagsArray: [],
-    // 初始化
-    init_Tags: []
+    tagsArray: []
 }
 const mutations = {
     SET_TAGS(state, tags) {
         state.tagsArray.push(tags)
     },
-    SET_INIT_TAGS(state) {
-        state.init_Tags = state.tagsArray
+    SET_INIT_TAGS(state, tags) {
+        state.tagsArray = tags
     }
 }
 const actions = {
-    // 初始化 tags
-    ACT_initTags({ commit }) {
-        // console.log(state.init_Tags)
-        
-        commit("SET_INIT_TAGS")
+    // 初始化 tags 
+    ACT_init_Tags({ commit }, tags) {
+        commit("SET_INIT_TAGS", tags)
     },
     // 新增 tags
     ACT_setTags({ commit }, tags) {
+        console.log(tags,"tags")
         // 判断 当前的 tags 中是否已经存在当前的 路由名称
         const is_push = state.tagsArray.some(item => {
             return item.meta.title == tags.meta.title

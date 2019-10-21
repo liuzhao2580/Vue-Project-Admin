@@ -17,8 +17,8 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapGetters } from "vuex"
-import path from 'path'
 import store from '@/store'
 export default {
 	name: "TagsView",
@@ -34,18 +34,34 @@ export default {
     },
 	created() {},
 	mounted() {
-        this.initTags()
+        this.init_tags()
     },
 	methods: {
-        // 初始化 tags
-        // init_Tags() {
-        //     // console.log(111)
-        //     console.log(store.state.TagsView.init_Tags)
-        // },
+        // 初始化 tags 
+        init_tags() {
+            const routes = this.$router.options.routes
+            const affixTags = this.filterAffixTags(routes)
+            console.log(affixTags)
+            // for (const tag of affixTags) {
+            //     store.dispatch("TagsView/ACT_setTags", tag);
+            // }
+        },
         // 增加 tags
         insertT_Tags() {
-            const TagsTitle = this.$route
-            store.dispatch("TagsView/ACT_setTags", TagsTitle)
+            
+            // for (const tag of affixTags) {
+            //     store.dispatch("TagsView/ACT_setTags", tag);
+            // }
+        },
+        filterAffixTags(routes) {
+            const tags = routes.filter(item => {
+                if (item.children && !item.meta) {
+                    if (item.children[0].meta.affix) {
+                       return true 
+                    }
+                }
+            })
+            return tags;
         },
         // 用于高亮当前的tags
         is_active(tag) {
@@ -64,52 +80,14 @@ export default {
 		handleClick(tag) {
             this.$router.push(tag.path)
         },
-        filterAffixTags(routes, basePath = "/") {
-            let tags = [];
-            routes.forEach(route => {
-                if (route.meta && route.meta.affix) {
-                    const tagPath = path.resolve(basePath, route.path);
-                    tags.push({
-                        fullPath: tagPath,
-                        path: tagPath,
-                        name: route.name,
-                        meta: { ...route.meta }
-                    });
-                }
-                if (route.children) {
-                    const tempTags = this.filterAffixTags(
-                        route.children,
-                        route.path
-                    );
-                    if (tempTags.length >= 1) {
-                        tags = [...tags, ...tempTags];
-                    }
-                }
-            });
-            return tags;
-        },
-        initTags() {
-            console.log(this.$router.options)
-            const affixTags = (this.affixTags = this.filterAffixTags(
-                this.$router.options.routes
-            ));
-            console.log(affixTags)
-            // for (const tag of affixTags) {
-            //     // Must have tag name
-            //     if (tag.name) {
-            //         this.$store.dispatch("tagsView/addVisitedView", tag);
-            //     }
-            // }
-        },
-    },
-    beforeDestroy() {
-        store.dispatch("TagsView/ACT_initTags")
+        
     },
 	watch: {
         $route: {
             handler() {
                 this.insertT_Tags()
-            }
+            },
+            immediate: true
         }
     }
 };
