@@ -2,7 +2,10 @@
     <div class="breadcrumb-box">
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">{{breadcrumbTitle}}</el-breadcrumb-item>
-            <el-breadcrumb-item v-for="item in getMatched" :key="item.path" :to="handleClick(item)">{{item.meta.title}}</el-breadcrumb-item>
+            <!--面包屑的切换动画 -->
+            <transition-group name="breadcrumb-transition" mode="out-in" v-if="getMatched.length !== 0">
+                <el-breadcrumb-item  v-for="item in getMatched" :key="item.path" :to="handleClick(item)">{{item.meta.title}}</el-breadcrumb-item>
+            </transition-group>
         </el-breadcrumb>
     </div>
 </template>

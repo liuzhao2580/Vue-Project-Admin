@@ -9,7 +9,7 @@ const error_page = {
             path: '401',
             component: () => import('@/views/error_page/401_page'),
             name: '401_page',
-            meta: { title: '401', icon: "401", breadcrumb: false },
+            meta: { title: '401', icon: "401" },
             redirect: "/errorPage/401/4011",
             children: [
                 {

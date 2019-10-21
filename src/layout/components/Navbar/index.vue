@@ -1,18 +1,23 @@
 <template>
 	<div class="Navbar-box">
-        <div class="side-btn" @click="side_Btn">
-            <i class="el-icon-s-operation"></i>
+        <div class="Navbar-Breadcrumb">
+            <div class="side-btn" @click="side_Btn">
+                <i class="el-icon-s-operation"></i>
+            </div>
+            <Breadcrumb />
         </div>
-        <Breadcrumb />
+        <TagsView />
     </div>
 </template>
 
 <script>
 import Breadcrumb from "../Breadcrumb"
+import TagsView from "../TagsView"
 export default {
 	name: "Navbar",
 	components: {
-        Breadcrumb
+        Breadcrumb,
+        TagsView
     },
 	props: {},
 	data() {

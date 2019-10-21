@@ -3,6 +3,7 @@ import Vuex from "vuex"
 import getters from "./getters"
 import user from './modules/user'
 import app from './modules/app'
+import TagsView from './modules/TagsView'
 
 Vue.use(Vuex)
 
@@ -22,7 +23,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     modules: {
         user,
-        app
+        app,
+        TagsView
     },
     getters
 })

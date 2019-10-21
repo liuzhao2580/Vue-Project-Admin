@@ -10,6 +10,7 @@ Vue.use(Router)
  * hidden: true,  该路由不在侧边栏显示
  * redirect: 'noRedirect' , 说明该路由显示在面包屑中 但是不能被点击
  * breadcrumb: false   说明该路由不显示在面包屑中
+ * affix: true  说明 该路由在 tags 中不能被删除
  */
 export const constantRoutes = [
     {
@@ -28,7 +29,7 @@ export const constantRoutes = [
                 path: 'dashboard',
                 component: () => import('@/views/dashboard/index'),
                 name: 'Dashboard',
-                meta: { title: '首页',icon: "index" }
+                meta: { title: '首页', icon: "index", affix: true }
             }
         ]
     },
@@ -41,7 +42,7 @@ export const constantRoutes = [
                 path: 'index',
                 component: () => import('@/views/documentation/index'),
                 name: 'documentation',
-                meta: { title: '文档', icon: "wendang" }
+                meta: { title: '文档', icon: "wendang", affix: true }
             }
         ]
     },

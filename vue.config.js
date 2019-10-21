@@ -20,7 +20,7 @@ module.exports = {
     transpileDependencies: [],
     productionSourceMap: false,
     integrity: false,
-    // webpack 配置
+    // webpack 简单配置 
     configureWebpack: {
         name: name,
         resolve: {
@@ -49,7 +49,7 @@ module.exports = {
             }
         }
     },
-    // 
+    // webpack 高级配置 
     chainWebpack(config) {
         // set svg-sprite-loader
         // 设置 svg 导入

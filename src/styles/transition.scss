@@ -1,4 +1,4 @@
-// 路由的过渡动画
+/* --------------------------------路由的过渡动画 --------------------------*/
 .fade-transition-enter,
 .fade-transition-leave {
     opacity: 0.2;
@@ -18,4 +18,22 @@
 .fade-transition-enter-active,
 .fade-transition-leave-active {
     transition: 0.5s;
+}
+
+/*---------------------------------面包屑的过度动画----------------------- */
+.breadcrumb-transition-enter,
+.breadcrumb-transition-leave {
+    opacity: 0.2;
+}
+.breadcrumb-transition-enter {
+    opacity: 0;
+    transform: translateX(50px);
+}
+.breadcrumb-transition-leave {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+.breadcrumb-transition-enter-active,
+.breadcrumb-transition-leave-active {
+    transition: 0.7s;
 }
