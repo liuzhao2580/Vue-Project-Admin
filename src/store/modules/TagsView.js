@@ -1,7 +1,7 @@
 /*eslint-disable*/
 const state = {
     // 存放 tags 的数组
-    tagsArray: [],
+    tagsArray: []
 }
 const mutations = {
     SET_TAGS(state, tags) {
