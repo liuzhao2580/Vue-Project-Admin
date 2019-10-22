@@ -61,6 +61,15 @@
                                 vertical-align: middle;
                                 font-size: 18px;
                             }
+                            
+                            .is-opened ,
+                            .MenuitemClass{
+                                &.is-active {
+                                    > div {
+                                        color: #409EFF !important;
+                                    }
+                                }
+                            }
                             .submenu-side {
                                 // 二级菜单 中的子菜单被选中
                                 &.is-active {
@@ -94,6 +103,7 @@
                 }
                 .AppMain-box {
                     padding: 0 20px;
+                    margin-top: 20px;
                 }
             }
         }
@@ -106,4 +116,14 @@
         vertical-align: middle;
         font-size: 18px;
     }
+    .SidebarItem-box {
+        .el-submenu {
+            &.is-active {
+                >div {
+                    color: #409EFF !important;
+                }
+            }
+        }
+    }
 }
+

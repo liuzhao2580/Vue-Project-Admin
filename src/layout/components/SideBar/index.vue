@@ -1,7 +1,7 @@
 <template>
 	<el-scrollbar class="SideBar-scrollbar">
 		<div class="SideBar-title" :style="{paddingLeft: (!side_status ? '20px': '10px')}" @click="$router.push({path: '/'})">
-            <img src="../../../assets/images/welcom.gif" alt="">
+            <img :src="user_img" alt="">
             <span v-show="!side_status">欢迎访问</span>
         </div>
 		<el-menu
@@ -34,7 +34,7 @@ export default {
 	},
 	props: {},
 	computed: {
-        ...mapGetters(["side_status"]),
+        ...mapGetters(["user_img","side_status"]),
         // 获取当前页面的 url 地址
 		activeMenu() {
 			const route = this.$route;

@@ -9,6 +9,7 @@
 					@close="handleClose(tag)"
 					size="small"
 					@click="handleClick(tag)"
+                    disable-transitions
                     :class="{ 'is-active' : is_active(tag.meta.title)}"
 				>{{tag.meta.title}}</el-tag>
 			</template>
@@ -19,6 +20,7 @@
 <script>
 /* eslint-disable */
 import { mapGetters } from "vuex"
+import path from "path"
 import store from '@/store'
 export default {
 	name: "TagsView",
@@ -32,36 +34,44 @@ export default {
     computed: {
         ...mapGetters(["tags_data"])
     },
-	created() {},
-	mounted() {
+	created() {
         this.init_tags()
+        this.insertT_Tags()
     },
+	mounted() {},
 	methods: {
         // 初始化 tags 
         init_tags() {
             const routes = this.$router.options.routes
             const affixTags = this.filterAffixTags(routes)
-            console.log(affixTags)
-            // for (const tag of affixTags) {
-            //     store.dispatch("TagsView/ACT_setTags", tag);
-            // }
+            store.dispatch("TagsView/ACT_init_Tags", affixTags)
         },
-        // 增加 tags
-        insertT_Tags() {
-            
-            // for (const tag of affixTags) {
-            //     store.dispatch("TagsView/ACT_setTags", tag);
-            // }
-        },
+        // 初始化的时候取出 固定的tags
         filterAffixTags(routes) {
-            const tags = routes.filter(item => {
+            let tags = []
+            routes.forEach(item => {
                 if (item.children && !item.meta) {
                     if (item.children[0].meta.affix) {
-                       return true 
+                       let item_child = item.children[0]
+                       tags.push({
+                           fullPath: path.resolve(item.path, item_child.path),
+                           meta: item_child.meta,
+                           name: item_child.name
+                       })
                     }
                 }
             })
             return tags;
+        },
+        // 增加 tags
+        insertT_Tags() {
+            const route = this.$route
+            const currentTag = {
+                fullPath: route.fullPath,
+                meta: route.meta,
+                name: route.name
+            }
+            store.dispatch("TagsView/ACT_setTags", currentTag);
         },
         // 用于高亮当前的tags
         is_active(tag) {
@@ -74,20 +84,23 @@ export default {
         },
         // 点击关闭按钮
 		handleClose(tag) {
-			this.tags_data.splice(this.tags_data.indexOf(tag), 1);
+            const getIndex = this.tags_data.indexOf(tag)
+            const route = this.$route
+            if (route.fullPath == tag.fullPath) {
+                this.handleClick(this.tags_data[getIndex - 1])
+            }
+            this.tags_data.splice(getIndex, 1);
         },
         // 点击 tags 跳转
 		handleClick(tag) {
-            this.$router.push(tag.path)
-        },
-        
+            this.$router.push(tag.fullPath)
+        }
     },
 	watch: {
         $route: {
             handler() {
                 this.insertT_Tags()
-            },
-            immediate: true
+            }
         }
     }
 };

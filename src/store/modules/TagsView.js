@@ -4,11 +4,11 @@ const state = {
     tagsArray: []
 }
 const mutations = {
-    SET_TAGS(state, tags) {
-        state.tagsArray.push(tags)
-    },
     SET_INIT_TAGS(state, tags) {
         state.tagsArray = tags
+    },
+    SET_TAGS(state, tags) {
+        state.tagsArray.push(tags)
     }
 }
 const actions = {
@@ -18,7 +18,6 @@ const actions = {
     },
     // 新增 tags
     ACT_setTags({ commit }, tags) {
-        console.log(tags,"tags")
         // 判断 当前的 tags 中是否已经存在当前的 路由名称
         const is_push = state.tagsArray.some(item => {
             return item.meta.title == tags.meta.title

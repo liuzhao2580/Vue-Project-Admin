@@ -28,38 +28,23 @@ export default {
     created() {},
     methods: {
         init() {
-            const nowRoute = this.$route
-            // 说明只有一级路由
-            if (nowRoute.matched.length == 2) {
-                this.getMatched = nowRoute.matched.filter(item => {
-                    if (item.name) {
-                        // 用于判断 当前页面是否在首页
-                        if (item.path == "/dashboard") {
-                            return  false
-                        } else {
-                            return true
-                        }
-                    }
-                })
-            } 
-            // 说明存在多级路由
-            else if (nowRoute.matched.length > 2){
-                // 用于判断当前的路由是否显示在面包屑中
-                this.getMatched = nowRoute.matched.filter(item => {
-                    if (item.meta.breadcrumb == false) {
-                        return false
-                    } else {
-                        return true
-                    }
-                })
-            }
+            const nowRoute = this.$route.matched
+            this.getMatched = nowRoute.filter(item => {
+                // 说明存在多级路由
+                if (item.meta && item.meta.title) {
+                    // 用于判断 当前页面是否在首页
+                    if (item.path == "/dashboard") return false
+                    // 用于判断当前的路由是否显示在面包屑中
+                    else if (item.meta.breadcrumb == false) return false
+                    return true
+                }
+            })
         },
         // 面包屑点击
         handleClick(item) {
+            // 用于判断当前的面包屑是否可以点击跳转
             if (item.redirect !== "noRedirect") {
                 return item.redirect
-            } else {
-                return
             }
         }
     },

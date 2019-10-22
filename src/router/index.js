@@ -46,6 +46,41 @@ export const constantRoutes = [
             }
         ]
     },
+    // 文章页
+    {
+        path: "/article",
+        component: Layout,
+        meta: { title: '文章', icon: "article"},
+        redirect: "noRedirect",
+        children: [
+            {
+                path: "created",
+                component: () => import("@/views/article/created"),
+                name: "created",
+                meta: { title: '文章创建', icon: "created"}
+            },
+            {
+                path: "list",
+                component: () => import("@/views/article/list"),
+                name: "list",
+                meta: { title: '文章列表', icon: "list" }
+            },
+        ]
+    },
+    // 个人中心
+    {
+        path: "/personal",
+        component: Layout,
+        hidden: true,
+        children: [
+            {
+                path: "index",
+                component: () => import("@/views/personal"),
+                meta: { title: '个人中心', icon: "personal" },
+                name: "personalCenter",
+            }
+        ]
+    },
     // 错误页
     error_page,
     // 404

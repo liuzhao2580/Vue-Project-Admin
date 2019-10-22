@@ -1,5 +1,6 @@
 const state = {
-
+    user_img: require("@/assets/images/welcom.gif"),
+    user_name: "小火车况且况且"
 }
 const mutations = {
 

@@ -5,6 +5,7 @@
                 <i class="el-icon-s-operation"></i>
             </div>
             <Breadcrumb />
+            <Personal />
         </div>
         <TagsView />
     </div>
@@ -13,11 +14,13 @@
 <script>
 import Breadcrumb from "../Breadcrumb"
 import TagsView from "../TagsView"
+import Personal from '../Personal'
 export default {
 	name: "Navbar",
 	components: {
         Breadcrumb,
-        TagsView
+        TagsView,
+        Personal
     },
 	props: {},
 	data() {
