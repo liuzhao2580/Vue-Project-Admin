@@ -1,7 +1,7 @@
 <template>
 	<div class="app-warpper">
         <el-container class="container-box">
-            <el-aside :width="asideWidth" class="sider-box">
+            <el-aside :width="asideWidth" class="sider-box" >
                 <Sidebar />
             </el-aside>
             <el-main class="main-box" :style="{marginLeft: (side_status? '64px':'200px')}">
@@ -16,6 +16,7 @@
 import { AppMain, Sidebar, Navbar } from './components'
 import {mapGetters} from 'vuex'
 import { userInfoApi } from '@/api/user'
+import ResizeMixin from './mixin/Resize.js'
 export default {
 	name: "layout",
 	components: {
@@ -23,6 +24,7 @@ export default {
         Sidebar,
         Navbar
     },
+    mixins: [ResizeMixin],
     computed: {
         ...mapGetters(["side_status"]),
         asideWidth() {

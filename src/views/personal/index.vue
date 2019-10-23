@@ -2,7 +2,7 @@
 	<div class="personalCenter-box">
         <el-row :gutter="20">
             <!-- 个人信息 -->
-            <el-col class="personal-info" :xs="24" :sm="12" :md="10" :lg="8">
+            <el-col class="personal-info" :xs="24" :sm="12" :md="10" :lg="8" > 
                 <Info />
             </el-col>
             <!-- 个人介绍 -->

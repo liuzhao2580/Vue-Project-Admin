@@ -64,7 +64,7 @@ export default {
 	methods: {
 		// 登出
 		login_Out() {
-			console.log(222);
+			this.$router.push({path: "/login"})
 		}
 	},
 	watch: {}
@@ -75,7 +75,7 @@ export default {
 .Personal-box {
 	margin-right: 10px;
 	cursor: pointer;
-	.el-avatar {
+	/deep/ .el-avatar {
 		width: 50px;
 		height: 50px;
 		img {
