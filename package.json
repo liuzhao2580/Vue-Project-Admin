@@ -13,6 +13,7 @@
     "element-ui": "^2.12.0",
     "nprogress": "^0.2.0",
     "vue": "^2.6.10",
+    "vue-amap": "^0.5.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
   },

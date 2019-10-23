@@ -46,6 +46,20 @@ export const constantRoutes = [
             }
         ]
     },
+    // 个人中心
+    {
+        path: "/personal",
+        component: Layout,
+        hidden: true,
+        children: [
+            {
+                path: "index",
+                component: () => import("@/views/personal"),
+                meta: { title: '个人中心', icon: "personal" },
+                name: "personalCenter",
+            }
+        ]
+    },
     // 文章页
     {
         path: "/article",
@@ -67,17 +81,16 @@ export const constantRoutes = [
             },
         ]
     },
-    // 个人中心
+    // 地图
     {
-        path: "/personal",
+        path: "/amap",
         component: Layout,
-        hidden: true,
         children: [
             {
                 path: "index",
-                component: () => import("@/views/personal"),
-                meta: { title: '个人中心', icon: "personal" },
-                name: "personalCenter",
+                component: () => import("@/views/map"),
+                name: "amap",
+                meta: {title: "地图", icon: "map"}
             }
         ]
     },
