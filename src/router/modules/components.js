@@ -4,19 +4,13 @@ const components = {
     path: "/components",
     component: Layout,
     meta: { title: "组件", icon: "components" },
-    redirect : "/components/tinymce",
+    redirect: "/components/richtext",
     children: [
         {
-            path: "tinymce",
-            meta: { title: "Tinymce富文本", icon: "tinymce" },
-            name: 'tinymce',
-            component: () => import ("@/views/components/tinymce")
-        },
-        {
-            path: "CKEditor",
-            meta: { title: "CKEditor富文本", icon: "richtext" },
-            name: "CKEditor",
-            component: () => import("@/views/components/CKEditor")
+            path: "richtext",
+            meta: { title: "富文本编辑器", icon: "richtext" },
+            name: 'richtext',
+            component: () => import("@/views/components/richtext")
         },
         {
             path: "markdown",

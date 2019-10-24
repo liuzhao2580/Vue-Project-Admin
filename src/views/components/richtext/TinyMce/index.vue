@@ -1,19 +1,25 @@
 <template>
 	<div class="tinymce-box">
-        <textarea id="tinymceId" class="tinymce-textarea" />
+        <textarea id="tinymceId" class="tinymce-textarea" v-model="TinyMce_Mess"></textarea>
     </div>
 </template>
 
 <script>
 /* eslint-disable */
+/** 中文文档  http://tinymce.ax-z.cn/ */
 const tinymceCDN = "https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js";
-import load from "./createdTinymce";
+import load from "../createdScript";
 import plugins from "./plugins";
 import toolbar from "./toolbar";
 export default {
-	name: "tinymce",
+	name: "TinyMce",
 	components: {},
-	props: {},
+    props: {},
+    computed: {
+        TinyMce_Mess(){ 
+            return "这是一个 TinyMce 富文本编辑器"
+        }
+    },
 	data() {
 		return {};
 	},
@@ -24,14 +30,13 @@ export default {
 	methods: {
 		// 初始化
 		init() {
-			load(tinymceCDN, res => {
-				console.log(window.tinymce);
-				this.initTinymce();
-			});
+            load(tinymceCDN).then(res => {
+                this.initTinymce()
+            })
 		},
 		initTinymce() {
             const _this = this
-			window.tinymce.init({
+			tinymce.init({
                 selector: `#tinymceId`,
 				language: "zh_CN",
 				height: 400,
@@ -45,7 +50,9 @@ export default {
 				code_dialog_width: 1000,
 				advlist_bullet_styles: "square",
 				advlist_number_styles: "default",
-				imagetools_cors_hosts: ["www.tinymce.com", "codepen.io"],
+                imagetools_cors_hosts: ["www.tinymce.com", "codepen.io"],
+                images_upload_url: '/demo/upimg.php',
+                images_upload_base_path: '/demo',
 				default_link_target: "_blank",
 				link_title: false,
 				nonbreaking_force_tab: true,
@@ -72,8 +79,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tinymce-box {
-	width: 100%;
-	height: 500px;
-}
 </style>
