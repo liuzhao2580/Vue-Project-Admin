@@ -24,6 +24,9 @@ export default {
 
 <style lang="scss" scoped>
 .map-box {
-	height: 500px;
+	height: 600px;
+    border: 5px solid #ccc;
+    width: 100%;
+    border-radius: 10px;
 }
 </style>

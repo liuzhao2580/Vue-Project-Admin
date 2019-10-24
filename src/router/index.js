@@ -3,6 +3,7 @@ import Router from "vue-router"
 import Layout from '@/layout'
 // 使用 modules 引入嵌套过多的路由
 import error_page from "./modules/error"
+import components from "./modules/components"
 Vue.use(Router)
 // 公共的页面
 /**
@@ -94,6 +95,7 @@ export const constantRoutes = [
             }
         ]
     },
+    components,
     // 错误页
     error_page,
     // 404
