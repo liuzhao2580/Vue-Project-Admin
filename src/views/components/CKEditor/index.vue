@@ -1,12 +1,12 @@
 <template>
-	<div class="wangEditor-box">
+	<div class="CKEditor-box">
         CKEditor 5
     </div>
 </template>
 
 <script>
 export default {
-	name: "wangEditor",
+	name: "CKEditor",
 	components: {},
 	props: {},
 	data() {

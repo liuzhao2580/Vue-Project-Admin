@@ -13,10 +13,10 @@ const components = {
             component: () => import ("@/views/components/tinymce")
         },
         {
-            path: "wangEditor",
-            meta: { title: "wangEditor富文本", icon: "wangEditor" },
-            name: "wangEditor",
-            component: () => import("@/views/components/wangEditor")
+            path: "CKEditor",
+            meta: { title: "CKEditor富文本", icon: "richtext" },
+            name: "CKEditor",
+            component: () => import("@/views/components/CKEditor")
         },
         {
             path: "markdown",
