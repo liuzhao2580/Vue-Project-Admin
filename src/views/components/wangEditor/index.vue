@@ -1,5 +1,7 @@
 <template>
-	<div class="wangEditor-box"></div>
+	<div class="wangEditor-box">
+        CKEditor 5
+    </div>
 </template>
 
 <script>
