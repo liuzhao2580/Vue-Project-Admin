@@ -17,8 +17,7 @@ const components = {
             meta: { title: "Markdown编辑器", icon: "markdown" },
             name: "markdown",
             component: () => import("@/views/components/markdown")
-        },
-        
+        }
     ]
 }
 
