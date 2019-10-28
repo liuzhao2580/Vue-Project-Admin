@@ -43,13 +43,10 @@ export default {
                 language: "zh-cn",
                 toolbar,
                 plugins,
-                // ckfinder: {
-                //     openerMethod: 'popup',
-                //     uploadUrl: "/text/index",
-                //     options: {
-                //         resourceType: 'Images'
-                //     }
-                // }
+                ckfinder: {
+                    // Upload the images to the server using the CKFinder QuickUpload command.
+                    uploadUrl: 'https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                }
                 // extraPlugins: [MyCustomUploadAdapterPlugin ]
             }).then((editor) => {
                 // editor.plugins.get( 'image.toolbar' );
@@ -58,8 +55,6 @@ export default {
 					console.error(error);
 				}
             )
-            const getMap = ClassicEditor.builtinPlugins.map( plugin => plugin.pluginName );
-            console.log(getMap)
 		}
 	},
 	watch: {}
