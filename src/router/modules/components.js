@@ -29,6 +29,12 @@ const components = {
             meta: { title: "返回顶部", icon: "backtop" },
             name: "back-to-top",
             component: () => import("@/views/components/back-to-top")
+        },
+        {
+            path: "other-components",
+            meta: { title: "其他组件", icon: "other-components" },
+            name: "other-components",
+            component: () => import("@/views/components/other-components")
         }
     ]
 }

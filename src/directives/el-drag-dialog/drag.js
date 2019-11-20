@@ -70,6 +70,5 @@ export default {
                 document.onmousedown = null
             }
         }
-        
     }
 }
