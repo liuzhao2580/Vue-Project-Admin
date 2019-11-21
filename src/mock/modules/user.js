@@ -8,7 +8,8 @@ const userInfo = [
     {
         username: "admin",
         password: "admin",
-        nickname: "小火车况且况且"
+        nickname: "小火车况且况且",
+        token: "admin-token"
     }
 ]
 // 用户登陆的时候 保存用户的基本信息
@@ -23,7 +24,8 @@ const setUserInfo = (options) => {
     if (is_True) {
         return {
             "status": 200,
-            "nickname": is_True.nickname
+            "nickname": is_True.nickname,
+            "token": is_True.token
         }
     }
     else {

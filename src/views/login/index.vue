@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { setCookie } from "@/utils/cookies"
 import { userLogin } from "@/api/user"
 export default {
 	name: "login",
@@ -59,6 +60,12 @@ export default {
                     // this.$router.push({path: "/"})
                     userLogin(params).then(({data}) => {
                         console.log(data,"data")
+                        if(data.status == 200) {
+                            setCookie("token", data.token)
+                        }
+                        // else if (data.status == 200) {
+
+                        // }
                     })
 				} else {
 					return false;
