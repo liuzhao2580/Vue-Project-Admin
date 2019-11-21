@@ -4,6 +4,6 @@ import Mock from "mockjs"
 //     token: "token-admin"
 // }
 
-Mock.mock("/user/info", "get", {
-    data: 1111
+Mock.mock("/dashboard", "get", {
+    "页面访问次数|1-100": 100
 })

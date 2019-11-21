@@ -1,20 +1,32 @@
 <template>
-	<div class="dashboard-box">dashboard
-        <svg-icon icon-class="index" />
+	<div class="dashboard-box">
+        <card />
     </div>
 </template>
 
 <script>
+import { dashboardApi } from "@/api/dashboard"
 export default {
 	name: "dashboard",
-	components: {},
+	components: {
+        card: () => import("./card")
+    },
 	props: {},
 	data() {
 		return {};
 	},
-	created() {},
+	created() {
+        this.init()
+    },
 	mounted() {},
-	methods: {},
+	methods: {
+        // 初始化
+        init() {
+            dashboardApi().then((data) => {
+                console.log(data)
+            })
+        }
+    },
 	watch: {}
 };
 </script>

@@ -2,18 +2,18 @@
 	<el-col class="login-box">
 		<el-row class="login-content">
             <p class="login-title">欢迎登录</p>
-			<el-form label-position="left" :model="login_from" ref="login_from">
+			<el-form label-position="left" :model="login_form" ref="login_form">
 				<el-form-item label="用户名" prop="username" label-width="80px">
-					<el-input v-model="login_from.username"></el-input>
+					<el-input v-model="login_form.username"></el-input>
 				</el-form-item>
 				<el-form-item label="密码" prop="password" label-width="80px">
-					<el-input type="password" v-model="login_from.password"></el-input>
+					<el-input type="password" v-model="login_form.password"></el-input>
 				</el-form-item>
 				<el-form-item label="验证码" prop="code" label-width="80px">
-					<el-input v-model="login_from.code"></el-input>
+					<el-input v-model="login_form.code"></el-input>
 				</el-form-item>
 				<el-form-item >
-					<el-button class="loginBtn" type="primary" @click="submitForm('login_from')">登录</el-button>
+					<el-button class="loginBtn" type="primary" @click="submitForm('login_form')">登录</el-button>
 				</el-form-item>
 			</el-form>
 		</el-row>
@@ -21,13 +21,14 @@
 </template>
 
 <script>
+import { userLogin } from "@/api/user"
 export default {
 	name: "login",
 	components: {},
 	props: {},
 	data() {
 		return {
-			login_from: {
+			login_form: {
 				username: "admin",
 				password: "admin",
 				code: "7777"
@@ -51,7 +52,14 @@ export default {
 		submitForm(formName) {
 			this.$refs[formName].validate(valid => {
 				if (valid) {
-                    this.$router.push({path: "/"})
+                    const params = {
+                        username: this.login_form.username,
+                        password: this.login_form.password
+                    }
+                    // this.$router.push({path: "/"})
+                    userLogin(params).then(({data}) => {
+                        console.log(data,"data")
+                    })
 				} else {
 					return false;
 				}
