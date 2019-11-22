@@ -13,7 +13,7 @@
 					<el-input v-model="login_form.code"></el-input>
 				</el-form-item>
 				<el-form-item >
-					<el-button class="loginBtn" type="primary" @click="submitForm('login_form')">登录</el-button>
+					<el-button class="loginBtn" type="primary" @click="submitForm('login_form')" :loading="login_loading">登录</el-button>
 				</el-form-item>
 			</el-form>
 		</el-row>
@@ -44,7 +44,8 @@ export default {
 				code: [
 					{ required: true, message: "请输入验证码", trigger: "blur" }
 				]
-			}
+            },
+            login_loading: false
 		};
 	},
 	created() {},
@@ -53,19 +54,35 @@ export default {
 		submitForm(formName) {
 			this.$refs[formName].validate(valid => {
 				if (valid) {
+                    this.login_loading = true
                     const params = {
                         username: this.login_form.username,
                         password: this.login_form.password
                     }
-                    // this.$router.push({path: "/"})
                     userLogin(params).then(({data}) => {
+                        this.login_loading = false
                         console.log(data,"data")
                         if(data.status == 200) {
+                            // 存入 token
                             setCookie("token", data.token)
+                            this.$store.dispatch("user/ACT_userInfo", data)
+                            this.$message({
+                                message: data.message,
+                                type: "success"
+                            })
+                            // this.$router.push({path: "/"})
                         }
-                        // else if (data.status == 200) {
-
-                        // }
+                        else if (data.status == 400) {
+                            this.$message({
+                                message: data.message,
+                                type: "error"
+                            })
+                        }
+                    }).catch(() => {
+                        this.$message({
+                            message: "系统出错,请稍后再试",
+                            type: "error"
+                        })
                     })
 				} else {
 					return false;

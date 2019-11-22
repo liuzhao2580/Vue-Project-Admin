@@ -9,7 +9,8 @@ const userInfo = [
         username: "admin",
         password: "admin",
         nickname: "小火车况且况且",
-        token: "admin-token"
+        token: "admin-token",
+        avatar:"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"
     }
 ]
 // 用户登陆的时候 保存用户的基本信息
@@ -25,12 +26,15 @@ const setUserInfo = (options) => {
         return {
             "status": 200,
             "nickname": is_True.nickname,
-            "token": is_True.token
+            "token": is_True.token,
+            "message": "登陆成功",
+            "avatar": is_True.avatar
         }
     }
     else {
         return {
-            "status": 400
+            "status": 400,
+            "message": "登录失败,请检查用户名和密码是否正确"
         }
     }
 }

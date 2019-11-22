@@ -28,6 +28,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { removeCookie } from '@/utils/cookies'
 export default {
 	name: "Personal",
 	components: {},
@@ -64,7 +65,8 @@ export default {
 	methods: {
 		// 登出
 		login_Out() {
-			this.$router.push({path: "/login"})
+            removeCookie("token")
+            this.$router.push({path: "/login"})
 		}
 	},
 	watch: {}
