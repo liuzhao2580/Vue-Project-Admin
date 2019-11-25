@@ -1,6 +1,6 @@
 <template>
 	<div class="UserImg-box">
-		<div class="img" :style="{backgroundImage: `url(${user_img})`}"></div>
+		<div class="img" :style="{backgroundImage: `url(${avatar})`}"></div>
 	</div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
 	name: "UserImg",
     components: {},
     computed: {
-        ...mapGetters(["user_img"])
+        ...mapGetters(["avatar"])
     },
 };
 </script>

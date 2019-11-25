@@ -5,7 +5,7 @@
 		</div>
 		<div class="img-box">
 			<userImg />
-			<p>{{user_name}}</p>
+			<p>{{nickname}}</p>
 		</div>
 		<div class="experience">
 			<div class="Education">
@@ -36,7 +36,7 @@ export default {
 	},
 	props: {},
 	computed: {
-		...mapGetters(["user_img", "user_name"])
+		...mapGetters(["avatar", "nickname"])
 	},
 	data() {
 		return {

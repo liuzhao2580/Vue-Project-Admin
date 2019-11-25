@@ -1,14 +1,14 @@
 const state = {
-    user_img: require("@/assets/images/welcom.gif"),
-    user_name: "小火车况且况且",
-    user_token: ""
+    avatar: require("@/assets/images/welcom.gif"),
+    nickname: "小火车况且况且",
+    token: ""
 }
 const mutations = {
     // 设置用户基本数据
     SET_USER_INFO(state, userInfo) {
-        state.user_img = userInfo.user_img
-        state.user_name = userInfo.user_name
-        state.user_token = userInfo.user_token
+        state.avatar = userInfo.avatar
+        state.nickname = userInfo.nickname
+        state.token = userInfo.token
     }
 }
 const actions = {

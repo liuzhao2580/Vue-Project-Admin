@@ -10,7 +10,7 @@ router.beforeEach((to, from, next) => {
     // 用于设置 浏览器的 title 显示
     document.title = setPageTitle(to.meta.title)
     Nprogress.start()
-    // next()
+    next()
     // 说明存在 token 用于已经登录
     if (token) {
         // if (to.path === "/login") {
@@ -23,18 +23,17 @@ router.beforeEach((to, from, next) => {
         next()
         Nprogress.done()
     }
-    // else {
-    //     if (to.path === "/login") {
-    //         next()
-    //         Nprogress.start()
-    //     }
-    //     else {
-    //         next({
-    //             path: "/login"
-    //         })
-    //         Nprogress.start()
-    //     }
-    // }
+    else {
+        if (to.path === "/login") {
+            next()
+        }
+        else {
+            next({
+                path: "/login"
+            })
+        }
+        Nprogress.done()
+    }
 })
 // eslint-disable-next-line no-unused-vars
 router.afterEach((to, from) => {

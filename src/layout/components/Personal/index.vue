@@ -2,7 +2,7 @@
 	<div class="Personal-box">
 		<el-dropdown trigger="click">
 			<span style="display: inline-block">
-				<el-avatar :src="user_img"></el-avatar>
+				<el-avatar :src="avatar"></el-avatar>
 				<i class="el-icon-arrow-down el-icon--right"></i>
 			</span>
 			<el-dropdown-menu slot="dropdown">
@@ -34,7 +34,7 @@ export default {
 	components: {},
 	props: {},
 	computed: {
-		...mapGetters(["user_img"])
+		...mapGetters(["avatar"])
 	},
 	data() {
 		return {
@@ -60,7 +60,9 @@ export default {
 			]
 		};
 	},
-	created() {},
+	created() {
+        console.log(this.avatar)
+    },
 	mounted() {},
 	methods: {
 		// 登出

@@ -21,7 +21,7 @@ export default {
 	name: "account",
     components: {},
     computed: {
-        ...mapGetters(["user_name"])
+        ...mapGetters(["nickname"])
     },
 	props: {},
 	data() {
@@ -38,7 +38,7 @@ export default {
 	mounted() {},
 	methods: {
         init() {
-            this.form_account.name = this.user_name
+            this.form_account.name = this.nickname
         }
     },
 	watch: {}

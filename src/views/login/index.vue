@@ -70,7 +70,7 @@ export default {
                                 message: data.message,
                                 type: "success"
                             })
-                            // this.$router.push({path: "/"})
+                            this.$router.push({path: "/"})
                         }
                         else if (data.status == 400) {
                             this.$message({
