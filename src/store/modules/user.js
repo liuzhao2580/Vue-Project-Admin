@@ -1,3 +1,5 @@
+
+import { setCookie } from "@/utils/cookies"
 const state = {
     avatar: require("@/assets/images/welcom.gif"),
     nickname: "小火车况且况且",
@@ -13,7 +15,12 @@ const mutations = {
 }
 const actions = {
     ACT_userInfo({ commit }, userInfo) {
-        commit("SET_USER_INFO", userInfo)
+        return new Promise((resolve) => {
+            // 存入 token
+            setCookie("token", userInfo.token)
+            commit("SET_USER_INFO", userInfo)
+            resolve()
+        })
     }
 }
 export default {

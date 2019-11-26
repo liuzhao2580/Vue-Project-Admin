@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import { setCookie } from "@/utils/cookies"
 import { userLogin } from "@/api/user"
 export default {
 	name: "login",
@@ -61,16 +60,14 @@ export default {
                     }
                     userLogin(params).then(({data}) => {
                         this.login_loading = false
-                        console.log(data,"data")
                         if(data.status == 200) {
-                            // 存入 token
-                            setCookie("token", data.token)
-                            this.$store.dispatch("user/ACT_userInfo", data)
-                            this.$message({
-                                message: data.message,
-                                type: "success"
+                            this.$store.dispatch("user/ACT_userInfo", data).then(() => {
+                                this.$message({
+                                    message: data.message,
+                                    type: "success"
+                                })
+                                this.$router.push({path: "/"})
                             })
-                            this.$router.push({path: "/"})
                         }
                         else if (data.status == 400) {
                             this.$message({

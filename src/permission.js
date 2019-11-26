@@ -4,22 +4,14 @@ import { getCookie } from '@/utils/cookies'
 import "nprogress/nprogress.css" // 必须要的样式
 import setPageTitle from "@/utils/setPageTitle"
 
-const token = getCookie("token")
-console.log(token)
 router.beforeEach((to, from, next) => {
+    const token = getCookie("token")
+    console.log(token)
     // 用于设置 浏览器的 title 显示
     document.title = setPageTitle(to.meta.title)
     Nprogress.start()
-    next()
     // 说明存在 token 用于已经登录
     if (token) {
-        // if (to.path === "/login") {
-        //     next(false)
-        // }
-        // else {
-        //     next()
-        //     Nprogress.start()
-        // }
         next()
         Nprogress.done()
     }
