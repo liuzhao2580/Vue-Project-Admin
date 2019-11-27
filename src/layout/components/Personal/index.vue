@@ -15,10 +15,10 @@
 					</el-dropdown-item>
 					<el-dropdown-item v-else-if="item.divided" divided :key="index"></el-dropdown-item>
 					<el-dropdown-item v-else-if="item.command" :key="index" :icon="item.icon">
-						<span @click="login_Out">{{item.label}}</span>
+                        <span @click="login_Out">{{item.label}}</span>
 					</el-dropdown-item>
 					<el-dropdown-item v-else :key="index" :icon="item.icon">
-						<span @click="$router.push({path: item.path})">{{item.label}}</span>
+                        <span @click="$router.push({path: item.path})">{{item.label}}</span>
 					</el-dropdown-item>
 				</template>
 			</el-dropdown-menu>
@@ -60,9 +60,7 @@ export default {
 			]
 		};
 	},
-	created() {
-        console.log(this.avatar)
-    },
+	created() {},
 	mounted() {},
 	methods: {
 		// 登出
