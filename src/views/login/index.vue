@@ -9,9 +9,6 @@
 				<el-form-item label="密码" prop="password" label-width="80px">
 					<el-input type="password" v-model="login_form.password"></el-input>
 				</el-form-item>
-				<el-form-item label="验证码" prop="code" label-width="80px">
-					<el-input v-model="login_form.code"></el-input>
-				</el-form-item>
 				<el-form-item >
 					<el-button class="loginBtn" type="primary" @click="submitForm('login_form')" :loading="login_loading">登录</el-button>
 				</el-form-item>
@@ -30,8 +27,7 @@ export default {
 		return {
 			login_form: {
 				username: "admin",
-				password: "admin",
-				code: "7777"
+				password: "admin"
 			},
 			rules: {
 				username: [
@@ -39,9 +35,6 @@ export default {
 				],
 				password: [
 					{ required: true, message: "请输入密码", trigger: "blur" }
-				],
-				code: [
-					{ required: true, message: "请输入验证码", trigger: "blur" }
 				]
             },
             login_loading: false
@@ -55,27 +48,27 @@ export default {
 				if (valid) {
                     this.login_loading = true
                     const params = {
-                        username: this.login_form.username,
+                        name: this.login_form.username,
                         password: this.login_form.password
                     }
                     userLogin(params).then(({data}) => {
-                        this.login_loading = false
+						this.login_loading = false
+						console.log(data)
                         if(data.status == 200) {
-                            this.$store.dispatch("user/ACT_userInfo", data).then(() => {
-                                this.$message({
-                                    message: data.message,
-                                    type: "success"
-                                })
-                                this.$router.push({path: "/"})
-                            })
+							this.$message({
+								message: "登录成功",
+								type: "success"
+							})
+							this.$router.push({path: "/"})
                         }
-                        else if (data.status == 400) {
+                        else {
                             this.$message({
                                 message: data.message,
                                 type: "error"
                             })
                         }
                     }).catch(() => {
+						this.login_loading = false
                         this.$message({
                             message: "系统出错,请稍后再试",
                             type: "error"

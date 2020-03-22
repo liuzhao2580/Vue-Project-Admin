@@ -2,13 +2,10 @@ let baseUrl = ""
 
 // 生产环境
 if (process.env.NODE_ENV === "production") {
-    // 再判断 线上 还是 测试
-    if (process.env.VUE_APP_TITLE === "production") {
-        baseUrl = ""
-    }   
+    baseUrl = process.env.VUE_APP_BASE_API 
 }
 // 开发环境
 else {
-    baseUrl = "http://localhost:9527"
+    baseUrl = process.env.VUE_APP_BASE_API
 }
-export default baseUrl
+module.exports =  baseUrl
