@@ -1,4 +1,4 @@
-const {title:defatulConfig,targetURL} = require("./src/setting")
+const {title:defatulConfig} = require("./src/setting")
 const path = require("path")
 
 function resolve(dir) {
@@ -44,8 +44,8 @@ module.exports = {
         // 配置跨域
         proxy: {
             // 定义代理的名称
-            [`^${process.env.VUE_APP_BASE_API}`]: {
-                target: targetURL,
+            [`${process.env.VUE_APP_BASE_API}`]: {
+                target: process.env.BASE_URL,
                 changeOrigin: true, // 是否启动代理
                 // 设置之后请求会默认加上  如果你的真实的api路径中没有 /api 这一个路径，把这句加上
                 pathRewrite: {
