@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { dashboardApi } from "@/api/dashboard"
+// import { dashboardApi } from "@/api/dashboard"
 export default {
 	name: "dashboard",
 	components: {
@@ -22,9 +22,10 @@ export default {
 	methods: {
         // 初始化
         init() {
-            dashboardApi().then((data) => {
-                console.log(data)
-            })
+            // dashboardApi().then((data) => {
+            //     console.log(data)
+            console.log(222)
+            // })
         }
     },
 	watch: {}

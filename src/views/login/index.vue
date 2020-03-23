@@ -19,6 +19,7 @@
 
 <script>
 import { userLogin } from "@/api/user"
+import {setCookie} from "@/utils/cookies"
 export default {
 	name: "login",
 	components: {},
@@ -59,6 +60,7 @@ export default {
 								message: "登录成功",
 								type: "success"
 							})
+							setCookie("token", data.token)
 							this.$router.push({path: "/"})
                         }
                         else {
@@ -67,7 +69,8 @@ export default {
                                 type: "error"
                             })
                         }
-                    }).catch(() => {
+                    }).catch((error) => {
+						console.log(error,8888)
 						this.login_loading = false
                         this.$message({
                             message: "系统出错,请稍后再试",

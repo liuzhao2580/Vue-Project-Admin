@@ -6,7 +6,7 @@ const koa_body = require("koa-body")
 const page_error = require("koa-json-error")
 // const cors = require("koa-cors")
 const koa_static = require("koa-static")
-const { node_prot } = require("./utils/config")
+const { node_port } = require("./utils/config")
 const All_router = require("./router")
 
 // 连接数据库
@@ -29,4 +29,6 @@ app
 
 All_router(app)
 app.use(koa_static(__dirname,"public"))
-app.listen(node_prot,() => console.log(`node_api启动 localhost:${node_prot}`))
+app.listen(({
+    port: node_port
+}),() => console.log(`node_api启动 localhost:${node_port}`))
