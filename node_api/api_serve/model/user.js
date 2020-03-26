@@ -38,6 +38,14 @@ const UserSchema = new Schema({
     creatd_data: {
         type: Date,
         default: Date.now()
+    },
+    // 用户的显示的路由
+    routerList: {
+        type: {
+            name: {type: String},
+            path: {type: String},
+            children: {type: Array}
+        }
     }
 })
 

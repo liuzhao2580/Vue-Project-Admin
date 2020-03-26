@@ -3,6 +3,7 @@ import Nprogress from "nprogress"
 import { getCookie } from '@/utils/cookies'
 import "nprogress/nprogress.css" // 必须要的样式
 import setPageTitle from "@/utils/setPageTitle"
+import stroe from '@/store'
 
 router.beforeEach((to, from, next) => {
     const token = getCookie("token")
@@ -19,6 +20,17 @@ router.beforeEach((to, from, next) => {
             next(false)
             Nprogress.done()
             return
+        }
+        /**
+         * 说明是正常的路由页面
+         * 判断是否刷新页面 false 否 true 是
+         * 刷新页面重新请求用户数据
+         */
+        const {Need_refresh} = stroe.state.user
+        if(Need_refresh) {
+            stroe.dispatch("user/ACT_findByIDUser").then(() => {
+                console.log(222)
+            })
         }
         next()
         Nprogress.done()

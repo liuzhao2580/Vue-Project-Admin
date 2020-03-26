@@ -1,24 +1,43 @@
-
-import { setCookie } from "@/utils/cookies"
+import {userInfoApi} from "@/api/user"
+import { setCookie,getCookie } from "@/utils/cookies"
 const state = {
-    avatar: require("@/assets/images/welcom.gif"),
-    nickname: "小火车况且况且",
-    token: ""
+    avatar: "",
+    nickname: "",
+    Need_refresh: true // 判断是否刷新页面 false 否 true 是
 }
 const mutations = {
     // 设置用户基本数据
     SET_USER_INFO(state, userInfo) {
-        state.avatar = userInfo.avatar
+        state.avatar = userInfo.avatar_url
         state.nickname = userInfo.nickname
-        state.token = userInfo.token
+        state.Need_refresh = false 
     }
 }
 const actions = {
-    ACT_userInfo({ commit }, userInfo) {
+    ACT_userInfo({ commit }, data) {
         return new Promise((resolve) => {
             // 存入 token
-            setCookie("token", userInfo.token)
-            commit("SET_USER_INFO", userInfo)
+            setCookie("token", data.token)
+            setCookie("user_id", data.userInfo._id)
+            commit("SET_USER_INFO", data.userInfo)
+            resolve()
+        })
+    },
+    // 获取指定的用户信息
+    ACT_findByIDUser({commit}) {
+        return new Promise((resolve) => {
+            const user_id = getCookie("user_id")
+            const params = {
+                user_id
+            }
+            userInfoApi(params).then(({data})=> {
+                console.log(data)
+                commit("SET_USER_INFO", data)
+                
+                resolve()
+            }).catch(err => {
+                console.log(err)
+            })
             resolve()
         })
     }

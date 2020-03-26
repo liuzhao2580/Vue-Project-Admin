@@ -31,6 +31,11 @@ class UserCtl {
         const userlist = await UserSchema.find()
         ctx.body = userlist
     }
+    // 获取指定的用户数据
+    async get_findByIDUser(ctx) {
+        const res = await UserSchema.findById(ctx.params.id)
+        ctx.body = res
+    }
     // 用户注册
     async post_register(ctx) {
         ctx.verifyParams({
@@ -80,7 +85,7 @@ class UserCtl {
         } else {
             // 添加token
             const token = jwt.sign({name: res.name,id: res.id},token_secret,{expiresIn: "1D"})
-            ctx.body = { status: 200, token}
+            ctx.body = { status: 200, token,userInfo: res}
         }
     }
 }

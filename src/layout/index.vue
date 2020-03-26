@@ -15,7 +15,7 @@
 <script>
 import { AppMain, Sidebar, Navbar } from './components'
 import {mapGetters} from 'vuex'
-import { userInfoApi } from '@/api/user'
+// import { userInfoApi } from '@/api/user'
 import ResizeMixin from './mixin/Resize.js'
 export default {
 	name: "layout",
@@ -43,9 +43,9 @@ export default {
     },
 	methods: {
         init() {
-            userInfoApi().then((res) => {
-                console.log(res)
-            })
+            // userInfoApi().then((res) => {
+            //     console.log(res)
+            // })
         }
     },
 	watch: {}

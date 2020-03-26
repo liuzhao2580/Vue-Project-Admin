@@ -19,7 +19,6 @@
 
 <script>
 import { userLogin } from "@/api/user"
-import {setCookie} from "@/utils/cookies"
 export default {
 	name: "login",
 	components: {},
@@ -54,14 +53,14 @@ export default {
                     }
                     userLogin(params).then(({data}) => {
 						this.login_loading = false
-						console.log(data)
                         if(data.status == 200) {
 							this.$message({
 								message: "登录成功",
 								type: "success"
 							})
-							setCookie("token", data.token)
-							this.$router.push({path: "/"})
+							this.$store.dispatch("user/ACT_userInfo", data).then(() =>{
+								this.$router.push({path: "/"})
+							})
                         }
                         else {
                             this.$message({

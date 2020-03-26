@@ -16,6 +16,7 @@
 			:active-text-color="variables.menuActiveText"
 			:collapse-transition="false"
 			:router="true"
+			:unique-opened="true"
 		>
 			<SidebarItem
 				v-for="route in this.$router.options.routes"

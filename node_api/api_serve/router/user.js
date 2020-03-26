@@ -6,6 +6,8 @@ const koa_jwt = require("koa-jwt")
 const check_token = koa_jwt({secret:token_secret})
 // 获取用户列表
 router.get("/user",check_token,UserCtl.get_listUser)
+// 获取指定的用户信息
+router.get("/user/:id",check_token,UserCtl.get_findByIDUser)
 // 用户注册
 router.post("/register",UserCtl.user_existed, UserCtl.post_register)
 // 修改指定用户信息
