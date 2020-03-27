@@ -45,7 +45,8 @@ const UserSchema = new Schema({
             name: {type: String},
             path: {type: String},
             children: {type: Array}
-        }
+        },
+        default:[]
     }
 })
 

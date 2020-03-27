@@ -5,7 +5,7 @@ import "nprogress/nprogress.css" // 必须要的样式
 import setPageTitle from "@/utils/setPageTitle"
 import stroe from '@/store'
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     const token = getCookie("token")
     // 用于设置 浏览器的 title 显示
     document.title = setPageTitle(to.meta.title)
@@ -28,9 +28,7 @@ router.beforeEach((to, from, next) => {
          */
         const {Need_refresh} = stroe.state.user
         if(Need_refresh) {
-            stroe.dispatch("user/ACT_findByIDUser").then(() => {
-                console.log(222)
-            })
+            await stroe.dispatch("user/ACT_findByIDUser")
         }
         next()
         Nprogress.done()

@@ -14,7 +14,7 @@ const mutations = {
     }
 }
 const actions = {
-    ACT_userInfo({ commit }, data) {
+    ACT_userInfo({ commit }, {data}) {
         return new Promise((resolve) => {
             // 存入 token
             setCookie("token", data.token)
@@ -25,20 +25,14 @@ const actions = {
     },
     // 获取指定的用户信息
     ACT_findByIDUser({commit}) {
-        return new Promise((resolve) => {
-            const user_id = getCookie("user_id")
-            const params = {
-                user_id
-            }
-            userInfoApi(params).then(({data})=> {
-                console.log(data)
-                commit("SET_USER_INFO", data)
-                
-                resolve()
-            }).catch(err => {
-                console.log(err)
-            })
-            resolve()
+        const user_id = getCookie("user_id")
+        const params = {
+            user_id
+        }
+        userInfoApi(params).then(({data})=> {
+            commit("SET_USER_INFO", data.data)
+        }).catch(err => {
+            console.log(err)
         })
     }
 }

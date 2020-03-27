@@ -1,5 +1,5 @@
 module.exports = async (ctx, next) => {
-    ctx.setUnifyResFormat = (data,code,message) => {
+    ctx.setUnifyResFormat = (data = {},code,message) => {
         let res = {}
         if(code === 200) {
             res = {

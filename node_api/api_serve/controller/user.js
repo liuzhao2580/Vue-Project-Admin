@@ -15,7 +15,6 @@ class UserCtl {
         } else {
             await next()
         }
-        
     }
     // 判断该用户是否已经注册
     async checkISexisted(ctx,next) {

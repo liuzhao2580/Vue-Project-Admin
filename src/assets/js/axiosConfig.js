@@ -6,5 +6,5 @@ const Axios = axios.create({
     timeout: 50000 // request timeout
 })
 // 设置 token 的请求头
-Axios.defaults.headers.common["Authorization"] = "Bearer " + getCookie("token")
+Axios.defaults.headers.common["Authorization"] = getCookie("token")
 export default Axios

@@ -7,7 +7,7 @@ const page_error = require("koa-json-error")
 // const cors = require("koa-cors")
 const koa_static = require("koa-static")
 const { node_port} = require("./utils/config")
-const resextra = require("./utils/resextra")
+const resextra = require("./utils/unifyResFormat")
 const All_router = require("./router")
 
 // 连接数据库
