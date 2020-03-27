@@ -6,7 +6,8 @@ const koa_body = require("koa-body")
 const page_error = require("koa-json-error")
 // const cors = require("koa-cors")
 const koa_static = require("koa-static")
-const { node_port } = require("./utils/config")
+const { node_port} = require("./utils/config")
+const resextra = require("./utils/resextra")
 const All_router = require("./router")
 
 // 连接数据库
@@ -17,6 +18,7 @@ const options = {
 }
 app
 .use(page_error(options))
+.use(resextra)
 .use(koa_body({
     multipart: true,
     formidable: {
@@ -25,9 +27,9 @@ app
     }
 }))
 .use(koa_parameter(app))
-// .use(cors())
 
 All_router(app)
+
 app.use(koa_static(__dirname,"public"))
 app.listen(({
     port: node_port
