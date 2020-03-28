@@ -1,5 +1,5 @@
 <template>
-	<div>
+    <div>
         401
         <router-view></router-view>
     </div>
@@ -7,18 +7,17 @@
 
 <script>
 export default {
-	name: "",
-	components: {},
-	props: {},
-	data() {
-		return {};
-	},
-	created() {},
-	mounted() {},
-	methods: {},
-	watch: {}
-};
+    name: '',
+    components: {},
+    props: {},
+    data() {
+        return {}
+    },
+    created() {},
+    mounted() {},
+    methods: {},
+    watch: {}
+}
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
