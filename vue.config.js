@@ -10,7 +10,7 @@ const name = defatulConfig
 const port = 9527
 module.exports = {
     publicPath: "./",
-    outputDir: process.env.VUE_APP_TITLE === "production" ? "dist" : "test",
+    outputDir: process.env.NODE_ENV === "production" ? "dist" : "test",
     assetsDir: "",
     indexPath: "index.html",
     filenameHashing: true,
@@ -29,8 +29,13 @@ module.exports = {
             }
         },
         externals: {
+            "vue": "Vue",
+            'vue-router': 'VueRouter',
+            "vuex": "Vuex",
+            "element-ui": "ELEMENT",
             "AMap": "AMap",
-            "AMapUI": "AMapUI"
+            "AMapUI": "AMapUI",
+            "mavonEditor": "mavonEditor"
         }
     },
     devServer: {
@@ -45,8 +50,8 @@ module.exports = {
         proxy: {
             // 定义代理的名称
             [`${process.env.VUE_APP_BASE_API}`]: {
-                target: process.env.BASE_URL,
-                changeOrigin: true, // 是否启动代理
+                target: process.env.VUE_APP_BASE_URL,
+                changeOrigin: false, // 是否启动代理
                 // 设置之后请求会默认加上  如果你的真实的api路径中没有 /api 这一个路径，把这句加上
                 pathRewrite: {
                     [`^${process.env.VUE_APP_BASE_API}`]: ""

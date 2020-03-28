@@ -2,7 +2,7 @@
 node_modules
 /dist
 /node_api/node_modules
-
+/test
 # local env files
 .env.local
 .env.*.local

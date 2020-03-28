@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= webpackConfig.name %></title>
-    <script src="https://webapi.amap.com/maps?v=1.4.8&key=466cfc09695269cb432af38420bfebe0"></script>
-    <script src="//webapi.amap.com/ui/1.0/main.js"></script>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but vue_project doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title><%= webpackConfig.name %></title>
+  <!-- 引入样式 elementUI -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> <!--vue-router -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- vue -->
+  <script src="https://unpkg.com/vuex"></script> <!--vuex -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script> <!-- elementUI -->
+  <script src="https://webapi.amap.com/maps?v=1.4.8&key=466cfc09695269cb432af38420bfebe0"></script>
+  <script src="//webapi.amap.com/ui/1.0/main.js"></script>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but vue_project doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
