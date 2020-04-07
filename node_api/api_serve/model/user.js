@@ -42,6 +42,7 @@ const UserSchema = new Schema({
     // 用户的显示的路由
     routerList: {
         type: {
+            id: true,
             name: {type: String},
             path: {type: String},
             children: {type: Array}

@@ -17,6 +17,8 @@ userRouter.get('/user/:id', check_token, UserCtl.get_findByIDUser)
 userRouter.post('/register', UserCtl.user_existed, UserCtl.post_register)
 // 修改指定用户信息
 userRouter.patch('/user/updata', UserCtl.patch_userUpdata)
+// 修改指定用户的路由信息
+userRouter.patch('/user/:id/router',check_token, UserCtl.patch_userRouter)
 // 用户登录
 userRouter.post('/login', UserCtl.checkISexisted, UserCtl.post_login)
 module.exports = router

@@ -75,6 +75,21 @@ class UserCtl {
         const res = await UserSchema.findByIdAndUpdate(getBody.id,getBody)
         ctx.body = ctx.setUnifyResFormat(res,200,"获取数据成功")
     }
+    // 修改指定用户的路由信息
+    async patch_userRouter(ctx) {
+        ctx.verifyParams({
+            id: {
+                type: "string",required: true,format: /^[0-9a-zA-Z]{24}$/,message: "只能是24位"
+            },
+            routerList: {
+                type: "array",required: true
+            }
+        })
+        let {body: getBody} = ctx.request
+        const {id: getID} = ctx.params
+        const res = await UserSchema.findByIdAndUpdate(getID,getBody)
+        ctx.body = ctx.setUnifyResFormat(res.routerList,200,"修改成功")
+    }
     // 用户登录
     async post_login(ctx) {
         ctx.verifyParams({
@@ -92,6 +107,7 @@ class UserCtl {
             ctx.body = get_UnifyResFormat
         }
     }
+    
 }
 
 module.exports = new UserCtl()
