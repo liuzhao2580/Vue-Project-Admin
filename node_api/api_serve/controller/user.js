@@ -107,7 +107,6 @@ class UserCtl {
             ctx.body = get_UnifyResFormat
         }
     }
-    
 }
 
 module.exports = new UserCtl()

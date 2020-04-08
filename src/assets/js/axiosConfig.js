@@ -1,8 +1,8 @@
 import axios from 'axios'
 const { getCookie } = require("@/utils/cookies")
 const Axios = axios.create({
-    baseURL: process.env.VUE_APP_BASE_URL,
-    // baseURL: "http://localhost:1234/api/v1",
+    // baseURL: process.env.VUE_APP_BASE_URL,
+    baseURL: `http://localhost:9527${process.env.VUE_APP_BASE_API}`,
     withCredentials: true,
     timeout: 50000
 })

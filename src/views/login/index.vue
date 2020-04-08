@@ -58,9 +58,10 @@ export default {
 								message: "登录成功",
 								type: "success"
 							})
-							// this.$store.dispatch("user/ACT_userInfo", data).then(() =>{
-							// 	// this.$router.push({path: "/"})
-							// })
+							console.log(data)
+							this.$store.dispatch("user/ACT_userInfo", data).then(() =>{
+								this.$router.push({path: "/"})
+							})
                         }
                         else {
                             this.$message({

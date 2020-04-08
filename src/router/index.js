@@ -82,6 +82,11 @@ export const constantRoutes = [
             },
         ]
     },
+    // 404
+    { path: "*", hidden:true, component: () => import("@/views/error_page/404_page") }
+]
+// 需要权限的页面
+export const asyncRoutes = [
     // 地图
     {
         path: "/amap",
@@ -97,13 +102,7 @@ export const constantRoutes = [
     },
     components,
     // 错误页
-    error_page,
-    // 404
-    { path: "*", hidden:true, component: () => import("@/views/error_page/404_page") }
-]
-// 需要权限的页面
-export const asyncRoutes = [
-
+    error_page
 ]
 const createRouter = () => new Router({
     // mode: 'history', // require service support

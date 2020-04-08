@@ -6,6 +6,7 @@ function resolve(dir) {
 }
 // 设置 项目名称
 const name = defatulConfig
+console.log(process.env.VUE_APP_BASE_API)
 // 设置项目的端口号
 const port = 9527
 module.exports = {
@@ -49,12 +50,12 @@ module.exports = {
 		// 配置跨域
 		proxy: {
 			// 定义代理的名称
-			[`${process.env.VUE_APP_BASE_API}`]: {
+			[`/api/v1`]: {
 				target: process.env.VUE_APP_BASE_URL,
 				changeOrigin: true, // 是否启动代理
 				// 设置之后请求会默认加上  如果你的真实的api路径中没有 /api 这一个路径，把这句加上
 				pathRewrite: {
-					[`^${process.env.VUE_APP_BASE_API}`]: ''
+					[`^/api/v1`]: `/api/v1`
 				}
 			}
 		}
