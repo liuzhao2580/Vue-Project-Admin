@@ -19,8 +19,6 @@
 </template>
 <script>
 /*eslint-disable */
-import AMap from "AMap";
-import AMapUI from "AMapUI";
 export default {
 	name: "AmapCom",
 	components: {},
@@ -137,7 +135,11 @@ export default {
 			);
 		}
 	},
-	watch: {}
+	watch: {},
+	beforeDestroy() {
+		AMap.event.removeListener(AMap, "click", this.handleClick)
+		this.mapOBJ.destroy()
+	}
 };
 </script>
 

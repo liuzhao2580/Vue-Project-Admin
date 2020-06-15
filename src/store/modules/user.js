@@ -1,9 +1,13 @@
-import {userInfoApi} from "@/api/user"
+/* eslint-disable */
+import {userInfoApi} from "@api/user"
 import { setCookie,getCookie } from "@/utils/cookies"
 import { deepClone } from "@/utils/config"
-import {constantRoutes, asyncRoutes,resetRouter} from "@/router"
-// import Router from "@/router"
-// 将后台传递的路由格式和本地的路由对比
+import {constantRoutes, asyncRoutes, resetRouter} from "@/router"
+/**
+ * 将后台传递的路由格式和本地的路由对比
+ * @param {asyncRoutes} asyncRoutes  本地路由需要权限的数据
+ * @param {dataRouter} dataRouter  从后台获取的路由数据
+ */
 const getRouter = (asyncRoutes, dataRouter) => {
     let arr = []
     dataRouter.forEach(dataItem => {
@@ -30,8 +34,12 @@ const getRouter = (asyncRoutes, dataRouter) => {
 // 整理成为新的路由
 const creatRouter = (asyncRoutes, routerList) => {
     const getAsyncRouter = getRouter(asyncRoutes, routerList)
-    const RouterArr = [...constantRoutes, ...getAsyncRouter]
-    resetRouter()
+    const getRouterList = deepClone(constantRoutes)
+    // 1. 首先获取 404 页面, 从当前的路由中剔除
+    const get404_Page = getRouterList.splice(getRouterList.length - 1, 1)
+    // 2. 最后拼接 404 页面
+    const RouterArr = [...getRouterList, ...getAsyncRouter, ...get404_Page]
+    resetRouter(RouterArr)
     return RouterArr
 }
 const state = {
@@ -43,7 +51,7 @@ const state = {
 const mutations = {
     // 设置用户基本数据
     SET_USER_INFO(state, userInfo) {
-        state.avatar = userInfo.avatar_url
+        state.avatar = userInfo.avatar
         state.nickname = userInfo.nickname
         state.Need_refresh = false 
     },
@@ -53,27 +61,31 @@ const mutations = {
     }
 }
 const actions = {
-    ACT_userInfo({ commit }, {data}) {
+    // 用户登陆 获取用户信息 路由信息
+    ACT_userInfo({ commit }, data) {
         return new Promise((resolve) => {
             // 存入 token
-            setCookie("token", data.token)
-            setCookie("user_id", data.userInfo._id)
+            setCookie("token", data.userInfo.token)
+            setCookie("user_id", data.userInfo.id)
             commit("SET_USER_INFO", data.userInfo)
-            const getList = creatRouter(asyncRoutes, data.userInfo.routerList)
+            const getList = creatRouter(asyncRoutes, data.routerList)
             commit("SET_ROUTER_LIST",getList)
-            resolve()
+            resolve(getList)
         })
     },
-    // 获取用户信息, 路由信息
-    async ACT_findByIDUser({commit}) {
-        const user_id = getCookie("user_id")
-        const params = {
-            user_id
-        }
-        const {data} = await userInfoApi(params)
-        commit("SET_USER_INFO", data.data)
-        const getList = creatRouter(asyncRoutes, data.data.routerList)
-        commit("SET_ROUTER_LIST",getList)
+    // 页面刷新 重新获取用户信息, 路由信息
+    ACT_findByIDUser({commit}) {
+        return new Promise(async (resolve) => {
+            const userId = getCookie("user_id")
+            const params = {
+                userId
+            }
+            const { data } = await userInfoApi(params)
+            commit("SET_USER_INFO", data.userInfo)
+            const getList = creatRouter(asyncRoutes, data.routerList)
+            commit("SET_ROUTER_LIST",getList)
+            resolve(getList)
+        })
     }
 }
 export default {

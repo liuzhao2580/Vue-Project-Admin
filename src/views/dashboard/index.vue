@@ -24,7 +24,6 @@ export default {
         init() {
             // dashboardApi().then((data) => {
             //     console.log(data)
-            console.log(222)
             // })
         }
     },

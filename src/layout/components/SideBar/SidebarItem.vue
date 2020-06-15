@@ -26,7 +26,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 import { mapGetters } from 'vuex'
 // 引入 path 模块 用于拼接url地址
 import path from 'path'

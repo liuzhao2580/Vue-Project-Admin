@@ -19,8 +19,8 @@
 			:unique-opened="true"
 		>
 			<SidebarItem
-				v-for="route in RouList"
-				:key="route.path"
+				v-for="(route,index) in RouList"
+				:key="index"
 				:item="route"
 				:base-path="route.path"
 			/>

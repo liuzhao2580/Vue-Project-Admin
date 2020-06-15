@@ -1,6 +1,6 @@
 <template>
 	<div class="tinymce-box">
-        <p>目前展示tinymce 的基本使用, 更多的文档和功能请访问 <a href="https://www.tiny.cloud" style="color: #409eff">官方网站</a> </p>
+        <p>目前展示tinymce 的基本使用, 更多的文档和功能请访问 <a href="https://www.tiny.cloud" style="color: #409eff" target="block">官方网站</a> </p>
 		<textarea :id="TinyMce_ID" class="tinymce-textarea" v-model="TinyMce_Mess"></textarea>
 		<el-button type="primary" @click="onSubmit" class="tinymce-btn">提交</el-button>
 	</div>

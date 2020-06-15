@@ -1,10 +1,14 @@
 const state = {
-    side_status: false, // 侧边栏状态 展开 false 或者 折叠 ture 
+    side_status: false, // 侧边栏状态 展开 false 或者 折叠 true 
 }
 const mutations = {
     // 侧边栏状态 展开 或者 折叠
     CHANGE_SIDESTATUS(state) {
+        // let status = localStorage.getItem('side_status') ? localStorage.getItem('side_status') : false
+        // status === 'false' ? status = false : status = true
+        // console.log(status)
         state.side_status = !state.side_status
+        // localStorage.setItem('side_status', state.side_status)
     },
     // 折叠侧边栏
     FLOD_SIDE(state) {

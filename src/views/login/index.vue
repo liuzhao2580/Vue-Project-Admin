@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import { userLogin } from "@/api/user"
+import { userLogin } from "@api/user"
+import {mapActions} from 'vuex'
 export default {
 	name: "login",
 	components: {},
@@ -43,40 +44,42 @@ export default {
 	created() {},
 	mounted() {},
 	methods: {
+		...mapActions({
+			ACT_userInfo: 'user/ACT_userInfo'
+		}),
 		submitForm(formName) {
-			this.$refs[formName].validate(valid => {
+			this.$refs[formName].validate(async valid => {
 				if (valid) {
                     this.login_loading = true
                     const params = {
-                        name: this.login_form.username,
+                        username: this.login_form.username,
                         password: this.login_form.password
-                    }
-                    userLogin(params).then(({data}) => {
-						this.login_loading = false
-                        if(data.status == 200) {
+					}
+					try {
+						const {data: getData} = await userLogin(params)
+						if(getData.status == 200) {
 							this.$message({
 								message: "登录成功",
 								type: "success"
 							})
-							console.log(data)
-							this.$store.dispatch("user/ACT_userInfo", data).then(() =>{
-								this.$router.push({path: "/"})
-							})
+							// 传递数据 给 vuex 
+							await this.ACT_userInfo(getData)
+							this.$router.push({path: "/"})
                         }
                         else {
                             this.$message({
-                                message: data.message,
+                                message: getData.message,
                                 type: "error"
                             })
                         }
-                    }).catch((error) => {
-						console.log(error,8888)
+						this.login_loading = false
+					} catch (error) {
 						this.login_loading = false
                         this.$message({
                             message: "系统出错,请稍后再试",
                             type: "error"
                         })
-                    })
+					}
 				} else {
 					return false;
 				}

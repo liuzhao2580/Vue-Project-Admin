@@ -8,10 +8,10 @@ Vue.use(Router)
 // 公共的页面
 /**
  * 参数说明
- * hidden: true,  该路由不在侧边栏显示
- * redirect: 'noRedirect' , 说明该路由显示在面包屑中 但是不能被点击
- * breadcrumb: false   说明该路由不显示在面包屑中
- * affix: true  说明 该路由在 tags 中不能被删除
+ * @param {hidden}: true,  该路由不在侧边栏显示
+ * @param  {redirect}: 'noRedirect' , 说明该路由显示在面包屑中 但是不能被点击
+ * @param  {breadcrumb}: false   说明该路由不显示在面包屑中
+ * @param  {affix: true}  说明 该路由在 tags 中不能被删除
  */
 export const constantRoutes = [
     {
@@ -104,19 +104,24 @@ export const asyncRoutes = [
     // 错误页
     error_page
 ]
-const createRouter = () => new Router({
-    // mode: 'history', // require service support
+// RouterList = constantRoutes
+const createRouter = (RouterList = constantRoutes) => new Router({
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes
+    routes: RouterList
 })
 const router = createRouter()
-export function resetRouter() {
-    const newRouter = createRouter()
-    router.matcher = newRouter.matcher // reset router
+
+// 重置路由
+export const resetRouter = (RouterList) => {
+    const newRouter = createRouter(RouterList)
+    router.matcher = newRouter.matcher
+    router.options.routes = RouterList
 }
+
 // 解决 点击路由的是否报错问题
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 }
+
 export default router

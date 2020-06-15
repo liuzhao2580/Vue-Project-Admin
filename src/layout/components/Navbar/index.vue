@@ -5,6 +5,7 @@
                 <i class="el-icon-s-operation"></i>
             </div>
             <Breadcrumb />
+            <Change-color />
             <Personal />
         </div>
         <TagsView />
@@ -20,7 +21,8 @@ export default {
 	components: {
         Breadcrumb,
         TagsView,
-        Personal
+        Personal,
+        ChangeColor: () => import('../ChangeColor')
     },
 	props: {},
 	data() {
