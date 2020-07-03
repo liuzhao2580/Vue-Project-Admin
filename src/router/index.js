@@ -28,7 +28,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'dashboard',
-                component: () => import('@/views/dashboard/index'),
+                component: () => import('@/views/dashboard'),
                 name: 'Dashboard',
                 meta: { title: '首页', icon: "index", affix: true }
             }
@@ -41,7 +41,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'index',
-                component: () => import('@/views/documentation/index'),
+                component: () => import('@/views/documentation'),
                 name: 'documentation',
                 meta: { title: '文档', icon: "wendang", affix: true }
             }
@@ -82,11 +82,6 @@ export const constantRoutes = [
             },
         ]
     },
-    // 404
-    { path: "*", hidden:true, component: () => import("@/views/error_page/404_page") }
-]
-// 需要权限的页面
-export const asyncRoutes = [
     // 地图
     {
         path: "/amap",
@@ -103,22 +98,24 @@ export const asyncRoutes = [
     components,
     // 错误页
     error_page
+    // 404
+    // { path: "*", hidden:true, component: () => import("@/views/error_page/404_page") }
 ]
-// RouterList = constantRoutes
-const createRouter = (RouterList = constantRoutes) => new Router({
+// 需要权限的页面
+export const asyncRoutes = []
+const createRouter = () => new Router({
     scrollBehavior: () => ({ y: 0 }),
-    routes: RouterList
+    routes: constantRoutes
 })
 const router = createRouter()
 
 // 重置路由
-export const resetRouter = (RouterList) => {
-    const newRouter = createRouter(RouterList)
+export const resetRouter = () => {
+    const newRouter = createRouter()
     router.matcher = newRouter.matcher
-    router.options.routes = RouterList
 }
 
-// 解决 点击路由的是否报错问题
+// 解决 点击路由是否报错问题
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)

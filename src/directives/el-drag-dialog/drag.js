@@ -1,6 +1,5 @@
-/* eslint-disable */
 export default {
-    bind(el, binding, vnode){
+    bind(el){
         const dialogHead = el.querySelector(".el-dialog__header")
         const dialogBox = el.querySelector(".el-dialog")
         dialogHead.style.cursor = "move"

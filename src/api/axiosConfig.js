@@ -1,7 +1,7 @@
 import axios from 'axios'
 // const { getCookie } = require("@/utils/cookies")
 const Axios = axios.create({
-    baseURL: process.env.VUE_APP_BASE_URL,
+    // baseURL: process.env.VUE_APP_BASE_URL,
     // baseURL: process.env.VUE_APP_BASE_URL + process.env.VUE_APP_BASE_API,
     withCredentials: true,
     timeout: 50000

@@ -18,7 +18,7 @@ import {mapGetters} from 'vuex'
 // import { userInfoApi } from '@/api/user'
 import ResizeMixin from './mixin/Resize.js'
 export default {
-	name: "layout",
+	name: "Layout",
 	components: {
         AppMain,
         Sidebar,

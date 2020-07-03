@@ -54,7 +54,9 @@ export default {
 	data() {
 		return {};
 	},
-	created() {},
+	created() {
+		console.log(1111)
+	},
 	mounted() {},
 	methods: {},
 	watch: {}

@@ -2,7 +2,7 @@
 	<div class="AppMain-box">
         <transition name="fade-transition" mode="out-in">
             <keep-alive>
-                <router-view />
+                <router-view/>
             </keep-alive>
         </transition>
     </div>

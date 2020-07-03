@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import AmapCom from "@/components/Amap";
+import AmapCom from "./Amap";
 export default {
 	name: "amap",
 	components: {
@@ -24,9 +24,9 @@ export default {
 
 <style lang="scss" scoped>
 .map-box {
-	height: 600px;
     border: 5px solid #ccc;
-    width: 100%;
+	width: 100%;
+	height: 800px;
     border-radius: 10px;
 }
 </style>

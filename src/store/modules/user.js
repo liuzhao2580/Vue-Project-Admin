@@ -2,7 +2,7 @@
 import {userInfoApi} from "@api/user"
 import { setCookie,getCookie } from "@/utils/cookies"
 import { deepClone } from "@/utils/config"
-import {constantRoutes, asyncRoutes, resetRouter} from "@/router"
+import router, {constantRoutes, asyncRoutes, resetRouter} from "@/router"
 /**
  * 将后台传递的路由格式和本地的路由对比
  * @param {asyncRoutes} asyncRoutes  本地路由需要权限的数据
@@ -35,11 +35,16 @@ const getRouter = (asyncRoutes, dataRouter) => {
 const creatRouter = (asyncRoutes, routerList) => {
     const getAsyncRouter = getRouter(asyncRoutes, routerList)
     const getRouterList = deepClone(constantRoutes)
-    // 1. 首先获取 404 页面, 从当前的路由中剔除
-    const get404_Page = getRouterList.splice(getRouterList.length - 1, 1)
-    // 2. 最后拼接 404 页面
-    const RouterArr = [...getRouterList, ...getAsyncRouter, ...get404_Page]
-    resetRouter(RouterArr)
+    // 1. 404 页面
+    const get404_Page = [{ path: "*", hidden:true, component: () => import("@/views/error_page/404_page") }]
+    // 2. 将动态获取的数据 和 404页面 拼接起来
+    const RouterList = [...getAsyncRouter, ...get404_Page]
+    // 3.重置路由信息
+    resetRouter()
+    // 4.添加路由信息
+    router.addRoutes(RouterList)
+    // 5. 设置侧边栏的路由信息
+    const RouterArr = getRouterList.concat(RouterList)
     return RouterArr
 }
 const state = {

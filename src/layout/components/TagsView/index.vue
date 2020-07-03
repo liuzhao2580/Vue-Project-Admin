@@ -1,9 +1,9 @@
 <template>
 	<div class="TagsView-box">
 		<el-scrollbar class="TagsView-scrollbar">
-			<template v-for="tag in tags_data">
+			<template v-for="(tag,index) in tags_data">
 				<el-tag
-					:key="tag.path"
+					:key="index"
 					:closable="is_closable(tag)"
 					effect="dark"
 					@close="handleClose(tag)"
@@ -18,10 +18,8 @@
 </template>
 
 <script>
-/* eslint-disable */
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 import path from "path"
-import store from '@/store'
 export default {
 	name: "TagsView",
 	components: {},
@@ -40,11 +38,15 @@ export default {
     },
 	mounted() {},
 	methods: {
+        ...mapActions({
+            ACT_init_Tags: 'TagsView/ACT_init_Tags',
+            ACT_setTags: 'TagsView/ACT_setTags'
+        }),
         // 初始化 tags 
         init_tags() {
             const routes = this.$router.options.routes
             const affixTags = this.filterAffixTags(routes)
-            store.dispatch("TagsView/ACT_init_Tags", affixTags)
+            this.ACT_init_Tags(affixTags)
         },
         // 初始化的时候取出 固定的tags
         filterAffixTags(routes) {
@@ -71,7 +73,7 @@ export default {
                 meta: route.meta,
                 name: route.name
             }
-            store.dispatch("TagsView/ACT_setTags", currentTag);
+            this.ACT_setTags(currentTag)
         },
         // 用于高亮当前的tags
         is_active(tag) {
@@ -93,14 +95,13 @@ export default {
         },
         // 点击 tags 跳转
 		handleClick(tag) {
+            // this.insertT_Tags()
             this.$router.push(tag.fullPath)
         }
     },
-	watch: {
-        $route: {
-            handler() {
-                this.insertT_Tags()
-            }
+    watch: {
+        '$route.path'() {
+            this.insertT_Tags()
         }
     }
 };

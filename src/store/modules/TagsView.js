@@ -1,4 +1,3 @@
-/*eslint-disable*/
 const state = {
     // 存放 tags 的数组
     tagsArray: []
