@@ -1,9 +1,9 @@
-import Vue from "vue"
-import Router from "vue-router"
+import Vue from 'vue'
+import Router from 'vue-router'
 import Layout from '@/layout'
 // 使用 modules 引入嵌套过多的路由
-import error_page from "./modules/error"
-import components from "./modules/components"
+import error_page from './modules/error'
+import components from './modules/components'
 Vue.use(Router)
 // 公共的页面
 /**
@@ -14,99 +14,98 @@ Vue.use(Router)
  * @param  {affix: true}  说明 该路由在 tags 中不能被删除
  */
 export const constantRoutes = [
+    // 登录页面
     {
-        path: "/login",
-        name: "login",
+        path: '/login',
+        name: 'login',
         hidden: true,
-        component: () => import("@/views/login")
-    },
-    // 首页
+        component: () => import('@/views/login')
+    }
+]
+// 需要权限的页面
+/**
+ * @param {roles} 数组 用来存放路由的权限信息
+ * 如果 roles 没有声明 说明所有用户都可以进入该页面
+ * roles 代表的数字说明
+ * 1 超级管理员
+ * 2 管理员
+ * 3 普通用户
+ */
+export const asyncRoutes = [
     {
-        path: "/",
+        path: '/',
         component: Layout,
-        redirect: "/dashboard",
+        redirect: '/dashboard',
         children: [
+            // 首页
             {
                 path: 'dashboard',
                 component: () => import('@/views/dashboard'),
                 name: 'Dashboard',
-                meta: { title: '首页', icon: "index", affix: true }
-            }
-        ]
-    },
-    // 文档页
-    {
-        path: "/documentation",
-        component: Layout,
-        children: [
+                meta: { title: '首页', icon: 'index', affix: true }
+            },
+            // 文档页
             {
-                path: 'index',
+                path: 'documentation',
                 component: () => import('@/views/documentation'),
                 name: 'documentation',
-                meta: { title: '文档', icon: "wendang", affix: true }
-            }
-        ]
-    },
-    // 个人中心
-    {
-        path: "/personal",
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: "index",
-                component: () => import("@/views/personal"),
-                meta: { title: '个人中心', icon: "personal" },
-                name: "personalCenter",
-            }
-        ]
-    },
-    // 文章页
-    {
-        path: "/article",
-        component: Layout,
-        meta: { title: '文章', icon: "article"},
-        redirect: "noRedirect",
-        children: [
-            {
-                path: "created",
-                component: () => import("@/views/article/created"),
-                name: "created",
-                meta: { title: '文章创建', icon: "created"}
+                meta: { title: '文档', icon: 'wendang', affix: true }
             },
+            // 文章页
             {
-                path: "list",
-                component: () => import("@/views/article/list"),
-                name: "list",
-                meta: { title: '文章列表', icon: "list" }
+                path: 'article',
+                meta: { title: '文章页', icon: 'article', roles: [1, 2, 3] },
+                redirect: '/article/created',
+                name: 'personalCenter',
+                children: [
+                    {
+                        path: 'created',
+                        component: () => import('@/views/article/created'),
+                        name: 'created',
+                        meta: { title: '文章创建', icon: 'created', roles: [1, 2] }
+                    },
+                    {
+                        path: 'list',
+                        component: () => import('@/views/article/list'),
+                        name: 'list',
+                        meta: { title: '文章列表', icon: 'list', roles: [3] }
+                    }
+                ]
             },
-        ]
-    },
-    // 地图
-    {
-        path: "/amap",
-        component: Layout,
-        children: [
+            // 地图
             {
-                path: "index",
-                component: () => import("@/views/map"),
-                name: "amap",
-                meta: {title: "地图", icon: "map"}
-            }
+                path: 'amap',
+                component: () => import('@/views/map'),
+                meta: { title: '地图', icon: 'map' },
+                name: 'amap'
+            },
+            // 组件
+            components,
+            // 错误页
+            error_page,
+            // 个人中心
+            {
+                path: 'personal',
+                component: () => import('@/views/personal'),
+                hidden: true,
+                meta: { title: '个人中心', icon: 'personal' },
+                name: 'personalCenter'
+            },
+            
         ]
     },
-    components,
-    // 错误页
-    error_page
     // 404
-    // { path: "*", hidden:true, component: () => import("@/views/error_page/404_page") }
+    {
+        path: '*',
+        hidden: true,
+        component: () => import('@/views/error_page/404_page')
+    }
 ]
-// 需要权限的页面
-export const asyncRoutes = []
-const createRouter = () => new Router({
-    scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes
-})
+const createRouter = () =>
+    new Router({
+        scrollBehavior: () => ({ y: 0 }),
+        routes: constantRoutes
+    })
 const router = createRouter()
 
 // 重置路由
@@ -118,7 +117,7 @@ export const resetRouter = () => {
 // 解决 点击路由是否报错问题
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
-    return originalPush.call(this, location).catch(err => err)
+    return originalPush.call(this, location).catch((err) => err)
 }
 
 export default router

@@ -3,49 +3,41 @@ import {userInfoApi} from "@api/user"
 import { setCookie,getCookie } from "@/utils/cookies"
 import { deepClone } from "@/utils/config"
 import router, {constantRoutes, asyncRoutes, resetRouter} from "@/router"
+import { reject } from "core-js/fn/promise"
 /**
  * 将后台传递的路由格式和本地的路由对比
  * @param {asyncRoutes} asyncRoutes  本地路由需要权限的数据
  * @param {dataRouter} dataRouter  从后台获取的路由数据
  */
-const getRouter = (asyncRoutes, dataRouter) => {
-    let arr = []
-    dataRouter.forEach(dataItem => {
-        asyncRoutes.forEach(asyncItem => {
-            // 说明存在子路由
-            if(dataItem.hasOwnProperty("children")) {
-                if(dataItem.path === asyncItem.path) {
-                    let getArr = getRouter(asyncItem.children, dataItem.children)
-                    let deepRouter = deepClone(asyncItem)
-                    deepRouter.children = getArr
-                    arr.push(deepRouter)
-                }
-            }
-            // 说明不存在子路由 
-            else {
-                if(asyncItem.path === dataItem.path){
-                    arr.push(asyncItem)
-                }
-            }
-        })
-    })
-    return arr
+// 判断当前的路由是否存在权限 如该用户可以访问该页面就返回true 否则返回false
+const hasPrimission = (route, roleId) => {
+    return route.meta.roles.includes(roleId)
 }
-// 整理成为新的路由
-const creatRouter = (asyncRoutes, routerList) => {
-    const getAsyncRouter = getRouter(asyncRoutes, routerList)
-    const getRouterList = deepClone(constantRoutes)
-    // 1. 404 页面
-    const get404_Page = [{ path: "*", hidden:true, component: () => import("@/views/error_page/404_page") }]
-    // 2. 将动态获取的数据 和 404页面 拼接起来
-    const RouterList = [...getAsyncRouter, ...get404_Page]
-    // 3.重置路由信息
-    resetRouter()
-    // 4.添加路由信息
-    router.addRoutes(RouterList)
-    // 5. 设置侧边栏的路由信息
-    const RouterArr = getRouterList.concat(RouterList)
-    return RouterArr
+// 根据roleId 整理成为新的路由
+const creatRouter = (routes, roleId) => {
+    let routesArr = []
+    routes.children.forEach(item => {
+        // 说明需要根据权限展示页面
+        if(item.meta.roles) {
+            // 1. 首先判断该用户是否可以访问该页面
+            if(hasPrimission(item, roleId)) {
+                // 2. 再判断 该页面是否存在子路由
+                // 2.1 该用户有子路由，使用递归判断子路由是否可以访问
+                if(item.children) {
+                    const getChildrenRouter = creatRouter(item, roleId)
+                    routesArr.push({
+                        ...item,
+                        children: getChildrenRouter 
+                    })
+                }
+                // 2.2 说明该页面没有子路由
+                else routesArr.push(item)
+            }
+        }
+        // 说明不需要权限即可展示页面
+        else routesArr.push(item)
+    })
+    return routesArr
 }
 const state = {
     RouList: [], // 路由
@@ -70,12 +62,19 @@ const actions = {
     ACT_userInfo({ commit }, data) {
         return new Promise((resolve) => {
             // 存入 token
-            setCookie("token", data.userInfo.token)
+            // setCookie("token", data.userInfo.token)
             setCookie("user_id", data.userInfo.id)
+            setCookie("roleId", data.userInfo.roleId)
             commit("SET_USER_INFO", data.userInfo)
-            const getList = creatRouter(asyncRoutes, data.routerList)
-            commit("SET_ROUTER_LIST",getList)
-            resolve(getList)
+            // const getList = creatRouter(asyncRoutes[0], data.userInfo.roleId)
+            try {
+                const getList = creatRouter(asyncRoutes[0], 3)
+                commit("SET_ROUTER_LIST",getList)
+                resolve(getList)
+            } catch (error) {
+                reject(error)
+            }
+            
         })
     },
     // 页面刷新 重新获取用户信息, 路由信息
@@ -87,7 +86,7 @@ const actions = {
             }
             const { data } = await userInfoApi(params)
             commit("SET_USER_INFO", data.userInfo)
-            const getList = creatRouter(asyncRoutes, data.routerList)
+            const getList = creatRouter(asyncRoutes[0], data.routerList)
             commit("SET_ROUTER_LIST",getList)
             resolve(getList)
         })

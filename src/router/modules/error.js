@@ -1,7 +1,5 @@
-import Layout from '@/layout'
 const error_page = {
-    path: "/errorPage",
-    component: Layout,
+    path: "errorPage",
     meta: { title: "Error", icon: "error" },
     redirect: "/errorPage/401",
     children: [

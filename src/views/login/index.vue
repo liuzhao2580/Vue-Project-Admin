@@ -64,7 +64,7 @@ export default {
 							})
 							// 传递数据 给 vuex 
 							await this.ACT_userInfo(getData)
-							this.$router.push({path: "/"})
+							// this.$router.push({path: "/"})
                         }
                         else {
                             this.$message({

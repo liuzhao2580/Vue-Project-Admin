@@ -1,8 +1,5 @@
-import Layout from '@/layout'
-
 const components = {
-    path: "/components",
-    component: Layout,
+    path: "components",
     meta: { title: "组件", icon: "components" },
     redirect: "/components/richtext",
     children: [
