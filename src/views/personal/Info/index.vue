@@ -36,7 +36,10 @@ export default {
 	},
 	props: {},
 	computed: {
-		...mapGetters(["avatar", "nickname"])
+		...mapGetters({
+			avatar: 'user/avatar',
+			nickname: 'user/nickname'
+		})
 	},
 	data() {
 		return {

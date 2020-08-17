@@ -26,7 +26,9 @@ export default {
     },
     mixins: [ResizeMixin],
     computed: {
-        ...mapGetters(["side_status"]),
+        ...mapGetters({
+            side_status: 'app/side_status'
+        }),
         asideWidth() {
             if (this.side_status) return "64px"
             return "200px"

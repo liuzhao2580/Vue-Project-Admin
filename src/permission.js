@@ -16,7 +16,9 @@ router.beforeEach(async (to, from, next) => {
          * 如果在 token 存在的情况下要跳转到登录页面的话，阻止跳转
          * 在退出登录的时候会清除 token 
          */
-        const { Need_refresh } = store.state.user
+        const Need_refresh = store.getters['user/Need_refresh']
+        console.log(Need_refresh, 111)
+        console.log(987, 111)
         if(to.path === "/login") {
             next(false)
             Nprogress.done()
@@ -28,14 +30,15 @@ router.beforeEach(async (to, from, next) => {
          */
         else if(Need_refresh) {
             try {
-                await store.dispatch("user/ACT_findByIDUser")
+                const routesList = await store.dispatch("user/ACT_findByIDUser")
+                router.addRoutes(routesList)
                 next({...to, replace: true }) // hack方法 确保addRoutes已完成
                 Nprogress.done()
             } catch (error) {
                 console.log(error)
             }
         }
-        else {
+        else if(!Need_refresh){
             next()
             Nprogress.done()
         }

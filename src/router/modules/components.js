@@ -1,5 +1,5 @@
 const components = {
-    path: "components",
+    path: "/components",
     meta: { title: "组件", icon: "components" },
     redirect: "/components/richtext",
     children: [

@@ -39,24 +39,24 @@ export const asyncRoutes = [
         children: [
             // 首页
             {
-                path: 'dashboard',
+                path: '/dashboard',
                 component: () => import('@/views/dashboard'),
-                name: 'Dashboard',
+                name: 'dashboard',
                 meta: { title: '首页', icon: 'index', affix: true }
             },
             // 文档页
             {
-                path: 'documentation',
+                path: '/documentation',
                 component: () => import('@/views/documentation'),
                 name: 'documentation',
                 meta: { title: '文档', icon: 'wendang', affix: true }
             },
             // 文章页
             {
-                path: 'article',
+                path: '/article',
                 meta: { title: '文章页', icon: 'article', roles: [1, 2, 3] },
                 redirect: '/article/created',
-                name: 'personalCenter',
+                name: 'article',
                 children: [
                     {
                         path: 'created',
@@ -74,7 +74,7 @@ export const asyncRoutes = [
             },
             // 地图
             {
-                path: 'amap',
+                path: '/amap',
                 component: () => import('@/views/map'),
                 meta: { title: '地图', icon: 'map' },
                 name: 'amap'
@@ -85,13 +85,12 @@ export const asyncRoutes = [
             error_page,
             // 个人中心
             {
-                path: 'personal',
+                path: '/personal',
                 component: () => import('@/views/personal'),
                 hidden: true,
                 meta: { title: '个人中心', icon: 'personal' },
                 name: 'personalCenter'
-            },
-            
+            }
         ]
     },
     // 404

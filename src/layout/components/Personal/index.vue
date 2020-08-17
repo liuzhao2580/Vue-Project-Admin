@@ -21,12 +21,15 @@
 <script>
 import { mapGetters } from "vuex";
 import { removeCookie } from '@/utils/cookies'
+import { resetRouter } from "@/router"
 export default {
 	name: "Personal",
 	components: {},
 	props: {},
 	computed: {
-		...mapGetters(["avatar"])
+		...mapGetters({
+			avatar: 'user/avatar'
+		})
 	},
 	data() {
 		return {};
@@ -37,7 +40,8 @@ export default {
 		// 登出
 		login_Out() {
             removeCookie("token")
-            removeCookie("user_id")
+			removeCookie("user_id")
+			resetRouter()
             this.$router.push({path: "/login"})
 		},
 		handleCommand(command) {

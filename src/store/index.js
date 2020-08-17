@@ -1,6 +1,5 @@
 import Vue from "vue"
 import Vuex from "vuex"
-import getters from "./getters"
 import user from './modules/user'
 import app from './modules/app'
 import TagsView from './modules/TagsView'
@@ -25,8 +24,7 @@ const store = new Vuex.Store({
         user,
         app,
         TagsView
-    },
-    getters
+    }
 })
 
 export default store

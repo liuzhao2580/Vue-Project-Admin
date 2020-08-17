@@ -1,5 +1,5 @@
 const error_page = {
-    path: "errorPage",
+    path: "/errorPage",
     meta: { title: "Error", icon: "error" },
     redirect: "/errorPage/401",
     children: [

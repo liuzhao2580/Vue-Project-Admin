@@ -19,7 +19,7 @@
 
 <script>
 import { userLogin } from "@api/user"
-import {mapActions} from 'vuex'
+import {mapMutations,mapActions} from 'vuex'
 export default {
 	name: "login",
 	components: {},
@@ -45,7 +45,11 @@ export default {
 	mounted() {},
 	methods: {
 		...mapActions({
-			ACT_userInfo: 'user/ACT_userInfo'
+			ACT_userInfo: 'user/ACT_userInfo',
+			ACT_Need_Refresh: 'user/ACT_Need_Refresh'
+		}),
+		...mapMutations({
+			Need_refresh: 'user/Need_refresh'
 		}),
 		submitForm(formName) {
 			this.$refs[formName].validate(async valid => {
@@ -62,9 +66,13 @@ export default {
 								message: "登录成功",
 								type: "success"
 							})
-							// 传递数据 给 vuex 
-							await this.ACT_userInfo(getData)
-							// this.$router.push({path: "/"})
+							try {
+								await this.ACT_userInfo(getData)
+								await this.ACT_Need_Refresh(true)
+								this.$router.replace({path: "/"})
+							} catch (error) {
+								console.log(error, 111)
+							}
                         }
                         else {
                             this.$message({

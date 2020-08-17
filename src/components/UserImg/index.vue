@@ -10,7 +10,9 @@ export default {
 	name: "UserImg",
     components: {},
     computed: {
-        ...mapGetters(["avatar"])
+        ...mapGetters({
+			avatar: 'user/avatar'
+		})
     },
 };
 </script>

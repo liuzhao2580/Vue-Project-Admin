@@ -30,7 +30,9 @@ export default {
 		};
     },
     computed: {
-        ...mapGetters(["tags_data"])
+        ...mapGetters({
+            tags_data: 'TagsView/tags_data'
+        })
     },
 	created() {
         this.init_tags()

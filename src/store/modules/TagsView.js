@@ -26,9 +26,14 @@ const actions = {
         commit("SET_TAGS", tags)
     }
 }
+
+const getters = {
+    tags_data: state => state.tagsArray
+}
 export default {
     namespaced: true,
     state,
     mutations,
-    actions
+    actions,
+    getters
 }

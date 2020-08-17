@@ -39,7 +39,11 @@ export default {
 	},
 	props: {},
 	computed: {
-		...mapGetters(["avatar", "side_status","RouList"]),
+		...mapGetters({
+			avatar: 'user/avatar',
+			side_status: 'app/side_status',
+			RouList: 'user/RouList'
+		}),
 		// 获取当前页面的 url 地址
 		activeMenu() {
 			const route = this.$route;
@@ -54,9 +58,7 @@ export default {
 	data() {
 		return {};
 	},
-	created() {
-		console.log(1111)
-	},
+	created() {},
 	mounted() {},
 	methods: {},
 	watch: {}

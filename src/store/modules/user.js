@@ -2,8 +2,7 @@
 import {userInfoApi} from "@api/user"
 import { setCookie,getCookie } from "@/utils/cookies"
 import { deepClone } from "@/utils/config"
-import router, {constantRoutes, asyncRoutes, resetRouter} from "@/router"
-import { reject } from "core-js/fn/promise"
+import router, {constantRoutes, asyncRoutes} from "@/router"
 /**
  * 将后台传递的路由格式和本地的路由对比
  * @param {asyncRoutes} asyncRoutes  本地路由需要权限的数据
@@ -50,31 +49,30 @@ const mutations = {
     SET_USER_INFO(state, userInfo) {
         state.avatar = userInfo.avatar
         state.nickname = userInfo.nickname
-        state.Need_refresh = false 
     },
     // 设置用户动态路由
     SET_ROUTER_LIST(state,list) {
         state.RouList = list
+    },
+    // 设置 Need_refresh 用来更新 Need_refresh
+    MUT_Need_Refresh(state, flag) {
+        state.Need_refresh = flag
     }
 }
 const actions = {
     // 用户登陆 获取用户信息 路由信息
     ACT_userInfo({ commit }, data) {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             // 存入 token
-            // setCookie("token", data.userInfo.token)
+            setCookie("token", data.userInfo.token)
             setCookie("user_id", data.userInfo.id)
             setCookie("roleId", data.userInfo.roleId)
             commit("SET_USER_INFO", data.userInfo)
-            // const getList = creatRouter(asyncRoutes[0], data.userInfo.roleId)
             try {
-                const getList = creatRouter(asyncRoutes[0], 3)
-                commit("SET_ROUTER_LIST",getList)
-                resolve(getList)
+                resolve()
             } catch (error) {
                 reject(error)
             }
-            
         })
     },
     // 页面刷新 重新获取用户信息, 路由信息
@@ -82,19 +80,35 @@ const actions = {
         return new Promise(async (resolve) => {
             const userId = getCookie("user_id")
             const params = {
-                userId
+                id: userId
             }
             const { data } = await userInfoApi(params)
             commit("SET_USER_INFO", data.userInfo)
-            const getList = creatRouter(asyncRoutes[0], data.routerList)
-            commit("SET_ROUTER_LIST",getList)
-            resolve(getList)
+            commit('MUT_Need_Refresh', false)
+            const getList = creatRouter(asyncRoutes[0], data.userInfo.roleId)
+            const newRoutesList = deepClone(asyncRoutes[0])
+            newRoutesList.children = getList
+            const routesList = constantRoutes.concat(newRoutesList)
+            commit("SET_ROUTER_LIST",routesList)
+            resolve([newRoutesList])
         })
+    },
+    ACT_Need_Refresh({commit}, flag) {
+        commit('MUT_Need_Refresh', flag)
     }
+}
+const getters = {
+    avatar: state => state.avatar,
+    nickname: state => state.nickname,
+    token: state => state.token,
+    RouList: state => state.RouList,
+    Need_refresh: state => state.Need_refresh,
+    
 }
 export default {
     namespaced: true, // 之后在不同页面中引入getter、actions、mutations时，需要加上所属的模块名
     state,
     mutations,
-    actions
+    actions,
+    getters
 }
