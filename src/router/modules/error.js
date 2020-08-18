@@ -1,7 +1,9 @@
+import PageContent from '@/layout/components/AppMain'
 const error_page = {
     path: "/errorPage",
     meta: { title: "Error", icon: "error" },
     redirect: "/errorPage/401",
+    component: PageContent,
     children: [
         {
             path: '401',

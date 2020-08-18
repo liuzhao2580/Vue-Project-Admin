@@ -1,7 +1,9 @@
+import PageContent from '@/layout/components/AppMain'
 const components = {
     path: "/components",
     meta: { title: "组件", icon: "components" },
     redirect: "/components/richtext",
+    component: PageContent,
     children: [
         {
             path: "richtext",

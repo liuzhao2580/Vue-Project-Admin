@@ -17,8 +17,6 @@ router.beforeEach(async (to, from, next) => {
          * 在退出登录的时候会清除 token 
          */
         const Need_refresh = store.getters['user/Need_refresh']
-        console.log(Need_refresh, 111)
-        console.log(987, 111)
         if(to.path === "/login") {
             next(false)
             Nprogress.done()
@@ -28,7 +26,7 @@ router.beforeEach(async (to, from, next) => {
          * 判断是否刷新页面 false 否 true 是
          * 刷新页面重新请求用户数据
          */
-        else if(Need_refresh) {
+        if (Need_refresh) {
             try {
                 const routesList = await store.dispatch("user/ACT_findByIDUser")
                 router.addRoutes(routesList)
@@ -38,7 +36,7 @@ router.beforeEach(async (to, from, next) => {
                 console.log(error)
             }
         }
-        else if(!Need_refresh){
+        else {
             next()
             Nprogress.done()
         }

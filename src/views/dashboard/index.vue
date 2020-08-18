@@ -27,7 +27,7 @@ export default {
 		return {};
 	},
 	created() {
-        this.init()
+        // this.init()
     },
 	mounted() {},
 	methods: {

@@ -39,9 +39,10 @@ const creatRouter = (routes, roleId) => {
     return routesArr
 }
 const state = {
-    RouList: [], // 路由
+    sideBarList: [], // 侧边栏的数据
     avatar: "",
     nickname: "",
+    token: "",
     Need_refresh: true // 判断是否刷新页面 false 否 true 是
 }
 const mutations = {
@@ -49,10 +50,11 @@ const mutations = {
     SET_USER_INFO(state, userInfo) {
         state.avatar = userInfo.avatar
         state.nickname = userInfo.nickname
+        state.token = userInfo.token
     },
     // 设置用户动态路由
     SET_ROUTER_LIST(state,list) {
-        state.RouList = list
+        state.sideBarList = list
     },
     // 设置 Need_refresh 用来更新 Need_refresh
     MUT_Need_Refresh(state, flag) {
@@ -84,12 +86,12 @@ const actions = {
             }
             const { data } = await userInfoApi(params)
             commit("SET_USER_INFO", data.userInfo)
-            commit('MUT_Need_Refresh', false)
             const getList = creatRouter(asyncRoutes[0], data.userInfo.roleId)
             const newRoutesList = deepClone(asyncRoutes[0])
             newRoutesList.children = getList
             const routesList = constantRoutes.concat(newRoutesList)
-            commit("SET_ROUTER_LIST",routesList)
+            commit("SET_ROUTER_LIST",newRoutesList.children)
+            commit('MUT_Need_Refresh', false)
             resolve([newRoutesList])
         })
     },
@@ -101,9 +103,8 @@ const getters = {
     avatar: state => state.avatar,
     nickname: state => state.nickname,
     token: state => state.token,
-    RouList: state => state.RouList,
-    Need_refresh: state => state.Need_refresh,
-    
+    sideBarList: state => state.sideBarList,
+    Need_refresh: state => state.Need_refresh
 }
 export default {
     namespaced: true, // 之后在不同页面中引入getter、actions、mutations时，需要加上所属的模块名

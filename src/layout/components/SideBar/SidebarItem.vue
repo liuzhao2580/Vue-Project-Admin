@@ -1,7 +1,7 @@
 <template>
 	<div v-if="!item.hidden" class="SidebarItem-box">
         <!-- 首先判断 当级路由下不存在多级路由 -->
-        <template v-if="checkMoreRouter(item.children, item)">
+        <template v-if="checkMoreRouter(item)">
             <el-menu-item :index="resolvePath(onlyOneChild.path)">
                 <MenuItem :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title"/>
             </el-menu-item>
@@ -36,7 +36,9 @@ export default {
         MenuItem
     },
     computed: {
-        ...mapGetters(["side_status"])
+        ...mapGetters({
+            side_status: 'app/side_status'
+        })
     },
 	props: {
 		item: {
@@ -64,11 +66,11 @@ export default {
             return path.resolve(this.basePath, routePath)
         },
         // 用户判断多级路由
-        checkMoreRouter(children = [], parent) {
+        checkMoreRouter(route) {
             // 判断 是否含有多级路由
-            // 当 children 和 meta 同时存在时, 说明还存在子路由
-            if (parent.children && parent.meta) {
-                this.onlyOneChild = parent
+            // 当 children 存在时, 说明还存在子路由
+            if (route.children) {
+                this.onlyOneChild = route
                 return false
             }
             // 说明当前路由不存在子路由 
@@ -76,11 +78,11 @@ export default {
                 // 如果 isMoreChild 存在 说明当前的路由是通过递归传递的数据
                 if (this.isMoreChild) {
                     // 重新定义 path 
-                    this.onlyOneChild = {...parent,path:""}
+                    this.onlyOneChild = {...route,path:""}
                 }
                 // 说明 当前的路由是一级路由 
                 else {
-                    this.onlyOneChild = children[0]
+                    this.onlyOneChild = route
                 }
                 return true
             }

@@ -19,7 +19,7 @@
 			:unique-opened="true"
 		>
 			<SidebarItem
-				v-for="(route,index) in RouList"
+				v-for="(route,index) in sideBarList"
 				:key="index"
 				:item="route"
 				:base-path="route.path"
@@ -42,7 +42,7 @@ export default {
 		...mapGetters({
 			avatar: 'user/avatar',
 			side_status: 'app/side_status',
-			RouList: 'user/RouList'
+			sideBarList: 'user/sideBarList'
 		}),
 		// 获取当前页面的 url 地址
 		activeMenu() {

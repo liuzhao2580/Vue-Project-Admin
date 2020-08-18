@@ -1,18 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/layout'
+import PageContent from '@/layout/components/AppMain'
 // 使用 modules 引入嵌套过多的路由
 import error_page from './modules/error'
 import components from './modules/components'
 Vue.use(Router)
 // 公共的页面
-/**
- * 参数说明
- * @param {hidden}: true,  该路由不在侧边栏显示
- * @param  {redirect}: 'noRedirect' , 说明该路由显示在面包屑中 但是不能被点击
- * @param  {breadcrumb}: false   说明该路由不显示在面包屑中
- * @param  {affix: true}  说明 该路由在 tags 中不能被删除
- */
 export const constantRoutes = [
     // 登录页面
     {
@@ -30,6 +24,13 @@ export const constantRoutes = [
  * 1 超级管理员
  * 2 管理员
  * 3 普通用户
+ */
+/**
+ * 参数说明
+ * @param  {hidden}: true,  该路由不在侧边栏显示
+ * @param  {redirect}: 'noRedirect' , 说明该路由显示在面包屑中 但是不能被点击
+ * @param  {breadcrumb}: false   说明该路由不显示在面包屑中
+ * @param  {affix: true}  说明 该路由在 tags 中 初始化的时候就要显示，并且不能被删除
  */
 export const asyncRoutes = [
     {
@@ -56,6 +57,7 @@ export const asyncRoutes = [
                 path: '/article',
                 meta: { title: '文章页', icon: 'article', roles: [1, 2, 3] },
                 redirect: '/article/created',
+                component: PageContent,
                 name: 'article',
                 children: [
                     {
@@ -68,7 +70,7 @@ export const asyncRoutes = [
                         path: 'list',
                         component: () => import('@/views/article/list'),
                         name: 'list',
-                        meta: { title: '文章列表', icon: 'list', roles: [3] }
+                        meta: { title: '文章列表', icon: 'list', roles: [1, 2, 3]}
                     }
                 ]
             },

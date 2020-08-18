@@ -12,7 +12,9 @@ export default {
 	data() {
 		return {};
 	},
-	created() {},
+	created() {
+		console.log(987, 1111)
+	},
 	mounted() {},
 	methods: {},
 	watch: {}
