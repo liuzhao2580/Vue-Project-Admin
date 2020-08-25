@@ -41,19 +41,20 @@ export default {
 		login_Out() {
             removeCookie("token")
 			removeCookie("user_id")
+			// 重置 路由
 			resetRouter()
             this.$router.push({path: "/login"})
 		},
 		handleCommand(command) {
 			switch (command) {
 				case "a":
-					this.$router.push("/personal/index")
+					this.$router.push("/personal")
 					break;
 				case "b":
 					this.$router.push("/")
 					break;
 				case "c":
-					this.$router.push("/documentation/index")
+					this.$router.push("/documentation")
 					break;
 				case "d":
 					window.open( "https://github.com/liuzhao2580/Vue_project")

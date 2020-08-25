@@ -21,7 +21,9 @@ export default {
 	name: "account",
     components: {},
     computed: {
-        ...mapGetters(["nickname"])
+        ...mapGetters({
+			nickname: 'user/nickname'
+		})
     },
 	props: {},
 	data() {
