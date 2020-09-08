@@ -2,7 +2,7 @@
 import {userInfoApi} from "@api/user"
 import { setCookie,getCookie } from "@/utils/cookies"
 import { deepClone } from "@/utils/config"
-import router, {constantRoutes, asyncRoutes} from "@/router"
+import {asyncRoutes} from "@/router"
 /**
  * 将后台传递的路由格式和本地的路由对比
  * @param {asyncRoutes} asyncRoutes  本地路由需要权限的数据
@@ -84,12 +84,15 @@ const actions = {
             const params = {
                 id: userId
             }
+            // 获取用户的基本信息
             const { data } = await userInfoApi(params)
             commit("SET_USER_INFO", data.userInfo)
+            // 通过递归获取用户的路由权限，侧边栏数据
             const getList = creatRouter(asyncRoutes[0], data.userInfo.roleId)
+            // 深拷贝用户的侧边栏数据
             const newRoutesList = deepClone(asyncRoutes[0])
             newRoutesList.children = getList
-            const routesList = constantRoutes.concat(newRoutesList)
+            // 存储数据
             commit("SET_ROUTER_LIST",newRoutesList.children)
             commit('MUT_Need_Refresh', false)
             resolve([newRoutesList])
