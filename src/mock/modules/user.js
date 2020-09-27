@@ -25,10 +25,10 @@ const userInfo = [
         id: 4396,
         roleId: 3,
         roleName: '普通用户',
-        username: "admin",
-        password: "admin",
+        username: "user",
+        password: "user",
         nickname: "小火车况且况且",
-        token: "admin-token",
+        token: "user-token",
         avatar:"https://isorepublic.com/wp-content/uploads/2019/12/iso-republic-two-women-run-along-a-sunset-beach-200x300.jpg"
     }
 ]
