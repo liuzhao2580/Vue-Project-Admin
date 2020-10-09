@@ -1,28 +1,56 @@
 <template>
-    <div class="change-color">
-        <el-color-picker v-model="color" color-format='hex' @active-change='handleChange'></el-color-picker>
+    <div>
+        <el-select
+            v-model="value"
+            :style="{ backgroundColor: value }"
+            placeholder="请选择"
+            class="change-color"
+            @change="selectChange"
+        >
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+                :style="{ backgroundColor: item.value }"
+            >
+            </el-option>
+        </el-select>
+        <p class="test">测试</p>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'change-color',
-    components: {},
-    props: {},
-    computed: {},
     data() {
         return {
-            color: '#409EFF'
+            value: '#409EFF',
+            options: [
+                {
+                    value: '#409EFF',
+                    label: ''
+                },
+                {
+                    value: '#14F7D1',
+                    label: ''
+                },
+                {
+                    value: '#E4F714',
+                    label: ''
+                },
+                {
+                    value: '#FFC0CD',
+                    label: ''
+                }
+            ]
         }
     },
-    created() {},
-    mounted() {},
     methods: {
-        handleChange(value) {
-            const reg = /[0-9]\d+/g
-            const getArr = value.match(reg)
-            let hexStr = '#'+((getArr[0] << 16) | (getArr[1]  << 8) | getArr[2] ).toString(16);
-            console.log(hexStr)
+        selectChange(value) {
+            console.log(value, 1111)
+            const bodyDom = document.querySelector('body')
+            bodyDom.setAttribute('data-theme', '')
+            bodyDom.setAttribute('data-theme', `${value}`)
         }
     }
 }
@@ -30,6 +58,7 @@ export default {
 
 <style lang="scss" scoped>
 .change-color {
-    margin-right: 10px;
+    width: 120px;
+    border-radius: 50%;
 }
 </style>

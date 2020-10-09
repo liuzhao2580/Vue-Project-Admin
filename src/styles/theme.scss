@@ -1,0 +1,7 @@
+@mixin theme($background: #409EFF, $color: #409EFF) {
+    [data-theme = '#409EFF'] & {
+        .test {
+            color: $background;
+        }
+    }
+}
