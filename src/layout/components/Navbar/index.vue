@@ -4,8 +4,13 @@
             <div class="side-btn" @click="side_Btn">
                 <i class="el-icon-s-operation"></i>
             </div>
+            <!-- 面包屑 -->
             <Breadcrumb />
+            <!-- 中英文切换 -->
+            <Change-language />
+            <!-- 颜色选择器 -->
             <Change-color />
+            <!-- 个人 -->
             <Personal />
         </div>
         <TagsView />
@@ -16,11 +21,13 @@
 import Breadcrumb from "../Breadcrumb"
 import TagsView from "../TagsView"
 import Personal from '../Personal'
+import ChangeLanguage from '../Change-language'
 export default {
 	name: "Navbar",
 	components: {
         Breadcrumb,
         TagsView,
+        ChangeLanguage,
         Personal,
         ChangeColor: () => import('../ChangeColor')
     },
