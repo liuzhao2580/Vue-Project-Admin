@@ -16,7 +16,7 @@
             >
             </el-option>
         </el-select>
-        <p class="test">测试</p>
+        <p class="test-text">测试</p>
     </div>
 </template>
 
@@ -47,8 +47,7 @@ export default {
     },
     methods: {
         selectChange(value) {
-            console.log(value, 1111)
-            const bodyDom = document.querySelector('body')
+            const bodyDom = document.querySelector('#app')
             bodyDom.setAttribute('data-theme', '')
             bodyDom.setAttribute('data-theme', `${value}`)
         }

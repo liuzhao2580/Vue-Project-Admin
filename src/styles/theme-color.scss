@@ -1,0 +1,7 @@
+// @import './variables.scss';
+@mixin theme-color($bgColor: #409EFF, $ftcolor: #FFF) {
+    $brandColor: $bgColor;
+    .test-text {
+        color: $bgColor;
+    }
+}
