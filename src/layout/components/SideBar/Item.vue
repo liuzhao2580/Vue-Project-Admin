@@ -1,6 +1,10 @@
 <template>
     <div>
+<<<<<<< HEAD
         <svg-icon :icon-class='icon'/>
+=======
+        <svg-icon :icon-class="icon" />
+>>>>>>> master
         <span slot="title">{{title}}</span>
     </div>
 </template>
