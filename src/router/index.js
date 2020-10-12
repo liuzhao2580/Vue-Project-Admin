@@ -63,13 +63,13 @@ export const asyncRoutes = [
                     {
                         path: 'created',
                         component: () => import('@/views/article/created'),
-                        name: 'created',
+                        name: 'articleCreated',
                         meta: { title: '文章创建', icon: 'created', roles: [1, 2] }
                     },
                     {
                         path: 'list',
                         component: () => import('@/views/article/list'),
-                        name: 'list',
+                        name: 'articleList',
                         meta: { title: '文章列表', icon: 'list', roles: [1, 2, 3]}
                     }
                 ]
