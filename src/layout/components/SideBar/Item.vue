@@ -1,11 +1,7 @@
 <template>
     <div>
-<<<<<<< HEAD
-        <svg-icon :icon-class='icon'/>
-=======
         <svg-icon :icon-class="icon" />
->>>>>>> master
-        <span slot="title">{{title}}</span>
+        <span slot="title">{{$t('i18n.routes.dashboard')}}</span>
     </div>
 </template>
 <script>

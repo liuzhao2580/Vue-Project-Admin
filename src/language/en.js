@@ -1,5 +1,10 @@
 export default {
     routes : {
-        dashboard: "Dashboard"
+        dashboard: "Dashboard",
+        documentation: 'Documentation',
+        article: 'Article',
+        articleCreated: 'Article Created',
+        articleList: 'Article List',
+        amap: 'Amap'
     }
 }
