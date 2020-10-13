@@ -1,9 +1,9 @@
 @import './theme-color.scss';
-$themes : (
-    #409EFF,
-    #14F7D1,
-    #E4F714,
-    #FFC0CD
+$themes: (
+    #409EFF: #FFF,
+    #14F7D1: #FFF,
+    #E4F714: #000,
+    #FFC0CD: #000
 );
 /*
     @each $val in list 是scss的语法 https://www.sass.hk/docs/#t8-4
@@ -11,11 +11,9 @@ $themes : (
     主题切换 依赖的是 自定义属性，在选择主题颜色的时候，给 ID选择器 app添加自定义属性 data-theme = 'theme' theme代表选择的颜色
 */
 #app {
-    @each $themeName in $themes {
-        &[data-theme = '#{$themeName}'] {
-            @include theme-color($themeName)
+    @each $themeName, $ftColor in $themes {
+        &[data-theme='#{$themeName}'] {
+            @include theme-color($themeName, $ftColor);
         }
     }
 }
-
-
