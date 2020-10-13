@@ -6,13 +6,13 @@
 				<i class="el-icon-arrow-down el-icon--right"></i>
 			</span>
 			<el-dropdown-menu slot="dropdown">
-				<el-dropdown-item command="a" icon="el-icon-user-solid">个人中心</el-dropdown-item>
-				<el-dropdown-item command="b" icon="el-icon-s-home">首页</el-dropdown-item>
-				<el-dropdown-item command="c" icon="el-icon-document">文档</el-dropdown-item>
+				<el-dropdown-item command="a" icon="el-icon-user-solid">{{$t('i18n.personal.personal')}}</el-dropdown-item>
+				<el-dropdown-item command="b" icon="el-icon-s-home">{{$t('i18n.personal.dashboard')}}</el-dropdown-item>
+				<el-dropdown-item command="c" icon="el-icon-document">{{$t('i18n.personal.documentation')}}</el-dropdown-item>
 				<el-dropdown-item command="d" >
 					<svg-icon iconClass="github" /> GitHub
 				</el-dropdown-item>
-				<el-dropdown-item command="e" icon="el-icon-switch-button" divided>退出登录</el-dropdown-item>
+				<el-dropdown-item command="e" icon="el-icon-switch-button" divided>{{$t('i18n.personal.logOut')}}</el-dropdown-item>
 			</el-dropdown-menu>
 		</el-dropdown>
 	</div>

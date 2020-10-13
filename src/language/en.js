@@ -17,5 +17,12 @@ export default {
         errorPage401: '401',
         errorPage4011: '4011',
         errorPage404: '404',
+    },
+    // 右侧头像的下拉框
+    personal : {
+        personal: 'Personal',
+        dashboard: 'Dashboard',
+        documentation: 'Documentation',
+        logOut: "LogOut"
     }
 }

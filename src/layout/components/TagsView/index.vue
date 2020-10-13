@@ -11,7 +11,7 @@
                     @click="handleClick(tag)"
                     disable-transitions
                     :class="{ 'is-active' : is_active(tag.meta.title)}"
-                >{{tag.meta.title}}</el-tag>
+                >{{$t(`i18n.routes.${tag.name}`)}}</el-tag>
             </template>
         </el-scrollbar>
     </div>
