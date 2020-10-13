@@ -1,7 +1,7 @@
 <template>
     <div>
         <svg-icon :icon-class="icon" />
-        <span slot="title">{{$t('i18n.routes.dashboard')}}</span>
+        <span slot="title">{{$t(`i18n.routes.${name}`)}}</span>
     </div>
 </template>
 <script>
@@ -15,7 +15,11 @@ export default {
 		title: {
 			type: String,
 			default: ""
-        }
+		},
+		name: {
+			type: String,
+			default: ''
+		}
     }
 };
 </script>

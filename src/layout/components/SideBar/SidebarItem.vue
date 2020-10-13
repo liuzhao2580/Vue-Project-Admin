@@ -3,13 +3,13 @@
         <!-- 首先判断 当级路由下不存在多级路由 -->
         <template v-if="checkMoreRouter(item)">
             <el-menu-item :index="resolvePath(onlyOneChild.path)">
-                <MenuItem :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title"/>
+                <MenuItem :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title" :name='onlyOneChild.name'/>
             </el-menu-item>
         </template>
         <!-- 当级路由下存在多级路由 -->
         <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body :class="{'MenuitemClass' : (side_status && !isMoreChild) }">
             <template slot="title">
-                <MenuItem :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title" />
+                <MenuItem :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title" :name='onlyOneChild.name'/>
             </template>
             <template v-if="item.children">
                 <SidebarItem
