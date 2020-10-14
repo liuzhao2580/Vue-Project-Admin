@@ -1,7 +1,19 @@
 @mixin theme-color($bgColor: #409EFF, $ftColor: #fff) {
-    $backgroundColor : $bgColor !global;
-    .test-text {
-        background-color: $bgColor;
-        color: $ftColor;
+    // tag 的背景色
+    .TagsView-box {
+        /deep/ .TagsView-scrollbar {
+            .el-scrollbar__wrap {
+                .el-scrollbar__view {
+                    .el-tag {
+                        &.is-active {
+                            background-color: $bgColor;
+                            color: $ftColor;
+                        }
+                        
+                    }
+                }
+            }
+            
+        }
     }
 }

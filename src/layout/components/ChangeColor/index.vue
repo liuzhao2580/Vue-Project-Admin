@@ -16,8 +16,6 @@
             >
             </el-option>
         </el-select>
-        <p class="test-text">测试</p>
-        <p class="box">测试2</p>
     </div>
 </template>
 
@@ -64,8 +62,8 @@ export default {
             bodyDom.setAttribute('data-theme', '')
             bodyDom.setAttribute('data-theme', `${value}`)
             setStorage('theme', value)
-            // const getTheme = getStorage('theme') ? JSON.parse(getStorage('theme')) : this.theme
-            // this.changeElementColor(value, getTheme)
+            const getTheme = getStorage('theme') ? JSON.parse(getStorage('theme')) : this.theme
+            this.changeElementColor(value, getTheme)
         },
         // 改变elementUI的主题色
         changeElementColor(val, oldVal) {
@@ -171,12 +169,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/styles/theme.scss';
 .change-color {
     width: 120px;
     border-radius: 50%;
-}
-.box {
-    background-color: $backgroundColor;
 }
 </style>
