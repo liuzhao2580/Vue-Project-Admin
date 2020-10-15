@@ -11,7 +11,7 @@ const externalsConfig = () => {
         'vue-router': 'VueRouter',
         vuex: 'Vuex',
         'element-ui': 'ELEMENT',
-        mavonEditor: 'mavonEditor'
+        'quill': 'Quill'
     }
 }
 // 设置 项目名称

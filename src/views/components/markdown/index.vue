@@ -1,7 +1,7 @@
 <template>
 	<div class="markdown-box">
         <p> 依赖于 mavon-editor <a href="https://github.com/hinesboy/mavonEditor" style="color: #409eff" target="block">GitHub地址</a> </p>
-        <mavon-editor @save="mavon_save" v-model="mavon_model"/>
+        <mavon-editor @save="mavon_save" v-model="mavon_model" :ishljs = "true"/>
         <el-button type="primary" @click="onSubmit" class="tinymce-btn">提交</el-button>
     </div>
 </template>
@@ -21,11 +21,10 @@ export default {
             mavon_model: ""
         };
 	},
-	created() {},
 	mounted() {},
 	methods: {
         mavon_save(value ,render) {
-            console.log(value)
+            console.log(value,render)
         },
         onSubmit() {
             console.log(this.mavon_model)

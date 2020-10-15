@@ -1,29 +1,24 @@
 <template>
     <div class="richtext-box">
-        <el-tabs value="TinyMce" type="border-card">
-            <el-tab-pane label="TinyMce" name="TinyMce">
-                <TinyMce />
-            </el-tab-pane>
-            <el-tab-pane label="CKEditor" name="CKEditor">
-                <CKEditor />
+        <el-tabs value="Quill" type="border-card">
+            <el-tab-pane label="Quill" name="Quill">
+                <Quill />
             </el-tab-pane>
             <el-tab-pane label="wangEditor" name="wangEditor">
-                <WangEditor />
+                <!-- <WangEditor /> -->
             </el-tab-pane>
         </el-tabs>
     </div>
 </template>
 
 <script>
-import TinyMce from "./TinyMce";
-import CKEditor from './CKEditor';
-import WangEditor from './WangEditor'
+import Quill from './Quill'
+// import WangEditor from './WangEditor'
 export default {
     name: "richtext",
     components: {
-        TinyMce,
-        CKEditor,
-        WangEditor
+        Quill
+        // WangEditor
     }
 };
 </script>
