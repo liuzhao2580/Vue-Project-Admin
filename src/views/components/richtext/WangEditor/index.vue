@@ -14,7 +14,9 @@ export default {
     components: {},
     props: {},
     data() {
-        return {}
+        return {
+            wangEditor: null
+        }
     },
     created() {},
     mounted() {
@@ -31,6 +33,7 @@ export default {
             editor.config.colors = configColors
             editor.config.fontNames = fontNames
             editor.create()
+            this.wangEditor = editor
             document.querySelector('.WangEidtor-btn').addEventListener(
                 'click',
                 function() {
@@ -40,6 +43,10 @@ export default {
                 false
             )
         }
+    },
+    beforeDestroy() {
+        this.wangEditor.destory()
+        this.wangEditor = null
     },
     watch: {}
 }

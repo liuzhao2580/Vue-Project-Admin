@@ -18,8 +18,8 @@ import { dashboardApi } from "@api/dashboard"
 export default {
 	name: "dashboard",
 	components: {
-        card: () => import("./components/card"),
-        todoList: () => import('./components/todoList'),
+        card: () => import("./components/Card"),
+        todoList: () => import('./components/TodoList'),
         echarts: () => import('./components/Echarts')
     },
 	props: {},

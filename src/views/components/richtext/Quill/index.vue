@@ -8,7 +8,9 @@ import 'quill/dist/quill.snow.css'
 export default {
     components: {},
     data() {
-        return {}
+        return {
+            quillEditor: null
+        }
     },
     created() {},
     mounted() {
@@ -18,7 +20,7 @@ export default {
     methods: {
         // 初始化
         init() {
-            new Quill('#quill-editor', {
+            this.quillEditor = new Quill('#quill-editor', {
                 theme: 'snow',
                 modules: {
                     toolbar: [
@@ -43,6 +45,9 @@ export default {
                 }
             })
         }
+    },
+    beforeDestroy() {
+        this.quillEditor.destory()
     },
     watch: {}
 }
