@@ -1,19 +1,16 @@
 const { title: defatulConfig } = require('./src/setting')
 const path = require('path')
-
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
 // 配置 externals
-const externalsConfig = () => {
-    return {
-        vue: 'Vue',
-        'vue-router': 'VueRouter',
-        vuex: 'Vuex',
-        'element-ui': 'ELEMENT',
-        'quill': 'Quill',
-        'wangeditor':'E'
-    }
+const externalsConfig = {
+    vue: 'Vue',
+    'vue-router': 'VueRouter',
+    vuex: 'Vuex',
+    'element-ui': 'ELEMENT',
+    quill: 'Quill',
+    wangeditor: 'E'
 }
 // 设置 项目名称
 const name = defatulConfig
@@ -46,7 +43,7 @@ module.exports = {
         overlay: {
             warnings: true,
             errors: true
-        },
+        }
         // 配置跨域
         // proxy: {
         //     // 定义代理的名称
@@ -72,10 +69,7 @@ module.exports = {
             .end()
         // set svg-sprite-loader
         // 设置 svg 导入
-        config.module
-            .rule('svg')
-            .exclude.add(resolve('src/icons'))
-            .end()
+        config.module.rule('svg').exclude.add(resolve('src/icons')).end()
         config.module
             .rule('icons')
             .test(/\.svg$/)
@@ -87,7 +81,7 @@ module.exports = {
                 symbolId: 'icon-[name]'
             })
             .end()
-        
+
         // 全局导入 scss
         const oneOfsMap = config.module.rule('scss').oneOfs.store
         oneOfsMap.forEach((item) => {
