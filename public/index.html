@@ -8,18 +8,16 @@
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title><%= webpackConfig.name %></title>
   <% if(process.env.NODE_ENV === 'production') { %>
-    <!-- 引入样式 elementUI -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-
     <!-- 引入组件库 -->
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> <!--vue-router -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> <!-- vue -->
-    <script src="https://unpkg.com/vuex"></script> <!--vuex -->
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script> <!-- elementUI -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.4.3/vue-router.min.js"></script> <!--vue-router -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script> <!-- vue -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script> <!--vuex -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.12.0/index.js"></script> <!-- elementUI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.12.0/theme-chalk/index.css"> <!-- elementUI -->
     <script src="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.min.js"></script>  <!-- quill-editor -->
     <link href="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet"> <!-- quill-editor -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/wangEditor/3.1.1/wangEditor.min.js"></script> <!-- wangEditor -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/wangEditor/3.1.1/wangEditor.min.css" rel="stylesheet"> <!-- wangEditor -->
+    <script src="https://unpkg.com/wangeditor/dist/wangEditor.min.js"></script> <!-- wangEditor -->
+    <!-- <link href="https://unpkg.com/wangeditor/dist/wangEditor/wangEditor.min.css" rel="stylesheet"> wangEditor -->
 
   <% }  %>
   <script src="https://webapi.amap.com/maps?v=1.4.15&key=466cfc09695269cb432af38420bfebe0&plugin=AMap.ToolBar,AMap.Driving,AMap.Geolocation,AMap.AdvancedInfoWindow,AMap.PlaceSearch"></script>

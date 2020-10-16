@@ -7,6 +7,7 @@
 </template>
 
 <script>
+/*eslint-disable */
 import { configMenu, configColors , fontNames } from './config'
 import E from 'wangeditor'
 export default {
@@ -24,14 +25,21 @@ export default {
     },
     methods: {
         initWangEditor() {
-            let editor = new E('#WangEidtor')
+            let editor
+            if(process.env.NODE_ENV === 'production') {
+                editor = new wangEditor('#WangEidtor')
+            }
+            else {
+                // editor = new E('#WangEidtor')
+            }
+            console.log(editor, 1111)
             // 自定义菜单配置
-            editor.config.menus = configMenu
+            editor.customConfig.menus = configMenu
             // 使用 base64 保存图片
-            editor.config.uploadImgShowBase64 = true
+            editor.customConfig.uploadImgShowBase64 = true
             // 配置字体颜色、背景色
-            editor.config.colors = configColors
-            editor.config.fontNames = fontNames
+            editor.customConfig.colors = configColors
+            editor.customConfig.fontNames = fontNames
             editor.create()
             this.wangEditor = editor
             document.querySelector('.WangEidtor-btn').addEventListener(
