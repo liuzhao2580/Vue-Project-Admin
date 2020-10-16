@@ -1,9 +1,9 @@
 
 export const configMenu = [
+    'fontName',  // 字体
     'head',  // 标题
     'bold',  // 粗体
     'fontSize',  // 字号
-    'fontName',  // 字体
     'italic',  // 斜体
     'underline',  // 下划线
     'strikeThrough',  // 删除线
@@ -21,16 +21,23 @@ export const configMenu = [
     'undo',  // 撤销
     'redo'  // 重复
 ]
-export const configLang = {
-    '设置标题': 'title',
-    '正文': 'p',
-    '链接文字': 'link text',
-    '链接': 'link',
-    '上传图片': 'upload image',
-    '上传': 'upload',
-    '创建': 'init'
-    // 还可自定添加更多
-}
+// 配置字体
+export const fontNames = [
+    '黑体',
+    '仿宋',
+    '楷体',
+    '标楷体',
+    '华文仿宋',
+    '华文楷体',
+    '宋体',
+    '微软雅黑',
+    'Arial',
+    'Tahoma',
+    'Verdana',
+    'Times New Roman',
+    'Courier New',
+]
+// 编辑器的字体颜色和背景色
 export const configColors = [
     '#000000',
     '#eeece0',

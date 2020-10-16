@@ -8,16 +8,19 @@
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title><%= webpackConfig.name %></title>
   <% if(process.env.NODE_ENV === 'production') { %>
-  <!-- 引入样式 elementUI -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入样式 elementUI -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
-  <!-- 引入组件库 -->
-  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> <!--vue-router -->
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- vue -->
-  <script src="https://unpkg.com/vuex"></script> <!--vuex -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script> <!-- elementUI -->
-  <script src="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.min.js"></script>  <!-- quill-editor -->
-  <link href="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet"> <!-- quill-editor -->
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> <!--vue-router -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> <!-- vue -->
+    <script src="https://unpkg.com/vuex"></script> <!--vuex -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script> <!-- elementUI -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.min.js"></script>  <!-- quill-editor -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet"> <!-- quill-editor -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/wangEditor/3.1.1/wangEditor.min.js"></script> <!-- wangEditor -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/wangEditor/3.1.1/wangEditor.min.css" rel="stylesheet"> <!-- wangEditor -->
+
   <% }  %>
   <script src="https://webapi.amap.com/maps?v=1.4.15&key=466cfc09695269cb432af38420bfebe0&plugin=AMap.ToolBar,AMap.Driving,AMap.Geolocation,AMap.AdvancedInfoWindow,AMap.PlaceSearch"></script>
 </head>

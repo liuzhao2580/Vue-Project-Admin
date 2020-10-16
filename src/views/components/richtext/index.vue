@@ -5,7 +5,7 @@
                 <Quill />
             </el-tab-pane>
             <el-tab-pane label="wangEditor" name="wangEditor">
-                <!-- <WangEditor /> -->
+                <WangEditor />
             </el-tab-pane>
         </el-tabs>
     </div>
@@ -13,12 +13,12 @@
 
 <script>
 import Quill from './Quill'
-// import WangEditor from './WangEditor'
+import WangEditor from './WangEditor'
 export default {
     name: "richtext",
     components: {
-        Quill
-        // WangEditor
+        Quill,
+        WangEditor
     }
 };
 </script>

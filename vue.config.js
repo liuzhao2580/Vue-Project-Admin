@@ -11,7 +11,8 @@ const externalsConfig = () => {
         'vue-router': 'VueRouter',
         vuex: 'Vuex',
         'element-ui': 'ELEMENT',
-        'quill': 'Quill'
+        'quill': 'Quill',
+        'wangeditor':'E'
     }
 }
 // 设置 项目名称
