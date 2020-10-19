@@ -8,9 +8,12 @@ const externalsConfig = {
     vue: 'Vue',
     'vue-router': 'VueRouter',
     vuex: 'Vuex',
-    'element-ui': 'ELEMENT',
+    "element-ui": 'ELEMENT',
     quill: 'Quill',
-    wangeditor: 'E'
+    wangeditor: 'wangEditor',
+    axios: 'axios',
+    'mockjs':'Mock',
+    'mavon-editor':'MavonEditor'
 }
 // 设置 项目名称
 const name = defatulConfig
