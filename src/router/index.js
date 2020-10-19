@@ -41,14 +41,14 @@ export const asyncRoutes = [
             // 首页
             {
                 path: '/dashboard',
-                component: () => import('@/views/dashboard'),
+                component: () => import(/* webpackChunkName: "baseComponet" */ '@/views/dashboard'),
                 name: 'dashboard',
                 meta: { title: '首页', icon: 'index', affix: true }
             },
             // 文档页
             {
                 path: '/documentation',
-                component: () => import('@/views/documentation'),
+                component: () => import(/* webpackChunkName: "baseComponet" */ '@/views/documentation'),
                 name: 'documentation',
                 meta: { title: '文档', icon: 'wendang', affix: true }
             },
@@ -62,13 +62,13 @@ export const asyncRoutes = [
                 children: [
                     {
                         path: 'created',
-                        component: () => import('@/views/article/created'),
+                        component: () => import(/* webpackChunkName: "article" */ '@/views/article/created'),
                         name: 'articleCreated',
                         meta: { title: '文章创建', icon: 'created', roles: [1, 2] }
                     },
                     {
                         path: 'list',
-                        component: () => import('@/views/article/list'),
+                        component: () => import(/* webpackChunkName: "article" */ '@/views/article/list'),
                         name: 'articleList',
                         meta: { title: '文章列表', icon: 'list', roles: [1, 2, 3]}
                     }
@@ -77,7 +77,7 @@ export const asyncRoutes = [
             // 地图
             {
                 path: '/amap',
-                component: () => import('@/views/map'),
+                component: () => import(/* webpackChunkName: "baseComponet" */ '@/views/map'),
                 meta: { title: '地图', icon: 'map' },
                 name: 'amap'
             },
@@ -88,7 +88,7 @@ export const asyncRoutes = [
             // 个人中心
             {
                 path: '/personal',
-                component: () => import('@/views/personal'),
+                component: () => import(/* webpackChunkName: "baseComponet" */ '@/views/personal'),
                 hidden: true,
                 meta: { title: '个人中心', icon: 'personal' },
                 name: 'personalCenter'

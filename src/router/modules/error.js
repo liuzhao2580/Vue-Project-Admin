@@ -15,7 +15,7 @@ const error_page = {
             children: [
                 {
                     path: '4011',
-                    component: () => import('@/views/error_page/4011_page'),
+                    component: () => import(/* webpackChunkName: "errorPage" */ '@/views/error_page/4011_page'),
                     name: 'errorPage4011',
                     meta: { title: '4011', icon: "warn" },
                 }
@@ -23,7 +23,7 @@ const error_page = {
         },
         {
             path: '404',
-            component: () => import('@/views/error_page/404_page'),
+            component: () => import(/* webpackChunkName: "errorPage" */ '@/views/error_page/404_page'),
             name: 'errorPage404',
             meta: { title: '404', icon: "404" }
         },
