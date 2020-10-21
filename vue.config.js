@@ -1,4 +1,6 @@
 const { title: defatulConfig } = require('./src/setting')
+const FileListPlugin = require('./plugin/FileList-webpack-plugin')
+const UglifyJSPlugin =require('uglifyjs-webpack-plugin')
 const path = require('path')
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -38,7 +40,17 @@ module.exports = {
                 '@': resolve('src'),
                 '@api': resolve('src/api/modules')
             }
-        }
+        },
+        plugins: [
+            new FileListPlugin(),
+            new UglifyJSPlugin({
+                uglifyOptions: {
+                    compress: {
+                        drop_console: true
+                    }
+                }
+            })
+        ]
     },
     devServer: {
         port: port,
