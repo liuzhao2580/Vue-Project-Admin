@@ -1,6 +1,7 @@
 const { title: defatulConfig } = require('./src/setting')
 const FileListPlugin = require('./plugin/FileList-webpack-plugin')
 const UglifyJSPlugin =require('uglifyjs-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const path = require('path')
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -43,12 +44,18 @@ module.exports = {
         },
         plugins: [
             new FileListPlugin(),
+            // 删除生产环境的 console
             new UglifyJSPlugin({
                 uglifyOptions: {
                     compress: {
                         drop_console: true
                     }
                 }
+            }),
+            // 开启 gzip
+            new CompressionPlugin({
+                test: /\.js$|\.html$|\.css/,
+                threshold: 10240 // 只处理比这个值大的资源。按字节计算 设置的是 10kb
             })
         ]
     },
