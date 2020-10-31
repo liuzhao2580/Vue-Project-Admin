@@ -14,7 +14,7 @@ Mock.setup({
 })
 Mock.mock(`${baseURL}/user/login`, "post", user.setUserInfo)
 Mock.mock(RegExp(`${baseURL}/user/userInfo` + '*') , "get", user.getUserInfo)
-Mock.mock('/dashboard', "get", dashboard(Mock))
+Mock.mock(`${baseURL}/dashboard`, "get", dashboard(Mock))
 export default {
     Mock
 }

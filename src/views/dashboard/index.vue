@@ -3,7 +3,7 @@
         <!-- 卡片 -->
         <card />
         <!-- Echarts 图表 -->
-        <echarts />
+        <echarts :EchartsData='EchartsData'/>
         <el-row :gutter="20">
             <!-- todo-list -->
             <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
@@ -24,18 +24,20 @@ export default {
     },
 	props: {},
 	data() {
-		return {};
+		return {
+            EchartsData: {}
+        };
 	},
 	created() {
-        // this.init()
+        this.init()
     },
 	mounted() {},
 	methods: {
         // 初始化
         async init() {
             try {
-                const data = await dashboardApi()
-                console.log(data)
+                const {data} = await dashboardApi()
+                this.EchartsData = data
             } catch (error) {
                 console.log(error)
             }
