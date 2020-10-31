@@ -1,5 +1,4 @@
 const { title: defatulConfig } = require('./src/setting')
-const FileListPlugin = require('./plugin/FileList-webpack-plugin')
 const UglifyJSPlugin =require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const path = require('path')
@@ -18,6 +17,22 @@ const externalsConfig = {
     mockjs: 'Mock',
     'mavon-editor': 'MavonEditor'
 }
+// 配置生产的 plugin
+const productionPlugins = [
+    // 删除生产环境的 console
+    new UglifyJSPlugin({
+        uglifyOptions: {
+            compress: {
+                drop_console: true
+            }
+        }
+    }),
+    // 开启 gzip
+    new CompressionPlugin({
+        test: /\.js$|\.html$|\.css/,
+        threshold: 10240 // 只处理比这个值大的资源。按字节计算 设置的是 10kb
+    })
+]
 // 设置 项目名称
 const name = defatulConfig
 // 设置项目的端口号
@@ -42,22 +57,7 @@ module.exports = {
                 '@api': resolve('src/api/modules')
             }
         },
-        plugins: [
-            new FileListPlugin(),
-            // 删除生产环境的 console
-            new UglifyJSPlugin({
-                uglifyOptions: {
-                    compress: {
-                        drop_console: true
-                    }
-                }
-            }),
-            // 开启 gzip
-            new CompressionPlugin({
-                test: /\.js$|\.html$|\.css/,
-                threshold: 10240 // 只处理比这个值大的资源。按字节计算 设置的是 10kb
-            })
-        ]
+        plugins: process.env.NODE_ENV === 'production' ? productionPlugins : []
     },
     devServer: {
         port: port,
