@@ -32,7 +32,7 @@ export default {
     methods: {
         // 初始化
         init_Line() {
-            this.EchartsDom = Echarts.init(this.$refs.echartsLine)
+            this.EchartsDom = Echarts.init(this.$refs.echartsLine, 'westeros')
             this.EchartsDom.setOption({
                 title: {
                     text: this.EchartsTitle,

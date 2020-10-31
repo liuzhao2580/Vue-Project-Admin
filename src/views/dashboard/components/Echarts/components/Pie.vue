@@ -34,7 +34,7 @@ export default {
     methods: {
         // 初始化
         init_Pie() {
-            this.EchartsDom = Echarts.init(this.$refs.echartsPie)
+            this.EchartsDom = Echarts.init(this.$refs.echartsPie, 'westeros')
             this.EchartsDom.setOption({
                 title: {
                     text: this.EchartsTitle,

@@ -1,3 +1,4 @@
+import '../Echarts-theme'
 export default {
     data() {
         return {
@@ -8,6 +9,7 @@ export default {
         // 监听屏幕变化
         window.addEventListener('resize',() => {
             this.EchartsDom.resize()
+            console.log(1243, '1243')
         })
     },
     beforeDestroy() {

@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         init_Bar() {
-            this.EchartsDom = Echarts.init(this.$refs.echartsBar)
+            this.EchartsDom = Echarts.init(this.$refs.echartsBar, 'westeros')
             this.EchartsDom.setOption({
                 title: {
                     text: this.EchartsTitle,
@@ -52,13 +52,7 @@ export default {
                     show: true,
                     orient: 'vertical',
                     left: 'right',
-                    top: 'center',
-                    feature: {
-                        mark: { show: true },
-                        dataView: { show: true, readOnly: false },
-                        restore: { show: true },
-                        saveAsImage: { show: true },
-                    },
+                    top: 'center'
                 },
                 xAxis: {
                     data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
