@@ -15,7 +15,8 @@ const externalsConfig = {
     wangeditor: 'wangEditor',
     axios: 'axios',
     mockjs: 'Mock',
-    'mavon-editor': 'MavonEditor'
+    'mavon-editor': 'MavonEditor',
+    'echarts': 'echarts'
 }
 // 配置生产的 plugin
 const productionPlugins = [
