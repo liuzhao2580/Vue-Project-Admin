@@ -1,5 +1,5 @@
 ---
 applications:
- - name: 'My-NodeJS-Project'
+ - name: My-NodeJS-Project
    random-route: true
    memory: 128M
