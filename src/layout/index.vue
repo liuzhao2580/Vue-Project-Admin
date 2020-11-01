@@ -5,8 +5,8 @@
                 <Sidebar />
             </el-aside>
             <el-main class="main-box" :style="{marginLeft: (side_status? '64px':'200px')}">
-                <Navbar />
-                <AppMain />
+                <Navbar class="nav-bar"/>
+                <AppMain class="app-main"/>
             </el-main>
         </el-container>
     </div>
@@ -59,6 +59,16 @@ export default {
     .container-box {
         .sider-box {
             background-color: #304156;
+        }
+    }
+    .main-box {
+        display: flex;
+        flex-direction: column;
+        /deep/ .app-main {
+            flex: 1;
+            >div {
+                height: 100%;
+            }
         }
     }
 }

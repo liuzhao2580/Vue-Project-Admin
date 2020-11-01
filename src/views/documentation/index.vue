@@ -1,5 +1,7 @@
 <template>
-	<div class="documentation-box">documentation</div>
+	<div class="documentation-box">
+		documentation
+	</div>
 </template>
 
 <script>

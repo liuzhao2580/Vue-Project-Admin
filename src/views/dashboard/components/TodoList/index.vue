@@ -123,6 +123,7 @@ export default {
     margin-top: 10px;
     color: #999;
     max-height: 500px;
+    margin-bottom: 20px;
     .header-box {
         text-align: center;
     }
