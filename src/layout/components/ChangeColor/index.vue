@@ -1,22 +1,10 @@
 <template>
-    <div>
-        <el-select
-            v-model="theme"
-            :style="{ backgroundColor: theme }"
-            placeholder="请选择"
-            class="change-color"
-            @change="selectChange"
-        >
-            <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-                :style="{ backgroundColor: item.value }"
-            >
-            </el-option>
-        </el-select>
-    </div>
+    <el-select v-model="theme" placeholder="请选择" class="change-color" @change="selectChange" :popper-append-to-body='false'>
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" class="color-item">
+            <span class="background-box" :style="{backgroundColor: item.value}"></span>
+            <span class="content-box">{{ item.label }}</span>
+        </el-option>
+    </el-select>
 </template>
 
 <script>
@@ -30,21 +18,21 @@ export default {
             options: [
                 {
                     value: '#409EFF',
-                    label: ''
+                    label: '天蓝',
                 },
                 {
                     value: '#14F7D1',
-                    label: ''
+                    label: '淡绿',
                 },
                 {
                     value: '#E4F714',
-                    label: ''
+                    label: '浅黄',
                 },
                 {
                     value: '#FFC0CD',
-                    label: ''
-                }
-            ]
+                    label: '猛男',
+                },
+            ],
         }
     },
     beforeMount() {
@@ -54,6 +42,7 @@ export default {
         // 主题色初始化
         init() {
             const theme = getStorage('theme') ? JSON.parse(getStorage('theme')) : this.theme
+            this.theme = theme
             const bodyDom = document.querySelector('#app')
             bodyDom.setAttribute('data-theme', theme)
         },
@@ -163,8 +152,8 @@ export default {
             }
             clusters.push(shadeColor(theme, 0.1))
             return clusters
-        }
-    }
+        },
+    },
 }
 </script>
 
@@ -172,5 +161,21 @@ export default {
 .change-color {
     width: 120px;
     border-radius: 50%;
+    margin-right: 20px;
+    .color-item {
+        display: flex;
+        align-items: center;
+        .background-box {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+        .content-box {
+            flex: 1;
+            height: 100%;
+            text-align: center;
+        }
+    }
+    
 }
 </style>
