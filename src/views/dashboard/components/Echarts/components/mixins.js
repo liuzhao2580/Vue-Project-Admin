@@ -6,16 +6,30 @@ export default {
         }
     },
     mounted() {
+        this.$_init_resize()
+    },
+    methods: {
+        handleResize() {
+            if(this.EchartsDom) this.EchartsDom.resize()
+        },
         // 监听屏幕变化
-        window.addEventListener('resize',() => {
-            this.EchartsDom.resize()
-            console.log(1243, '1243')
-        })
+        $_init_resize() {
+            window.addEventListener('resize',this.handleResize)
+        },
+        // 移除屏幕变化
+        $_destroy_resize() {
+            window.removeEventListener('resize',this.handleResize)
+        }
+    },
+    activated() {
+        this.handleResize()
+        this.$_init_resize()
+    },
+    deactivated() {
+        this.$_destroy_resize()
     },
     beforeDestroy() {
-        window.removeEventListener('resize',() => {
-            this.EchartsDom.resize()
-        })
+        this.$_destroy_resize()
         // 销毁Echarts
         this.EchartsDom.dispose()
     }

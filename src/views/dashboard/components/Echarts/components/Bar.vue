@@ -28,7 +28,9 @@ export default {
     },
     created() {},
     mounted() {
-        this.init_Bar()
+        this.$nextTick(() => {
+            this.init_Bar()
+        })
     },
     methods: {
         init_Bar() {
@@ -43,16 +45,16 @@ export default {
                     }),
                 },
                 tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'shadow'
-        }
-    },
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow',
+                    },
+                },
                 toolbox: {
                     show: true,
                     orient: 'vertical',
                     left: 'right',
-                    top: 'center'
+                    top: 'center',
                 },
                 xAxis: {
                     data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],

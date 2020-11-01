@@ -61,7 +61,7 @@ export default {
             this.EchartsDom.clear()
             this.init_Line()
         },
-    },
+    }
 }
 </script>
 
