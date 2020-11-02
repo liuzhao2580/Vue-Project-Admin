@@ -3,7 +3,7 @@
         <!-- 卡片 -->
         <card />
         <!-- Echarts 图表 -->
-        <echarts :EchartsData='EchartsData'/>
+        <Echarts-components :EchartsData='EchartsData'/>
         <el-row :gutter="20">
             <!-- todo-list -->
             <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
@@ -15,12 +15,13 @@
 
 <script>
 import { dashboardApi } from "@api/dashboard"
+import EchartsComponents from './components/Echarts'
 export default {
 	name: "dashboard",
 	components: {
         card: () => import("./components/Card"),
         todoList: () => import('./components/TodoList'),
-        echarts: () => import('./components/Echarts')
+        EchartsComponents
     },
 	props: {},
 	data() {

@@ -11,12 +11,12 @@ const externalsConfig = {
     'vue-router': 'VueRouter',
     vuex: 'Vuex',
     'element-ui': 'ELEMENT',
+    'echarts': 'echarts',
     quill: 'Quill',
     wangeditor: 'wangEditor',
     axios: 'axios',
     mockjs: 'Mock',
     'mavon-editor': 'MavonEditor',
-    'echarts': 'echarts'
 }
 // 配置生产的 plugin
 const productionPlugins = [

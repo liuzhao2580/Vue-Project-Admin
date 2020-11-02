@@ -35,3 +35,22 @@ import {Button,Select,Message} from 'element-ui'
 Vue.use(Button).use(Select)
 Vue.$prototype.$message = Message
 ```
+
+#### 使用`echarts`导入自定义主题的时候，需要在自定义主题中修改
+```js
+// 引入 echarts
+import echarts from 'echarts'
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['exports', 'echarts'], factory);
+    } else if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
+        // CommonJS
+        factory(exports, require('echarts'));
+    } else {
+        // Browser globals
+        // 修改factory({}, root.echarts);
+        factory({}, echarts);
+    }
+}
+```
