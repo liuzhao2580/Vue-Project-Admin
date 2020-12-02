@@ -11,6 +11,7 @@
                     @click="handleClick(tag)"
                     disable-transitions
                     :class="{ 'is-active' : is_active(tag.meta.title)}"
+                    @contextmenu.prevent.native="tagContextmenu"
                 >{{tag.meta.title}}</el-tag>
             </template>
         </el-scrollbar>
@@ -100,6 +101,10 @@ export default {
                 name: tag.name
             })
         },
+        // 鼠标右键菜单
+        tagContextmenu() {
+            console.log(123, '123')
+        }
     },
     watch: {
         '$route.path'() {
