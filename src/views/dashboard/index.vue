@@ -1,9 +1,9 @@
 <template>
-	<div class="dashboard-box">
+    <div class="dashboard-box">
         <!-- 卡片 -->
         <card />
         <!-- Echarts 图表 -->
-        <Echarts-components :EchartsData='EchartsData'/>
+        <Echarts-components :EchartsData="EchartsData" />
         <el-row :gutter="20">
             <!-- todo-list -->
             <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
@@ -14,30 +14,31 @@
 </template>
 
 <script>
-import { dashboardApi } from "@api/dashboard"
+import { dashboardApi } from '@api/dashboard'
 import EchartsComponents from './components/Echarts'
 export default {
-	name: "dashboard",
-	components: {
-        card: () => import("./components/Card"),
+    name: 'dashboard',
+    components: {
+        card: () => import('./components/Card'),
         todoList: () => import('./components/TodoList'),
         EchartsComponents
     },
-	props: {},
-	data() {
-		return {
+    props: {},
+    data() {
+        return {
             EchartsData: {}
-        };
-	},
-	created() {
+        }
+    },
+    created() {
         this.init()
     },
-	mounted() {},
-	methods: {
+    mounted() {},
+    methods: {
         // 初始化
         async init() {
             try {
-                const {data} = await dashboardApi()
+                const { data } = await dashboardApi()
+                console.log(data, 'data')
                 this.EchartsData = data
             } catch (error) {
                 console.log(error)
@@ -45,8 +46,7 @@ export default {
         }
     },
     watch: {}
-};
+}
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
