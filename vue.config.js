@@ -51,7 +51,7 @@ module.exports = {
 
     configureWebpack: {
         externals: process.env.NODE_ENV === 'production' ? externalsConfig : {},
-        name: name,
+        name,
         resolve: {
             alias: {
                 '@': resolve('src'),
