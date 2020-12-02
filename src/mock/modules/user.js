@@ -9,7 +9,7 @@ const userInfo = [
         password: "admin",
         nickname: "小火车况且况且",
         token: "admin-token",
-        avatar:"https://isorepublic.com/wp-content/uploads/2019/12/iso-republic-two-women-run-along-a-sunset-beach-200x300.jpg"
+        avatar:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/ec902db0-3497-11eb-b997-9918a5dda011.jpg"
     },
     {
         id: 2580,
@@ -19,7 +19,7 @@ const userInfo = [
         password: "root",
         nickname: "小飞机呼哧呼哧",
         token: "root-token",
-        avatar:"https://isorepublic.com/wp-content/uploads/2019/12/iso-republic-two-women-run-along-a-sunset-beach-200x300.jpg"
+        avatar:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/94e4c280-349a-11eb-8ff1-d5dcf8779628.png"
     },
     {
         id: 4396,
@@ -27,7 +27,7 @@ const userInfo = [
         roleName: '普通用户',
         username: "user",
         password: "user",
-        nickname: "小火车况且况且",
+        nickname: "小话痨吧啦吧啦",
         token: "user-token",
         avatar:"https://isorepublic.com/wp-content/uploads/2019/12/iso-republic-two-women-run-along-a-sunset-beach-200x300.jpg"
     }
