@@ -29,7 +29,7 @@ const userInfo = [
         password: "user",
         nickname: "小话痨吧啦吧啦",
         token: "user-token",
-        avatar:"https://isorepublic.com/wp-content/uploads/2019/12/iso-republic-two-women-run-along-a-sunset-beach-200x300.jpg"
+        avatar:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/326b7250-34a6-11eb-97b7-0dc4655d6e68.png"
     }
 ]
 // 用户登陆的时候 保存用户的基本信息
