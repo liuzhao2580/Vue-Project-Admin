@@ -11,10 +11,17 @@
                     @click="handleClick(tag)"
                     disable-transitions
                     :class="{ 'is-active' : is_active(tag.meta.title)}"
-                    @contextmenu.prevent.native="tagContextmenu"
+                    @contextmenu.prevent.native="tagContextmenu($event, index)"
                 >{{tag.meta.title}}</el-tag>
             </template>
         </el-scrollbar>
+        <!-- 用来操作开启的 tag 标签 -->
+        <ul v-show="opearTagFlag" class="hide-tag-box" :style="hideTagBox">
+            <li class="hide-item">关闭当前</li>
+            <li class="hide-item">关闭其他</li>
+            <li class="hide-item">关闭右侧</li>
+            <li class="hide-item">全部关闭</li>
+        </ul>
     </div>
 </template>
 
@@ -28,6 +35,11 @@ export default {
     data() {
         return {
             affixTags: [],
+            opearTagFlag: false,
+            hideTagBox: {
+                left: 0,
+                top: 0
+            }
         }
     },
     computed: {
@@ -102,17 +114,55 @@ export default {
             })
         },
         // 鼠标右键菜单
-        tagContextmenu() {
-            console.log(123, '123')
+        tagContextmenu(e, index) {
+            const getTagWidth = e.target.offsetWidth
+            this.hideTagBox.left = 20 + (getTagWidth * (index))+ 'px'
+            this.hideTagBox.top = 40 +'px'
+            this.opearTagFlag = true
+        },
+        // 关闭 可以 tag 的操作菜单
+        closeTagOperation() {
+            this.opearTagFlag = false
+        },
+        // 开启 tag 的操作菜单
+        openTagOperation() {
+            this.opearTagFlag = true
         }
     },
     watch: {
         '$route.path'() {
             this.insertT_Tags()
         },
+        opearTagFlag(flag) {
+            // 每次只要 开启 就全局监听 click 事件，用来关闭
+            if(flag) document.body.addEventListener('click',this.closeTagOperation)
+            else document.body.removeEventListener('click',this.closeTagOperation)
+        }
     },
 }
 </script>
 
 <style lang="scss" scoped>
+.TagsView-box {
+    position: relative;
+}
+.hide-tag-box {
+    position: absolute;
+    background-color: #fafafa;
+    box-shadow: 0px 0px 5px #a6a6a6;
+    z-index: 9999;
+    display: inline-block;
+    border-radius: 5px;
+    .hide-item {
+        cursor: pointer;
+        height: 30px;
+        line-height: 30px;
+        padding: 0px 10px;
+        font-size: 14px;
+        &:hover {
+            background-color: pink;
+            color: #fff;
+        }
+    }
+}
 </style>
