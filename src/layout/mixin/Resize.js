@@ -24,8 +24,10 @@ export default {
             const side_flag = this.$_isMobile()
             if (side_flag) {
                 store.dispatch("app/Act_flodSide")
+                store.dispatch('app/Act_setDevice','mobile')
             } else if (!side_flag){
                 store.dispatch("app/ACT_unflodSide")
+                store.dispatch('app/Act_setDevice','desktop')
             }
         }
     },
