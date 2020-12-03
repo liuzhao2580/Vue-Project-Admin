@@ -18,8 +18,8 @@ export default {
     methods: {
         $_isMobile() {
             const react = body.getBoundingClientRect()
-            if(react.width < 768) store.dispatch('app/Act_setDevice','mobile')
-            else store.dispatch('app/Act_setDevice','desktop')
+            if(react.width < 768) store.dispatch('app/Act_setDevice',true)
+            else store.dispatch('app/Act_setDevice',false)
             return react.width - 1 < WIDTH
         },
         $_ResizeScreen() {

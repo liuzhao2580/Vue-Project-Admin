@@ -1,6 +1,6 @@
 <template>
     <div class="app-warpper">
-        <el-container class="container-box">
+        <el-container :class="[isMobile ? 'mobile' : 'desktop', 'container-box']">
             <el-aside :width="dynamicWidth" class="sider-box">
                 <Sidebar />
             </el-aside>
@@ -8,6 +8,7 @@
                 <Navbar class="nav-bar" />
                 <AppMain class="app-main" />
             </el-main>
+            <div class="click-icon">1111</div>
         </el-container>
     </div>
 </template>
@@ -27,10 +28,10 @@ export default {
     computed: {
         ...mapGetters({
             side_status: 'app/side_status',
-            device: 'app/device'
+            isMobile: 'app/isMobile'
         }),
         dynamicWidth() {
-            if(this.device === 'mobile') return '0'
+            if (this.isMobile) return '0'
             if (this.side_status) return '64px'
             return '200px'
         }
@@ -60,6 +61,16 @@ export default {
     .container-box {
         .sider-box {
             background-color: #304156;
+        }
+    }
+    .mobile {
+        .click-icon {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            position: fixed;
+            left: 0;
+            top: 100px;
         }
     }
     .main-box {
