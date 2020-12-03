@@ -20,15 +20,12 @@
         </el-scrollbar>
         <!-- 用来操作开启的 tag 标签 -->
         <ul v-show="operaTagFlag" class="hide-tag-box" :style="hideTagBox">
-            <li
-                :class="[disabledFlag ? 'disabled-operation' : 'hide-item']"
-                @click="clickOpearItem('closeNow')"
-            >
+            <li :class="[disabledFlag ? 'disabled-operation' : 'hide-item']" @click="closeNow">
                 关闭当前
             </li>
-            <li class="hide-item" @click="clickOpearItem('closeOther')">关闭其他</li>
-            <li class="hide-item" @click="clickOpearItem('closeRight')">关闭右侧</li>
-            <li class="hide-item" @click="clickOpearItem('closeAll')">全部关闭</li>
+            <li class="hide-item" @click="closeOther">关闭其他</li>
+            <li class="hide-item" @click="closeRight">关闭右侧</li>
+            <li class="hide-item" @click="closeAll">全部关闭</li>
         </ul>
     </div>
 </template>
@@ -65,7 +62,8 @@ export default {
         // 当前的 tag 是否可以操作
         disabledFlag() {
             let flag = false
-            if (this.saveCurrentTagIndex === 0 || this.saveCurrentTagIndex === 1) flag = true
+            if (this.saveCurrentTag.currentIndex === 0 || this.saveCurrentTag.currentIndex === 1)
+                flag = true
             return flag
         }
     },
@@ -153,34 +151,35 @@ export default {
             this.saveCurrentTag.currentIndex = index
             this.saveCurrentTag.currentTag = tag
         },
-        // tag 标签的点击事件 type 代表不同的操作
-        clickOpearItem(type) {
+        // 关闭当前
+        closeNow() {
             const { currentIndex, currentTag } = this.saveCurrentTag
-            switch (type) {
-                // 关闭当前
-                case 'closeNow':
-                    this.handleClose(currentTag)
-                    break
-                // 关闭其他
-                case 'closeOther':
-                    this._closeOther(currentTag, currentIndex)
-                    break
-                // 关闭右侧
-                case 'closeRight':
-                    break
-                // 全部关闭
-                case 'closeAll':
-                    break
-            }
+            if (currentIndex === 0 || currentIndex === 1) return
+            this.handleClose(currentTag)
         },
-        _closeOther(currentTag, currentIndex) {
-            const {meta}  = currentTag
+        // 关闭其他
+        closeOther() {
+            const { currentIndex, currentTag } = this.saveCurrentTag
             this.tags_data.forEach((item, index) => {
                 if (index === 0 || index === 1 || index === currentIndex) return
                 this.tags_data.splice(index, 1)
             })
             // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
-            if(!this.is_active(meta.title)) this.handleClick(currentTag)
+            if (!this.is_active(currentTag.meta.title)) this.handleClick(currentTag)
+        },
+        // 关闭右侧
+        closeRight() {
+            const { currentIndex, currentTag } = this.saveCurrentTag
+            this.tags_data.forEach((item, index) => {
+                if (index > currentIndex) this.tags_data.splice(index, 1)
+            })
+            // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
+            if (!this.is_active(currentTag.meta.title)) this.handleClick(currentTag)
+        },
+        // 全部关闭
+        closeAll() {
+            this.tags_data.splice(2)
+            this.$router.push('/')
         },
         // 关闭 可以 tag 的操作菜单
         closeTagOperation() {
