@@ -3,12 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
+
 // 设置 elementUI 的按需导入
 // import './ElementImport'
-// 换肤功能
-import '@/styles/theme.scss'
+import '@/styles/theme.scss' // 换肤功能
 import '@/permission' // 权限验证
 import '@/styles/index.scss' // 公共的样式
+import 'element-ui/lib/theme-chalk/display.css'; // 基于断点的隐藏类 Element 额外提供了一系列类名，用于在某些条件下隐藏元素
 
 import '@/mock' // 导入 mock  不需要的时候注释
 
