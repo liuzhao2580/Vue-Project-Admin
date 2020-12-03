@@ -138,12 +138,12 @@ export default {
             // 1.获取 tag-container-box html元素
             const getTagBoxDom = document.querySelector('.tag-container-box')
             // 2.将伪数组变成真实的数组
-            const getRealArr= Array.prototype.slice.call(getTagBoxDom.children)
+            const getRealArr = Array.prototype.slice.call(getTagBoxDom.children)
             // 3.tag 的操作菜单需要left的 总长度
             let getAllWidth = 0
-            getRealArr.forEach((item,Iindex) => {
+            getRealArr.forEach((item, Iindex) => {
                 // 4.如果当前鼠标右键的元素索引小于其他元素，说明右边的元素长度不考虑
-                if(Iindex >= index) return
+                if (Iindex >= index) return
                 // 5.计算每个元素的 宽度 并且 + margin-right的5个像素点
                 getAllWidth += item.offsetWidth + 5
             })
@@ -155,7 +155,7 @@ export default {
         },
         // tag 标签的点击事件 type 代表不同的操作
         clickOpearItem(type) {
-            const {currentIndex, currentTag} = this.saveCurrentTag
+            const { currentIndex, currentTag } = this.saveCurrentTag
             switch (type) {
                 // 关闭当前
                 case 'closeNow':
@@ -163,10 +163,7 @@ export default {
                     break
                 // 关闭其他
                 case 'closeOther':
-                    this.tags_data.forEach((item, index) => {
-                        if (index === 0 || index === 1 || index === currentIndex) return
-                        this.tags_data.splice(index, 1)
-                    })
+                    this._closeOther(currentTag, currentIndex)
                     break
                 // 关闭右侧
                 case 'closeRight':
@@ -175,6 +172,15 @@ export default {
                 case 'closeAll':
                     break
             }
+        },
+        _closeOther(currentTag, currentIndex) {
+            const {meta}  = currentTag
+            this.tags_data.forEach((item, index) => {
+                if (index === 0 || index === 1 || index === currentIndex) return
+                this.tags_data.splice(index, 1)
+            })
+            // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
+            if(!this.is_active(meta.title)) this.handleClick(currentTag)
         },
         // 关闭 可以 tag 的操作菜单
         closeTagOperation() {
