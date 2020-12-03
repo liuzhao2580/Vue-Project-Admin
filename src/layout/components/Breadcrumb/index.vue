@@ -1,6 +1,6 @@
 <template>
     <div class="breadcrumb-box">
-        <el-breadcrumb separator-class="el-icon-arrow-right" class="hidden-sm-and-down">
+        <el-breadcrumb separator-class="el-icon-arrow-right" class="hidden-xs-only">
             <el-breadcrumb-item :to="{ path: '/' }">{{ breadcrumbTitle }}</el-breadcrumb-item>
             <!--面包屑的切换动画 -->
             <transition-group
