@@ -8,7 +8,7 @@
                 <Navbar class="nav-bar" />
                 <AppMain class="app-main" />
             </el-main>
-            <div class="click-icon el-icon-s-operation" @click="showORhidden"></div>
+            <div v-show="isMobile" class="click-icon el-icon-s-operation" @click="showORhidden"></div>
         </el-container>
     </div>
 </template>
