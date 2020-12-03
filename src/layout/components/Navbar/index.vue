@@ -1,7 +1,7 @@
 <template>
 	<div class="Navbar-box">
         <div class="Navbar-Breadcrumb">
-            <div class="side-btn" @click="side_Btn">
+            <div class="side-btn hidden-sm-and-down" @click="side_Btn">
                 <i class="el-icon-s-operation"></i>
             </div>
             <Breadcrumb />
