@@ -8,14 +8,14 @@
                 <Navbar class="nav-bar" />
                 <AppMain class="app-main" />
             </el-main>
-            <div class="click-icon">1111</div>
+            <div class="click-icon el-icon-s-operation" @click="showORhidden"></div>
         </el-container>
     </div>
 </template>
 
 <script>
 import { AppMain, Sidebar, Navbar } from './components'
-import { mapGetters } from 'vuex'
+import { mapGetters,mapActions } from 'vuex'
 import ResizeMixin from './mixin/Resize.js'
 export default {
     name: 'Layout',
@@ -46,10 +46,17 @@ export default {
         this.init()
     },
     methods: {
+        ...mapActions({
+            ACT_unflodSide: 'app/ACT_unflodSide'
+        }),
         init() {
             // userInfoApi().then((res) => {
             //     console.log(res)
             // })
+        },
+        // 在 mobile 移动端模式下显示隐藏 侧边栏按钮
+        showORhidden() {
+            this.ACT_unflodSide()
         }
     },
     watch: {}
@@ -65,12 +72,19 @@ export default {
     }
     .mobile {
         .click-icon {
-            width: 200px;
-            height: 200px;
-            background-color: pink;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            text-align: center;
+            line-height: 40px;
+            box-shadow: 0px 0px 8px #a6a6a6;
+            background-color: #fff;
             position: fixed;
             left: 0;
             top: 100px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
     }
     .main-box {
