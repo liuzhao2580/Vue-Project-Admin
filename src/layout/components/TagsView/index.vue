@@ -1,26 +1,34 @@
 <template>
     <div class="TagsView-box">
         <el-scrollbar class="TagsView-scrollbar">
-            <template v-for="(tag,index) in tags_data">
-                <el-tag
-                    :key="index"
-                    :closable="is_closable(tag)"
-                    effect="dark"
-                    @close="handleClose(tag)"
-                    size="small"
-                    @click="handleClick(tag)"
-                    disable-transitions
-                    :class="{ 'is-active' : is_active(tag.meta.title)}"
-                    @contextmenu.prevent.native="tagContextmenu($event, index)"
-                >{{tag.meta.title}}</el-tag>
-            </template>
+            <div class="tag-container-box">
+                <template v-for="(tag, index) in tags_data">
+                    <el-tag
+                        :key="index"
+                        :closable="is_closable(tag)"
+                        effect="dark"
+                        @close="handleClose(tag)"
+                        size="small"
+                        @click="handleClick(tag)"
+                        disable-transitions
+                        :class="{ 'is-active': is_active(tag.meta.title) }"
+                        @contextmenu.prevent.native="tagContextmenu($event, tag, index)"
+                        >{{ tag.meta.title }}</el-tag
+                    >
+                </template>
+            </div>
         </el-scrollbar>
         <!-- 用来操作开启的 tag 标签 -->
-        <ul v-show="opearTagFlag" class="hide-tag-box" :style="hideTagBox">
-            <li class="hide-item">关闭当前</li>
-            <li class="hide-item">关闭其他</li>
-            <li class="hide-item">关闭右侧</li>
-            <li class="hide-item">全部关闭</li>
+        <ul v-show="operaTagFlag" class="hide-tag-box" :style="hideTagBox">
+            <li
+                :class="[disabledFlag ? 'disabled-operation' : 'hide-item']"
+                @click="clickOpearItem('closeNow')"
+            >
+                关闭当前
+            </li>
+            <li class="hide-item" @click="clickOpearItem('closeOther')">关闭其他</li>
+            <li class="hide-item" @click="clickOpearItem('closeRight')">关闭右侧</li>
+            <li class="hide-item" @click="clickOpearItem('closeAll')">全部关闭</li>
         </ul>
     </div>
 </template>
@@ -35,18 +43,31 @@ export default {
     data() {
         return {
             affixTags: [],
-            opearTagFlag: false,
+            // tag 操作菜单的显示隐藏
+            operaTagFlag: false,
+            // tag 操作菜单的样式
             hideTagBox: {
                 left: 0,
                 top: 0
+            },
+            // 记录当前右键的是哪个 tag
+            saveCurrentTag: {
+                currentIndex: -1,
+                currentTag: null
             }
         }
     },
     computed: {
         ...mapGetters({
             tags_data: 'TagsView/tags_data',
-            sideBarList: 'user/sideBarList',
+            sideBarList: 'user/sideBarList'
         }),
+        // 当前的 tag 是否可以操作
+        disabledFlag() {
+            let flag = false
+            if (this.saveCurrentTagIndex === 0 || this.saveCurrentTagIndex === 1) flag = true
+            return flag
+        }
     },
     created() {},
     mounted() {
@@ -56,7 +77,7 @@ export default {
     methods: {
         ...mapActions({
             ACT_init_Tags: 'TagsView/ACT_init_Tags',
-            ACT_setTags: 'TagsView/ACT_setTags',
+            ACT_setTags: 'TagsView/ACT_setTags'
         }),
         // 初始化 tags
         init_tags() {
@@ -72,7 +93,7 @@ export default {
                     return {
                         fullPath: item.path,
                         meta: item.meta,
-                        name: item.name,
+                        name: item.name
                     }
                 }
             })
@@ -84,7 +105,7 @@ export default {
             const currentTag = {
                 fullPath: route.fullPath,
                 meta: route.meta,
-                name: route.name,
+                name: route.name
             }
             this.ACT_setTags(currentTag)
         },
@@ -108,37 +129,72 @@ export default {
         },
         // 点击 tags 跳转
         handleClick(tag) {
-            // this.insertT_Tags()
             this.$router.push({
                 name: tag.name
             })
         },
         // 鼠标右键菜单
-        tagContextmenu(e, index) {
-            const getTagWidth = e.target.offsetWidth
-            this.hideTagBox.left = 20 + (getTagWidth * (index))+ 'px'
-            this.hideTagBox.top = 40 +'px'
-            this.opearTagFlag = true
+        tagContextmenu(e, tag, index) {
+            // 1.获取 tag-container-box html元素
+            const getTagBoxDom = document.querySelector('.tag-container-box')
+            // 2.将伪数组变成真实的数组
+            const getRealArr= Array.prototype.slice.call(getTagBoxDom.children)
+            // 3.tag 的操作菜单需要left的 总长度
+            let getAllWidth = 0
+            getRealArr.forEach((item,Iindex) => {
+                // 4.如果当前鼠标右键的元素索引小于其他元素，说明右边的元素长度不考虑
+                if(Iindex >= index) return
+                // 5.计算每个元素的 宽度 并且 + margin-right的5个像素点
+                getAllWidth += item.offsetWidth + 5
+            })
+            this.hideTagBox.left = 20 + getAllWidth + 'px'
+            this.hideTagBox.top = 40 + 'px'
+            this.operaTagFlag = true
+            this.saveCurrentTag.currentIndex = index
+            this.saveCurrentTag.currentTag = tag
+        },
+        // tag 标签的点击事件 type 代表不同的操作
+        clickOpearItem(type) {
+            const {currentIndex, currentTag} = this.saveCurrentTag
+            switch (type) {
+                // 关闭当前
+                case 'closeNow':
+                    this.handleClose(currentTag)
+                    break
+                // 关闭其他
+                case 'closeOther':
+                    this.tags_data.forEach((item, index) => {
+                        if (index === 0 || index === 1 || index === currentIndex) return
+                        this.tags_data.splice(index, 1)
+                    })
+                    break
+                // 关闭右侧
+                case 'closeRight':
+                    break
+                // 全部关闭
+                case 'closeAll':
+                    break
+            }
         },
         // 关闭 可以 tag 的操作菜单
         closeTagOperation() {
-            this.opearTagFlag = false
+            this.operaTagFlag = false
         },
         // 开启 tag 的操作菜单
         openTagOperation() {
-            this.opearTagFlag = true
+            this.operaTagFlag = true
         }
     },
     watch: {
         '$route.path'() {
             this.insertT_Tags()
         },
-        opearTagFlag(flag) {
+        operaTagFlag(flag) {
             // 每次只要 开启 就全局监听 click 事件，用来关闭
-            if(flag) document.body.addEventListener('click',this.closeTagOperation)
-            else document.body.removeEventListener('click',this.closeTagOperation)
+            if (flag) document.body.addEventListener('click', this.closeTagOperation)
+            else document.body.removeEventListener('click', this.closeTagOperation)
         }
-    },
+    }
 }
 </script>
 
@@ -153,12 +209,18 @@ export default {
     z-index: 9999;
     display: inline-block;
     border-radius: 5px;
-    .hide-item {
+    .hide-item,
+    .disabled-operation {
         cursor: pointer;
         height: 30px;
         line-height: 30px;
         padding: 0px 10px;
         font-size: 14px;
+    }
+    .disabled-operation {
+        cursor: not-allowed;
+    }
+    .hide-item {
         &:hover {
             background-color: pink;
             color: #fff;
