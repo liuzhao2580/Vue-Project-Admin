@@ -1,18 +1,16 @@
 <template>
-    <div>
-        <el-row :gutter="20">
-            <el-col :span="12">
-                <!-- 多选表格实现单选 -->
-                <span>多选表格实现单选</span>
-                <table-checkout />
-            </el-col>
-            <el-col :span="12">
-                <!-- 自定义表头 -->
-                <span>自定义表头</span>
-                <table-header />
-            </el-col>
-        </el-row>
-    </div>
+    <el-row :gutter="20">
+        <el-col :span="12">
+            <!-- 多选表格实现单选 -->
+            <span>多选表格实现单选</span>
+            <table-checkout />
+        </el-col>
+        <el-col :span="12">
+            <!-- 自定义表头 -->
+            <span>自定义表头</span>
+            <table-header />
+        </el-col>
+    </el-row>
 </template>
 
 <script>
@@ -22,7 +20,7 @@ export default {
     name: 'element-components',
     components: {
         tableCheckout,
-        tableHeader
+        tableHeader,
     },
     props: {},
     computed: {},
@@ -31,7 +29,7 @@ export default {
     },
     created() {},
     mounted() {},
-    methods: {}
+    methods: {},
 }
 </script>
 
