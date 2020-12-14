@@ -10,7 +10,7 @@
                     :key="headerIndex"
                 >
                     <!-- 表头的 slot -->
-                    <template slot="header">
+                    <template #header>
                         <el-popover placement="bottom" title="请选择" width="200" trigger="click">
                             <div slot="reference" class="search-header">
                                 <span class="search-title">{{ headerItem.label }}</span>
@@ -39,7 +39,7 @@
                     :prop="headerItem.prop"
                     :key="headerIndex"
                 >
-                    <template slot="header">
+                    <template #header>
                         <el-popover placement="bottom" title="请选择" trigger="click">
                             <div class="search-header" slot="reference">
                                 <span class="search-title">{{ headerItem.label }}</span>
@@ -66,7 +66,7 @@
                     :prop="headerItem.prop"
                     :key="headerIndex"
                 >
-                    <template slot="header">
+                    <template #header>
                         <el-popover placement="bottom" title="请选择" trigger="click">
                             <div slot="reference" class="search-header">
                                 <span class="search-title">{{ headerItem.label }}</span>
