@@ -53,8 +53,9 @@ export default {
     .icon-box {
         font-size: 64px;
         margin-bottom: 10px;
-        #icon-element {
-            color: #409eff;
+        transition: all 0.3s;
+        &:hover {
+            transform: scale(1.2);
         }
     }
     .title-text {
