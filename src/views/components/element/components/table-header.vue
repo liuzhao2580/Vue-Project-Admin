@@ -83,7 +83,6 @@
                 </el-table-column>
             </template>
         </el-table>
-        <el-button @click="confirm"> 确定 </el-button>
     </div>
 </template>
 <script>
@@ -145,11 +144,7 @@ export default {
     },
     created() {},
     mounted() {},
-    methods: {
-        confirm() {
-            console.log(this.headerData, 'this.headerData')
-        }
-    },
+    methods: {},
 }
 </script>
 
