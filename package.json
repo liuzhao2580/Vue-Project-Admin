@@ -25,8 +25,10 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.12.1",
     "@vue/cli-plugin-eslint": "^3.12.1",
+    "@vue/cli-plugin-typescript": "^4.5.9",
     "@vue/cli-service": "^3.12.1",
     "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/eslint-config-typescript": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-component": "^1.1.1",
     "compression-webpack-plugin": "^6.0.3",
@@ -36,7 +38,9 @@
     "node-sass": "^4.14.1",
     "sass-loader": "^7.1.0",
     "svg-sprite-loader": "^4.1.6",
+    "typescript": "~3.9.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.12",
+    "vuex-module-decorators": "^1.0.1"
   }
 }

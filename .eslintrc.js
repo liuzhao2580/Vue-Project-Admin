@@ -4,15 +4,15 @@ module.exports = {
         node: true
     },
     'extends': [
-        'plugin:vue/essential',
-        'eslint:recommended'
+      'plugin:vue/essential',
+      'eslint:recommended',
+      '@vue/typescript'
     ],
     rules: {
         "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
         "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
     },
     parserOptions: {
-        // 解析器
-        parser: "babel-eslint"
+        parser: '@typescript-eslint/parser'
     }
 }

@@ -30,7 +30,7 @@ const productionPlugins = [
     }),
     // 开启 gzip
     new CompressionPlugin({
-        test: /\.js$|\.html$|\.css/,
+        test: /\.js$|\.ts$|\.html$|\.css/,
         threshold: 10240 // 只处理比这个值大的资源。按字节计算 设置的是 10kb
     })
 ]
