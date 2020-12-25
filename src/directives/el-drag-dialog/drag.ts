@@ -1,9 +1,9 @@
 export default {
-    bind(el){
+    bind(el: { querySelector: (arg0: string) => any }){
         const dialogHead = el.querySelector(".el-dialog__header")
         const dialogBox = el.querySelector(".el-dialog")
         dialogHead.style.cursor = "move"
-        const getNumStyle = ((leftORtop) => {
+        const getNumStyle = ((leftORtop: string) => {
             if (leftORtop) {
                 return parseInt(leftORtop)
             } else {
@@ -11,7 +11,7 @@ export default {
             }
         })
         // 鼠标按下
-        dialogHead.onmousedown = (e) => {
+        dialogHead.onmousedown = (e:any) => {
             // 获取当前 body 可视区域的大小
             const screenW = document.body.offsetWidth
             const screenH = document.body.offsetHeight

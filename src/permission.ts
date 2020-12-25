@@ -1,12 +1,12 @@
-import router from "@/router"
-import Nprogress from "nprogress"
+import router from '@/router'
+import Nprogress from 'nprogress'
 import { getCookie } from '@/utils/cookies'
-import "nprogress/nprogress.css" // 必须要的样式
-import setPageTitle from "@/utils/setPageTitle"
+import 'nprogress/nprogress.css' // 必须要的样式
+import setPageTitle from '@/utils/setPageTitle'
 import store from '@/store'
 
-router.beforeEach(async (to: { meta: { title: string }; path: string }, from: any, next: (arg0: boolean | undefined) => void) => {
-    const token = getCookie("token")
+router.beforeEach(async (to: any | string, from: any, next: any) => {
+    const token = getCookie('token')
     // 用于设置 浏览器的 title 显示
     document.title = setPageTitle(to.meta.title)
     Nprogress.start()
@@ -14,10 +14,10 @@ router.beforeEach(async (to: { meta: { title: string }; path: string }, from: an
     if (token) {
         /**
          * 如果在 token 存在的情况下要跳转到登录页面的话，阻止跳转
-         * 在退出登录的时候会清除 token 
+         * 在退出登录的时候会清除 token
          */
         const Need_refresh = store.getters['user/Need_refresh']
-        if(to.path === "/login") {
+        if (to.path === '/login') {
             next(false)
             Nprogress.done()
         }
@@ -28,26 +28,23 @@ router.beforeEach(async (to: { meta: { title: string }; path: string }, from: an
          */
         if (Need_refresh) {
             try {
-                const routesList = await store.dispatch("user/ACT_findByIDUser")
+                const routesList = await store.dispatch('user/ACT_findByIDUser')
                 router.addRoutes(routesList)
-                next({...to, replace: true }) // hack方法 确保addRoutes已完成
+                next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
                 Nprogress.done()
             } catch (error) {
                 console.log(error)
             }
-        }
-        else {
+        } else {
             next(true)
             Nprogress.done()
         }
-    }
-    else {
-        if (to.path === "/login") {
+    } else {
+        if (to.path === '/login') {
             next(true)
-        }
-        else {
+        } else {
             next({
-                path: "/login"
+                path: '/login'
             })
         }
         Nprogress.done()

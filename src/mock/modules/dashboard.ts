@@ -1,4 +1,4 @@
-export default (Mock) => {
+export default (Mock:any) => {
     return Mock.mock({
         line: [
             {

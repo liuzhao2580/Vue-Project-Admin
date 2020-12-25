@@ -1,13 +1,11 @@
 import { Vue } from 'vue-property-decorator'
 import Router, { RawLocation, RouteConfig } from 'vue-router'
 
-import { RouteCustomInterface } from '@/ts-type/interface/route-interface'
 import Layout from '@/layout/index.vue'
 import PageContent from '@/layout/components/AppMain.vue'
 // 使用 modules 引入嵌套过多的路由
 import error_page from './modules/error'
 import components from './modules/components'
-import VueRouter from 'vue-router'
 Vue.use(Router)
 // 公共的页面
 export const constantRoutes: RouteConfig[] = [
@@ -116,7 +114,7 @@ export const asyncRoutes: RouteConfig[] = [
         meta: {
             hidden: true
         },
-        component: () => import('@/views/error_page/404_page/index.vue')
+        component: () => import('@/views/error_page/404_page.vue')
     }
 ]
 const createRouter = () =>

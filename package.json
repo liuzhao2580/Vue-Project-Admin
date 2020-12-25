@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/echarts": "^4.9.3",
     "@types/js-cookie": "^2.2.6",
+    "@types/mockjs": "^1.0.3",
     "@types/nprogress": "^0.2.0",
     "@vue/cli-plugin-babel": "^3.12.1",
     "@vue/cli-plugin-eslint": "^3.12.1",

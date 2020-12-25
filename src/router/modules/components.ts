@@ -1,5 +1,5 @@
 import { RouteConfig } from 'vue-router'
-import PageContent from '@/layout/components/AppMain/index.vue'
+import PageContent from '@/layout/components/AppMain.vue'
 const components: RouteConfig = {
     path: '/components',
     meta: { title: '组件', icon: 'components' },

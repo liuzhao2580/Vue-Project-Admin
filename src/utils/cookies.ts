@@ -17,5 +17,5 @@ export const removeCookie = (name: any) => {
 
 // 删除全部 cookies
 export const removeAllCookies = () => {
-    return Cookies.remove()
+    // return Cookies.remove()
 }
