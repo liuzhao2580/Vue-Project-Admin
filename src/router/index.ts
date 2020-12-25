@@ -1,19 +1,22 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Layout from '@/layout'
-import PageContent from '@/layout/components/AppMain'
+import { Vue } from 'vue-property-decorator'
+import Router, { RawLocation, RouteConfig } from 'vue-router'
+
+import { RouteCustomInterface } from '@/ts-type/interface/route-interface'
+import Layout from '@/layout/index.vue'
+import PageContent from '@/layout/components/AppMain.vue'
 // 使用 modules 引入嵌套过多的路由
 import error_page from './modules/error'
 import components from './modules/components'
+import VueRouter from 'vue-router'
 Vue.use(Router)
 // 公共的页面
-export const constantRoutes = [
+export const constantRoutes: RouteConfig[] = [
     // 登录页面
     {
         path: '/login',
         name: 'login',
-        hidden: true,
-        component: () => import('@/views/login')
+        meta: { hidden: true },
+        component: () => import('@/views/login.vue')
     }
 ]
 // 需要权限的页面
@@ -32,7 +35,7 @@ export const constantRoutes = [
  * @param  {breadcrumb}: false   说明该路由不显示在面包屑中
  * @param  {affix: true}  说明 该路由在 tags 中 初始化的时候就要显示，并且不能被删除
  */
-export const asyncRoutes = [
+export const asyncRoutes: RouteConfig[] = [
     {
         path: '/',
         component: Layout,
@@ -41,14 +44,18 @@ export const asyncRoutes = [
             // 首页
             {
                 path: '/dashboard',
-                component: () => import(/* webpackChunkName: "baseComponet" */ '@/views/dashboard'),
+                component: () =>
+                    import(/* webpackChunkName: "baseComponet" */ '@/views/dashboard/index.vue'),
                 name: 'dashboard',
                 meta: { title: '首页', icon: 'index', affix: true }
             },
             // 文档页
             {
                 path: '/documentation',
-                component: () => import(/* webpackChunkName: "baseComponet" */ '@/views/documentation'),
+                component: () =>
+                    import(
+                        /* webpackChunkName: "baseComponet" */ '@/views/documentation/index.vue'
+                    ),
                 name: 'documentation',
                 meta: { title: '文档', icon: 'wendang', affix: true }
             },
@@ -62,22 +69,29 @@ export const asyncRoutes = [
                 children: [
                     {
                         path: 'created',
-                        component: () => import(/* webpackChunkName: "article" */ '@/views/article/created'),
+                        component: () =>
+                            import(
+                                /* webpackChunkName: "article" */ '@/views/article/created/index.vue'
+                            ),
                         name: 'articleCreated',
                         meta: { title: '文章创建', icon: 'created', roles: [1, 2] }
                     },
                     {
                         path: 'list',
-                        component: () => import(/* webpackChunkName: "article" */ '@/views/article/list'),
+                        component: () =>
+                            import(
+                                /* webpackChunkName: "article" */ '@/views/article/list/index.vue'
+                            ),
                         name: 'articleList',
-                        meta: { title: '文章列表', icon: 'list', roles: [1, 2, 3]}
+                        meta: { title: '文章列表', icon: 'list', roles: [1, 2, 3] }
                     }
                 ]
             },
             // 地图
             {
                 path: '/amap',
-                component: () => import(/* webpackChunkName: "baseComponet" */ '@/views/map'),
+                component: () =>
+                    import(/* webpackChunkName: "baseComponet" */ '@/views/map/index.vue'),
                 meta: { title: '地图', icon: 'map' },
                 name: 'amap'
             },
@@ -88,9 +102,10 @@ export const asyncRoutes = [
             // 个人中心
             {
                 path: '/personal',
-                component: () => import(/* webpackChunkName: "baseComponet" */ '@/views/personal'),
-                hidden: true,
-                meta: { title: '个人中心', icon: 'personal' },
+                component: () =>
+                    import(/* webpackChunkName: "baseComponet" */ '@/views/personal/index.vue'),
+
+                meta: { title: '个人中心', icon: 'personal', hidden: true },
                 name: 'personalCenter'
             }
         ]
@@ -98,27 +113,28 @@ export const asyncRoutes = [
     // 404
     {
         path: '*',
-        hidden: true,
-        component: () => import('@/views/error_page/404_page')
+        meta: {
+            hidden: true
+        },
+        component: () => import('@/views/error_page/404_page/index.vue')
     }
 ]
 const createRouter = () =>
     new Router({
-        scrollBehavior: () => ({ y: 0 }),
         routes: constantRoutes
     })
-const router = createRouter()
+const router: any = createRouter()
 
 // 重置路由
 export const resetRouter = () => {
-    const newRouter = createRouter()
+    const newRouter: any = createRouter()
     router.matcher = newRouter.matcher
 }
 
 // 解决 点击路由是否报错问题
-const originalPush = Router.prototype.push
-Router.prototype.push = function push(location) {
-    return originalPush.call(this, location).catch((err) => err)
+const originalPush: any = Router.prototype.push
+Router.prototype.push = function push(location: RawLocation) {
+    return originalPush.call(this, location).catch((err: any) => err)
 }
 
 export default router

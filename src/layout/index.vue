@@ -8,58 +8,43 @@
                 <Navbar class="nav-bar" />
                 <AppMain class="app-main" />
             </el-main>
-            <div v-show="isMobile" class="click-icon el-icon-s-operation" @click="showORhidden"></div>
+            <div
+                v-show="isMobile"
+                class="click-icon el-icon-s-operation"
+                @click="showORhidden"
+            ></div>
         </el-container>
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue, Mixins } from 'vue-property-decorator'
 import { AppMain, Sidebar, Navbar } from './components'
-import { mapGetters,mapActions } from 'vuex'
-import ResizeMixin from './mixin/Resize.js'
-export default {
-    name: 'Layout',
+import { namespace } from 'vuex-class'
+import LayoutMixin from './mixin/Resize'
+const App_VUEX = namespace('app')
+@Component({
     components: {
         AppMain,
         Sidebar,
         Navbar
-    },
-    mixins: [ResizeMixin],
-    computed: {
-        ...mapGetters({
-            side_status: 'app/side_status',
-            isMobile: 'app/isMobile'
-        }),
-        dynamicWidth() {
-            if (this.isMobile) return '0'
-            if (this.side_status) return '64px'
-            return '200px'
-        }
-    },
-    props: {},
-    data() {
-        return {}
-    },
-    created() {},
-    mounted() {
-        // 初始化
-        this.init()
-    },
-    methods: {
-        ...mapActions({
-            ACT_unflodSide: 'app/ACT_unflodSide'
-        }),
-        init() {
-            // userInfoApi().then((res) => {
-            //     console.log(res)
-            // })
-        },
-        // 在 mobile 移动端模式下显示隐藏 侧边栏按钮
-        showORhidden() {
-            this.ACT_unflodSide()
-        }
-    },
-    watch: {}
+    }
+})
+export default class LayoutComponent extends Mixins(LayoutMixin) {
+    @App_VUEX.Getter side_status: any
+    @App_VUEX.Getter isMobile: any
+    @App_VUEX.Action ACT_unflodSide!: () => void
+    dynamicWidth(): string {
+        if (this.isMobile) return '0'
+        if (this.side_status) return '64px'
+        return '200px'
+    }
+    created() {}
+    mounted() {}
+    // 在 mobile 移动端模式下显示隐藏 侧边栏按钮
+    showORhidden() {
+        this.ACT_unflodSide()
+    }
 }
 </script>
 

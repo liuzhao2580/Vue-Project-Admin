@@ -1,5 +1,5 @@
 import Vue from "vue"
-import SvgIcon from "@/components/SvgIcon"
+import SvgIcon from "@/components/SvgIcon/index.vue"
 // 注册全局组件
 Vue.component("svg-icon", SvgIcon)
 
@@ -9,7 +9,7 @@ Vue.component("svg-icon", SvgIcon)
  * resolve 是一个函数，返回已解析请求的模块ID。
  * keys 是一个函数，它返回上下文模块可以处理的所有可能请求的数组
  * */
-const importAll = requireContext => requireContext.keys().map(requireContext)
+const importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().map(requireContext)
 
 /** 
  * require.context("./svg", false, /\.svg&/) 会去找 ./svg 文件夹下面的以 .svg结尾的所有文件

@@ -5,7 +5,7 @@ import "nprogress/nprogress.css" // 必须要的样式
 import setPageTitle from "@/utils/setPageTitle"
 import store from '@/store'
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to: { meta: { title: string }; path: string }, from: any, next: (arg0: boolean | undefined) => void) => {
     const token = getCookie("token")
     // 用于设置 浏览器的 title 显示
     document.title = setPageTitle(to.meta.title)
@@ -37,13 +37,13 @@ router.beforeEach(async (to, from, next) => {
             }
         }
         else {
-            next()
+            next(true)
             Nprogress.done()
         }
     }
     else {
         if (to.path === "/login") {
-            next()
+            next(true)
         }
         else {
             next({

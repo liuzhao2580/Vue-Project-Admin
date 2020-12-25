@@ -7,7 +7,7 @@
  * @param {any} storageExpire 过期时间 不传递默认为不删除 支持传递的格式 正整数 单位毫秒 string 1h(H) 1d(D) 其他均不支持
  * 过期时间是根据当前的时间戳 + 传递的过期时间，在获取 localStorage 的时候判断当前的时间和过期时间
  */
-export const setStorage = (storageName, storageData, storageExpire = null) => {
+export const setStorage = (storageName: string, storageData: any, storageExpire: any = null) => {
     const local = window.localStorage
     local.setItem(storageName, JSON.stringify(storageData))
     // 说明要设置过期时间
@@ -44,7 +44,7 @@ export const setStorage = (storageName, storageData, storageExpire = null) => {
  * @param {string} storageName 指定需要获取的数据名称
  * @returns {any} storageData 存储的数据 存在并且没有过期，返回存储的数据；不存在或者过期了，就返回null
  */
-export const getStorage = (storageName) => {
+export const getStorage = (storageName: string): any => {
     const local = window.localStorage
     // 获取数据
     let storageData = local.getItem(storageName)
@@ -65,7 +65,7 @@ export const getStorage = (storageName) => {
  * 删除 localStorage
  * @param {string} storageName 指定需要删除的数据名称
  */
-export const removeStorage = (storageName) => {
+export const removeStorage = (storageName: string) => {
     const local = window.localStorage
     // 删除
     local.removeItem(storageName)

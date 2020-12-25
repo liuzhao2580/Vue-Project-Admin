@@ -4,7 +4,7 @@ const state = {
 }
 const mutations = {
     // 侧边栏状态 展开 或者 折叠
-    CHANGE_SIDESTATUS(state) {
+    CHANGE_SIDESTATUS(state: { side_status: boolean }) {
         // let status = localStorage.getItem('side_status') ? localStorage.getItem('side_status') : false
         // status === 'false' ? status = false : status = true
         // console.log(status)
@@ -12,40 +12,40 @@ const mutations = {
         // localStorage.setItem('side_status', state.side_status)
     },
     // 折叠侧边栏
-    FLOD_SIDE(state) {
+    FLOD_SIDE(state: { side_status: boolean }) {
         state.side_status = true
     },
     // 展开侧边栏
-    UNFLOD_SIDE(state) {
+    UNFLOD_SIDE(state: { side_status: boolean }) {
         state.side_status = false
     },
     // 设置 设备类型
-    Mut_setDevice(state, type) {
+    Mut_setDevice(state: { isMobile: any }, type: any) {
         state.isMobile = type
     }
 }
 const actions = {
     // 侧边栏状态 展开 或者 折叠
-    change_SideStatus({ commit }) {
+    change_SideStatus({ commit }:any) {
         commit('CHANGE_SIDESTATUS')
     },
     // 折叠侧边栏
-    Act_flodSide({ commit }) {
+    Act_flodSide({ commit }:any) {
         commit('FLOD_SIDE')
     },
     // 展开侧边栏
-    ACT_unflodSide({ commit }) {
+    ACT_unflodSide({ commit }:any) {
         commit('UNFLOD_SIDE')
     },
     // 设置 设备类型
-    Act_setDevice({ commit }, type) {
+    Act_setDevice({ commit }: any, type: any) {
         commit('Mut_setDevice', type)
     }
 }
 
 const getters = {
-    side_status: (state) => state.side_status,
-    isMobile: (state) => state.isMobile
+    side_status: (state: { side_status: any }) => state.side_status,
+    isMobile: (state: { isMobile: any }) => state.isMobile
 }
 export default {
     namespaced: true, // 之后在不同页面中引入getter、actions、mutations时，需要加上所属的模块名

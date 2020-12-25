@@ -3,7 +3,6 @@ import Vuex from "vuex"
 import user from './modules/user'
 import app from './modules/app'
 import TagsView from './modules/TagsView'
-
 Vue.use(Vuex)
 
 // https://webpack.js.org/guides/dependency-management/#requirecontext

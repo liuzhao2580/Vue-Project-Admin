@@ -1,4 +1,4 @@
-const { title: defatulConfig } = require('./src/setting')
+const { title: defatulConfig } = require('./src/setting.ts')
 const UglifyJSPlugin =require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const path = require('path')

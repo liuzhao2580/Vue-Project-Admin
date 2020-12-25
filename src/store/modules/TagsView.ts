@@ -1,24 +1,27 @@
-const state = {
+interface stateInterface {
+    tagsArray: any
+}
+const state : stateInterface= {
     // 存放 tags 的数组
     tagsArray: []
 }
 const mutations = {
-    SET_INIT_TAGS(state, tags) {
+    SET_INIT_TAGS(state: { tagsArray: any }, tags: any) {
         state.tagsArray = tags
     },
-    SET_TAGS(state, tags) {
+    SET_TAGS(state: { tagsArray: any[] }, tags: any) {
         state.tagsArray.push(tags)
     }
 }
 const actions = {
     // 初始化 tags 
-    ACT_init_Tags({ commit }, tags) {
+    ACT_init_Tags({ commit }: any, tags: any) {
         commit("SET_INIT_TAGS", tags)
     },
     // 新增 tags
-    ACT_setTags({ commit }, tags) {
+    ACT_setTags({ commit }: any, tags: { meta: { title: any } }) {
         // 判断 当前的 tags 中是否已经存在当前的 路由名称
-        const is_push = state.tagsArray.some(item => {
+        const is_push = state.tagsArray.some((item:any) => {
             return item.meta.title == tags.meta.title
         })
         // 如果 is_push == true 说明存在, 不应该再次添加tags
@@ -28,7 +31,7 @@ const actions = {
 }
 
 const getters = {
-    tags_data: state => state.tagsArray
+    tags_data: (state: { tagsArray: any }) => state.tagsArray
 }
 export default {
     namespaced: true,

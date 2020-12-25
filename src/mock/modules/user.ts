@@ -33,7 +33,7 @@ const userInfo = [
     }
 ]
 // 用户登陆的时候 保存用户的基本信息
-const setUserInfo = (options) => {
+const setUserInfo = (options: { body: string }) => {
     const getUserInfo = JSON.parse(options.body)
 
     const username = getUserInfo.username
@@ -63,7 +63,7 @@ const setUserInfo = (options) => {
     }
 }
 // 用户刷新的时候获取用户基本信息
-const getUserInfo = (options) => {
+const getUserInfo = (options: { url: any }) => {
     const {url} = options
     const {id} = qs.parse(url.split('?')[1])
     // 判断该用户是否存在

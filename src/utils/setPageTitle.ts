@@ -1,6 +1,6 @@
-import defaultSetting from "@/setting"
+import defaultSetting from '@/setting'
 
-export default function (pageTitle) {
+export default function(pageTitle: string) {
     if (pageTitle) {
         return `${pageTitle} - ${defaultSetting.title}`
     }
