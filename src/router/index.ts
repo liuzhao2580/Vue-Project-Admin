@@ -14,7 +14,7 @@ export const constantRoutes: RouteConfig[] = [
         path: '/login',
         name: 'login',
         meta: { hidden: true },
-        component: () => import('@/views/login.vue')
+        component: () => import(/* webpackChunkName: "loginComponent" */ '@/views/login/index.vue')
     }
 ]
 // 需要权限的页面

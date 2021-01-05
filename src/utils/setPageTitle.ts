@@ -1,8 +1,7 @@
-import defaultSetting from '@/setting'
-
+const setConfig = require('@/setting')
 export default function(pageTitle: string) {
     if (pageTitle) {
-        return `${pageTitle} - ${defaultSetting.title}`
+        return `${pageTitle} - ${setConfig.defaultSetting.title}`
     }
-    return defaultSetting.title
+    return setConfig.defaultSetting.title
 }

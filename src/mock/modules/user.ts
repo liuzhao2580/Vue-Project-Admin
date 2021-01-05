@@ -1,4 +1,3 @@
-import qs from 'querystring'
 // 用户的基本信息
 const userInfo = [
     {
@@ -65,7 +64,7 @@ const setUserInfo = (options: { body: string }) => {
 // 用户刷新的时候获取用户基本信息
 const getUserInfo = (options: { url: any }) => {
     const {url} = options
-    const {id} = qs.parse(url.split('?')[1])
+    const id = url.split('?')[1]
     // 判断该用户是否存在
     const is_True = userInfo.find(item => {
         return item.id == id
