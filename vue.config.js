@@ -58,6 +58,7 @@ module.exports = {
                 '@api': resolve('src/api/modules')
             }
         },
+        extensions: ['.tsx','.ts','.js','.vue'],
         plugins: process.env.NODE_ENV === 'production' ? productionPlugins : []
     },
     devServer: {
