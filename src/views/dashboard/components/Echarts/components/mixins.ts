@@ -1,5 +1,9 @@
+import { Vue,Component } from 'vue-property-decorator'
 import '../Echarts-theme'
-export default class EchartsMixins {
+
+@Component({})
+
+export default class EchartsMixins extends Vue {
     EchartsDom: any = null
     mounted() {
         this.$_init_resize()

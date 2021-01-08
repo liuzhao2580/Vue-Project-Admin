@@ -1,5 +1,5 @@
 <template>
-	<div v-if="!item.hidden" class="SidebarItem-box">
+	<div v-if="!item.meta.hidden" class="SidebarItem-box">
         <!-- 首先判断 当级路由下不存在多级路由 -->
         <template v-if="checkMoreRouter(item)">
             <el-menu-item :index="resolvePath(onlyOneChild.path)">

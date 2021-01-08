@@ -1,10 +1,10 @@
 <template>
     <div class="app-warpper">
         <el-container :class="[isMobile ? 'mobile' : 'desktop', 'container-box']">
-            <el-aside :width="dynamicWidth" class="sider-box">
+            <el-aside :width="dynamicWidth()" class="sider-box">
                 <Sidebar />
             </el-aside>
-            <el-main class="main-box" :style="{ marginLeft: dynamicWidth }">
+            <el-main class="main-box" :style="{ marginLeft: dynamicWidth() }">
                 <Navbar class="nav-bar" />
                 <AppMain class="app-main" />
             </el-main>
