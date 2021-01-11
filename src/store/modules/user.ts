@@ -1,9 +1,9 @@
 /* eslint-disable */
-import { userInfoApi } from "@/api/modules/user"
+import { userInfoApi } from '@/api/modules/user'
 import { setCookie, getCookie } from '@/utils/cookies'
 import { deepClone } from '@/utils/config'
 import { asyncRoutes } from '@/router'
-import { RouteConfig } from "vue-router"
+import { RouteConfig } from 'vue-router'
 /**
  * 将后台传递的路由格式和本地的路由对比
  * @param {asyncRoutes} asyncRoutes  本地路由需要权限的数据
@@ -48,7 +48,10 @@ const state = {
 }
 const mutations = {
     // 设置用户基本数据
-    SET_USER_INFO(state: { avatar: any; nickname: any; token: any }, userInfo: { avatar: any; nickname: any; token: any }) {
+    SET_USER_INFO(
+        state: { avatar: any; nickname: any; token: any },
+        userInfo: { avatar: any; nickname: any; token: any }
+    ) {
         state.avatar = userInfo.avatar
         state.nickname = userInfo.nickname
         state.token = userInfo.token
@@ -79,7 +82,7 @@ const actions = {
         })
     },
     // 页面刷新 重新获取用户信息, 路由信息
-    ACT_findByIDUser({ commit }:any) {
+    ACT_findByIDUser({ commit }: any) {
         return new Promise(async (resolve) => {
             const userId = getCookie('user_id')
             const params = {
@@ -107,7 +110,7 @@ const getters = {
     avatar: (state: { avatar: any }) => state.avatar,
     nickname: (state: { nickname: any }) => state.nickname,
     token: (state: { token: any }) => state.token,
-    sideBarList: (state: { sideBarList: any }) => state.sideBarList,
+    sideBarList: (state: { sideBarList: RouteConfig[] }) => state.sideBarList,
     Need_refresh: (state: { Need_refresh: any }) => state.Need_refresh
 }
 export default {
