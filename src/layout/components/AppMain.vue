@@ -45,6 +45,11 @@ export default class AppMain extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.AppMain-box {
+    > div {
+        height: 100%;
+    }
+}
 /* --------------------------------路由的过渡动画 --------------------------*/
 .fade-transition-enter,
 .fade-transition-leave {

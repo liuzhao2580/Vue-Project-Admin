@@ -1,5 +1,5 @@
 <template>
-    <el-row :gutter="20">
+    <el-row :gutter="20" class="article-created-box">
         <!-- 当页面宽度为 768px 的时候显示 -->
         <el-col class="hidden-sm-and-up" :xs="24">
             <div>title2</div>

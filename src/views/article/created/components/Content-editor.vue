@@ -17,6 +17,7 @@ export default class ContentEditor extends Vue {
     }
     /** 初始化 编辑器 */
     initWangEditor() {
+        const getHeight: number = (document.querySelector('.article-created-box') as Element).scrollHeight
         let editor = new wangEditor('#WangEidtor-id')
         // 自定义菜单配置
         editor.config.menus = configMenu
@@ -25,6 +26,9 @@ export default class ContentEditor extends Vue {
         // 配置字体颜色、背景色
         editor.config.colors = configColors
         editor.config.fontNames = fontNames
+        // 设置 高度
+        editor.config.height = getHeight - 100
+        editor.config.zIndex = 500
 
         /** 编辑器监听内容变化 */
         editor.config.onchange = (newHtml:HTMLDocument) => {
