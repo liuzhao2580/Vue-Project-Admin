@@ -17,6 +17,21 @@ export const constantRoutes: RouteConfig[] = [
     }
 ]
 // 需要权限的页面
+/**
+ * @param {roles} 数组 用来存放路由的权限信息
+ * 如果 roles 没有声明 说明所有用户都可以进入该页面
+ * roles 代表的数字说明
+ * 1 超级管理员
+ * 2 管理员
+ * 3 普通用户
+ */
+/**
+ * 参数说明
+ * @param  {hidden}: true,  该路由不在侧边栏显示
+ * @param  {breadcrumb}: false   说明该路由不显示在面包屑中
+ * @param  {affix: true}  说明 该路由在 tags 中 初始化的时候就要显示，并且不能被删除
+ * @param  {keepAlive} boolean 路由是否不被销毁 默认都是 false 页面关闭销毁，true 保持页面存在
+ */
 export const asyncRoutes: RouteConfig[] = [
     {
         path: '/',
@@ -29,7 +44,7 @@ export const asyncRoutes: RouteConfig[] = [
                 component: () =>
                     import(/* webpackChunkName: "baseComponet" */ '@/views/dashboard/index.vue'),
                 name: 'dashboard',
-                meta: { title: '首页', icon: 'index', affix: true }
+                meta: { title: '首页', icon: 'index', affix: true, keepAlive: true }
             },
             // 文档页
             {
@@ -39,7 +54,7 @@ export const asyncRoutes: RouteConfig[] = [
                         /* webpackChunkName: "baseComponet" */ '@/views/documentation/index.vue'
                     ),
                 name: 'documentation',
-                meta: { title: '文档', icon: 'wendang', affix: true }
+                meta: { title: '文档', icon: 'wendang', affix: true,keepAlive: true }
             },
             // 文章页
             {
@@ -65,7 +80,7 @@ export const asyncRoutes: RouteConfig[] = [
                                 /* webpackChunkName: "article" */ '@/views/article/list/index.vue'
                             ),
                         name: 'articleList',
-                        meta: { title: '文章列表', icon: 'list', roles: [1, 2, 3] }
+                        meta: { title: '文章列表', icon: 'list', roles: [1, 2, 3],keepAlive: true }
                     }
                 ]
             },
@@ -74,7 +89,7 @@ export const asyncRoutes: RouteConfig[] = [
                 path: '/amap',
                 component: () =>
                     import(/* webpackChunkName: "baseComponet" */ '@/views/map/index.vue'),
-                meta: { title: '地图', icon: 'map' },
+                meta: { title: '地图', icon: 'map',keepAlive: true },
                 name: 'amap'
             },
             // 组件
