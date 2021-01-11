@@ -13,39 +13,33 @@
     </div>
 </template>
 
-<script>
-import { dashboardApi } from '@api/dashboard'
-import EchartsComponents from './components/Echarts'
-export default {
+<script lang="ts">
+import { dashboardApi } from '@/api/modules/dashboard'
+import EchartsComponents from './components/Echarts/index.vue'
+import { Component, Vue } from 'vue-property-decorator'
+@Component({
     name: 'dashboard',
     components: {
-        card: () => import('./components/Card'),
-        todoList: () => import('./components/TodoList'),
+        card: () => import('./components/Card/index.vue'),
+        todoList: () => import('./components/TodoList/index.vue'),
         EchartsComponents
-    },
-    props: {},
-    data() {
-        return {
-            EchartsData: {}
-        }
-    },
+    }
+})
+export default class Dashboard extends Vue {
+    EchartsData: any = {}
     created() {
         this.init()
-    },
-    mounted() {},
-    methods: {
-        // 初始化
-        async init() {
-            try {
-                const { data } = await dashboardApi()
-                console.log(data, 'data')
-                this.EchartsData = data
-            } catch (error) {
-                console.log(error)
-            }
+    }
+    // 初始化
+    async init() {
+        try {
+            const { data } = await dashboardApi()
+            console.log(data, 'data')
+            this.EchartsData = data
+        } catch (error) {
+            console.log(error)
         }
-    },
-    watch: {}
+    }
 }
 </script>
 

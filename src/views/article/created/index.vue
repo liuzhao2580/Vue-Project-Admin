@@ -4,18 +4,13 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'created',
-    components: {},
-    props: {},
-    data() {
-        return {}
-    },
-    created() {},
-    mounted() {},
-    methods: {},
-    watch: {},
+<script lang='ts'>
+import { Component, Vue } from "vue-property-decorator"
+@Component({
+    name: 'created'
+})
+export default class CreateArticle extends Vue {
+
 }
 </script>
 

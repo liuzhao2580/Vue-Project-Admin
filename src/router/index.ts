@@ -1,6 +1,5 @@
 import { Vue } from 'vue-property-decorator'
 import Router, { RawLocation, RouteConfig } from 'vue-router'
-
 import Layout from '@/layout/index.vue'
 import PageContent from '@/layout/components/AppMain.vue'
 // 使用 modules 引入嵌套过多的路由
@@ -18,21 +17,6 @@ export const constantRoutes: RouteConfig[] = [
     }
 ]
 // 需要权限的页面
-/**
- * @param {roles} 数组 用来存放路由的权限信息
- * 如果 roles 没有声明 说明所有用户都可以进入该页面
- * roles 代表的数字说明
- * 1 超级管理员
- * 2 管理员
- * 3 普通用户
- */
-/**
- * 参数说明
- * @param  {hidden}: true,  该路由不在侧边栏显示
- * @param  {redirect}: 'noRedirect' , 说明该路由显示在面包屑中 但是不能被点击
- * @param  {breadcrumb}: false   说明该路由不显示在面包屑中
- * @param  {affix: true}  说明 该路由在 tags 中 初始化的时候就要显示，并且不能被删除
- */
 export const asyncRoutes: RouteConfig[] = [
     {
         path: '/',
