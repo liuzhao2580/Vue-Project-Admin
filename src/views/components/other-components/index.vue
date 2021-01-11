@@ -1,29 +1,27 @@
 <template>
-	<div class="other-components">
-		<el-row>
-			<el-col :span="6">
-				<Calculator />
-			</el-col>
-		</el-row>
-	</div>
+    <div class="other-components">
+        <el-row :gutter="10">
+            <el-col :xs="24" :sm="8">
+                <Calculator />
+            </el-col>
+            <el-col :xs="24" :sm="8">
+                <between-time></between-time>
+            </el-col>
+        </el-row>
+    </div>
 </template>
 
-<script>
-export default {
-	name: "other-components",
-	components: {
-		Calculator: () => import("./Calculator")
-	},
-	props: {},
-	data() {
-		return {};
-	},
-	created() {},
-	mounted() {},
-	methods: {},
-	watch: {}
-};
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import BetweenTime from './components/Between-time.vue'
+@Component({
+    name: 'other-components',
+    components: {
+        Calculator: () => import('./components/Calculator.vue'),
+        BetweenTime
+    }
+})
+export default class OtherComponents extends Vue {}
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
