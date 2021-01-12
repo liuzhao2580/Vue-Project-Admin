@@ -1,3 +1,5 @@
+// setFullYear() MDN官方说明 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setFullYear
+
 /** 获取两个时间之间的 间隔时间
  * @param { Date | number | string } startTime 开始时间 字符串格式(6:00 06:00 18:00, 18:00:00) 必须是24小时格式
  * @param { Date | number | string } endTime 结束时间 字符串格式(6:00 06:00 18:00, 18:00:00) 必须是24小时格式
