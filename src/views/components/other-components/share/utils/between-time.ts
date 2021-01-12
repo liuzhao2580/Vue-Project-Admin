@@ -7,8 +7,8 @@
 export function getBetweenTime(startTime: string, endTime: string): Array<string> {
     // 校验时间格式
     if (typeof startTime === 'string' && typeof endTime === 'string') {
-        const startReg = /^(0?[1-9]|1[0-2]):(([0-5][0-9])(:([0-9][0-9]))?)$/g
-        const endReg = /^(0?[1-9]|1[0-2]):(([0-5][0-9])(:([0-9][0-9]))?)$/g
+        const startReg = /^(0?[1-9]|([1-2][0-4])):(([0-5][0-9])(:([0-9][0-9]))?)$/
+        const endReg = /^(0?[1-9]|([1-2][0-4])):(([0-5][0-9])(:([0-9][0-9]))?)$/
         if (!startReg.test(startTime)) throw `开始时间：${startTime} 时间格式错误`
         if (!endReg.test(endTime)) throw `结束时间：${endTime} 时间格式错误`
     } else throw `${startTime} 或者 ${endTime} 时间格式错误`

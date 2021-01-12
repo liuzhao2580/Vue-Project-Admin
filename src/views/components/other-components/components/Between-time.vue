@@ -118,6 +118,7 @@ export default class BetweenTime extends Vue {
     /** 单选框绑定值 发生变化 改变事件 */
     radioChange(value: BetweenTimeTypeEnum) {
         this.radioValue = value
+        this.selectedTimeData = []
     }
     /** 时间选择器 开始时间选择器 */
     startTimeChange(value: string | null) {
