@@ -1,8 +1,14 @@
 <template>
     <div class="big-screen-title">
+        <!-- 文章标题 -->
         <div class="title-input">
             <el-input placeholder="请输入文章标题" class="article-title" v-model="titleValue"></el-input>
         </div>
+        <!-- 文章分类 -->
+        <div class="article-category">
+
+        </div>
+        <!-- 预览按钮 -->
         <div class="button-box">
             <el-button type="primary" :disabled="disabled" @click="dialogVisible = true"
                 >预览</el-button
@@ -28,6 +34,8 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { EventBus } from '../../share/utils/EventBus'
+import { queryArticleCategory_API } from '@/api/modules/article'
+import { ResultCodeEnum } from '@/typescript/enum/config.enum'
 @Component({})
 /** 大屏幕 下的 标题 */
 export default class BigScreenTitle extends Vue {
@@ -49,8 +57,8 @@ export default class BigScreenTitle extends Vue {
 
     mounted() {
         this.init_EventBus()
+        this.queryArticleCategory()
     }
-
     /** 使用事件总线获取 当前的内容和 设置按钮的样式 */
     init_EventBus() {
         EventBus.$on('btnDisabled', (flag: boolean) => {
@@ -59,6 +67,12 @@ export default class BigScreenTitle extends Vue {
         EventBus.$on('getContent', (html: HTMLDocument) => {
             this.articleContainer = html
         })
+    }
+    /** 获取文章分类 */
+    async queryArticleCategory() {
+        const { data } = await queryArticleCategory_API()
+        if(data.code === ResultCodeEnum.success) console.log(data, "")
+
     }
     /** 发布按钮 */
     releaseArticle(): void {

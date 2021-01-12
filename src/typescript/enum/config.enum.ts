@@ -1,0 +1,7 @@
+/** 一些基本的公共枚举 */
+
+/** 1. 请求的状态参数返回的枚举 */
+export enum ResultCodeEnum {
+    /** 成功 */
+    success = 200
+}
