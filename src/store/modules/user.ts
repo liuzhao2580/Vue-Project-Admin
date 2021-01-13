@@ -4,6 +4,7 @@ import { setCookie, getCookie } from '@/utils/cookies'
 import { deepClone } from '@/utils/config'
 import { asyncRoutes } from '@/router'
 import { RouteConfig } from 'vue-router'
+import {IUserBaseInfo } from '@/typescript/interface/user-interface'
 /**
  * 将后台传递的路由格式和本地的路由对比
  * @param {asyncRoutes} asyncRoutes  本地路由需要权限的数据
@@ -50,10 +51,10 @@ const mutations = {
     // 设置用户基本数据
     SET_USER_INFO(
         state: { avatar: any; nickname: any; token: any },
-        userInfo: { avatar: any; nickname: any; token: any }
+        userInfo: IUserBaseInfo
     ) {
         state.avatar = userInfo.avatar
-        state.nickname = userInfo.nickname
+        state.nickname = userInfo.nickName
         state.token = userInfo.token
     },
     // 设置用户动态路由
@@ -67,13 +68,13 @@ const mutations = {
 }
 const actions = {
     // 用户登陆 获取用户信息 路由信息
-    ACT_userInfo({ commit }: any, data: { userInfo: { token: any; id: any; roleId: any } }) {
+    ACT_userInfo({ commit }: any, data:IUserBaseInfo) {
         return new Promise<void>((resolve, reject) => {
             // 存入 token
-            setCookie('token', data.userInfo.token)
-            setCookie('user_id', data.userInfo.id)
-            setCookie('roleId', data.userInfo.roleId)
-            commit('SET_USER_INFO', data.userInfo)
+            setCookie('token', data.token)
+            setCookie('userId', data.userId)
+            setCookie('roleId', data.roleId)
+            commit('SET_USER_INFO', data)
             try {
                 resolve()
             } catch (error) {
@@ -84,15 +85,16 @@ const actions = {
     // 页面刷新 重新获取用户信息, 路由信息
     ACT_findByIDUser({ commit }: any) {
         return new Promise(async (resolve) => {
-            const userId = getCookie('user_id')
+            const userId = getCookie('userId')
             const params = {
                 id: userId
             }
             // 获取用户的基本信息
             const { data } = await userInfoApi(params)
-            commit('SET_USER_INFO', data.userInfo)
+            console.log(data, 'data')
+            commit('SET_USER_INFO', data.data)
             // 通过递归获取用户的路由权限，侧边栏数据
-            const getList = creatRouter(asyncRoutes[0], data.userInfo.roleId)
+            const getList = creatRouter(asyncRoutes[0], data.data.roleId)
             // 深拷贝用户的侧边栏数据
             const newRoutesList = deepClone(asyncRoutes[0])
             newRoutesList.children = getList
