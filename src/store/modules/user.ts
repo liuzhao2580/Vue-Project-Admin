@@ -1,10 +1,11 @@
-/* eslint-disable */
+import { Message } from 'element-ui'
 import { userInfoApi } from '@/api/modules/user'
-import { setCookie, getCookie } from '@/utils/cookies'
+import { setCookie, getCookie, removeCookie } from '@/utils/cookies'
 import { deepClone } from '@/utils/config'
-import { asyncRoutes } from '@/router'
+import { asyncRoutes, resetRouter } from '@/router'
 import { RouteConfig } from 'vue-router'
-import {IUserBaseInfo } from '@/typescript/interface/user-interface'
+import { IUserBaseInfo } from '@/typescript/interface/user-interface'
+import { ResultCodeEnum } from '@/typescript/enum'
 /**
  * 将后台传递的路由格式和本地的路由对比
  * @param {asyncRoutes} asyncRoutes  本地路由需要权限的数据
@@ -49,10 +50,7 @@ const state = {
 }
 const mutations = {
     // 设置用户基本数据
-    SET_USER_INFO(
-        state: { avatar: any; nickname: any; token: any },
-        userInfo: IUserBaseInfo
-    ) {
+    SET_USER_INFO(state: { avatar: any; nickname: any; token: any }, userInfo: IUserBaseInfo) {
         state.avatar = userInfo.avatar
         state.nickname = userInfo.nickName
         state.token = userInfo.token
@@ -68,7 +66,7 @@ const mutations = {
 }
 const actions = {
     // 用户登陆 获取用户信息 路由信息
-    ACT_userInfo({ commit }: any, data:IUserBaseInfo) {
+    ACT_userInfo({ commit }: any, data: IUserBaseInfo) {
         return new Promise<void>((resolve, reject) => {
             // 存入 token
             setCookie('token', data.token)
@@ -86,22 +84,31 @@ const actions = {
     ACT_findByIDUser({ commit }: any) {
         return new Promise(async (resolve) => {
             const userId = getCookie('userId')
-            const params = {
-                id: userId
-            }
             // 获取用户的基本信息
-            const { data } = await userInfoApi(params)
+            const { data } = await userInfoApi(userId)
             console.log(data, 'data')
-            commit('SET_USER_INFO', data.data)
-            // 通过递归获取用户的路由权限，侧边栏数据
-            const getList = creatRouter(asyncRoutes[0], data.data.roleId)
-            // 深拷贝用户的侧边栏数据
-            const newRoutesList = deepClone(asyncRoutes[0])
-            newRoutesList.children = getList
-            // 存储数据
-            commit('SET_ROUTER_LIST', newRoutesList.children)
-            commit('MUT_Need_Refresh', false)
-            resolve([newRoutesList])
+            if (data.code === ResultCodeEnum.invalidToken) {
+                Message.error({
+                    message: 'token 无效'
+                })
+                removeCookie('token')
+                removeCookie('user_id')
+                // 重置 路由
+                resetRouter()
+                return
+            } else if (data.code === ResultCodeEnum.success) {
+                commit('SET_USER_INFO', data.data)
+                // 通过递归获取用户的路由权限，侧边栏数据
+                const getList = creatRouter(asyncRoutes[0], data.data.roleId)
+                // 深拷贝用户的侧边栏数据
+                const newRoutesList = deepClone(asyncRoutes[0])
+                newRoutesList.children = getList
+                // 存储数据
+                commit('SET_ROUTER_LIST', newRoutesList.children)
+                commit('MUT_Need_Refresh', false)
+                return resolve([newRoutesList])
+            }
+            return resolve([])
         })
     },
     ACT_Need_Refresh({ commit }: any, flag: any) {

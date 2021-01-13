@@ -7,8 +7,8 @@ export const userLogin = (params: any): Promise<ResultModel<any>> => {
 }
 
 // 获取指定的用户信息
-export const userInfoApi = (params: any): Promise<ResultModel<any>> => {
-    return axios.get(`/userInfo`, { params })
+export const userInfoApi = (userId: string | number|undefined): Promise<ResultModel<any>> => {
+    return axios.get(`/userInfo/${userId}`)
 }
 
 // 获取所有用户信息

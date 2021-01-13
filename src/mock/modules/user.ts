@@ -5,7 +5,7 @@ import { IMockResponseData } from '../share/interface/mock.interface'
 // 用户的基本信息
 const userInfo: IUserBaseInfo[] = [
     {
-        userId: 9527,
+        userId: 1,
         roleId: 1,
         roleName: '超级管理员',
         userName: 'admin',
@@ -16,7 +16,7 @@ const userInfo: IUserBaseInfo[] = [
             'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/ec902db0-3497-11eb-b997-9918a5dda011.jpg'
     },
     {
-        userId: 2580,
+        userId: 2,
         roleId: 2,
         roleName: '管理员',
         userName: 'root',
@@ -27,7 +27,7 @@ const userInfo: IUserBaseInfo[] = [
             'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/94e4c280-349a-11eb-8ff1-d5dcf8779628.png'
     },
     {
-        userId: 4396,
+        userId: 3,
         roleId: 3,
         roleName: '普通用户',
         userName: 'user',
@@ -70,8 +70,8 @@ const setUserInfo = (options: { body: string }): IMockResponseData<IUserBaseInfo
 // 用户刷新的时候获取用户基本信息
 const getUserInfo = (options: { url: any }): IMockResponseData<IUserBaseInfo> => {
     const { url } = options
-    const userId = url.split('?')[1].split('=')[1]
-    console.log(options, 'userId')
+    const splitArray: string[] = url.split('/')
+    const userId = +splitArray[splitArray.length - 1]
     // 判断该用户是否存在
     const is_True = userInfo.find((item) => {
         return item.userId == userId
