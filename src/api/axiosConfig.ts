@@ -1,8 +1,11 @@
 import axios from 'axios'
 // const { getCookie } = require("@/utils/cookies")
+const baseURL =
+    process.env.NODE_ENV === 'development'
+        ? process.env.VUE_APP_BASE_API
+        : process.env.VUE_APP_BASE_URL
 const Axios = axios.create({
-    baseURL: process.env.VUE_APP_BASE_URL,
-    // baseURL: process.env.VUE_APP_BASE_URL + process.env.VUE_APP_BASE_API,
+    baseURL,
     withCredentials: true,
     timeout: 50000
 })

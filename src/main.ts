@@ -4,8 +4,6 @@ import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
 
-// 设置 elementUI 的按需导入
-// import './ElementImport'
 import '@/styles/theme.scss' // 换肤功能
 import '@/permission' // 权限验证
 import '@/styles/index.scss' // 公共的样式
