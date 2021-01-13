@@ -3,8 +3,8 @@
         <el-row class="login-content">
             <p class="login-title">欢迎登录</p>
             <el-form label-position="left" :model="login_form" ref="login_form">
-                <el-form-item label="用户名" prop="username" label-width="80px">
-                    <el-input v-model="login_form.username"></el-input>
+                <el-form-item label="用户名" prop="userName" label-width="80px">
+                    <el-input v-model="login_form.userName"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password" label-width="80px">
                     <el-input type="password" v-model="login_form.password" @keydown.enter.native="submitForm('login_form')"></el-input>
@@ -23,8 +23,9 @@
 </template>
 
 <script>
-import { userLogin } from '@api/user'
 import { mapActions } from 'vuex'
+import { userLogin } from '@api/user'
+import { ResultCodeEnum } from '@/typescript/enum'
 export default {
     name: 'login',
     components: {},
@@ -32,11 +33,11 @@ export default {
     data() {
         return {
             login_form: {
-                username: 'admin',
+                userName: 'admin',
                 password: 'admin',
             },
             rules: {
-                username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+                userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
                 password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
             },
             login_loading: false,
@@ -54,18 +55,19 @@ export default {
                 if (valid) {
                     this.login_loading = true
                     const params = {
-                        username: this.login_form.username,
+                        userName: this.login_form.userName,
                         password: this.login_form.password,
                     }
                     try {
                         const { data: getData } = await userLogin(params)
-                        if (getData.status == 200) {
+                        console.log(getData, 'getData')
+                        if (getData.code === ResultCodeEnum.success) {
                             this.$message({
                                 message: '登录成功',
                                 type: 'success',
                             })
                             try {
-                                await this.ACT_userInfo(getData)
+                                await this.ACT_userInfo(getData.data)
                                 await this.ACT_Need_Refresh(true)
                                 this.$router.push({ path: '/' }).catch((error) => console.log(error, 1111))
                             } catch (error) {
@@ -73,7 +75,7 @@ export default {
                             }
                         } else {
                             this.$message({
-                                message: getData.message,
+                                message: getData.msg,
                                 type: 'error',
                             })
                         }

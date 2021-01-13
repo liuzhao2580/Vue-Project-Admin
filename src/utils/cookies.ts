@@ -14,8 +14,3 @@ export const getCookie = (name: string) => {
 export const removeCookie = (name: any) => {
     return Cookies.remove(name)
 }
-
-// 删除全部 cookies
-export const removeAllCookies = () => {
-    // return Cookies.remove()
-}

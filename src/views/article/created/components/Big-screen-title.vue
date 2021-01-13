@@ -35,7 +35,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { EventBus } from '../../share/utils/EventBus'
 import { queryArticleCategory_API } from '@/api/modules/article'
-import { ResultCodeEnum } from '@/typescript/enum/config.enum'
+import { ResultCodeEnum } from '@/typescript/enum'
 @Component({})
 /** 大屏幕 下的 标题 */
 export default class BigScreenTitle extends Vue {
