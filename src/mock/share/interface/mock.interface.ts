@@ -5,8 +5,8 @@ import { ResultCodeEnum } from '@/typescript/enum/index'
 export interface IMockResponseData<T> {
     /** 状态码 */
     code: ResultCodeEnum
-    /** 返回的参数说明 */
-    msg?: string
     /** 返回的数据 */
     data?: T
+    /** 返回的参数说明 */
+    msg?: string
 }
