@@ -2,17 +2,22 @@
     <div class="big-screen-title">
         <!-- 文章标题 -->
         <div class="title-input">
-            <el-input placeholder="请输入文章标题" class="article-title" v-model="titleValue"></el-input>
+            <el-input
+                placeholder="请输入文章标题"
+                class="article-title"
+                v-model="titleValue"
+            ></el-input>
         </div>
         <!-- 文章分类 -->
         <div class="article-category">
-
+            <el-cascader v-model="categoryValue" :props="categoryCascaderProps"></el-cascader>
         </div>
         <!-- 预览按钮 -->
         <div class="button-box">
             <el-button type="primary" :disabled="disabled" @click="dialogVisible = true"
                 >预览</el-button
             >
+            <el-button @click="serttin">设置</el-button>
         </div>
         <el-dialog
             title="文章预览"
@@ -21,7 +26,10 @@
             :close-on-click-modal="false"
             class="article-dialog-box"
         >
-            <div class="article-title">{{titleValue}}</div>
+            <!-- 文章标题 -->
+            <div class="article-title">{{ titleValue }}</div>
+            <!-- 文章分类 -->
+            <div class="article-name">文章分类： {{ categoryName }}</div>
             <div v-html="articleContainer"></div>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
@@ -36,6 +44,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 import { EventBus } from '../../share/utils/EventBus'
 import { queryArticleCategory_API } from '@/api/modules/article'
 import { ResultCodeEnum } from '@/typescript/enum'
+import { IArticleCategory } from '../../share/interface/article-config.interface'
 @Component({})
 /** 大屏幕 下的 标题 */
 export default class BigScreenTitle extends Vue {
@@ -43,8 +52,14 @@ export default class BigScreenTitle extends Vue {
     btnDisabled: boolean = true
     /** 文章标题 */
     titleValue: string = ''
+    /** 文章分类 选中项 id */
+    categoryValue: number[] = [1,2]
+    /** 文章分类 选中项 name */
+    categoryName: string = ''
+    /** 文章分类的数据 */
+    categoryData: IArticleCategory[] = []
     /** 文章内容 */
-    articleContainer:any = ''
+    articleContainer: any = ''
     /** 预览内容弹出框 */
     dialogVisible: boolean = false
 
@@ -55,9 +70,11 @@ export default class BigScreenTitle extends Vue {
         return flag
     }
 
+    serttin() {
+        console.log(this.categoryValue, 'this.')
+    }
     mounted() {
         this.init_EventBus()
-        this.queryArticleCategory()
     }
     /** 使用事件总线获取 当前的内容和 设置按钮的样式 */
     init_EventBus() {
@@ -69,14 +86,47 @@ export default class BigScreenTitle extends Vue {
         })
     }
     /** 获取文章分类 */
-    async queryArticleCategory() {
-        const { data } = await queryArticleCategory_API()
-        if(data.code === ResultCodeEnum.success) console.log(data, "")
+    async queryArticleCategory() {}
+    /** 文章分类 的级联选择器 */
+    categoryCascaderProps = {
+        lazy: true,
+        async lazyLoad(node: any, resolve: any) {
+            console.log(node, 'node')
+            const { level, data: nodeData } = node
+            const params = {
+                id: nodeData ? nodeData.id : null,
+                level: level + 1
+            }
+            const { data } = await queryArticleCategory_API(params)
+            if (data.code === ResultCodeEnum.success) {
+                if (data.data.length === 0) {
+                    node.data.leaf = true
+                    // 通过调用resolve将子节点数据返回，通知组件数据加载完成
+                    return resolve(node)
+                } else {
+                    const nodes = data.data.map((item: any) => {
+                        return {
+                            value: item.id,
+                            label: item.category_name,
+                            id: item.id,
+                            leaf: data.hasChildren
+                        }
+                    })
+                    // 通过调用resolve将子节点数据返回，通知组件数据加载完成
+                    resolve(nodes)
+                }
+            }
+        }
+    }
 
+    /** 文章分类改变事件 */
+    categoryChange(value: string) {
+        console.log(value, 'value')
     }
     /** 发布按钮 */
     releaseArticle(): void {
-        this.dialogVisible = false
+        console.log(this.articleContainer)
+        // this.dialogVisible = false
     }
 }
 </script>
@@ -91,12 +141,28 @@ export default class BigScreenTitle extends Vue {
     }
 }
 .article-title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 900;
 }
+// 分类
+.article-category {
+    .article-item {
+        margin: 5px;
+    }
+}
+// 预览按钮
+.button-box {
+    margin-top: 10px;
+}
+// 预览弹出框
 .article-dialog-box {
     .article-title {
         margin-bottom: 10px;
+    }
+    .article-name {
+        margin: 10px 0;
+        font-size: 20px;
+        font-weight: 900;
     }
 }
 </style>
