@@ -27,7 +27,7 @@ export default class ContentEditor extends Vue {
         editor.config.colors = configColors
         editor.config.fontNames = fontNames
         // 设置 高度
-        editor.config.height = getHeight - 100
+        editor.config.height = getHeight - 200
         editor.config.zIndex = 500
 
         /** 编辑器监听内容变化 */

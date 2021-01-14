@@ -5,5 +5,5 @@ export interface IArticleCategory {
     /** 分类id */
     id: string
     /** 分类名称 */
-    category: string
+    category_name: string
 }
