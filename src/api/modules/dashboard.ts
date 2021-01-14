@@ -1,5 +1,6 @@
 import axios from '../axiosConfig'
 
-export const dashboardApi = () => {
-    return axios.get("/dashboard")
+/** 获取 Echarts 的请求 */
+export const dashboardEcharts_Api = () => {
+    return axios.get("/dashboard/echarts")
 }

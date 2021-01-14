@@ -3,7 +3,7 @@
         <!-- 卡片 -->
         <card />
         <!-- Echarts 图表 -->
-        <Echarts-components :EchartsData="EchartsData" />
+        <Echarts-components :EchartsData="EchartsData" v-loading='EchartLoading'/>
         <el-row :gutter="20">
             <!-- todo-list -->
             <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts">
-import { dashboardApi } from '@/api/modules/dashboard'
-import EchartsComponents from './components/Echarts/index.vue'
 import { Component, Vue } from 'vue-property-decorator'
+import { dashboardEcharts_Api } from '@/api/modules/dashboard'
+import EchartsComponents from './components/Echarts/index.vue'
 @Component({
     name: 'dashboard',
     components: {
@@ -26,6 +26,8 @@ import { Component, Vue } from 'vue-property-decorator'
     }
 })
 export default class Dashboard extends Vue {
+    /** Echarts 组件加载样式 */
+    EchartLoading: boolean = true
     EchartsData: any = {}
     created() {
         this.init()
@@ -33,10 +35,12 @@ export default class Dashboard extends Vue {
     // 初始化
     async init() {
         try {
-            const { data } = await dashboardApi()
+            const { data } = await dashboardEcharts_Api()
+            this.EchartLoading = false
             console.log(data, 'data')
-            this.EchartsData = data
+            this.EchartsData = data.data
         } catch (error) {
+            this.EchartLoading = false
             console.log(error)
         }
     }

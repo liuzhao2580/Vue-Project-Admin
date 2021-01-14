@@ -8,8 +8,8 @@ const userInfo: IUserBaseInfo[] = [
         userId: 1,
         roleId: 1,
         roleName: '超级管理员',
-        userName: 'admin',
-        password: 'admin',
+        userName: 'liuzhao',
+        password: '123456',
         nickName: '小火车况且况且',
         token: 'admin-token',
         avatar:
@@ -19,10 +19,10 @@ const userInfo: IUserBaseInfo[] = [
         userId: 2,
         roleId: 2,
         roleName: '管理员',
-        userName: 'root',
-        password: 'root',
+        userName: 'admin',
+        password: 'admin',
         nickName: '小飞机呼哧呼哧',
-        token: 'root-token',
+        token: 'admin-token',
         avatar:
             'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/94e4c280-349a-11eb-8ff1-d5dcf8779628.png'
     },
