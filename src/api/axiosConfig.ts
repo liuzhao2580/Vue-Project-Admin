@@ -21,7 +21,7 @@ const Axios = axios.create({
 Axios.interceptors.request.use(
     (config) => {
         const reg = /\/login$/
-        if(config.url && reg.test(config.url)) return config
+        if (config.url && reg.test(config.url)) return config
         config.headers['x-csrf-token'] = getCookie('csrfToken')
         config.headers['Authorization'] = `Bearer ${getCookie('token')}`
         return config
@@ -30,7 +30,8 @@ Axios.interceptors.request.use(
         console.log(error, 'error')
     }
 )
-
+// 定义一个接受的参数，避免 在请求拦截的时候出现 Message undefined 报错问题
+const _Message = Message
 // 添加响应拦截器
 Axios.interceptors.response.use(
     // 请求成功
@@ -52,6 +53,16 @@ Axios.interceptors.response.use(
     },
     // 请求失败
     (error) => {
+        // 获取请求失败的状态码
+        const { response } = error
+        if (response) {
+            const { url } = error.config
+            const { statusText } = error.response
+            if (response.status === 404) {
+                _Message.error(`${url}请求地址 ${statusText}`)
+            }
+        }
+        console.log(error.response, '')
         return Promise.reject(error)
     }
 )
