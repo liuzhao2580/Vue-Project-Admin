@@ -22,7 +22,7 @@
             <div class="article-category-box">
                 <p class="article-title">文章分类</p>
                 <div class="article-category">
-                    <el-radio-group v-model="categoryValue">
+                    <el-radio-group v-model="categoryValue" @change="categoryChange">
                         <el-radio
                             :label="categoryItem.id"
                             v-for="categoryItem in categoryData"
@@ -36,7 +36,7 @@
             <div v-html="articleContainer"></div>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="releaseArticle">发 布</el-button>
+                <el-button type="primary" :disabled="releaseDisabled" @click="releaseArticle">发 布</el-button>
             </span>
         </el-dialog>
     </div>
@@ -64,10 +64,16 @@ export default class BigScreenTitle extends Vue {
     /** 预览内容弹出框 */
     dialogVisible: boolean = false
 
-    /** 发布按钮和预览按钮禁用取消 */
+    /** 预览按钮禁用 */
     get disabled(): boolean {
         let flag: boolean = false
         if (this.btnDisabled || !this.titleValue) flag = true
+        return flag
+    }
+    /** 发布按钮的禁用 */
+    get releaseDisabled() :boolean {
+        let flag: boolean = false
+        if (!this.categoryValue) flag = true
         return flag
     }
     mounted() {
@@ -90,7 +96,11 @@ export default class BigScreenTitle extends Vue {
         if (result.code === ResultCodeEnum.success) this.categoryData = result.data
         else this.$message.error(result.msg)
     }
-
+    /** 选择分类的改变事件 */
+    categoryChange(value: number) {
+        const getFind = this.categoryData.find(item  => item.id === value)
+        console.log(getFind, 'getFind')
+    }
     /** 发布按钮 */
     releaseArticle(): void {
         console.log(this.articleContainer)
