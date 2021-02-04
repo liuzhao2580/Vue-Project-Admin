@@ -132,7 +132,7 @@ export function getBetweenYear(
     }
     if (typeof endTime === 'string') {
         const reg = /^\d{4}$/g
-        if (!reg.test(endTime)) throw `结束时间：${endTime}时间格式错误`
+        if (!reg.test(endTime)) new Error(`结束时间：${endTime}时间格式错误`)
     }
     let start: Date = new Date(startTime)
     let end: Date = new Date(endTime)
