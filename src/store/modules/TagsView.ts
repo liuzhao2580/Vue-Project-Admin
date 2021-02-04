@@ -1,7 +1,7 @@
-interface stateInterface {
+interface IStateInterface {
     tagsArray: any
 }
-const state : stateInterface= {
+const state : IStateInterface= {
     // 存放 tags 的数组
     tagsArray: []
 }
