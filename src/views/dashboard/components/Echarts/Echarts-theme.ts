@@ -1,4 +1,5 @@
 /* eslint-disable */
+// tslint:disable
 import echarts from 'echarts'
 (function (_root, factory) {
     factory({}, echarts);
