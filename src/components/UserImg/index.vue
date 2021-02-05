@@ -7,12 +7,12 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-	name: "UserImg",
+    name: "UserImg",
     components: {},
     computed: {
         ...mapGetters({
-			avatar: 'user/avatar'
-		})
+            avatar: 'user/avatar'
+        })
     },
 };
 </script>

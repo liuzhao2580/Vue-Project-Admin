@@ -29,33 +29,33 @@ import { mapGetters } from "vuex";
 import userImg from "@/components/UserImg";
 import Progress from '@/components/Progress'
 export default {
-	name: "Info",
-	components: {
+    name: "Info",
+    components: {
         userImg,
         Progress
-	},
-	props: {},
-	computed: {
-		...mapGetters({
-			avatar: 'user/avatar',
-			nickname: 'user/nickname'
-		})
-	},
-	data() {
-		return {
-			items: [
-				{ type: "", label: "唱" },
-				{ type: "success", label: "跳" },
-				{ type: "info", label: "rap" },
-				{ type: "danger", label: "篮球" },
-				{ type: "warning", label: "music" }
-			]
-		};
-	},
-	created() {},
-	mounted() {},
-	methods: {},
-	watch: {}
+    },
+    props: {},
+    computed: {
+        ...mapGetters({
+            avatar: 'user/avatar',
+            nickname: 'user/nickname'
+        })
+    },
+    data() {
+        return {
+            items: [
+                { type: "", label: "唱" },
+                { type: "success", label: "跳" },
+                { type: "info", label: "rap" },
+                { type: "danger", label: "篮球" },
+                { type: "warning", label: "music" }
+            ]
+        };
+    },
+    created() {},
+    mounted() {},
+    methods: {},
+    watch: {}
 };
 </script>
 

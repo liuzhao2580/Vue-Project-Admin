@@ -24,8 +24,8 @@
 
 <script>
 export default {
-	name: "Calculator",
-	components: {},
+    name: "Calculator",
+    components: {},
     props: {},
     computed: {
         total() {
@@ -50,8 +50,8 @@ export default {
             }
         }
     },
-	data() {
-		return {
+    data() {
+        return {
             CalculatorData: [
                 {
                     name: "早餐",
@@ -77,15 +77,15 @@ export default {
                 }
             ]
         };
-	},
-	created() {},
-	mounted() {},
-	methods: {
+    },
+    created() {},
+    mounted() {},
+    methods: {
         clear() {
             this.fullName = ""
         }
     },
-	watch: {}
+    watch: {}
 };
 </script>
 

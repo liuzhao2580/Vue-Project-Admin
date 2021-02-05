@@ -17,19 +17,19 @@
 import Info from './Info'
 import Introduce from './Introduce'
 export default {
-	name: "personalCenter",
-	components: {
+    name: "personalCenter",
+    components: {
         Info,
         Introduce
     },
-	props: {},
-	data() {
-		return {};
-	},
-	created() {},
-	mounted() {},
-	methods: {},
-	watch: {}
+    props: {},
+    data() {
+        return {};
+    },
+    created() {},
+    mounted() {},
+    methods: {},
+    watch: {}
 };
 </script>
 

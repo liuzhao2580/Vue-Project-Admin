@@ -31,7 +31,7 @@ import { mapGetters } from 'vuex'
 import path from 'path'
 import MenuItem from './Item'
 export default {
-	name: "SidebarItem",
+    name: "SidebarItem",
     components: {
         MenuItem
     },
@@ -40,27 +40,27 @@ export default {
             side_status: 'app/side_status'
         })
     },
-	props: {
-		item: {
-			require: true
-		},
-		basePath: {
-			type: String,
-			default: ""
+    props: {
+        item: {
+            require: true
+        },
+        basePath: {
+            type: String,
+            default: ""
         },
         isMoreChild: {
             type:Boolean,
             default: false
         }
-	},
-	data() {
-		return {
+    },
+    data() {
+        return {
             onlyOneChild: null
         };
-	},
-	created() {},
-	mounted() {},
-	methods: {
+    },
+    created() {},
+    mounted() {},
+    methods: {
         // 用于拼接 url 地址
         resolvePath(routePath) {
             return path.resolve(this.basePath, routePath)
@@ -88,7 +88,7 @@ export default {
             }
         },
     },
-	watch: {}
+    watch: {}
 };
 </script>
 

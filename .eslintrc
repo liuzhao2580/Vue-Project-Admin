@@ -5,7 +5,10 @@
       "@vue/typescript"
     ],
     "rules": {
-        "no-console":"off"
+        "no-console":"off",
+        "no-await-in-loop":"warn",
+        "require-await": "off",
+        "indent": ["warn", 4, { "SwitchCase": 1 }]
     },
     "parserOptions": {
         "parser":"@typescript-eslint/parser"
