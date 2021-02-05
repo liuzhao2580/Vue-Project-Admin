@@ -31,7 +31,7 @@
         "no-shadowed-variable": false,
         "no-string-literal": false,
         "ban-types": false,
-        "await-promise": true,
+        "await-promise": false,
         "curly": false,
         "forin": false,
         "no-arg": true,
@@ -77,7 +77,7 @@
         "object-literal-sort-keys": false,
         "no-consecutive-blank-lines": [true, 2],
         "no-trailing-whitespace": [false, "ignore-comments", "ignore-jsdoc"],
-        "no-unnecessary-initializer": true,
+        "no-unnecessary-initializer": false,
         "no-throw-literal": false
     },
     "rulesDirectory": [],

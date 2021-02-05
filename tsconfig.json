@@ -19,6 +19,9 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@/api": [
+        "src/api/modules/*"
       ]
     },
     "lib": [

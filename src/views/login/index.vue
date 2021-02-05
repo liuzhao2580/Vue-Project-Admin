@@ -7,7 +7,11 @@
                     <el-input v-model="login_form.userName"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password" label-width="80px">
-                    <el-input type="password" v-model="login_form.password" @keydown.enter.native="submitForm('login_form')"></el-input>
+                    <el-input
+                        type="password"
+                        v-model="login_form.password"
+                        @keydown.enter.native="submitForm('login_form')"
+                    ></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button
@@ -15,85 +19,77 @@
                         type="primary"
                         @click="submitForm('login_form')"
                         :loading="login_loading"
-                    >登录</el-button>
+                        >登录</el-button
+                    >
                 </el-form-item>
             </el-form>
         </el-row>
     </el-col>
 </template>
 
-<script>
-import { mapActions } from 'vuex'
-import { userLogin } from '@api/user'
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+import { userLogin } from '@/api/modules/user'
 import { ResultCodeEnum } from '@/typescript/enum'
-export default {
-    name: 'login',
-    components: {},
-    props: {},
-    data() {
-        return {
-            login_form: {
-                userName: 'admin',
-                password: 'admin',
-            },
-            rules: {
-                userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-                password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-            },
-            login_loading: false,
-        }
-    },
-    created() {},
-    mounted() {},
-    methods: {
-        ...mapActions({
-            ACT_userInfo: 'user/ACT_userInfo',
-            ACT_Need_Refresh: 'user/ACT_Need_Refresh',
-        }),
-        submitForm(formName) {
-            this.$refs[formName].validate(async (valid) => {
-                if (valid) {
-                    this.login_loading = true
-                    const params = {
-                        userName: this.login_form.userName,
-                        password: this.login_form.password,
-                    }
-                    try {
-                        const { data: getData } = await userLogin(params)
-                        console.log(getData, 'getData')
-                        if (getData.code === ResultCodeEnum.success) {
-                            this.$message({
-                                message: '登录成功',
-                                type: 'success',
-                            })
-                            try {
-                                await this.ACT_userInfo(getData.data)
-                                await this.ACT_Need_Refresh(true)
-                                this.$router.push({ path: '/' }).catch((error) => console.log(error, 1111))
-                            } catch (error) {
-                                console.log(error, 111)
-                            }
-                        } else {
-                            this.$message({
-                                message: getData.msg,
-                                type: 'error',
-                            })
-                        }
-                        this.login_loading = false
-                    } catch (error) {
-                        this.login_loading = false
+const USER_VUEX = namespace('user')
+@Component({
+    name: 'login'
+})
+export default class LoginComponent extends Vue {
+    @USER_VUEX.Action ACT_userInfo!: (params) => void
+    @USER_VUEX.Action ACT_Need_Refresh!: (params) => void
+    login_form = {
+        userName: 'admin',
+        password: 'admin'
+    }
+    rules = {
+        userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+    }
+    login_loading: boolean = false
+    
+    submitForm(formName) {
+        // @ts-ignore
+        this.$refs[formName].validate(async (valid: boolean) => {
+            if (valid) {
+                this.login_loading = true
+                const params = {
+                    userName: this.login_form.userName,
+                    password: this.login_form.password
+                }
+                try {
+                    const { data: getData } = await userLogin(params)
+                    console.log(getData, 'getData')
+                    if (getData.code === ResultCodeEnum.success) {
                         this.$message({
-                            message: '系统出错,请稍后再试',
-                            type: 'error',
+                            message: '登录成功',
+                            type: 'success'
+                        })
+                        try {
+                            await this.ACT_userInfo(getData.data)
+                            await this.ACT_Need_Refresh(true)
+                            this.$router
+                                .push({ path: '/' })
+                                .catch((error) => console.log(error, 1111))
+                        } catch (error) {
+                            console.log(error, 111)
+                        }
+                    } else {
+                        this.$message({
+                            message: getData.msg,
+                            type: 'error'
                         })
                     }
-                } else {
-                    return false
+                    this.login_loading = false
+                } catch (err) {
+                    this.login_loading = false
                 }
-            })
-        },
-    },
-    watch: {},
+            } else {
+                return false
+            }
+        })
+    }
 }
 </script>
 

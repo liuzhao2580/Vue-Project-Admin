@@ -57,7 +57,8 @@ import echarts from 'echarts'
 
 ### `tslint`
 + 禁用`tslint`检查 双斜杠必须要
-    + 忽略该行以下所有代码出现的错误提示，可以在文件首行添加达到忽略整个文件的格式提示 `// tslint:disable `
-    + 当前ts文件重新启用tslint `// tslint:enable`
-    + 忽略当前行代码出现的错误提示 `// tslint:disable-line`
-    + 忽略下一行代码出现的错误提示 `// tslint:disable-next-line`
+    + 只对`.ts`结尾的文件有效 忽略该行以下所有代码出现的错误提示，可以在文件首行添加达到忽略整个文件的格式提示 `// tslint:disable `
+    + 只对`.ts`结尾的文件有效 当前ts文件重新启用tslint `// tslint:enable`
+    + 只对`.ts`结尾的文件有效 忽略当前行代码出现的错误提示 `// tslint:disable-line`
+    + 只对`.ts`结尾的文件有效 忽略下一行代码出现的错误提示 `// tslint:disable-next-line`
+    + 对`.vue`文件有效忽略下一行的代码错误 `// @ts-ignore`
