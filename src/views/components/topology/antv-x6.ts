@@ -1,7 +1,11 @@
 import * as X6 from '@antv/x6'
 export class EditableCellTool extends X6.ToolsView.ToolItem<X6.EdgeView, EditableCellToolOptions> {
     editorContent!: HTMLDivElement
-
+    topologyContent: HTMLDivElement
+    constructor(dom: HTMLDivElement) {
+        super()
+        this.topologyContent = dom
+    }
     render() {
         super.render()
         const cell = this.cell
@@ -114,7 +118,7 @@ export interface EditableCellToolOptions extends X6.ToolsView.ToolItem.Options {
 X6.Graph.registerEdgeTool('editableCell', EditableCellTool, true)
 X6.Graph.registerNodeTool('editableCell', EditableCellTool, true)
 
-const container = document.getElementById('antv-x6-container') as HTMLDivElement
+const container = document.querySelector('#antv-x6-container') as HTMLDivElement
 const graph = new X6.Graph({
     container: container,
     grid: true
