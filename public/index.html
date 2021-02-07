@@ -1,37 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+        <title><%= webpackConfig.name %></title>
+        <% if(process.env.NODE_ENV === 'production') { %>
+        <!-- 引入组件库 -->
+        <!--vue-router -->
+        <script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.3/vue-router.min.js"></script>
+        <!-- vue -->
+        <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+        <!--vuex -->
+        <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
+        <!-- elementUI -->
+        <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.14.1/index.min.js"></script>
+        <!-- axios -->
+        <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.0/axios.min.js"></script>
+        <!-- quill-editor -->
+        <script src="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.min.js"></script>
+        <!-- wangEditor -->
+        <script src="https://unpkg.com/wangeditor@4.0.4/dist/wangEditor.min.js"></script>
+        <!-- mockjs -->
+        <script src="https://unpkg.com/mockjs@1.1.0/dist/mock.js"></script>
+        <!-- mavon-editor -->
+        <script src="https://unpkg.com/mavon-editor@2.9.0/dist/mavon-editor.js"></script>
+        <!-- Echarts -->
+        <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js"></script>
+        <!-- antv-x6 -->
+        <script src="https://unpkg.com/@antv/x6@1.12.30/dist/x6.js"></script>
+        <% } %>
+        <script src="https://webapi.amap.com/maps?v=1.4.15&key=466cfc09695269cb432af38420bfebe0&plugin=AMap.ToolBar,AMap.Driving,AMap.Geolocation,AMap.AdvancedInfoWindow,AMap.PlaceSearch"></script>
+        <!-- quill-editor -->
+        <link
+            href="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.snow.min.css"
+            rel="stylesheet"
+        />
+        <!-- elementUI -->
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css"
+        />
+    </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <title><%= webpackConfig.name %></title>
-  <% if(process.env.NODE_ENV === 'production') { %>
-    <!-- 引入组件库 -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.3/vue-router.min.js"></script> <!--vue-router -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script> <!-- vue -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.0.1/vuex.min.js"></script> <!--vuex -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.14.1/index.min.js"></script> <!-- elementUI -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.0/axios.min.js"></script>  <!-- axios -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.min.js"></script>  <!-- quill-editor -->
-    <script src="https://unpkg.com/wangeditor@4.0.4/dist/wangEditor.min.js"></script> <!-- wangEditor -->
-    <script src="https://unpkg.com/mockjs@1.1.0/dist/mock.js"></script>
-    <script src="https://unpkg.com/mavon-editor@2.9.0/dist/mavon-editor.js"></script> <!-- mavon-editor -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js"></script> <!-- Echarts -->
-  <% }  %>
-  <script src="https://webapi.amap.com/maps?v=1.4.15&key=466cfc09695269cb432af38420bfebe0&plugin=AMap.ToolBar,AMap.Driving,AMap.Geolocation,AMap.AdvancedInfoWindow,AMap.PlaceSearch"></script>
-  <link href="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.snow.min.css" rel="stylesheet"> <!-- quill-editor -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css"> <!-- elementUI -->
-</head>
-
-<body>
-  <noscript>
-    <strong>We're sorry but vue_project doesn't work properly without JavaScript enabled. Please enable it to
-      continue.</strong>
-  </noscript>
-  <div id="app"></div>
-  <!-- built files will be auto injected -->
-</body>
-
+    <body>
+        <noscript>
+            <strong
+                >We're sorry but vue_project doesn't work properly without JavaScript enabled.
+                Please enable it to continue.</strong
+            >
+        </noscript>
+        <div id="app"></div>
+        <!-- built files will be auto injected -->
+    </body>
 </html>

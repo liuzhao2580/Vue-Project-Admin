@@ -46,7 +46,7 @@ export default {
         }
     },
     beforeDestroy() {
-        this.quillEditor.destory()
+        if (this.quillEditor) this.quillEditor = null
     },
     watch: {}
 }

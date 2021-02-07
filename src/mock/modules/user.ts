@@ -5,7 +5,7 @@ import { IMockResponseData } from '../share/interface/mock.interface'
 // 用户的基本信息
 const userInfo: IUserBaseInfo[] = [
     {
-        userId: 1,
+        id: 1,
         roleId: 1,
         roleName: '超级管理员',
         userName: 'liuzhao',
@@ -16,7 +16,7 @@ const userInfo: IUserBaseInfo[] = [
             'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/ec902db0-3497-11eb-b997-9918a5dda011.jpg'
     },
     {
-        userId: 2,
+        id: 2,
         roleId: 2,
         roleName: '管理员',
         userName: 'admin',
@@ -27,7 +27,7 @@ const userInfo: IUserBaseInfo[] = [
             'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/94e4c280-349a-11eb-8ff1-d5dcf8779628.png'
     },
     {
-        userId: 3,
+        id: 3,
         roleId: 3,
         roleName: '普通用户',
         userName: 'user',
@@ -52,7 +52,7 @@ const setUserInfo = (options: { body: string }): IMockResponseData<IUserBaseInfo
         return {
             code: ResultCodeEnum.success,
             data: {
-                userId: is_True.userId,
+                id: is_True.id,
                 userName: is_True.userName,
                 roleId: is_True.roleId,
                 nickName: is_True.nickName,
@@ -71,16 +71,16 @@ const setUserInfo = (options: { body: string }): IMockResponseData<IUserBaseInfo
 const getUserInfo = (options: { url: any }): IMockResponseData<IUserBaseInfo> => {
     const { url } = options
     const splitArray: string[] = url.split('/')
-    const userId = +splitArray[splitArray.length - 1]
+    const id = +splitArray[splitArray.length - 1]
     // 判断该用户是否存在
     const is_True = userInfo.find((item) => {
-        return item.userId == userId
+        return item.id == id
     })
     if (is_True) {
         return {
             code: ResultCodeEnum.success,
             data: {
-                userId: is_True.userId,
+                id: is_True.id,
                 userName: is_True.userName,
                 roleId: is_True.roleId,
                 nickName: is_True.nickName,

@@ -53,6 +53,15 @@ const components: RouteConfig = {
                 )
         },
         {
+            path: 'topology',
+            meta: { title: '拓扑图', icon: 'topology' },
+            name: 'topologyComponents',
+            component: () =>
+                import(
+                    /* webpackChunkName: "componentsPage" */ '@/views/components/topology/index.vue'
+                )
+        },
+        {
             path: 'other-components',
             meta: { title: '其他组件', icon: 'other-components' },
             name: 'otherComponents',

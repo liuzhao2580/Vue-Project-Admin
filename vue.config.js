@@ -1,5 +1,5 @@
 const { title: defatulConfig } = require('./src/setting.ts')
-const UglifyJSPlugin =require('uglifyjs-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const path = require('path')
 function resolve(dir) {
@@ -11,12 +11,13 @@ const externalsConfig = {
     'vue-router': 'VueRouter',
     vuex: 'Vuex',
     'element-ui': 'ELEMENT',
-    'echarts': 'echarts',
+    echarts: 'echarts',
     quill: 'Quill',
     wangeditor: 'wangEditor',
     axios: 'axios',
     mockjs: 'Mock',
     'mavon-editor': 'MavonEditor',
+    '@antv/x6': 'X6'
 }
 // 配置生产的 plugin
 const productionPlugins = [
@@ -58,7 +59,7 @@ module.exports = {
                 '@': resolve('src'),
                 '@api': resolve('src/api/modules')
             },
-            extensions: ['.tsx','.ts','.js','.vue'],
+            extensions: ['.tsx', '.ts', '.js', '.vue']
         },
         plugins: process.env.NODE_ENV === 'production' ? productionPlugins : []
     },

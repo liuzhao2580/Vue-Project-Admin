@@ -1,13 +1,16 @@
 <template>
     <div class="WangEidtor-box">
-        <p>具体配置 <a href="http://www.wangeditor.com/" style="color: #409eff" target="block"> 官方文档</a></p>
+        <p>
+            具体配置
+            <a href="http://www.wangeditor.com/" style="color: #409eff" target="block"> 官方文档</a>
+        </p>
         <div id="WangEidtor"></div>
         <el-button type="primary" class="WangEidtor-btn">提交</el-button>
     </div>
 </template>
 
 <script>
-import { configMenu, configColors , fontNames } from './config'
+import { configMenu, configColors, fontNames } from './config'
 import wangEditor from 'wangeditor'
 export default {
     name: 'WangEidtor',
@@ -46,8 +49,10 @@ export default {
         }
     },
     beforeDestroy() {
-        this.wangEditor.destory()
-        this.wangEditor = null
+        if (this.wangEditor) {
+            this.wangEditor.destroy()
+            this.wangEditor = null
+        }
     },
     watch: {}
 }

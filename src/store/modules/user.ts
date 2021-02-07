@@ -6,6 +6,8 @@ import { asyncRoutes, resetRouter } from '@/router'
 import { RouteConfig } from 'vue-router'
 import { IUserBaseInfo } from '@/typescript/interface/user-interface'
 import { ResultCodeEnum } from '@/typescript/enum'
+// 定义一个接受的参数，避免 在请求拦截的时候出现 Message undefined 报错问题
+const _Message = Message
 /**
  * 将后台传递的路由格式和本地的路由对比
  * @param {asyncRoutes} asyncRoutes  本地路由需要权限的数据
@@ -50,7 +52,7 @@ const state = {
 }
 const mutations = {
     // 设置用户基本数据
-    SET_USER_INFO(state: { avatar: any; nickname: any; token: any }, userInfo: IUserBaseInfo) {
+    SET_USER_INFO(state, userInfo: IUserBaseInfo) {
         state.avatar = userInfo.avatar
         state.nickname = userInfo.nickName
         state.token = userInfo.token
@@ -70,7 +72,7 @@ const actions = {
         return new Promise<void>((resolve, reject) => {
             // 存入 token
             setCookie('token', data.token)
-            setCookie('userId', data.userId)
+            setCookie('userId', data.id)
             setCookie('roleId', data.roleId)
             commit('SET_USER_INFO', data)
             try {
@@ -107,8 +109,11 @@ const actions = {
                 commit('SET_ROUTER_LIST', newRoutesList.children)
                 commit('MUT_Need_Refresh', false)
                 return resolve([newRoutesList])
+            } else {
+                return _Message.error({
+                    message: data.msg
+                })
             }
-            return resolve([])
         })
     },
     ACT_Need_Refresh({ commit }: any, flag: any) {
