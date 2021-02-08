@@ -9,7 +9,7 @@ export class ResultModel<T> {
     /** 返回的消息*/
     public msg!: string
     /** 返回的数据 T 可能是数组、对象 */
-    public data?: T
+    public data: T
     /** 如果是列表 返回有分页页码 */
     public pageNum?: number
     /** 如果是列表 返回有分页每页条数 */

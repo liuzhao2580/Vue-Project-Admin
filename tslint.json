@@ -59,7 +59,7 @@
         "use-isnan": true,
 
         "indent": [false, "spaces", 4],
-        "max-classes-per-file": [true, 1],
+        "max-classes-per-file": false,
         "max-file-line-count": [true, 1000],
         "max-line-length": [true, 300],
         "no-default-export": false,

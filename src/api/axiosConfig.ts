@@ -60,9 +60,12 @@ Axios.interceptors.response.use(
         if (response) {
             const { url } = error.config
             const { statusText } = error.response
+            // 404
             if (response.status === 404) {
                 _Message.error(`${url}请求地址 ${statusText}`)
-            } else if (response.status === 500) {
+            }
+            // 500
+            else if (response.status === 500) {
                 _Message.error(`系统内部出错,状态码:${response.status}`)
             }
             return Promise.reject(error)
