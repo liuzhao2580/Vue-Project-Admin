@@ -11,6 +11,10 @@ export class TableConfigModel {
     stripe?: boolean = true
     /** 是否有选择框 默认 false 没有 */
     checkout?: boolean = false
+    /** 表格是否有打印功能 默认false */
+    print?: boolean = false
+    /** 表格是否有 搜索功能 默认true */
+    search?: boolean = true
     /** 表格的加载状态 */
     loading: boolean = true
     /** 表格的列配置 */

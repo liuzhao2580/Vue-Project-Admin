@@ -4,8 +4,20 @@
         <div class="table-top-box">
             <div class="operation-left"></div>
             <div class="operation-right">
+                <!-- 搜索 -->
+                <span
+                    v-if="tableConfig.search !== false"
+                    title="搜索"
+                    @click="tableSearch"
+                    class="right-icon el-icon-search"
+                ></span>
                 <!-- 打印 -->
-                <span title="打印" @click="tablePrint" class="right-icon el-icon-printer"></span>
+                <span
+                    v-if="tableConfig.print"
+                    title="打印"
+                    @click="tablePrint"
+                    class="right-icon el-icon-printer"
+                ></span>
             </div>
         </div>
         <el-table
@@ -114,6 +126,8 @@ export default class TableComponent extends Vue {
     tablePrint() {
         window.print()
     }
+    /** 表格的搜索 */
+    tableSearch() {}
 }
 </script>
 

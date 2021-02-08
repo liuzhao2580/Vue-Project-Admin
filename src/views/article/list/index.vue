@@ -24,6 +24,7 @@ export default class ArticleListComponent extends Vue {
     /** 表格的列配置 */
     tableConfig: TableConfigModel = {
         loading: true,
+        print: true,
         columnConfig: [
             {
                 label: "文章标题",
