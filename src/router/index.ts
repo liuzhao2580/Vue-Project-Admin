@@ -1,20 +1,28 @@
-import { Vue } from 'vue-property-decorator'
-import Router, { RawLocation, RouteConfig } from 'vue-router'
-import Layout from '@/layout/index.vue'
-import PageContent from '@/layout/components/AppMain.vue'
+import { Vue } from "vue-property-decorator"
+import Router, { RawLocation, RouteConfig } from "vue-router"
+import Layout from "@/layout/index.vue"
+import PageContent from "@/layout/components/AppMain.vue"
 // 使用 modules 引入嵌套过多的路由
-import error_page from './modules/error'
-import components from './modules/components'
+import error_page from "./modules/error"
+import components from "./modules/components"
 Vue.use(Router)
 // 公共的页面
 export const constantRoutes: RouteConfig[] = [
     // 登录页面
     {
-        path: '/login',
-        name: 'login',
+        path: "/login",
+        name: "login",
         meta: { hidden: true },
-        component: () => import(/* webpackChunkName: "loginComponent" */ '@/views/login/index.vue')
-    }
+        component: () => import(/* webpackChunkName: "loginComponent" */ "@/views/login/index.vue"),
+    },
+    // 404
+    {
+        path: "*",
+        meta: {
+            hidden: true,
+        },
+        component: () => import("@/views/error_page/404_page.vue"),
+    },
 ]
 // 需要权限的页面
 /**
@@ -34,63 +42,68 @@ export const constantRoutes: RouteConfig[] = [
  */
 export const asyncRoutes: RouteConfig[] = [
     {
-        path: '/',
+        path: "/",
         component: Layout,
-        redirect: '/dashboard',
+        redirect: "/dashboard",
         children: [
             // 首页
             {
-                path: '/dashboard',
+                path: "/dashboard",
                 component: () =>
-                    import(/* webpackChunkName: "baseComponet" */ '@/views/dashboard/index.vue'),
-                name: 'dashboard',
-                meta: { title: '首页', icon: 'index', affix: true, keepAlive: true }
+                    import(/* webpackChunkName: "baseComponet" */ "@/views/dashboard/index.vue"),
+                name: "dashboard",
+                meta: { title: "首页", icon: "index", affix: true, keepAlive: true },
             },
             // 文档页
             {
-                path: '/documentation',
+                path: "/documentation",
                 component: () =>
                     import(
-                        /* webpackChunkName: "baseComponet" */ '@/views/documentation/index.vue'
+                        /* webpackChunkName: "baseComponet" */ "@/views/documentation/index.vue"
                     ),
-                name: 'documentation',
-                meta: { title: '文档', icon: 'wendang', affix: true,keepAlive: true }
+                name: "documentation",
+                meta: { title: "文档", icon: "wendang", affix: true, keepAlive: true },
             },
             // 文章页
             {
-                path: '/article',
-                meta: { title: '文章页', icon: 'article', roles: [1, 2, 3] },
-                redirect: '/article/created',
+                path: "/article",
+                meta: { title: "文章页", icon: "article", roles: [1, 2, 3] },
+                redirect: "/article/created",
                 component: PageContent,
-                name: 'article',
+                name: "article",
                 children: [
                     {
-                        path: 'created',
+                        path: "created",
                         component: () =>
                             import(
-                                /* webpackChunkName: "article" */ '@/views/article/created/index.vue'
+                                /* webpackChunkName: "article" */ "@/views/article/created/index.vue"
                             ),
-                        name: 'articleCreated',
-                        meta: { title: '文章创建', icon: 'created', roles: [1, 2] }
+                        name: "articleCreated",
+                        meta: { title: "文章创建", icon: "created", roles: [1, 2] },
                     },
                     {
-                        path: 'list',
+                        path: "list",
                         component: () =>
                             import(
-                                /* webpackChunkName: "article" */ '@/views/article/list/index.vue'
+                                /* webpackChunkName: "article" */ "@/views/article/list/index.vue"
                             ),
-                        name: 'articleList',
-                        meta: { title: '文章列表', icon: 'list', roles: [1, 2, 3],keepAlive: true }
-                    }
-                ]
+                        name: "articleList",
+                        meta: {
+                            title: "文章列表",
+                            icon: "list",
+                            roles: [1, 2, 3],
+                            keepAlive: true,
+                        },
+                    },
+                ],
             },
             // 地图
             {
-                path: '/amap',
+                path: "/amap",
                 component: () =>
-                    import(/* webpackChunkName: "baseComponet" */ '@/views/map/index.vue'),
-                meta: { title: '地图', icon: 'map',keepAlive: true },
-                name: 'amap'
+                    import(/* webpackChunkName: "baseComponet" */ "@/views/map/index.vue"),
+                meta: { title: "地图", icon: "map", keepAlive: true },
+                name: "amap",
             },
             // 组件
             components,
@@ -98,27 +111,19 @@ export const asyncRoutes: RouteConfig[] = [
             error_page,
             // 个人中心
             {
-                path: '/personal',
+                path: "/personal",
                 component: () =>
-                    import(/* webpackChunkName: "baseComponet" */ '@/views/personal/index.vue'),
+                    import(/* webpackChunkName: "baseComponet" */ "@/views/personal/index.vue"),
 
-                meta: { title: '个人中心', icon: 'personal', hidden: true },
-                name: 'personalCenter'
-            }
-        ]
+                meta: { title: "个人中心", icon: "personal", hidden: true },
+                name: "personalCenter",
+            },
+        ],
     },
-    // 404
-    {
-        path: '*',
-        meta: {
-            hidden: true
-        },
-        component: () => import('@/views/error_page/404_page.vue')
-    }
 ]
 const createRouter = () =>
     new Router({
-        routes: constantRoutes
+        routes: constantRoutes,
     })
 const router: any = createRouter()
 
