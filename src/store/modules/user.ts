@@ -1,11 +1,11 @@
-import { Message } from 'element-ui'
-import { userInfoApi } from '@/api/modules/user'
-import { setCookie, getCookie, removeCookie } from '@/utils/cookies'
-import { deepClone } from '@/utils/config'
-import { asyncRoutes, resetRouter } from '@/router'
-import { RouteConfig } from 'vue-router'
-import { IUserBaseInfo } from '@/typescript/interface/user-interface'
-import { ResultCodeEnum } from '@/typescript/enum'
+import { Message } from "element-ui"
+import { userInfoApi } from "@/api/modules/user"
+import { setCookie, getCookie, removeCookie } from "@/utils/cookies"
+import { deepClone } from "@/utils/config"
+import { asyncRoutes, resetRouter } from "@/router"
+import { RouteConfig } from "vue-router"
+import { IUserBaseInfo } from "@/typescript/interface/user-interface"
+import { ResultCodeEnum } from "@/typescript/enum"
 // 定义一个接受的参数，避免 在请求拦截的时候出现 Message undefined 报错问题
 const _Message = Message
 /**
@@ -31,7 +31,7 @@ const creatRouter = (routes: any, roleId: any) => {
                     const getChildrenRouter = creatRouter(item, roleId)
                     routesArr.push({
                         ...item,
-                        children: getChildrenRouter
+                        children: getChildrenRouter,
                     })
                 }
                 // 2.2 说明该页面没有子路由
@@ -45,10 +45,10 @@ const creatRouter = (routes: any, roleId: any) => {
 }
 const state = {
     sideBarList: [], // 侧边栏的数据
-    avatar: '',
-    nickname: '',
-    token: '',
-    Need_refresh: true // 判断是否刷新页面 false 否 true 是
+    avatar: "",
+    nickname: "",
+    token: "",
+    Need_refresh: true, // 判断是否刷新页面 false 否 true 是
 }
 const mutations = {
     // 设置用户基本数据
@@ -64,17 +64,17 @@ const mutations = {
     // 设置 Need_refresh 用来更新 Need_refresh
     MUT_Need_Refresh(state: { Need_refresh: any }, flag: any) {
         state.Need_refresh = flag
-    }
+    },
 }
 const actions = {
     // 用户登陆 获取用户信息 路由信息
     ACT_userInfo({ commit }: any, data: IUserBaseInfo) {
         return new Promise<void>((resolve, reject) => {
             // 存入 token
-            setCookie('token', data.token)
-            setCookie('userId', data.id)
-            setCookie('roleId', data.roleId)
-            commit('SET_USER_INFO', data)
+            setCookie("token", data.token)
+            setCookie("userId", data.id)
+            setCookie("roleId", data.roleId)
+            commit("SET_USER_INFO", data)
             try {
                 resolve()
             } catch (error) {
@@ -85,52 +85,51 @@ const actions = {
     // 页面刷新 重新获取用户信息, 路由信息
     ACT_findByIDUser({ commit }: any) {
         return new Promise(async (resolve) => {
-            const userId = getCookie('userId')
+            const userId = getCookie("userId")
             // 获取用户的基本信息
-            const { data } = await userInfoApi(userId)
-            console.log(data, 'data')
-            if (data.code === ResultCodeEnum.invalidToken) {
+            const result = await userInfoApi(userId)
+            if (result.code === ResultCodeEnum.invalidToken) {
                 Message.error({
-                    message: 'token 无效'
+                    message: "token 无效",
                 })
-                removeCookie('token')
-                removeCookie('user_id')
+                removeCookie("token")
+                removeCookie("user_id")
                 // 重置 路由
                 resetRouter()
                 return
-            } else if (data.code === ResultCodeEnum.success) {
-                commit('SET_USER_INFO', data.data)
+            } else if (result.code === ResultCodeEnum.success) {
+                commit("SET_USER_INFO", result.data)
                 // 通过递归获取用户的路由权限，侧边栏数据
-                const getList = creatRouter(asyncRoutes[0], data.data.roleId)
+                const getList = creatRouter(asyncRoutes[0], result.data?.roleId)
                 // 深拷贝用户的侧边栏数据
                 const newRoutesList = deepClone(asyncRoutes[0])
                 newRoutesList.children = getList
                 // 存储数据
-                commit('SET_ROUTER_LIST', newRoutesList.children)
-                commit('MUT_Need_Refresh', false)
+                commit("SET_ROUTER_LIST", newRoutesList.children)
+                commit("MUT_Need_Refresh", false)
                 return resolve([newRoutesList])
             } else {
                 return _Message.error({
-                    message: data.msg
+                    message: result.msg,
                 })
             }
         })
     },
     ACT_Need_Refresh({ commit }: any, flag: any) {
-        commit('MUT_Need_Refresh', flag)
-    }
+        commit("MUT_Need_Refresh", flag)
+    },
 }
 const getters = {
     avatar: (state: { avatar: any }) => state.avatar,
     nickname: (state: { nickname: any }) => state.nickname,
     token: (state: { token: any }) => state.token,
     sideBarList: (state: { sideBarList: RouteConfig[] }) => state.sideBarList,
-    Need_refresh: (state: { Need_refresh: any }) => state.Need_refresh
+    Need_refresh: (state: { Need_refresh: any }) => state.Need_refresh,
 }
 export default {
     namespaced: true, // 之后在不同页面中引入getter、actions、mutations时，需要加上所属的模块名
     state,
     mutations,
     actions,
-    getters
+    getters,
 }

@@ -1,18 +1,18 @@
-import axios from 'axios'
-import { Message } from 'element-ui'
+import axios, { AxiosResponse } from "axios"
+import { Message } from "element-ui"
 
-import { ResultCodeEnum } from '@/typescript/enum'
-import { ResultModel } from '@/typescript/model'
-import { getCookie, removeCookie } from '@/utils/cookies'
-import { resetRouter } from '@/router'
+import { ResultCodeEnum } from "@/typescript/enum"
+import { ResultModel } from "@/typescript/model"
+import { getCookie, removeCookie } from "@/utils/cookies"
+import { resetRouter } from "@/router"
 const baseURL =
-    process.env.NODE_ENV === 'development'
+    process.env.NODE_ENV === "development"
         ? process.env.VUE_APP_BASE_API
         : process.env.VUE_APP_BASE_URL
 const Axios = axios.create({
     baseURL,
     withCredentials: true,
-    timeout: 50000
+    timeout: 50000,
 })
 // 设置 token 的请求头
 // Axios.defaults.headers.common["Authorization"] = getCookie("token")
@@ -22,13 +22,13 @@ Axios.interceptors.request.use(
     (config) => {
         const reg = /\/login$/
         if (config.url && reg.test(config.url)) return config
-        config.headers['x-csrf-token'] = getCookie('csrfToken')
-        config.headers['Authorization'] = `Bearer ${getCookie('token')}`
+        config.headers["x-csrf-token"] = getCookie("csrfToken")
+        config.headers["Authorization"] = `Bearer ${getCookie("token")}`
         return config
     },
     (error) => {
-        console.log(error, 'error')
-    }
+        console.log(error, "error")
+    },
 )
 // 定义一个接受的参数，避免 在请求拦截的时候出现 Message undefined 报错问题
 const _Message = Message
@@ -38,14 +38,16 @@ Axios.interceptors.response.use(
     (response) => {
         const data: ResultModel<any> = response.data
         // 说明返回数据成功
-        if (data.code === ResultCodeEnum.success) return response
+        if (data.code === ResultCodeEnum.success) {
+            return response.data
+        }
         // 说明 token 无效
         else if (data.code === ResultCodeEnum.invalidToken) {
-            Message.error({
-                message: 'token 无效'
+            _Message.error({
+                message: "token 无效",
             })
-            removeCookie('token')
-            removeCookie('user_id')
+            removeCookie("token")
+            removeCookie("user_id")
             // 重置 路由
             resetRouter()
             return response
@@ -60,12 +62,11 @@ Axios.interceptors.response.use(
             const { statusText } = error.response
             if (response.status === 404) {
                 _Message.error(`${url}请求地址 ${statusText}`)
-            }
-            else if(response.status === 500) {
+            } else if (response.status === 500) {
                 _Message.error(`系统内部出错,状态码:${response.status}`)
             }
             return Promise.reject(error)
         }
-    }
+    },
 )
 export default Axios

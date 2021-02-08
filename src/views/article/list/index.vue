@@ -1,21 +1,28 @@
 <template>
-	<div>list</div>
+    <div>article-list</div>
 </template>
 
-<script>
-export default {
-    name: "list",
-    components: {},
-    props: {},
-    data() {
-        return {};
-    },
-    created() {},
-    mounted() {},
-    methods: {},
-    watch: {}
-};
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator"
+import { queryArticleList_API } from "@/api/modules/article"
+import { ResultCodeEnum } from "@/typescript/enum"
+@Component({
+    name: "article-list",
+})
+export default class ArticleListComponent extends Vue {
+    created() {
+        this.init()
+    }
+    /** 初始化 */
+    async init() {
+        try {
+            const { data } = await queryArticleList_API()
+            console.log(data, "data")
+        } catch (error) {
+            console.log(error, "error")
+        }
+    }
+}
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
