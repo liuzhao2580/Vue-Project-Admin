@@ -20,17 +20,17 @@
 </template>
 
 <script>
-import defaultConfig from '@/setting'
+import defaultConfig from "@/setting"
 export default {
-    name: 'breadcrumb',
+    name: "breadcrumb",
     computed: {
         breadcrumbTitle() {
             return defaultConfig.title
-        }
+        },
     },
     data() {
         return {
-            getMatched: []
+            getMatched: [],
         }
     },
     created() {},
@@ -41,9 +41,9 @@ export default {
                 // 说明存在多级路由
                 if (item.meta && item.meta.title) {
                     // 用于判断 当前页面是否在首页
-                    if (item.path == '/dashboard') return false
+                    if (item.path === "/dashboard") return false
                     // 用于判断当前的路由是否显示在面包屑中
-                    else if (item.meta.breadcrumb == false) return false
+                    else if (item.meta.breadcrumb === false) return false
                     return true
                 }
             })
@@ -51,19 +51,19 @@ export default {
         // 面包屑点击
         handleClick(item) {
             // 用于判断当前的面包屑是否可以点击跳转
-            if (item.redirect !== 'noRedirect') {
+            if (item.redirect !== "noRedirect") {
                 return item.redirect
             }
-        }
+        },
     },
     watch: {
         $route: {
             handler() {
                 this.init()
             },
-            immediate: true
-        }
-    }
+            immediate: true,
+        },
+    },
 }
 </script>
 

@@ -16,7 +16,7 @@ import * as X6 from "@antv/x6"
 })
 export default class TopologyComponent extends Vue {
     /** 定义 装拓扑图组件 */
-    topologyContent: HTMLDivElement
+    topologyContent!: HTMLDivElement
     /** 画布的实例对象 */
     graph
     data = {

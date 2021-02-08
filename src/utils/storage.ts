@@ -29,13 +29,14 @@ export const setStorage = (storageName: string, storageData: any, storageExpire:
             // 得到数据
             const timeData = +storageExpire.substr(0, storageExpire.length - 1)
             // 说明传递的是 小时
-            if (timeUnit == 'h' || timeUnit == 'H') setExpire = time + timeData * 60 * 60 * 1000
+            if (timeUnit === "h" || timeUnit === "H") setExpire = time + timeData * 60 * 60 * 1000
             // 说明传递的是 天数
-            else if (timeUnit == 'd' || timeUnit == 'D') setExpire = time + timeData * 24 * 60 * 60 * 1000
+            else if (timeUnit === "d" || timeUnit === "D")
+                setExpire = time + timeData * 24 * 60 * 60 * 1000
             local.setItem(`${storageName}_expire`, JSON.stringify(setExpire))
         }
         // 如果都没有匹配到说明数据格式错误
-        else return console.error('格式错误')
+        else return console.error("格式错误")
     }
 }
 

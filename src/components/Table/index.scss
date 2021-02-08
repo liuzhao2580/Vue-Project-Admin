@@ -1,0 +1,15 @@
+.table-component-box {
+    .table-top-box {
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .operation-right {
+            .right-icon {
+                font-size: 22px;
+                cursor: pointer;
+                color: $brandColor;
+            }
+        }
+    }
+}

@@ -11,7 +11,7 @@ import { ResultCodeEnum } from "@/typescript/enum"
 import { IArticleBasic } from "../share/interface/article-config.interface"
 import tableComponent from "@/components/Table/index.vue"
 import { TableConfigModel } from "@/typescript/model/tableModel/table-config.model"
-import { ColumnTypeEnum } from "@/typescript/enum/table-enum"
+import { ColumnTypeEnum, OperationTypeEnum } from "@/typescript/enum/table-enum"
 @Component({
     name: "article-list",
     components: {
@@ -23,6 +23,7 @@ export default class ArticleListComponent extends Vue {
     tableData: IArticleBasic[] = []
     /** 表格的列配置 */
     tableConfig: TableConfigModel = {
+        loading: true,
         columnConfig: [
             {
                 label: "文章标题",
@@ -32,6 +33,24 @@ export default class ArticleListComponent extends Vue {
                 label: "创建时间",
                 type: ColumnTypeEnum.dateTime,
                 prop: "article_time",
+            },
+        ],
+        operation: [
+            {
+                type: OperationTypeEnum.primary,
+                text: "编辑",
+                icon: "el-icon-edit",
+                handle: () => {
+                    console.log("123")
+                },
+            },
+            {
+                type: OperationTypeEnum.danger,
+                text: "删除",
+                icon: "el-icon-delete",
+                handle: () => {
+                    console.log(46, "123")
+                },
             },
         ],
     }
@@ -45,6 +64,7 @@ export default class ArticleListComponent extends Vue {
             console.log(result, "data")
             this.tableData = result.data
         }
+        this.tableConfig.loading = false
     }
     /** 初始化表格 */
     initTableConfig() {}
