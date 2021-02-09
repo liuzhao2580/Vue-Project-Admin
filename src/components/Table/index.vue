@@ -6,7 +6,7 @@
             <div class="operation-right">
                 <!-- 搜索 -->
                 <span
-                    v-if="tableConfig.search !== false"
+                    v-if="tableConfig.searchIcon !== false"
                     title="搜索"
                     @click="tableSearch"
                     class="right-icon el-icon-search"
@@ -47,11 +47,16 @@
                 :key="tableIndex"
             >
                 <template slot-scope="scope">
-                    <!-- 时间,日期转换 -->
-                    <span v-if="judgeTime(tableItem.type)"
-                        >{{ handleTranslateTime(scope.row[tableItem.prop], tableItem.type) }}
-                    </span>
-                    <span v-else>{{ scope.row[tableItem.prop] }}</span>
+                    <template v-if="scope.$index === 0 && tableConfig.showSearch">
+                        <el-input></el-input>
+                    </template>
+                    <template v-else>
+                        <!-- 时间,日期转换 -->
+                        <span v-if="judgeTime(tableItem.type)"
+                            >{{ handleTranslateTime(scope.row[tableItem.prop], tableItem.type) }}
+                        </span>
+                        <span v-else>{{ scope.row[tableItem.prop] }}</span>
+                    </template>
                 </template>
             </el-table-column>
             <el-table-column label="操作">
@@ -84,8 +89,12 @@ import { Component, Vue, Prop } from "vue-property-decorator"
 import moment from "moment"
 import { TableConfigModel } from "@/typescript/model/tableModel/table-config.model"
 import { ColumnTypeEnum } from "@/typescript/enum/table-enum"
+import tableSearch from "./components/table-search.vue"
 @Component({
     name: "tableComponent",
+    components: {
+        tableSearch,
+    },
 })
 export default class TableComponent extends Vue {
     /** 表格的数据 */
@@ -114,9 +123,8 @@ export default class TableComponent extends Vue {
     }
     /** 表格的操作按钮的样式,可能是直接使用的 elementUI默认的icon ,也可能使用的是iconfont的字体图标 */
     operaIcon(icon: string) {
-        if (icon.startsWith("el-icon")) {
-            return icon
-        } else return `iconfont ${icon}`
+        if (icon.startsWith("el-icon")) return icon
+        else return `iconfont ${icon}`
     }
     /** 表格按钮的操作 */
     operaHandle(handle) {
@@ -127,7 +135,26 @@ export default class TableComponent extends Vue {
         window.print()
     }
     /** 表格的搜索 */
-    tableSearch() {}
+    tableSearch() {
+        // 用来显示隐藏搜索栏
+        const showSearch: boolean = this.tableConfig.showSearch as boolean
+        // 说明搜索栏已经展开
+        if (showSearch) {
+            this.tableData.splice(0, 1)
+        }
+        // 说明搜索栏还未展开
+        else {
+            if (this.tableConfig.columnConfig) {
+                const getFilter = this.tableConfig.columnConfig.map((item) => {
+                    return item.prop
+                })
+                const filterObj = {}
+                getFilter.forEach((item) => (filterObj[item] = ""))
+                this.tableData.unshift(filterObj)
+            }
+        }
+        this.tableConfig.showSearch = !showSearch
+    }
 }
 </script>
 

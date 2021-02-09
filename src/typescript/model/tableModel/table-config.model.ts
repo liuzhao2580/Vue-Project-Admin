@@ -13,8 +13,10 @@ export class TableConfigModel {
     checkout?: boolean = false
     /** 表格是否有打印功能 默认false */
     print?: boolean = false
-    /** 表格是否有 搜索功能 默认true */
-    search?: boolean = true
+    /** 表格是否有 搜索功能按钮 默认true */
+    searchIcon?: boolean = true
+    /** 点击搜索按钮之后 显示搜索栏 */
+    showSearch?: boolean = false
     /** 表格的加载状态 */
     loading: boolean = true
     /** 表格的列配置 */
