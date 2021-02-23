@@ -1,11 +1,8 @@
-import * as X6 from '@antv/x6'
-export class EditableCellTool extends X6.ToolsView.ToolItem<X6.EdgeView, EditableCellToolOptions> {
-    editorContent!: HTMLDivElement
-    topologyContent: HTMLDivElement
-    constructor(dom: HTMLDivElement) {
-        super()
-        this.topologyContent = dom
-    }
+import { Graph, ToolsView, EdgeView, Point } from '@antv/x6'
+
+class EditableCellTool extends ToolsView.ToolItem<EdgeView, EditableCellToolOptions> {
+    private editorContent: HTMLDivElement
+
     render() {
         super.render()
         const cell = this.cell
@@ -28,7 +25,7 @@ export class EditableCellTool extends X6.ToolsView.ToolItem<X6.EdgeView, Editabl
             height = 40
         }
 
-        const editorParent = X6.ToolsView.createElement('div', false) as HTMLDivElement
+        const editorParent = ToolsView.createElement('div', false) as HTMLDivElement
         editorParent.style.position = 'absolute'
         editorParent.style.left = `${x}px`
         editorParent.style.top = `${y}px`
@@ -38,7 +35,7 @@ export class EditableCellTool extends X6.ToolsView.ToolItem<X6.EdgeView, Editabl
         editorParent.style.alignItems = 'center'
         editorParent.style.textAlign = 'center'
 
-        this.editorContent = X6.ToolsView.createElement('div', false) as HTMLDivElement
+        this.editorContent = ToolsView.createElement('div', false) as HTMLDivElement
         this.editorContent.contentEditable = 'true'
         this.editorContent.style.width = '100%'
         this.editorContent.style.outline = 'none'
@@ -98,28 +95,29 @@ export class EditableCellTool extends X6.ToolsView.ToolItem<X6.EdgeView, Editabl
                 .getSourceNode()!
                 .getBBox()
                 .intersectsWithLineFromCenterToPoint(targetPoint)!
-            const p = new X6.Point(this.options.x, this.options.y)
+            const p = new Point(this.options.x, this.options.y)
             return p.distance(cross)
         }
         return 0
     }
 }
+
 EditableCellTool.config({
     tagName: 'div',
     isSVGElement: false
 })
 
 // tslint:disable-next-line: interface-name
-export interface EditableCellToolOptions extends X6.ToolsView.ToolItem.Options {
+export interface EditableCellToolOptions extends ToolsView.ToolItem.Options {
     x: number
     y: number
 }
 
-X6.Graph.registerEdgeTool('editableCell', EditableCellTool, true)
-X6.Graph.registerNodeTool('editableCell', EditableCellTool, true)
+Graph.registerEdgeTool('editableCell', EditableCellTool, true)
+Graph.registerNodeTool('editableCell', EditableCellTool, true)
 
-const container = document.querySelector('#antv-x6-container') as HTMLDivElement
-const graph = new X6.Graph({
+const container = document.getElementById('container') as HTMLDivElement
+const graph = new Graph({
     container: container,
     grid: true
 })

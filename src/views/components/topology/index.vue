@@ -1,16 +1,16 @@
 <template>
     <div>
         <p>
-            <a href="https://antv-x6.gitee.io/zh">官网地址</a>
+            <a href="https://antv-x6.gitee.io/zh" target="_block">官网地址</a>
         </p>
-        <div id="antv-x6-container"></div>
+        <div id="container"></div>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import * as X6 from '@antv/x6'
-import { EditableCellTool } from './antv-x6'
+import './antv-x6'
 /** 拓扑图组件 */
 @Component({
     name: 'topology',
@@ -48,11 +48,11 @@ export default class TopologyComponent extends Vue {
     }
     mounted() {
         this.topologyContent = document.querySelector('#antv-x6-container') as HTMLDivElement
-        new EditableCellTool(this.topologyContent)
     }
     /** 初始化 */
     init() {}
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>
