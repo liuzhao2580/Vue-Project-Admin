@@ -22,6 +22,8 @@ export class TableConfigModel {
   columnConfig!: ColumnConfig[]
   /** 表格的操作 */
   operation?: Operation[]
+  /** 搜索事件 */
+  handleSearch?: any
 }
 
 /** 表格的列配置 */

@@ -68,6 +68,9 @@ export default class ArticleListComponent extends Vue {
         },
       },
     ],
+    handleSearch: () => {
+      console.log("handleSearch")
+    },
   }
   created() {
     this.init()

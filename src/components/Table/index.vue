@@ -69,7 +69,12 @@
           <!-- 搜索栏开启时的操作 -->
           <template v-if="scope.$index === 0 && tableConfig.showSearch">
             <el-tooltip placement="top" effect="light" content="搜索">
-              <el-button icon="el-icon-search" size="mini" circle></el-button>
+              <el-button
+                icon="el-icon-search"
+                size="mini"
+                circle
+                @click="tableConfig.handleSearch"
+              ></el-button>
             </el-tooltip>
             <el-tooltip placement="top" effect="light" content="重置">
               <el-button icon="el-icon-refresh" size="mini" circle></el-button>
