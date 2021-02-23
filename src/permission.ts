@@ -13,9 +13,9 @@ router.beforeEach(async (to: any | string, from: any, next: any) => {
   // 说明存在 token 用于已经登录
   if (token) {
     /**
-         * 如果在 token 存在的情况下要跳转到登录页面的话，阻止跳转
-         * 在退出登录的时候会清除 token
-         */
+     * 如果在 token 存在的情况下要跳转到登录页面的话，阻止跳转
+     * 在退出登录的时候会清除 token
+     */
     const Need_refresh = store.getters["user/Need_refresh"]
     if (to.path === "/login") {
       next(false)
@@ -23,10 +23,10 @@ router.beforeEach(async (to: any | string, from: any, next: any) => {
       return
     }
     /**
-         * 说明是正常的路由页面
-         * 判断是否刷新页面 false 否 true 是
-         * 刷新页面重新请求用户数据
-         */
+     * 说明是正常的路由页面
+     * 判断是否刷新页面 false 否 true 是
+     * 刷新页面重新请求用户数据
+     */
     if (Need_refresh) {
       try {
         const routesList = await store.dispatch("user/ACT_findByIDUser")
