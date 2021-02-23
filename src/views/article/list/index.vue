@@ -10,8 +10,12 @@ import { queryArticleList_API } from "@/api/modules/article"
 import { ResultCodeEnum } from "@/typescript/enum"
 import { IArticleBasic } from "../share/interface/article-config.interface"
 import tableComponent from "@/components/Table/index.vue"
-import { TableConfigModel } from "@/typescript/model/tableModel/table-config.model"
-import { ColumnTypeEnum, OperationTypeEnum } from "@/typescript/enum/table-enum"
+import {
+  TableConfigModel,
+  EColumnType,
+  EOperationType,
+  ESearchType,
+} from "@/typescript/model/tableModel/table-config.model"
 @Component({
   name: "article-list",
   components: {
@@ -29,16 +33,26 @@ export default class ArticleListComponent extends Vue {
       {
         label: "文章标题",
         prop: "article_title",
+        fixed: true,
+        searchable: true,
+        searchConfig: {
+          type: ESearchType.input,
+        },
       },
       {
         label: "创建时间",
-        type: ColumnTypeEnum.dateTime,
+        type: EColumnType.dateTime,
         prop: "article_time",
+        width: 200,
+        searchable: true,
+        searchConfig: {
+          type: ESearchType.dateTime,
+        },
       },
     ],
     operation: [
       {
-        type: OperationTypeEnum.primary,
+        type: EOperationType.primary,
         text: "编辑",
         icon: "el-icon-edit",
         handle: () => {
@@ -46,7 +60,7 @@ export default class ArticleListComponent extends Vue {
         },
       },
       {
-        type: OperationTypeEnum.danger,
+        type: EOperationType.danger,
         text: "删除",
         icon: "el-icon-delete",
         handle: () => {

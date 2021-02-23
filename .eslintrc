@@ -4,7 +4,7 @@
     "no-console": "off",
     "no-await-in-loop": "warn",
     "require-await": "off",
-    "indent": ["warn", 2],
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
     "eqeqeq": "warn"
   },
   "parserOptions": {

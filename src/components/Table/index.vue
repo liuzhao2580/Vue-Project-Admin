@@ -30,20 +30,31 @@
       :header-cell-style="tableHeaderStyle"
     >
       <!-- 多选 -->
-      <el-table-column type="selection" width="55" v-if="tableConfig.checkout"> </el-table-column>
+      <el-table-column fixed type="selection" width="60" v-if="tableConfig.checkout">
+      </el-table-column>
       <!-- 序号 -->
-      <el-table-column type="index" label="序号" width="50" v-if="tableConfig.index !== false">
+      <el-table-column
+        fixed
+        type="index"
+        label="序号"
+        width="60"
+        v-if="tableConfig.index !== false"
+      >
       </el-table-column>
       <el-table-column
+        :fixed="tableItem.fixed"
         :label="tableItem.label"
-        :width="tableItem.width"
+        :width="tableItem.width ? tableItem.width : 150"
+        :show-overflow-tooltip="tableItem.showTooltip !== false"
         v-for="(tableItem, tableIndex) in tableConfig.columnConfig"
         :key="tableIndex"
       >
         <template slot-scope="scope">
+          <!-- 搜索栏 -->
           <template v-if="scope.$index === 0 && tableConfig.showSearch">
-            <el-input></el-input>
+            <table-header-search :tableHeaderSearch="tableItem" />
           </template>
+          <!-- 数据栏 -->
           <template v-else>
             <!-- 时间,日期转换 -->
             <span v-if="judgeTime(tableItem.type)"
@@ -53,17 +64,29 @@
           </template>
         </template>
       </el-table-column>
-      <el-table-column label="操作">
-        <template :width="operaItem.width" v-for="(operaItem, operaIndex) in tableConfig.operation">
-          <el-tooltip :key="operaIndex" :content="operaItem.text" placement="top" effect="light">
-            <el-button
-              size="mini"
-              circle
-              :icon="operaIcon(operaItem.icon)"
-              :type="operaItem.type"
-              @click="operaHandle(operaItem.handle)"
-            ></el-button>
-          </el-tooltip>
+      <el-table-column label="操作" fixed="right" min-width="100">
+        <template slot-scope="scope">
+          <!-- 搜索栏开启时的操作 -->
+          <template v-if="scope.$index === 0 && tableConfig.showSearch">
+            <el-tooltip placement="top" effect="light" content="搜索">
+              <el-button icon="el-icon-search" size="mini" circle></el-button>
+            </el-tooltip>
+            <el-tooltip placement="top" effect="light" content="重置">
+              <el-button icon="el-icon-refresh" size="mini" circle></el-button>
+            </el-tooltip>
+          </template>
+          <!-- 其他操作 -->
+          <template v-else v-for="(operaItem, operaIndex) in tableConfig.operation">
+            <el-tooltip :key="operaIndex" :content="operaItem.text" placement="top" effect="light">
+              <el-button
+                size="mini"
+                circle
+                :icon="operaIcon(operaItem.icon)"
+                :type="operaItem.type"
+                @click="operaHandle(operaItem.handle)"
+              ></el-button>
+            </el-tooltip>
+          </template>
         </template>
       </el-table-column>
     </el-table>
@@ -73,13 +96,12 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator"
 import moment from "moment"
-import { TableConfigModel } from "@/typescript/model/tableModel/table-config.model"
-import { ColumnTypeEnum } from "@/typescript/enum/table-enum"
-import tableSearch from "./components/table-search.vue"
+import { TableConfigModel, EColumnType } from "@/typescript/model/tableModel/table-config.model"
+import tableHeaderSearch from "./components/table-header-search.vue"
 @Component({
   name: "tableComponent",
   components: {
-    tableSearch,
+    tableHeaderSearch,
   },
 })
 export default class TableComponent extends Vue {
@@ -92,17 +114,18 @@ export default class TableComponent extends Vue {
     return { background: "#e0e0e0", color: "#333", fontWeight: 900 }
   }
   /** 表格的列 type 的类型 */
-  ColumnTypeEnum!: ColumnTypeEnum
+  EColumnType!: EColumnType
+  showSearch: boolean = false
   /** 判断是否是时间type */
-  judgeTime(type: ColumnTypeEnum) {
-    return ColumnTypeEnum[type]
+  judgeTime(type: EColumnType) {
+    return EColumnType[type]
   }
   /** 处理时间 */
-  handleTranslateTime(time: Date, type: ColumnTypeEnum) {
+  handleTranslateTime(time: Date, type: EColumnType) {
     let translateTime
-    if (type === ColumnTypeEnum.time) {
+    if (type === EColumnType.date) {
       translateTime = moment(time).format("YYYY-MM-DD")
-    } else if (type === ColumnTypeEnum.dateTime) {
+    } else if (type === EColumnType.dateTime) {
       translateTime = moment(time).format("YYYY-MM-DD HH:mm:ss")
     }
     return translateTime
