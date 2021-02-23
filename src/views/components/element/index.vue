@@ -25,20 +25,20 @@ import tableCheckout from './components/table-checkout'
 import tableHeader from './components/table-header'
 import GetBetweenTime from './components/GetBetweenTime'
 export default {
-    name: 'element-components',
-    components: {
-        tableCheckout,
-        tableHeader,
-        GetBetweenTime,
-    },
-    props: {},
-    computed: {},
-    data() {
-        return {}
-    },
-    created() {},
-    mounted() {},
-    methods: {},
+  name: 'element-components',
+  components: {
+    tableCheckout,
+    tableHeader,
+    GetBetweenTime,
+  },
+  props: {},
+  computed: {},
+  data() {
+    return {}
+  },
+  created() {},
+  mounted() {},
+  methods: {},
 }
 </script>
 

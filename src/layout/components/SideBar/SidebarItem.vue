@@ -31,64 +31,64 @@ import { mapGetters } from 'vuex'
 import path from 'path'
 import MenuItem from './Item'
 export default {
-    name: "SidebarItem",
-    components: {
-        MenuItem
+  name: "SidebarItem",
+  components: {
+    MenuItem
+  },
+  computed: {
+    ...mapGetters({
+      side_status: 'app/side_status'
+    })
+  },
+  props: {
+    item: {
+      require: true
     },
-    computed: {
-        ...mapGetters({
-            side_status: 'app/side_status'
-        })
+    basePath: {
+      type: String,
+      default: ""
     },
-    props: {
-        item: {
-            require: true
-        },
-        basePath: {
-            type: String,
-            default: ""
-        },
-        isMoreChild: {
-            type:Boolean,
-            default: false
+    isMoreChild: {
+      type:Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      onlyOneChild: null
+    };
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    // 用于拼接 url 地址
+    resolvePath(routePath) {
+      return path.resolve(this.basePath, routePath)
+    },
+    // 用户判断多级路由
+    checkMoreRouter(route) {
+      // 判断 是否含有多级路由
+      // 当 children 存在时, 说明还存在子路由
+      if (route.children) {
+        this.onlyOneChild = route
+        return false
+      }
+      // 说明当前路由不存在子路由 
+      else {
+        // 如果 isMoreChild 存在 说明当前的路由是通过递归传递的数据
+        if (this.isMoreChild) {
+          // 重新定义 path 
+          this.onlyOneChild = {...route,path:""}
         }
+        // 说明 当前的路由是一级路由 
+        else {
+          this.onlyOneChild = route
+        }
+        return true
+      }
     },
-    data() {
-        return {
-            onlyOneChild: null
-        };
-    },
-    created() {},
-    mounted() {},
-    methods: {
-        // 用于拼接 url 地址
-        resolvePath(routePath) {
-            return path.resolve(this.basePath, routePath)
-        },
-        // 用户判断多级路由
-        checkMoreRouter(route) {
-            // 判断 是否含有多级路由
-            // 当 children 存在时, 说明还存在子路由
-            if (route.children) {
-                this.onlyOneChild = route
-                return false
-            }
-            // 说明当前路由不存在子路由 
-            else {
-                // 如果 isMoreChild 存在 说明当前的路由是通过递归传递的数据
-                if (this.isMoreChild) {
-                    // 重新定义 path 
-                    this.onlyOneChild = {...route,path:""}
-                }
-                // 说明 当前的路由是一级路由 
-                else {
-                    this.onlyOneChild = route
-                }
-                return true
-            }
-        },
-    },
-    watch: {}
+  },
+  watch: {}
 };
 </script>
 

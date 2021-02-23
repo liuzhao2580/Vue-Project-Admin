@@ -7,13 +7,13 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-    name: "UserImg",
-    components: {},
-    computed: {
-        ...mapGetters({
-            avatar: 'user/avatar'
-        })
-    },
+  name: "UserImg",
+  components: {},
+  computed: {
+    ...mapGetters({
+      avatar: 'user/avatar'
+    })
+  },
 };
 </script>
 

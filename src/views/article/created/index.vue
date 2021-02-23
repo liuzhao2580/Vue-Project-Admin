@@ -16,17 +16,17 @@ import ContentEditor from './components/Content-editor.vue'
 import BigScreenTitle from './components/Big-screen-title.vue'
 import { EventBus } from '../share/utils/EventBus'
 @Component({
-    name: 'created',
-    components: {
-        ContentEditor,
-        BigScreenTitle
-    }
+  name: 'created',
+  components: {
+    ContentEditor,
+    BigScreenTitle
+  }
 })
 export default class CreateArticle extends Vue {
-    beforeDestroy() {
-        /** 清除所有事件总线 */
-        EventBus.$off()
-    }
+  beforeDestroy() {
+    /** 清除所有事件总线 */
+    EventBus.$off()
+  }
 }
 </script>
 

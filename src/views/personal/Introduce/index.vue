@@ -19,20 +19,20 @@ import active from './active'
 import timeline from './timeline'
 import account from './account'
 export default {
-    name: 'Introduce',
-    components: {
-        active,
-        timeline,
-        account
-    },
-    props: {},
-    data() {
-        return {}
-    },
-    created() {},
-    mounted() {},
-    methods: {},
-    watch: {}
+  name: 'Introduce',
+  components: {
+    active,
+    timeline,
+    account
+  },
+  props: {},
+  data() {
+    return {}
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+  watch: {}
 }
 </script>
 

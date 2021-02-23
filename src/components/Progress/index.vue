@@ -11,23 +11,23 @@
 
 <script>
 export default {
-    name: 'Progress',
-    components: {},
-    props: {},
-    data() {
-        return {
-            progressItems: [
-                { label: 'Vue', percentage: 80, color: '#5cb87a' },
-                { label: 'JavaScript', percentage: 70, color: '#e6a23c' },
-                { label: 'CSS', percentage: 50, color: '#f56c6c' },
-                { label: 'HTML', percentage: 60, color: '#6f7ad3' }
-            ]
-        }
-    },
-    created() {},
-    mounted() {},
-    methods: {},
-    watch: {}
+  name: 'Progress',
+  components: {},
+  props: {},
+  data() {
+    return {
+      progressItems: [
+        { label: 'Vue', percentage: 80, color: '#5cb87a' },
+        { label: 'JavaScript', percentage: 70, color: '#e6a23c' },
+        { label: 'CSS', percentage: 50, color: '#f56c6c' },
+        { label: 'HTML', percentage: 60, color: '#6f7ad3' }
+      ]
+    }
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+  watch: {}
 }
 </script>
 

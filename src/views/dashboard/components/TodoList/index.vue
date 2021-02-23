@@ -51,91 +51,91 @@
 
 <script>
 export default {
-    name: 'todo-list',
-    components: {},
-    props: {},
-    data() {
-        return {
-            // 新增 todolist
-            insertInput: '',
-            // 全选状态  false 不全选  true 全选
-            checkAll: false,
-            // 用以表示 checkbox 的不确定状态 只负责样式控制 false
-            isIndeterminate: true,
-            // all 完成  active未完成  component已完成
-            status: 'all',
-            listArr: [
-                {
-                    title: '吃饭',
-                    flag: false
-                },
-                {
-                    title: '睡觉',
-                    flag: false
-                },
-                {
-                    title: '打豆豆',
-                    flag: true
-                }
-            ],
-            // 关闭按钮的显示
-            colse_isActive: -1
+  name: 'todo-list',
+  components: {},
+  props: {},
+  data() {
+    return {
+      // 新增 todolist
+      insertInput: '',
+      // 全选状态  false 不全选  true 全选
+      checkAll: false,
+      // 用以表示 checkbox 的不确定状态 只负责样式控制 false
+      isIndeterminate: true,
+      // all 完成  active未完成  component已完成
+      status: 'all',
+      listArr: [
+        {
+          title: '吃饭',
+          flag: false
+        },
+        {
+          title: '睡觉',
+          flag: false
+        },
+        {
+          title: '打豆豆',
+          flag: true
         }
-    },
-    computed: {
-        checkedList() {
-            let getAllListArr = ''
-            switch (this.status) {
-                // 全部
-                case 'all':
-                    getAllListArr = this.listArr
-                    break
-                // 未完成
-                case 'active':
-                    getAllListArr = this.listArr.filter((item) => {
-                        if (!item.flag) return item
-                    })
-                    break
-                // 已完成
-                case 'component':
-                    getAllListArr = this.listArr.filter((item) => {
-                        if (item.flag) return item
-                    })
-                    break
-            }
-            return getAllListArr
-        }
-    },
-    created() {},
-    mounted() {},
-    methods: {
-        // 输入框的回车新增事件
-        handleInsertInput() {
-            if (!this.insertInput) return
-            const setList = {
-                title: this.insertInput,
-                flag: true
-            }
-            this.listArr.push(setList)
-            this.insertInput = ''
-        },
-        // 列表点击事件
-        handleItemClick(index) {
-            this.listArr[index].flag = !this.listArr[index].flag
-        },
-        // 鼠标移入
-        handleMouseEnter(index) {
-            this.colse_isActive = index
-        },
-        // 鼠标移除
-        handleMouseLeave() {
-            this.colse_isActive = -1
-        },
-        // 移除 指定的list
-        removeList(index) {
-            this.listArr.splice(index, 1)
-        }
+      ],
+      // 关闭按钮的显示
+      colse_isActive: -1
     }
+  },
+  computed: {
+    checkedList() {
+      let getAllListArr = ''
+      switch (this.status) {
+        // 全部
+        case 'all':
+          getAllListArr = this.listArr
+          break
+          // 未完成
+        case 'active':
+          getAllListArr = this.listArr.filter((item) => {
+            if (!item.flag) return item
+          })
+          break
+          // 已完成
+        case 'component':
+          getAllListArr = this.listArr.filter((item) => {
+            if (item.flag) return item
+          })
+          break
+      }
+      return getAllListArr
+    }
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    // 输入框的回车新增事件
+    handleInsertInput() {
+      if (!this.insertInput) return
+      const setList = {
+        title: this.insertInput,
+        flag: true
+      }
+      this.listArr.push(setList)
+      this.insertInput = ''
+    },
+    // 列表点击事件
+    handleItemClick(index) {
+      this.listArr[index].flag = !this.listArr[index].flag
+    },
+    // 鼠标移入
+    handleMouseEnter(index) {
+      this.colse_isActive = index
+    },
+    // 鼠标移除
+    handleMouseLeave() {
+      this.colse_isActive = -1
+    },
+    // 移除 指定的list
+    removeList(index) {
+      this.listArr.splice(index, 1)
+    }
+  }
 }
 </script>
 

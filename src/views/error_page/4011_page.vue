@@ -4,16 +4,16 @@
 
 <script>
 export default {
-    name: "page4011",
-    components: {},
-    props: {},
-    data() {
-        return {};
-    },
-    created() {},
-    mounted() {},
-    methods: {},
-    watch: {}
+  name: "page4011",
+  components: {},
+  props: {},
+  data() {
+    return {};
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+  watch: {}
 };
 </script>
 

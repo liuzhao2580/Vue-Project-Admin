@@ -1,13 +1,13 @@
 {
-    "extends": ["plugin:vue/essential", "eslint:recommended", "@vue/typescript"],
-    "rules": {
-        "no-console": "off",
-        "no-await-in-loop": "warn",
-        "require-await": "off",
-        "indent": ["warn", 4, { "SwitchCase": 1 }],
-        "eqeqeq": "warn"
-    },
-    "parserOptions": {
-        "parser": "@typescript-eslint/parser"
-    }
+  "extends": ["plugin:vue/essential", "eslint:recommended", "@vue/typescript"],
+  "rules": {
+    "no-console": "off",
+    "no-await-in-loop": "warn",
+    "require-await": "off",
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "eqeqeq": "warn"
+  },
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  }
 }

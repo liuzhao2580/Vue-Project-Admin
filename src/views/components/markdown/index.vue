@@ -15,26 +15,26 @@
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 export default {
-    name: 'markdown',
-    components: {
-        mavonEditor
+  name: 'markdown',
+  components: {
+    mavonEditor
+  },
+  props: {},
+  data() {
+    return {
+      mavon_model: ''
+    }
+  },
+  mounted() {},
+  methods: {
+    mavon_save(value, render) {
+      console.log(value, render)
     },
-    props: {},
-    data() {
-        return {
-            mavon_model: ''
-        }
-    },
-    mounted() {},
-    methods: {
-        mavon_save(value, render) {
-            console.log(value, render)
-        },
-        onSubmit() {
-            console.log(this.mavon_model)
-        }
-    },
-    watch: {}
+    onSubmit() {
+      console.log(this.mavon_model)
+    }
+  },
+  watch: {}
 }
 </script>
 

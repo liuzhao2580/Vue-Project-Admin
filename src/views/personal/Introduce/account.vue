@@ -18,32 +18,32 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-    name: 'account',
-    components: {},
-    computed: {
-        ...mapGetters({
-            nickname: 'user/nickname'
-        })
-    },
-    props: {},
-    data() {
-        return {
-            form_account: {
-                name: '',
-                Email: 'liuzhao2580'
-            }
-        }
-    },
-    created() {
-        this.init()
-    },
-    mounted() {},
-    methods: {
-        init() {
-            this.form_account.name = this.nickname
-        }
-    },
-    watch: {}
+  name: 'account',
+  components: {},
+  computed: {
+    ...mapGetters({
+      nickname: 'user/nickname'
+    })
+  },
+  props: {},
+  data() {
+    return {
+      form_account: {
+        name: '',
+        Email: 'liuzhao2580'
+      }
+    }
+  },
+  created() {
+    this.init()
+  },
+  mounted() {},
+  methods: {
+    init() {
+      this.form_account.name = this.nickname
+    }
+  },
+  watch: {}
 }
 </script>
 

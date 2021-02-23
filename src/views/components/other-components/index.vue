@@ -15,11 +15,11 @@
 import { Component, Vue } from 'vue-property-decorator'
 import BetweenTime from './components/Between-time.vue'
 @Component({
-    name: 'other-components',
-    components: {
-        Calculator: () => import('./components/Calculator.vue'),
-        BetweenTime
-    }
+  name: 'other-components',
+  components: {
+    Calculator: () => import('./components/Calculator.vue'),
+    BetweenTime
+  }
 })
 export default class OtherComponents extends Vue {}
 </script>

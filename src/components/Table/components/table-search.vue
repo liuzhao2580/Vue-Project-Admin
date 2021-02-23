@@ -1,14 +1,14 @@
 <template>
-    <div>vue</div>
+  <div>vue</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
 @Component({
-    name: "tableSearch",
+  name: "tableSearch",
 })
 export default class TableSearchComponent extends Vue {
-    created() {}
+  created() {}
 }
 </script>
 

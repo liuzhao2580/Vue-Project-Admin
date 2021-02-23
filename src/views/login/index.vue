@@ -34,62 +34,62 @@ import { userLogin } from "@/api/modules/user"
 import { ResultCodeEnum } from "@/typescript/enum"
 const USER_VUEX = namespace("user")
 @Component({
-    name: "login",
+  name: "login",
 })
 export default class LoginComponent extends Vue {
     @USER_VUEX.Action ACT_userInfo!: (params) => void
     @USER_VUEX.Action ACT_Need_Refresh!: (params) => void
     login_form = {
-        userName: "admin",
-        password: "admin",
+      userName: "admin",
+      password: "admin",
     }
     rules = {
-        userName: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+      userName: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+      password: [{ required: true, message: "请输入密码", trigger: "blur" }],
     }
     /** 登录的加载按钮样式 */
     login_loading: boolean = false
 
     submitForm(formName) {
-        // @ts-ignore
-        this.$refs[formName].validate(async (valid: boolean) => {
-            if (valid) {
-                this.login_loading = true
-                const params = {
-                    userName: this.login_form.userName,
-                    password: this.login_form.password,
-                }
-                try {
-                    const result = await userLogin(params)
-                    console.log(result, "data")
-                    if (result.code === ResultCodeEnum.success) {
-                        this.$message({
-                            message: "登录成功",
-                            type: "success",
-                        })
-                        try {
-                            await this.ACT_userInfo(result.data)
-                            await this.ACT_Need_Refresh(true)
-                            this.$router
-                                .push({ path: "/" })
-                                .catch((error) => console.log(error, 1111))
-                        } catch (error) {
-                            console.log(error, 111)
-                        }
-                    } else {
-                        this.$message({
-                            message: result.msg,
-                            type: "error",
-                        })
-                    }
-                    this.login_loading = false
-                } catch (err) {
-                    this.login_loading = false
-                }
+      // @ts-ignore
+      this.$refs[formName].validate(async (valid: boolean) => {
+        if (valid) {
+          this.login_loading = true
+          const params = {
+            userName: this.login_form.userName,
+            password: this.login_form.password,
+          }
+          try {
+            const result = await userLogin(params)
+            console.log(result, "data")
+            if (result.code === ResultCodeEnum.success) {
+              this.$message({
+                message: "登录成功",
+                type: "success",
+              })
+              try {
+                await this.ACT_userInfo(result.data)
+                await this.ACT_Need_Refresh(true)
+                this.$router
+                  .push({ path: "/" })
+                  .catch((error) => console.log(error, 1111))
+              } catch (error) {
+                console.log(error, 111)
+              }
             } else {
-                return false
+              this.$message({
+                message: result.msg,
+                type: "error",
+              })
             }
-        })
+            this.login_loading = false
+          } catch (err) {
+            this.login_loading = false
+          }
+        } else {
+          return false
+        }
+      })
     }
 }
 </script>

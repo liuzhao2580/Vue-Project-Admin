@@ -19,11 +19,11 @@ Vue.use(Vuex)
 // }, {})
 
 const store = new Vuex.Store({
-    modules: {
-        user,
-        app,
-        TagsView
-    }
+  modules: {
+    user,
+    app,
+    TagsView
+  }
 })
 
 export default store

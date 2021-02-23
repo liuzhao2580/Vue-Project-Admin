@@ -15,19 +15,19 @@
 </template>
 <script>
 export default {
-    name: 'get-between-time',
-    data() {
-        return {
-            datePValue: null
-        }
-    },
-    created() {},
-    mounted() {},
-    methods: {
-        dateChange(value) {
-            console.log(value, 'value')
-        }
-    },
+  name: 'get-between-time',
+  data() {
+    return {
+      datePValue: null
+    }
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    dateChange(value) {
+      console.log(value, 'value')
+    }
+  },
 }
 </script>
 
