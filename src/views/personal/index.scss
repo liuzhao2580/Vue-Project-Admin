@@ -1,25 +1,25 @@
 .personalCenter-box {
-    // 个人信息
-    /deep/ .personal-info {
-        margin-bottom: 20px;
-        .img-box {
-            text-align: center;
-            p {
-                margin-top: 10px;
-            }
-        }
-        .experience {
-            padding: 0 10px;
-            .el-divider {
-                margin: 10px 0;
-            }
-            .el-tag {
-                margin-right: 5px;
-                margin-bottom: 5px;
-            }
-            .Education {
-                margin-bottom: 20px;
-            }
-        }
+  // 个人信息
+  /deep/ .personal-info {
+    margin-bottom: 20px;
+    .img-box {
+      text-align: center;
+      p {
+        margin-top: 10px;
+      }
     }
+    .experience {
+      padding: 0 10px;
+      .el-divider {
+        margin: 10px 0;
+      }
+      .el-tag {
+        margin-right: 5px;
+        margin-bottom: 5px;
+      }
+      .Education {
+        margin-bottom: 20px;
+      }
+    }
+  }
 }

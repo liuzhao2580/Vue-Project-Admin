@@ -91,10 +91,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { BetweenTimeTypeEnum } from '../share/enum/other-components.enum'
 import {
-    getBetweenDate,
-    getBetweenMonth,
-    getBetweenYear,
-    getBetweenTime
+  getBetweenDate,
+  getBetweenMonth,
+  getBetweenYear,
+  getBetweenTime
 } from '../share/utils/between-time'
 @Component({})
 export default class BetweenTime extends Vue {
@@ -117,34 +117,34 @@ export default class BetweenTime extends Vue {
 
     /** 单选框绑定值 发生变化 改变事件 */
     radioChange(value: BetweenTimeTypeEnum) {
-        this.radioValue = value
-        this.selectedTimeData = []
+      this.radioValue = value
+      this.selectedTimeData = []
     }
     /** 时间选择器 开始时间选择器 */
     startTimeChange(value: string | null) {
-        if (!value) this.endTime = null
+      if (!value) this.endTime = null
     }
     /** 时间选择器 结束时间选择器 */
     endTimeChange(value: string | null) {
-        if (value) this.selectedTimeData = getBetweenTime(this.startTime, value)
+      if (value) this.selectedTimeData = getBetweenTime(this.startTime, value)
     }
     /** 日期选择器 改变事件 */
     datePickerChange(value: Array<Date>, type: BetweenTimeTypeEnum) {
-        if (!value) return
-        // 日期
-        if (type === BetweenTimeTypeEnum.date)
-            this.selectedTimeData = getBetweenDate(value[0], value[1])
+      if (!value) return
+      // 日期
+      if (type === BetweenTimeTypeEnum.date)
+        this.selectedTimeData = getBetweenDate(value[0], value[1])
         // 月份
-        else if (type === BetweenTimeTypeEnum.month)
-            this.selectedTimeData = getBetweenMonth(value[0], value[1])
+      else if (type === BetweenTimeTypeEnum.month)
+        this.selectedTimeData = getBetweenMonth(value[0], value[1])
     }
     /** 年份选择器 改变事件 开始年份 */
     startYearChange(value: Date | null) {
-        if (!value) this.endYear = null
+      if (!value) this.endYear = null
     }
     /** 年份选择器 改变事件 结束年份 */
     endYearChange(value: Date | null) {
-        if (value) this.selectedTimeData = getBetweenYear(this.startYear, value)
+      if (value) this.selectedTimeData = getBetweenYear(this.startYear, value)
     }
 }
 </script>

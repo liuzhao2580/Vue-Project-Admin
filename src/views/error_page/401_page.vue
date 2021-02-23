@@ -7,16 +7,16 @@
 
 <script>
 export default {
-    name: '',
-    components: {},
-    props: {},
-    data() {
-        return {}
-    },
-    created() {},
-    mounted() {},
-    methods: {},
-    watch: {}
+  name: '',
+  components: {},
+  props: {},
+  data() {
+    return {}
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+  watch: {}
 }
 </script>
 

@@ -24,26 +24,26 @@ import { namespace } from 'vuex-class'
 import LayoutMixin from './mixin/Resize'
 const App_VUEX = namespace('app')
 @Component({
-    components: {
-        AppMain,
-        Sidebar,
-        Navbar
-    }
+  components: {
+    AppMain,
+    Sidebar,
+    Navbar
+  }
 })
 export default class LayoutComponent extends Mixins(LayoutMixin) {
     @App_VUEX.Getter side_status: any
     @App_VUEX.Getter isMobile: any
     @App_VUEX.Action ACT_unflodSide!: () => void
     dynamicWidth(): string {
-        if (this.isMobile) return '0'
-        if (this.side_status) return '64px'
-        return '200px'
+      if (this.isMobile) return '0'
+      if (this.side_status) return '64px'
+      return '200px'
     }
     created() {}
     mounted() {}
     // 在 mobile 移动端模式下显示隐藏 侧边栏按钮
     showORhidden() {
-        this.ACT_unflodSide()
+      this.ACT_unflodSide()
     }
 }
 </script>

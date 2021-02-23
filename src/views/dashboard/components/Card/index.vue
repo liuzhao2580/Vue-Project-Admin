@@ -16,17 +16,17 @@
 <script>
 import imageRotote from '@/directives/imgRotote'
 export default {
-    name: 'card',
-    directives: { imageRotote },
-    components: {},
-    props: {},
-    data() {
-        return {}
-    },
-    created() {},
-    mounted() {},
-    methods: {},
-    watch: {}
+  name: 'card',
+  directives: { imageRotote },
+  components: {},
+  props: {},
+  data() {
+    return {}
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+  watch: {}
 }
 </script>
 

@@ -15,11 +15,11 @@
 import Quill from './Quill'
 import WangEditor from './WangEditor'
 export default {
-    name: "richtext",
-    components: {
-        Quill,
-        WangEditor
-    }
+  name: "richtext",
+  components: {
+    Quill,
+    WangEditor
+  }
 };
 </script>
 

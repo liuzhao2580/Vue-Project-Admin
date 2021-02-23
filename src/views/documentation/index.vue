@@ -18,33 +18,33 @@
 
 <script>
 export default {
-    name: 'documentation',
-    components: {},
-    props: {},
-    data() {
-        return {
-            cardList: [
-                {
-                    iconClass: 'vue',
-                    titleText: 'Vue',
-                    srcURL: 'https://cn.vuejs.org/v2/guide/',
-                },
-                {
-                    iconClass: 'element',
-                    titleText: 'elementUI',
-                    srcURL: 'https://element.eleme.cn/#/zh-CN/component/installation',
-                },
-            ],
-        }
-    },
-    created() {},
-    mounted() {},
-    methods: {
-        jumpURL(URL) {
-            window.open(URL)
+  name: 'documentation',
+  components: {},
+  props: {},
+  data() {
+    return {
+      cardList: [
+        {
+          iconClass: 'vue',
+          titleText: 'Vue',
+          srcURL: 'https://cn.vuejs.org/v2/guide/',
         },
+        {
+          iconClass: 'element',
+          titleText: 'elementUI',
+          srcURL: 'https://element.eleme.cn/#/zh-CN/component/installation',
+        },
+      ],
+    }
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    jumpURL(URL) {
+      window.open(URL)
     },
-    watch: {},
+  },
+  watch: {},
 }
 </script>
 

@@ -19,7 +19,7 @@
             "@/api": ["src/api/modules/*"]
         },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-        "strictPropertyInitialization": false
+        "strictPropertyInitialization": true // 必须声明初始值
     },
     "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
     "exclude": ["node_modules", "vue.config.js"]

@@ -8,52 +8,52 @@
 
 <script>
 export default {
-    name: 'ClickLike',
-    components: {},
-    data() {
-        return {
-            // 设置 缓缓升起的红心的显示状态
-            ClickLike_Status: false,
-            scr: '',
-            dz_Name: '赞',
-            // 点赞前的图片
-            src_dz: require('@/assets/images/dz.png'),
-            dzd_status: false, // 点赞状态, 如果没有点赞 false  点赞之后就是 true
-            // 点赞后的图片
-            src_dzd: require('@/assets/images/dzd.png')
-        }
-    },
-    created() {
-        this.init()
-    },
-    methods: {
-        init() {
-            this.src = this.src_dz
-        },
-        ClickLike() {
-            // 说明已经点赞了, 如果再次点击 就是取消点赞
-            if (this.dzd_status) {
-                this.dz_Name = '赞'
-                this.src = this.src_dz
-                this.dzd_status = false
-                return
-            }
-            this.ClickLike_Status = true
-            setTimeout(() => {
-                this.ClickLike_Status = false
-                this.src = this.src_dzd
-                this.dzd_status = true
-            }, 1000)
-        }
-    },
-    watch: {
-        // 通过监听 点赞状态 改变 显示的字体
-        dzd_status(val) {
-            if (val) {
-                this.dz_Name = '取消'
-            }
-        }
+  name: 'ClickLike',
+  components: {},
+  data() {
+    return {
+      // 设置 缓缓升起的红心的显示状态
+      ClickLike_Status: false,
+      scr: '',
+      dz_Name: '赞',
+      // 点赞前的图片
+      src_dz: require('@/assets/images/dz.png'),
+      dzd_status: false, // 点赞状态, 如果没有点赞 false  点赞之后就是 true
+      // 点赞后的图片
+      src_dzd: require('@/assets/images/dzd.png')
     }
+  },
+  created() {
+    this.init()
+  },
+  methods: {
+    init() {
+      this.src = this.src_dz
+    },
+    ClickLike() {
+      // 说明已经点赞了, 如果再次点击 就是取消点赞
+      if (this.dzd_status) {
+        this.dz_Name = '赞'
+        this.src = this.src_dz
+        this.dzd_status = false
+        return
+      }
+      this.ClickLike_Status = true
+      setTimeout(() => {
+        this.ClickLike_Status = false
+        this.src = this.src_dzd
+        this.dzd_status = true
+      }, 1000)
+    }
+  },
+  watch: {
+    // 通过监听 点赞状态 改变 显示的字体
+    dzd_status(val) {
+      if (val) {
+        this.dz_Name = '取消'
+      }
+    }
+  }
 }
 </script>
 

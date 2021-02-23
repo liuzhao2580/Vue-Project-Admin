@@ -11,22 +11,22 @@
 
 <script>
 export default {
-    name: "back-to-top",
-    components: {},
-    props: {},
-    data() {
-        return {
-            count: 0
-        };
-    },
-    created() {},
-    mounted() {},
-    methods: {
-        load() {
-            this.count += 2;
-        }
-    },
-    watch: {}
+  name: "back-to-top",
+  components: {},
+  props: {},
+  data() {
+    return {
+      count: 0
+    };
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    load() {
+      this.count += 2;
+    }
+  },
+  watch: {}
 };
 </script>
 

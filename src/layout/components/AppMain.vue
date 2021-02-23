@@ -14,7 +14,7 @@ import { RouteConfig } from 'vue-router'
 import { namespace } from 'vuex-class'
 const App_VUEX = namespace('user')
 @Component({
-    name: 'AppMain'
+  name: 'AppMain'
 })
 export default class AppMain extends Vue {
     @App_VUEX.Getter sideBarList: any
@@ -23,23 +23,23 @@ export default class AppMain extends Vue {
     keepAliveRoutes: Array<string | undefined> = []
 
     created() {
-        this.init()
+      this.init()
     }
 
     /** 获取 路由中的数据 判断meta中 keepAlive 是否为true */
     init() {
-        const getKeepAlive: Array<string | undefined> = []
-        function loopRoutes(listArr: RouteConfig[]) {
-            listArr.forEach((item) => {
-                if (item.meta && item.meta.keepAlive) {
-                    getKeepAlive.push(item.name)
-                } else if (item.children) {
-                    loopRoutes(item.children)
-                }
-            })
-        }
-        loopRoutes(this.sideBarList)
-        this.keepAliveRoutes = getKeepAlive
+      const getKeepAlive: Array<string | undefined> = []
+      function loopRoutes(listArr: RouteConfig[]) {
+        listArr.forEach((item) => {
+          if (item.meta && item.meta.keepAlive) {
+            getKeepAlive.push(item.name)
+          } else if (item.children) {
+            loopRoutes(item.children)
+          }
+        })
+      }
+      loopRoutes(this.sideBarList)
+      this.keepAliveRoutes = getKeepAlive
     }
 }
 </script>

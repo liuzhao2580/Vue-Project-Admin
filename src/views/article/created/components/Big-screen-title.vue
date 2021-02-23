@@ -66,45 +66,45 @@ export default class BigScreenTitle extends Vue {
 
     /** 预览按钮禁用 */
     get disabled(): boolean {
-        let flag: boolean = false
-        if (this.btnDisabled || !this.titleValue) flag = true
-        return flag
+      let flag: boolean = false
+      if (this.btnDisabled || !this.titleValue) flag = true
+      return flag
     }
     /** 发布按钮的禁用 */
     get releaseDisabled() :boolean {
-        let flag: boolean = false
-        if (!this.categoryValue) flag = true
-        return flag
+      let flag: boolean = false
+      if (!this.categoryValue) flag = true
+      return flag
     }
     mounted() {
-        this.init_EventBus()
-        this.queryArticleCategory()
+      this.init_EventBus()
+      this.queryArticleCategory()
     }
     /** 使用事件总线获取 当前的内容和 设置按钮的样式 */
     init_EventBus() {
-        EventBus.$on('btnDisabled', (flag: boolean) => {
-            this.btnDisabled = flag
-        })
-        EventBus.$on('getContent', (html: HTMLDocument) => {
-            this.articleContainer = html
-        })
+      EventBus.$on('btnDisabled', (flag: boolean) => {
+        this.btnDisabled = flag
+      })
+      EventBus.$on('getContent', (html: HTMLDocument) => {
+        this.articleContainer = html
+      })
     }
     /** 获取文章分类 */
     async queryArticleCategory() {
-        const { data: result } = await queryArticleCategory_API({ level: 2 })
-        console.log(result, '')
-        if (result.code === ResultCodeEnum.success) this.categoryData = result.data
-        else this.$message.error(result.msg)
+      const { data: result } = await queryArticleCategory_API({ level: 2 })
+      console.log(result, '')
+      if (result.code === ResultCodeEnum.success) this.categoryData = result.data
+      else this.$message.error(result.msg)
     }
     /** 选择分类的改变事件 */
     categoryChange(value: number) {
-        const getFind = this.categoryData.find(item  => item.id === value)
-        console.log(getFind, 'getFind')
+      const getFind = this.categoryData.find(item  => item.id === value)
+      console.log(getFind, 'getFind')
     }
     /** 发布按钮 */
     releaseArticle(): void {
-        console.log(this.articleContainer)
-        // this.dialogVisible = false
+      console.log(this.articleContainer)
+      // this.dialogVisible = false
     }
 }
 </script>

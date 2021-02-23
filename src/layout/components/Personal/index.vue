@@ -23,49 +23,49 @@ import { mapGetters } from "vuex";
 import { removeCookie } from '@/utils/cookies'
 import { resetRouter } from "@/router"
 export default {
-    name: "Personal",
-    components: {},
-    props: {},
-    computed: {
-        ...mapGetters({
-            avatar: 'user/avatar'
-        })
+  name: "Personal",
+  components: {},
+  props: {},
+  computed: {
+    ...mapGetters({
+      avatar: 'user/avatar'
+    })
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    // 登出
+    login_Out() {
+      removeCookie("token")
+      removeCookie("user_id")
+      // 重置 路由
+      resetRouter()
+      this.$router.push({path: "/login"})
     },
-    data() {
-        return {};
-    },
-    created() {},
-    mounted() {},
-    methods: {
-        // 登出
-        login_Out() {
-            removeCookie("token")
-            removeCookie("user_id")
-            // 重置 路由
-            resetRouter()
-            this.$router.push({path: "/login"})
-        },
-        handleCommand(command) {
-            switch (command) {
-                case "a":
-                    this.$router.push("/personal")
-                    break;
-                case "b":
-                    this.$router.push("/")
-                    break;
-                case "c":
-                    this.$router.push("/documentation")
-                    break;
-                case "d":
-                    window.open( "https://github.com/liuzhao2580/Vue_project")
-                    break;
-                case "e":
-                    this.login_Out()
-                    break;
-            }
-        }
-    },
-    watch: {}
+    handleCommand(command) {
+      switch (command) {
+        case "a":
+          this.$router.push("/personal")
+          break;
+        case "b":
+          this.$router.push("/")
+          break;
+        case "c":
+          this.$router.push("/documentation")
+          break;
+        case "d":
+          window.open( "https://github.com/liuzhao2580/Vue_project")
+          break;
+        case "e":
+          this.login_Out()
+          break;
+      }
+    }
+  },
+  watch: {}
 };
 </script>
 

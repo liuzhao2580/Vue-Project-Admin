@@ -17,24 +17,24 @@ import EchartsLine from './components/Line'
 import EchartsBar from './components/Bar'
 import EchartsPie from './components/Pie'
 export default {
-    props: {
-        EchartsData: {
-            type: Object,
-            default: () => {},
-        },
+  props: {
+    EchartsData: {
+      type: Object,
+      default: () => {},
     },
-    components: {
-        EchartsLine,
-        EchartsBar,
-        EchartsPie,
-    },
-    data() {
-        return {}
-    },
-    computed: {},
-    created() {},
-    mounted() {},
-    methods: {},
+  },
+  components: {
+    EchartsLine,
+    EchartsBar,
+    EchartsPie,
+  },
+  data() {
+    return {}
+  },
+  computed: {},
+  created() {},
+  mounted() {},
+  methods: {},
 }
 </script>
 

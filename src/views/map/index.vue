@@ -7,18 +7,18 @@
 <script>
 import AmapCom from "./Amap";
 export default {
-    name: "amap",
-    components: {
-        AmapCom
-    },
-    props: {},
-    data() {
-        return{}
-    },
-    created() {},
-    mounted() {},
-    methods: {},
-    watch: {}
+  name: "amap",
+  components: {
+    AmapCom
+  },
+  props: {},
+  data() {
+    return{}
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+  watch: {}
 };
 </script>
 

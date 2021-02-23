@@ -17,7 +17,7 @@ import './icons' // 导入 icon 字体
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 new Vue({
-    router,
-    store,
-    render: (h) => h(App)
+  router,
+  store,
+  render: (h) => h(App)
 }).$mount('#app')

@@ -24,68 +24,68 @@
 
 <script>
 export default {
-    name: "Calculator",
-    components: {},
-    props: {},
-    computed: {
-        total() {
-            let getTotal = 0
-            this.CalculatorData.forEach(item => {
-                getTotal += Number(item.value)
-            })
-            return getTotal
+  name: "Calculator",
+  components: {},
+  props: {},
+  computed: {
+    total() {
+      let getTotal = 0
+      this.CalculatorData.forEach(item => {
+        getTotal += Number(item.value)
+      })
+      return getTotal
+    },
+    fullName: {
+      get() {
+        let getFullName = ""
+        this.nameDate.forEach(item => {
+          getFullName += item.value
+        })
+        return getFullName
+      },
+      set() {
+        this.nameDate.forEach(item => {
+          item.value = ""
+        })
+      }
+    }
+  },
+  data() {
+    return {
+      CalculatorData: [
+        {
+          name: "早餐",
+          value: ""
         },
-        fullName: {
-            get() {
-                let getFullName = ""
-                this.nameDate.forEach(item => {
-                    getFullName += item.value
-                })
-                return getFullName
-            },
-            set() {
-                this.nameDate.forEach(item => {
-                    item.value = ""
-                })
-            }
+        {
+          name: "中餐",
+          value: ""
+        },
+        {
+          name: "晚餐",
+          value: ""
         }
-    },
-    data() {
-        return {
-            CalculatorData: [
-                {
-                    name: "早餐",
-                    value: ""
-                },
-                {
-                    name: "中餐",
-                    value: ""
-                },
-                {
-                    name: "晚餐",
-                    value: ""
-                }
-            ],
-            nameDate: [
-                {
-                    name: "姓",
-                    value: ""
-                },
-                {
-                    name: "名",
-                    value: ""
-                }
-            ]
-        };
-    },
-    created() {},
-    mounted() {},
-    methods: {
-        clear() {
-            this.fullName = ""
+      ],
+      nameDate: [
+        {
+          name: "姓",
+          value: ""
+        },
+        {
+          name: "名",
+          value: ""
         }
-    },
-    watch: {}
+      ]
+    };
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    clear() {
+      this.fullName = ""
+    }
+  },
+  watch: {}
 };
 </script>
 
