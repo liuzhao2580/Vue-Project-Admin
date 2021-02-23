@@ -52,7 +52,8 @@
         <template slot-scope="scope">
           <!-- 搜索栏 -->
           <template v-if="scope.$index === 0 && tableConfig.showSearch">
-            <table-header-search :tableHeaderSearch="tableItem" />
+            <table-header-search :tableHeaderSearch="tableItem" ref="tableHeaderSearchRef" />
+            {{ testHandle(scope.$index, tableConfig.showSearch, scope.row, tableIndex) }}
           </template>
           <!-- 数据栏 -->
           <template v-else>
@@ -69,12 +70,7 @@
           <!-- 搜索栏开启时的操作 -->
           <template v-if="scope.$index === 0 && tableConfig.showSearch">
             <el-tooltip placement="top" effect="light" content="搜索">
-              <el-button
-                icon="el-icon-search"
-                size="mini"
-                circle
-                @click="tableConfig.handleSearch"
-              ></el-button>
+              <el-button icon="el-icon-search" size="mini" circle @click="handleSearch"></el-button>
             </el-tooltip>
             <el-tooltip placement="top" effect="light" content="重置">
               <el-button icon="el-icon-refresh" size="mini" circle></el-button>
@@ -148,7 +144,7 @@ export default class TableComponent extends Vue {
   tablePrint() {
     window.print()
   }
-  /** 表格的搜索 */
+  /** 展开关闭 表格的搜索 */
   tableSearch() {
     // 用来显示隐藏搜索栏
     const showSearch: boolean = this.tableConfig.showSearch as boolean
@@ -159,15 +155,22 @@ export default class TableComponent extends Vue {
     // 说明搜索栏还未展开
     else {
       if (this.tableConfig.columnConfig) {
-        const getFilter = this.tableConfig.columnConfig.map((item) => {
+        const getFilter = this.tableConfig.columnConfig.map(item => {
           return item.prop
         })
         const filterObj = {}
-        getFilter.forEach((item) => (filterObj[item] = ""))
+        getFilter.forEach(item => (filterObj[item] = ""))
         this.tableData.unshift(filterObj)
       }
     }
     this.tableConfig.showSearch = !showSearch
+  }
+  /** 表格点击搜索按钮 */
+  handleSearch() {
+    console.log(this.$refs.tableHeaderSearchRef, "")
+  }
+  testHandle(index, flag, row, tabIndex) {
+    console.log(index, flag, row, tabIndex)
   }
 }
 </script>

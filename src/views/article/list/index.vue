@@ -49,6 +49,16 @@ export default class ArticleListComponent extends Vue {
           type: ESearchType.dateTime,
         },
       },
+      {
+        label: "更新时间",
+        type: EColumnType.dateTime,
+        prop: "article_update_time",
+        width: 200,
+        searchable: true,
+        searchConfig: {
+          type: ESearchType.dateTime,
+        },
+      },
     ],
     operation: [
       {
