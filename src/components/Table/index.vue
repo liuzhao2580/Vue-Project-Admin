@@ -52,8 +52,10 @@
         <template slot-scope="scope">
           <!-- 搜索栏 -->
           <template v-if="scope.$index === 0 && tableConfig.showSearch">
-            <table-header-search :tableHeaderSearch="tableItem" ref="tableHeaderSearchRef" />
-            {{ testHandle(scope.$index, tableConfig.showSearch, scope.row, tableIndex) }}
+            <table-header-search
+              :tableHeaderSearch="tableItem"
+              :searchParamsValue="searchParamsValue"
+            />
           </template>
           <!-- 数据栏 -->
           <template v-else>
@@ -98,6 +100,9 @@
 import { Component, Vue, Prop } from "vue-property-decorator"
 import moment from "moment"
 import { TableConfigModel, EColumnType } from "@/typescript/model/tableModel/table-config.model"
+import { FilterConditionModel } from "@/typescript/model/filterModel/filter-condition.model"
+import { initFilterField } from "./shared/utils"
+import { SearchModelValue } from "./shared/model/serach-model-value"
 import tableHeaderSearch from "./components/table-header-search.vue"
 @Component({
   name: "tableComponent",
@@ -116,7 +121,12 @@ export default class TableComponent extends Vue {
   }
   /** 表格的列 type 的类型 */
   EColumnType!: EColumnType
-  showSearch: boolean = false
+  /** 表格过滤的条件 */
+  searchParamsValue: SearchModelValue = new SearchModelValue()
+  created() {
+    this.searchParamsValue = initFilterField(this.tableConfig)
+    console.log(this.searchParamsValue, "this.filterCondition")
+  }
   /** 判断是否是时间type */
   judgeTime(type: EColumnType) {
     return EColumnType[type]
@@ -155,11 +165,11 @@ export default class TableComponent extends Vue {
     // 说明搜索栏还未展开
     else {
       if (this.tableConfig.columnConfig) {
-        const getFilter = this.tableConfig.columnConfig.map(item => {
+        const getFilter = this.tableConfig.columnConfig.map((item) => {
           return item.prop
         })
         const filterObj = {}
-        getFilter.forEach(item => (filterObj[item] = ""))
+        getFilter.forEach((item) => (filterObj[item] = ""))
         this.tableData.unshift(filterObj)
       }
     }
@@ -167,10 +177,7 @@ export default class TableComponent extends Vue {
   }
   /** 表格点击搜索按钮 */
   handleSearch() {
-    console.log(this.$refs.tableHeaderSearchRef, "")
-  }
-  testHandle(index, flag, row, tabIndex) {
-    console.log(index, flag, row, tabIndex)
+    console.log(this.searchParamsValue, "this.searchParamsValue")
   }
 }
 </script>

@@ -40,6 +40,11 @@ export default class ArticleListComponent extends Vue {
         },
       },
       {
+        label: "分类",
+        prop: "category_name",
+        searchable: false,
+      },
+      {
         label: "创建时间",
         type: EColumnType.dateTime,
         prop: "article_time",

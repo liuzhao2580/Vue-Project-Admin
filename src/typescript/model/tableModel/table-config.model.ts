@@ -27,11 +27,9 @@ export class TableConfigModel {
 }
 
 /** 表格的列配置 */
-class ColumnConfig {
+export class ColumnConfig {
   /** 类型 */
   type?: EColumnType
-  /** 用于查询的值 */
-  searchKey?: string
   /** 排序 */
   sortKey?: string
   /** 每列的宽度 */
@@ -46,8 +44,10 @@ class ColumnConfig {
   fixed?: boolean = false
   /** 是否可搜索  */
   searchable: boolean = true
+  /** 用于需要搜索的字段 */
+  searchKey?: string
   /** 搜索的配置 */
-  searchConfig!: SearchConfig
+  searchConfig?: SearchConfig
 }
 /** 搜索的配置 */
 class SearchConfig {

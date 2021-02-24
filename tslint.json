@@ -57,14 +57,12 @@
     "restrict-plus-operands": false,
     "triple-equals": false,
     "use-isnan": true,
-
-    "indent": [false, "spaces", 4],
+    "indent": [false, "spaces", 2],
     "max-classes-per-file": false,
     "max-file-line-count": [true, 1000],
     "max-line-length": [true, 300],
     "no-default-export": false,
     "no-duplicate-imports": true,
-
     "align": [false, "parameters", "arguments", "statements", "members", "elements"],
     "array-type": [false, "array"],
     "class-name": false,

@@ -6,7 +6,7 @@
       <el-input
         style="width: 100%"
         size="mini"
-        v-model="modelValue"
+        v-model="searchParamsValue[tableHeaderSearch.prop].filterValue"
         v-if="tableHeaderSearch.searchConfig.type === ESearchType.input"
         placeholder="请输入"
       />
@@ -16,7 +16,7 @@
         size="mini"
         v-else-if="tableHeaderSearch.searchConfig.type === ESearchType.date"
         type="date"
-        v-model="modelValue"
+        v-model="searchParamsValue[tableHeaderSearch.prop].filterValue"
         placeholder="选择日期"
       >
       </el-date-picker>
@@ -26,7 +26,7 @@
         size="mini"
         v-else-if="tableHeaderSearch.searchConfig.type === ESearchType.dateTime"
         type="datetime"
-        v-model="modelValue"
+        v-model="searchParamsValue[tableHeaderSearch.prop].filterValue"
         placeholder="选择日期时间"
       >
       </el-date-picker>
@@ -36,16 +36,19 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator"
-import { ESearchType } from "@/typescript/model/tableModel/table-config.model"
+import { ESearchType, ColumnConfig } from "@/typescript/model/tableModel/table-config.model"
+import { SearchModelValue } from "../shared/model/serach-model-value"
 @Component({
   name: "tableHeaderSearch",
 })
 export default class TableHeaderSearchComponent extends Vue {
   /** 表格的搜索配置 */
-  @Prop({ required: true, default: () => {}, type: Object }) tableHeaderSearch
+  @Prop({ required: true, default: () => {}, type: Object }) tableHeaderSearch!: ColumnConfig
+  /** 给每个 model 赋值 */
+  @Prop({ required: true, default: () => new SearchModelValue(), type: Object })
+  searchParamsValue!: SearchModelValue
   /** 搜索的类型 */
   ESearchType = ESearchType
-  modelValue = null
 }
 </script>
 
