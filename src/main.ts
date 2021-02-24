@@ -13,6 +13,7 @@ import "@/mock" // 导入 mock  不需要的时候注释
 
 import "./icons" // 导入 icon 字体
 
+import "@/directives/permission"
 // 打包的时候注释 不然 externals 还是会将 elementUI 打包
 Vue.use(ElementUI)
 Vue.config.productionTip = false
