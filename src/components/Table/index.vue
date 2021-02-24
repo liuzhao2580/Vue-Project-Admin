@@ -38,6 +38,7 @@
         type="index"
         label="序号"
         width="60"
+        :index="indexMethod"
         v-if="tableConfig.index !== false"
       >
       </el-table-column>
@@ -126,6 +127,12 @@ export default class TableComponent extends Vue {
   created() {
     this.searchParamsValue = initFilterField(this.tableConfig)
     console.log(this.searchParamsValue, "this.filterCondition")
+  }
+  /** 自定义索引 */
+  indexMethod(index) {
+    if (this.tableConfig.showSearch) {
+      if (index) return index
+    } else return index + 1
   }
   /** 判断是否是时间type */
   judgeTime(type: EColumnType) {

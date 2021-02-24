@@ -4,12 +4,12 @@ import { ResultModel } from "@/typescript/model"
 import {
   IArticleInsert,
   IArticleBasic,
-} from "@/views/article/share/interface/article-config.interface"
+} from "@/views/article/shared/interface/article-config.interface"
 
 /** 获取文章分类 */
 export const queryArticleCategory_API = (params: {
-    id?: string
-    level?: number
+  id?: string
+  level?: number
 }): Promise<ResultModel<any>> => {
   return axios.post(`/article/category`, params)
 }

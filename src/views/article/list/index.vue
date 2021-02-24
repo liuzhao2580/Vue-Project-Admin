@@ -8,7 +8,7 @@
 import { Component, Vue } from "vue-property-decorator"
 import { queryArticleList_API } from "@/api/modules/article"
 import { ResultCodeEnum } from "@/typescript/enum"
-import { IArticleBasic } from "../share/interface/article-config.interface"
+import { IArticleBasic } from "../shared/interface/article-config.interface"
 import tableComponent from "@/components/Table/index.vue"
 import {
   TableConfigModel,
