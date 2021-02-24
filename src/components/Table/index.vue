@@ -6,7 +6,7 @@
       <div class="operation-right">
         <!-- 搜索 -->
         <span
-          v-if="tableConfig.searchIcon !== false"
+          v-if="searchIconFlag()"
           title="搜索"
           @click="tableSearch"
           class="right-icon el-icon-search"
@@ -126,9 +126,13 @@ export default class TableComponent extends Vue {
   searchParamsValue: SearchModelValue = new SearchModelValue()
   created() {
     this.searchParamsValue = initFilterField(this.tableConfig)
-    console.log(this.searchParamsValue, "this.filterCondition")
   }
-  /** 自定义索引 */
+  /** 用来设置 搜索按钮的显示隐藏 */
+  searchIconFlag() {
+    const searchable = this.tableConfig.columnConfig.some((columnItem) => columnItem.searchable)
+    if (this.tableConfig.searchIcon !== false && searchable) return true
+  }
+  /** 自定义索引,当开启搜索栏的时候,索引为0的不显示 */
   indexMethod(index) {
     if (this.tableConfig.showSearch) {
       if (index) return index
@@ -184,7 +188,12 @@ export default class TableComponent extends Vue {
   }
   /** 表格点击搜索按钮 */
   handleSearch() {
-    console.log(this.searchParamsValue, "this.searchParamsValue")
+    let queryParams: FilterConditionModel[] = []
+    // 用来过滤 只有当 filterValue 有值的时候才说明需要过滤数据
+    for (const key in this.searchParamsValue) {
+      if (this.searchParamsValue[key].filterValue) queryParams.push(this.searchParamsValue[key])
+    }
+    this.tableConfig.handleSearch(queryParams)
   }
 }
 </script>

@@ -8,14 +8,15 @@
 import { Component, Vue } from "vue-property-decorator"
 import { queryArticleList_API } from "@/api/modules/article"
 import { ResultCodeEnum } from "@/typescript/enum"
-import { IArticleBasic } from "../shared/interface/article-config.interface"
-import tableComponent from "@/components/Table/index.vue"
 import {
   TableConfigModel,
   EColumnType,
   EOperationType,
   ESearchType,
 } from "@/typescript/model/tableModel/table-config.model"
+import { FilterConditionModel } from "@/typescript/model/filterModel/filter-condition.model"
+import { IArticleBasic } from "../shared/interface/article-config.interface"
+import tableComponent from "@/components/Table/index.vue"
 @Component({
   name: "article-list",
   components: {
@@ -83,8 +84,8 @@ export default class ArticleListComponent extends Vue {
         },
       },
     ],
-    handleSearch: () => {
-      console.log("handleSearch")
+    handleSearch: (event: FilterConditionModel[]) => {
+      console.log(event)
     },
   }
   created() {
