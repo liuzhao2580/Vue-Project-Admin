@@ -5,6 +5,7 @@
     width="80%"
     :close-on-click-modal="false"
     class="article-dialog-box"
+    @close="$emit('update:visible', false)"
   >
     <!-- 文章标题 -->
     <div class="article-title">{{ title }}</div>
@@ -35,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from "vue-property-decorator"
+import { Component, Vue, Prop, Watch } from "vue-property-decorator"
 @Component({
   name: "ReleaseContainer",
 })
@@ -68,7 +69,6 @@ export default class ReleaseContainer extends Vue {
     console.log(this.articleContainer)
     // this.dialogVisible = false
   }
-
   /** 监听 visible 变化 */
   @Watch("visible") change(val, oldVal) {
     this.visibleFlag = this.visible
