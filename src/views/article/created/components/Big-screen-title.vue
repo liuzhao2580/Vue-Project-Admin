@@ -13,6 +13,7 @@
       :title="titleValue"
       :articleContainer="articleContainer"
       :categoryData="categoryData"
+      :visible.sync="dialogVisible"
     />
   </div>
 </template>
@@ -68,16 +69,6 @@ export default class BigScreenTitle extends Vue {
     if (result.code === ResultCodeEnum.success) this.categoryData = result.data
     else this.$message.error(result.msg)
   }
-  /** 选择分类的改变事件 */
-  categoryChange(value: number) {
-    const getFind = this.categoryData.find((item) => item.id === value)
-    console.log(getFind, "getFind")
-  }
-  /** 发布按钮 */
-  releaseArticle(): void {
-    console.log(this.articleContainer)
-    // this.dialogVisible = false
-  }
 }
 </script>
 
@@ -101,34 +92,5 @@ export default class BigScreenTitle extends Vue {
 .article-title {
   font-size: 24px;
   font-weight: 900;
-}
-
-// 预览弹出框
-.article-dialog-box {
-  .article-title {
-    margin-bottom: 10px;
-  }
-  .article-name {
-    margin: 10px 0;
-    font-size: 20px;
-    font-weight: 900;
-  }
-  // 分类
-  .article-category-box {
-    .article-title {
-      font-size: 18px;
-    }
-    .article-category {
-      min-height: 100px;
-      max-height: 150px;
-      overflow-y: auto;
-      border: 1px solid #f0f0f0;
-      border-radius: 5px;
-      padding: 16px;
-      .category-item {
-        margin: 5px 20px 5px 0;
-      }
-    }
-  }
 }
 </style>
