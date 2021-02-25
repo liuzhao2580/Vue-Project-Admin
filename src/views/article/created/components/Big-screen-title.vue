@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { Component, Vue } from "vue-property-decorator"
 import { EventBus } from "../../shared/utils/EventBus"
 import { queryArticleCategory_API } from "@/api/modules/article"
 import { ResultCodeEnum } from "@/typescript/shared/enum"

@@ -70,7 +70,7 @@ export default class ReleaseContainer extends Vue {
     // this.dialogVisible = false
   }
   /** 监听 visible 变化 */
-  @Watch("visible") change(val, oldVal) {
+  @Watch("visible") change() {
     this.visibleFlag = this.visible
   }
 }
