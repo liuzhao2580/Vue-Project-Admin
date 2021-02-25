@@ -9,38 +9,11 @@
       <!-- <el-button type="primary" :disabled="disabled" @click="dialogVisible = true">预览</el-button> -->
       <el-button type="primary" @click="dialogVisible = true">预览</el-button>
     </div>
-    <el-dialog
-      title="文章预览"
-      :visible.sync="dialogVisible"
-      width="80%"
-      :close-on-click-modal="false"
-      class="article-dialog-box"
-    >
-      <!-- 文章标题 -->
-      <div class="article-title">{{ titleValue }}</div>
-      <!-- 文章分类 -->
-      <div class="article-category-box">
-        <p class="article-title">文章分类</p>
-        <div class="article-category">
-          <el-radio-group v-model="categoryValue" @change="categoryChange">
-            <el-radio
-              :label="categoryItem.id"
-              v-for="categoryItem in categoryData"
-              :key="categoryItem.id"
-              class="category-item"
-              >{{ categoryItem.category_name }}</el-radio
-            >
-          </el-radio-group>
-        </div>
-      </div>
-      <div v-html="articleContainer"></div>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" :disabled="releaseDisabled" @click="releaseArticle"
-          >发 布</el-button
-        >
-      </span>
-    </el-dialog>
+    <release-container
+      :title="titleValue"
+      :articleContainer="articleContainer"
+      :categoryData="categoryData"
+    />
   </div>
 </template>
 
@@ -48,17 +21,20 @@
 import { Component, Vue, Prop } from "vue-property-decorator"
 import { EventBus } from "../../shared/utils/EventBus"
 import { queryArticleCategory_API } from "@/api/modules/article"
-import { ResultCodeEnum } from "@/typescript/enum"
-import { IArticleCategory } from "../../shared/interface/article-config.interface"
-@Component({})
+import { ResultCodeEnum } from "@/typescript/shared/enum"
+import { IArticleCategory } from "@/typescript/views/article/interface/article-config.interface"
+import ReleaseContainer from "./Release-container.vue"
+@Component({
+  components: {
+    ReleaseContainer,
+  },
+})
 /** 大屏幕 下的 标题 */
 export default class BigScreenTitle extends Vue {
   /** 按钮是否禁用 */
   btnDisabled: boolean = true
   /** 文章标题 */
   titleValue: string = ""
-  /** 文章分类 选中项 id */
-  categoryValue: string = ""
   /** 文章分类的数据 */
   categoryData: IArticleCategory[] = []
   /** 文章内容 */
@@ -72,12 +48,7 @@ export default class BigScreenTitle extends Vue {
     if (this.btnDisabled || !this.titleValue) flag = true
     return flag
   }
-  /** 发布按钮的禁用 */
-  get releaseDisabled(): boolean {
-    let flag: boolean = false
-    if (!this.categoryValue) flag = true
-    return flag
-  }
+
   mounted() {
     this.init_EventBus()
     this.queryArticleCategory()
@@ -93,8 +64,7 @@ export default class BigScreenTitle extends Vue {
   }
   /** 获取文章分类 */
   async queryArticleCategory() {
-    const { data: result } = await queryArticleCategory_API({ level: 2 })
-    console.log(result, "")
+    const result = await queryArticleCategory_API({ level: 2 })
     if (result.code === ResultCodeEnum.success) this.categoryData = result.data
     else this.$message.error(result.msg)
   }

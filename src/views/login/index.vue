@@ -31,7 +31,7 @@
 import { Vue, Component } from "vue-property-decorator"
 import { namespace } from "vuex-class"
 import { userLogin } from "@/api/modules/user"
-import { ResultCodeEnum } from "@/typescript/enum"
+import { ResultCodeEnum } from "@/typescript/shared/enum"
 const USER_VUEX = namespace("user")
 @Component({
   name: "login",

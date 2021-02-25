@@ -12,9 +12,8 @@ Vue.directive("permission", {
       el.style.backgroundImage = "none"
       el.style.backgroundColor = "#fff"
       el.style.borderColor = "#ebeef5"
-      el.addEventListener("click", () => {
-        return
-      })
+      /** 使用 css3 的属性,用来禁用点击事件 但是 ie9 不支持 */
+      el.style.pointerEvents = "none"
     }
   },
 })

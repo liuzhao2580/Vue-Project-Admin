@@ -1,6 +1,6 @@
 import axios from "../axiosConfig"
-import { ResultModel } from "@/typescript/model"
-import { IUserBaseInfo } from "@/typescript/interface/user-interface"
+import { ResultModel } from "@/typescript/shared/model"
+import { IUserBaseInfo } from "@/typescript/shared/interface/user-interface"
 
 // 用户登录
 export const userLogin = (params: any): Promise<ResultModel<IUserBaseInfo>> => {

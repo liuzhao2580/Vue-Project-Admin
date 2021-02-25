@@ -7,15 +7,15 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
 import { queryArticleList_API } from "@/api/modules/article"
-import { ResultCodeEnum } from "@/typescript/enum"
+import { ResultCodeEnum } from "@/typescript/shared/enum"
 import {
   TableConfigModel,
   EColumnType,
   EOperationType,
   ESearchType,
-} from "@/typescript/model/tableModel/table-config.model"
-import { FilterConditionModel } from "@/typescript/model/filterModel/filter-condition.model"
-import { IArticleBasic } from "../shared/interface/article-config.interface"
+} from "@/typescript/shared/model/tableModel/table-config.model"
+import { FilterConditionModel } from "@/typescript/shared/model/filterModel/filter-condition.model"
+import { IArticleBasic } from "@/typescript/views/article/interface/article-config.interface"
 import tableComponent from "@/components/Table/index.vue"
 @Component({
   name: "article-list",

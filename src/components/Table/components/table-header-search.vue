@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator"
-import { ESearchType, ColumnConfig } from "@/typescript/model/tableModel/table-config.model"
+import { ESearchType, ColumnConfig } from "@/typescript/shared/model/tableModel/table-config.model"
 import { SearchModelValue } from "../shared/model/serach-model-value"
 @Component({
   name: "tableHeaderSearch",

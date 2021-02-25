@@ -100,8 +100,11 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator"
 import moment from "moment"
-import { TableConfigModel, EColumnType } from "@/typescript/model/tableModel/table-config.model"
-import { FilterConditionModel } from "@/typescript/model/filterModel/filter-condition.model"
+import {
+  TableConfigModel,
+  EColumnType,
+} from "@/typescript/shared/model/tableModel/table-config.model"
+import { FilterConditionModel } from "@/typescript/shared/model/filterModel/filter-condition.model"
 import { initFilterField } from "./shared/utils"
 import { SearchModelValue } from "./shared/model/serach-model-value"
 import tableHeaderSearch from "./components/table-header-search.vue"
