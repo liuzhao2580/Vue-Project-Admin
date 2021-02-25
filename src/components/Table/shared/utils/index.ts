@@ -1,4 +1,4 @@
-import { FilterConditionModel } from "@/typescript/shared/model/filterModel/filter-condition.model"
+import { FilterConditionModel } from "@/typescript/shared/model/tableModel/filter-condition.model"
 import { TableConfigModel } from "@/typescript/shared/model/tableModel/table-config.model"
 import { SearchModelValue } from "../model/serach-model-value"
 /** 初始化表格过滤的字段 */
