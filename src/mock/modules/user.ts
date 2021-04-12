@@ -1,5 +1,5 @@
-import { ResultCodeEnum } from "@/typescript/enum"
-import { IUserBaseInfo } from "@/typescript/interface/user-interface"
+import { ResultCodeEnum } from "@/typescript/shared/enum"
+import { IUserBaseInfo } from "@/typescript/shared/interface/user-interface"
 import { IMockResponseData } from "../share/interface/mock.interface"
 
 // 用户的基本信息
@@ -13,7 +13,7 @@ const userInfo: IUserBaseInfo[] = [
     nickName: "小火车况且况且",
     token: "admin-token",
     avatar:
-            "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/ec902db0-3497-11eb-b997-9918a5dda011.jpg",
+      "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/ec902db0-3497-11eb-b997-9918a5dda011.jpg",
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const userInfo: IUserBaseInfo[] = [
     nickName: "小飞机呼哧呼哧",
     token: "admin-token",
     avatar:
-            "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/94e4c280-349a-11eb-8ff1-d5dcf8779628.png",
+      "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/94e4c280-349a-11eb-8ff1-d5dcf8779628.png",
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const userInfo: IUserBaseInfo[] = [
     nickName: "小话痨吧啦吧啦",
     token: "user-token",
     avatar:
-            "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/326b7250-34a6-11eb-97b7-0dc4655d6e68.png",
+      "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/326b7250-34a6-11eb-97b7-0dc4655d6e68.png",
   },
 ]
 // 用户登陆的时候 保存用户的基本信息

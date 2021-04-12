@@ -1,10 +1,9 @@
-import { AxiosResponse } from "axios"
 import axios from "../axiosConfig"
-import { ResultModel } from "@/typescript/model"
+import { ResultModel } from "@/typescript/shared/model/"
 import {
   IArticleInsert,
   IArticleBasic,
-} from "@/views/article/shared/interface/article-config.interface"
+} from "@/typescript/views/article/interface/article-config.interface"
 
 /** 获取文章分类 */
 export const queryArticleCategory_API = (params: {

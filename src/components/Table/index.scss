@@ -1,16 +1,21 @@
 .table-component-box {
-    .table-top-box {
-        margin: 10px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .operation-right {
-            .right-icon {
-                font-size: 22px;
-                cursor: pointer;
-                color: $brandColor;
-                margin-left: 10px;
-            }
-        }
+  .table-top-box {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .operation-right {
+      .right-icon {
+        font-size: 22px;
+        cursor: pointer;
+        color: $brandColor;
+        margin-left: 10px;
+      }
     }
+  }
+  // 分页
+  .pagination-box {
+    margin-top: 10px;
+    text-align: right;
+  }
 }

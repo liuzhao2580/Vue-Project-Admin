@@ -1,21 +1,22 @@
 <template>
   <div class="article-list-box">
-    <table-component :tableData="tableData" :tableConfig="tableConfig" />
+    <table-component :tableData="tableData" :tableConfig="tableConfig" :pageConfig="pageConfig" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
 import { queryArticleList_API } from "@/api/modules/article"
-import { ResultCodeEnum } from "@/typescript/enum"
+import { ResultCodeEnum } from "@/typescript/shared/enum"
 import {
   TableConfigModel,
   EColumnType,
   EOperationType,
   ESearchType,
-} from "@/typescript/model/tableModel/table-config.model"
-import { FilterConditionModel } from "@/typescript/model/filterModel/filter-condition.model"
-import { IArticleBasic } from "../shared/interface/article-config.interface"
+} from "@/typescript/shared/model/tableModel/table-config.model"
+import { PageModel } from "@/typescript/shared/model/tableModel/page-config.model"
+import { FilterConditionModel } from "@/typescript/shared/model/filterModel/filter-condition.model"
+import { IArticleBasic } from "@/typescript/views/article/interface/article-config.interface"
 import tableComponent from "@/components/Table/index.vue"
 @Component({
   name: "article-list",
@@ -26,6 +27,8 @@ import tableComponent from "@/components/Table/index.vue"
 export default class ArticleListComponent extends Vue {
   /** 表格的数据 */
   tableData: IArticleBasic[] = []
+  /** 表格的分页 */
+  pageConfig: PageModel = new PageModel()
   /** 表格的列配置 */
   tableConfig: TableConfigModel = {
     loading: true,
@@ -100,8 +103,6 @@ export default class ArticleListComponent extends Vue {
     }
     this.tableConfig.loading = false
   }
-  /** 初始化表格 */
-  initTableConfig() {}
 }
 </script>
 

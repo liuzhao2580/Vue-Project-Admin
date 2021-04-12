@@ -94,17 +94,31 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 分页组件 -->
+    <div class="pagination-box">
+      <el-pagination
+        layout="total, prev, pager, next,sizes, jumper"
+        :page-sizes="[10, 20, 50, 100]"
+        background
+        :total="pageConfig.total"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator"
 import moment from "moment"
-import { TableConfigModel, EColumnType } from "@/typescript/model/tableModel/table-config.model"
-import { FilterConditionModel } from "@/typescript/model/filterModel/filter-condition.model"
+import {
+  TableConfigModel,
+  EColumnType,
+} from "@/typescript/shared/model/tableModel/table-config.model"
+import { FilterConditionModel } from "@/typescript/shared/model/filterModel/filter-condition.model"
 import { initFilterField } from "./shared/utils"
 import { SearchModelValue } from "./shared/model/serach-model-value"
 import tableHeaderSearch from "./components/table-header-search.vue"
+import { PageModel } from "@/typescript/shared/model/tableModel/page-config.model"
 @Component({
   name: "tableComponent",
   components: {
@@ -116,6 +130,8 @@ export default class TableComponent extends Vue {
   @Prop({ required: true, type: Array, default: () => [] }) tableData!: Array<any>
   /** 表格的列配置 */
   @Prop({ required: true, type: Object, default: () => {} }) tableConfig!: TableConfigModel
+  /** 表格的分页 */
+  @Prop({ required: true, type: Object, default: new PageModel() }) pageConfig!: PageModel
   /** 表格的样式 */
   get tableHeaderStyle() {
     return { background: "#e0e0e0", color: "#333", fontWeight: 900 }

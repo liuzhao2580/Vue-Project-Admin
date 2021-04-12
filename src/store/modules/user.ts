@@ -4,8 +4,8 @@ import { setCookie, getCookie, removeCookie } from "@/utils/cookies"
 import { deepClone } from "@/utils/config"
 import { asyncRoutes, resetRouter } from "@/router"
 import { RouteConfig } from "vue-router"
-import { IUserBaseInfo } from "@/typescript/interface/user-interface"
-import { ResultCodeEnum } from "@/typescript/enum"
+import { IUserBaseInfo } from "@/typescript/shared/interface/user-interface"
+import { ResultCodeEnum } from "@/typescript/shared/enum"
 // 定义一个接受的参数，避免 在请求拦截的时候出现 Message undefined 报错问题
 const _Message = Message
 /**

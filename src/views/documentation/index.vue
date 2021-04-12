@@ -21,7 +21,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-button type="primary" v-permission="1" @click="handle">测试</el-button>
   </div>
 </template>
 
@@ -51,9 +50,6 @@ export default class DocumentationComponent extends Vue {
   // 跳转页面
   jumpURL(URL) {
     window.open(URL)
-  }
-  handle() {
-    console.log(123, "123")
   }
 }
 </script>

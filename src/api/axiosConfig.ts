@@ -1,14 +1,14 @@
 import axios, { AxiosResponse } from "axios"
 import { Message } from "element-ui"
 
-import { ResultCodeEnum } from "@/typescript/enum"
-import { ResultModel } from "@/typescript/model"
+import { ResultCodeEnum } from "@/typescript/shared/enum"
+import { ResultModel } from "@/typescript/shared/model/"
 import { getCookie, removeCookie } from "@/utils/cookies"
 import { resetRouter } from "@/router"
 const baseURL =
-    process.env.NODE_ENV === "development"
-      ? process.env.VUE_APP_BASE_API
-      : process.env.VUE_APP_BASE_URL
+  process.env.NODE_ENV === "development"
+    ? process.env.VUE_APP_BASE_API
+    : process.env.VUE_APP_BASE_URL
 const Axios = axios.create({
   baseURL,
   withCredentials: true,
