@@ -63,7 +63,7 @@ const components: RouteConfig = {
     },
     {
       path: "threeJS",
-      meta: { title: "threeJS", icon: "topology" },
+      meta: { title: "threeJS", icon: "3D" },
       name: "threeJSComponents",
       component: () =>
         import(
