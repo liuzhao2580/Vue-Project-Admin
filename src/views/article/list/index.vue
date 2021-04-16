@@ -1,6 +1,10 @@
 <template>
   <div class="article-list-box">
-    <table-component :tableData="tableData" :tableConfig="tableConfig" :pageConfig="pageConfig" />
+    <table-component
+      :tableData="tableData"
+      :tableConfig="tableConfig"
+      :pageConfig="pageConfig"
+    />
   </div>
 </template>
 
@@ -15,7 +19,7 @@ import {
   ESearchType,
 } from "@/typescript/shared/model/tableModel/table-config.model"
 import { PageModel } from "@/typescript/shared/model/tableModel/page-config.model"
-import { FilterConditionModel } from "@/typescript/shared/model/filterModel/filter-condition.model"
+import { FilterConditionModel } from "@/typescript/shared/model/tableModel/filter-condition.model"
 import { IArticleBasic } from "@/typescript/views/article/interface/article-config.interface"
 import tableComponent from "@/components/Table/index.vue"
 @Component({

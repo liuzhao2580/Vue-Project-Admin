@@ -10,7 +10,11 @@
         v-for="cardItem in cardList"
         :key="cardItem.iconClass"
       >
-        <el-card class="card-item-box" shadow="hover" @click.native="jumpURL(cardItem.srcURL)">
+        <el-card
+          class="card-item-box"
+          shadow="hover"
+          @click.native="jumpURL(cardItem.srcURL)"
+        >
           <div class="icon-box">
             <svg-icon
               :style="cardItem.iconClass === 'element' ? 'color: #409eff' : ''"
