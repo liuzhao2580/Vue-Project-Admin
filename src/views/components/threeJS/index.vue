@@ -1,5 +1,12 @@
 <template>
-  <div>{{ name12 }}</div>
+  <div class="threejs-box">
+    <p class="document-url">
+      <a
+        href="http://www.yanhuangxueyuan.com/threejs/docs/index.html#manual/zh/introduction/Creating-a-scene"
+        >文档地址</a
+      >
+    </p>
+  </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator"
@@ -11,4 +18,12 @@ export default class ThreeJSComponents extends Vue {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.threejs-box {
+  .document-url {
+    a {
+      color: $brandColor;
+    }
+  }
+}
+</style>
