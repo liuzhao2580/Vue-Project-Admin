@@ -1,6 +1,6 @@
 import { ResultCodeEnum } from "@/typescript/shared/enum"
 import { IUserBaseInfo } from "@/typescript/shared/interface/user-interface"
-import { IMockResponseData } from "../share/interface/mock.interface"
+import { IMockResponseData } from "../shared/interface/mock.interface"
 
 // 用户的基本信息
 const userInfo: IUserBaseInfo[] = [
@@ -39,13 +39,15 @@ const userInfo: IUserBaseInfo[] = [
   },
 ]
 // 用户登陆的时候 保存用户的基本信息
-const setUserInfo = (options: { body: string }): IMockResponseData<IUserBaseInfo> => {
+const setUserInfo = (options: {
+  body: string
+}): IMockResponseData<IUserBaseInfo> => {
   const getUserInfo = JSON.parse(options.body)
 
   const userName = getUserInfo.userName
   const password = getUserInfo.password
   // 判断该用户是否存在
-  const is_True = userInfo.find((item) => {
+  const is_True = userInfo.find(item => {
     return item.userName === userName && item.password === password
   })
   if (is_True) {
@@ -68,12 +70,14 @@ const setUserInfo = (options: { body: string }): IMockResponseData<IUserBaseInfo
   }
 }
 // 用户刷新的时候获取用户基本信息
-const getUserInfo = (options: { url: any }): IMockResponseData<IUserBaseInfo> => {
+const getUserInfo = (options: {
+  url: any
+}): IMockResponseData<IUserBaseInfo> => {
   const { url } = options
   const splitArray: string[] = url.split("/")
   const id = +splitArray[splitArray.length - 1]
   // 判断该用户是否存在
-  const is_True = userInfo.find((item) => {
+  const is_True = userInfo.find(item => {
     return item.id === id
   })
   if (is_True) {

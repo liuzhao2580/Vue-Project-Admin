@@ -5,7 +5,9 @@
     "no-await-in-loop": "warn",
     "require-await": "off",
     "indent": ["warn", 2, { "SwitchCase": 1 }],
-    "eqeqeq": "warn"
+    "eqeqeq": "warn",
+    "no-trailing-spaces": 1,
+    "no-unused-vars": "error"
   },
   "parserOptions": {
     "parser": "@typescript-eslint/parser"
