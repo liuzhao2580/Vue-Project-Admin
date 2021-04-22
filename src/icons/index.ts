@@ -12,10 +12,10 @@ Vue.component("svg-icon", SvgIcon)
 const importAll = (requireContext: __WebpackModuleApi.RequireContext) =>
   requireContext.keys().map(requireContext)
 
-/** 
+/**
  * require.context("./svg", false, /\.svg&/) 会去找 ./svg 文件夹下面的以 .svg结尾的所有文件
  *  需要结合 importAll 使用
- * 
+ *
  * require.context(directory, useSubdirectories, regExp)有三个参数：
  * directory ：说明需要检索的目录
     useSubdirectories ：是否检索子目录

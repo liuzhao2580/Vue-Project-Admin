@@ -14,6 +14,7 @@
 import { Vue, Component } from "vue-property-decorator"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 @Component({
   name: "threeJSComponents",
@@ -61,7 +62,8 @@ export default class ThreeJSComponents extends Vue {
     // 1. 创建一个 摄像机
     const scene = new THREE.Scene()
     // 2. 创建一个相机
-    const camera = new THREE.Camera()
+    const camera = new THREE.PerspectiveCamera()
+    camera.position.set(5, 2, 8)
     // 3. 创建一个渲染器
     const renderer = new THREE.WebGLRenderer()
     // 4. 获取dom元素
@@ -69,7 +71,7 @@ export default class ThreeJSComponents extends Vue {
     // 5. 设置渲染 canvas 大小
     renderer.setSize(dom.clientWidth, dom.clientHeight)
     // 6. 将渲染的元素添加到指定的容器中
-    dom?.appendChild(renderer.domElement)
+    dom.appendChild(renderer.domElement)
 
     // 添加环境光
     const ambLight = new THREE.AmbientLight(0x404040)
@@ -81,15 +83,16 @@ export default class ThreeJSComponents extends Vue {
     var hemisLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1)
     scene.add(hemisLight)
     const loader = new GLTFLoader()
+    loader.setDRACOLoader(new DRACOLoader())
+    loader.setPath("/assets/model/")
     loader.load(
-      "https://a.amap.com/jsapi_demos/static/gltf/Duck.gltf",
-      function(gltf) {
+      "gltf/duck/Duck.gltf",
+      gltf => {
         scene.add(gltf.scene)
-        gltf.scene.scale.set(0.2, 0.2, 0.2)
       },
       undefined,
-      function(error) {
-        console.error(error)
+      error => {
+        console.log(error)
       },
     )
     const render = () => {
@@ -98,8 +101,7 @@ export default class ThreeJSComponents extends Vue {
     }
     render()
     // 添加控件
-    const controls = new OrbitControls(camera, renderer.domElement)
-    controls.target.set(1, 1, 1)
+    new OrbitControls(camera, renderer.domElement)
   }
 }
 </script>

@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Mixins } from "vue-property-decorator"
+import { Component, Mixins } from "vue-property-decorator"
 import { AppMain, Sidebar, Navbar } from "./components"
 import { namespace } from "vuex-class"
 import LayoutMixin from "./mixin/Resize"

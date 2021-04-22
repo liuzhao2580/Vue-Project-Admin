@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios"
+import axios from "axios"
 import { Message } from "element-ui"
 
 import { ResultCodeEnum } from "@/typescript/shared/enum"
@@ -19,14 +19,14 @@ const Axios = axios.create({
 
 // 添加请求拦截器
 Axios.interceptors.request.use(
-  (config) => {
+  config => {
     const reg = /\/login$/
     if (config.url && reg.test(config.url)) return config
     config.headers["x-csrf-token"] = getCookie("csrfToken")
     config.headers["Authorization"] = `Bearer ${getCookie("token")}`
     return config
   },
-  (error) => {
+  error => {
     console.log(error, "error")
   },
 )
@@ -35,7 +35,7 @@ const _Message = Message
 // 添加响应拦截器
 Axios.interceptors.response.use(
   // 请求成功
-  (response) => {
+  response => {
     const data: ResultModel<any> = response.data
     // 说明返回数据成功
     if (data.code === ResultCodeEnum.success) {
@@ -54,7 +54,7 @@ Axios.interceptors.response.use(
     } else return response
   },
   // 请求失败
-  (error) => {
+  error => {
     // 获取请求失败的状态码
     const { response } = error
     if (response) {

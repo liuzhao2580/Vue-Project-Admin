@@ -63,7 +63,14 @@
     "max-line-length": [true, 300],
     "no-default-export": false,
     "no-duplicate-imports": true,
-    "align": [false, "parameters", "arguments", "statements", "members", "elements"],
+    "align": [
+      false,
+      "parameters",
+      "arguments",
+      "statements",
+      "members",
+      "elements"
+    ],
     "array-type": [false, "array"],
     "class-name": false,
     "comment-format": [false, "check-space"],
