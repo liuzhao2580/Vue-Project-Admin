@@ -38,6 +38,7 @@
     "no-bitwise": false,
     "no-conditional-assignment": true,
     "no-console": false,
+    "no-unused-var": true,
     "no-debugger": false,
     "no-duplicate-super": true,
     "no-empty": false,

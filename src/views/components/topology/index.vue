@@ -8,18 +8,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import * as X6 from "@antv/x6";
-import "./antv-x6";
+import { Component, Vue } from "vue-property-decorator"
+import * as X6 from "@antv/x6"
+import "./antv-x6"
 /** 拓扑图组件 */
 @Component({
   name: "topology",
 })
 export default class TopologyComponent extends Vue {
   /** 定义 装拓扑图组件 */
-  topologyContent!: HTMLDivElement;
+  topologyContent!: HTMLDivElement
   /** 画布的实例对象 */
-  graph;
+  graph
   data = {
     // 节点
     nodes: [
@@ -49,7 +49,7 @@ export default class TopologyComponent extends Vue {
         label: "world", // String，节点标签
       },
     ],
-    /* 
+    /*
         边
         默认图形 edge 来渲染边，除此之外，在 X6 中还内置了 double-edge 和 shadow-edge 两种图形，可以通过 shape 属性为边指定渲染的图形
         */
@@ -65,9 +65,11 @@ export default class TopologyComponent extends Vue {
         },
       },
     ],
-  };
+  }
   mounted() {
-    this.topologyContent = document.querySelector("#antv-x6-container") as HTMLDivElement;
+    this.topologyContent = document.querySelector(
+      "#antv-x6-container",
+    ) as HTMLDivElement
   }
   /** 初始化 */
   init() {
@@ -83,7 +85,7 @@ export default class TopologyComponent extends Vue {
         size: 10, // 网格大小 10px
         visible: true, // 渲染网格背景
       },
-    });
+    })
     // 创建节点
     const rect = new X6.Shape.Rect({
       id: "rect1",
@@ -98,7 +100,7 @@ export default class TopologyComponent extends Vue {
           fill: "white",
         },
       },
-    });
+    })
     const rect2 = new X6.Shape.Rect({
       id: "rect2",
       x: 100,
@@ -114,7 +116,7 @@ export default class TopologyComponent extends Vue {
           fill: "white",
         },
       },
-    });
+    })
     const edge = new X6.Shape.Edge({
       source: "rect1",
       target: "rect2",
@@ -124,17 +126,17 @@ export default class TopologyComponent extends Vue {
           sourceMarker: "block",
         },
       },
-    });
-    this.graph.addNode(rect);
-    this.graph.addNode(rect2);
-    this.graph.addEdge(edge);
+    })
+    this.graph.addNode(rect)
+    this.graph.addNode(rect2)
+    this.graph.addEdge(edge)
     // this.graph.fromJSON(this.data) // 渲染画布
     // this.graph.centerContent() // 将画布内容中心与视口中心对齐
     // this.graph.zoom(-0.5) // 缩放画布
     // this.graph.translate(80, 40) // 平移画布
   }
   beforeDestroy() {
-    this.graph.dispose();
+    this.graph.dispose()
   }
 }
 </script>

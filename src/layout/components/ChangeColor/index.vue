@@ -1,36 +1,51 @@
 <template>
-    <el-select v-model="theme" placeholder="请选择" class="change-color" @change="selectChange" :popper-append-to-body='false'>
-        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" class="color-item">
-            <span class="background-box" :style="{backgroundColor: item.value}"></span>
-            <span class="content-box">{{ item.label }}</span>
-        </el-option>
-    </el-select>
+  <el-select
+    v-model="theme"
+    placeholder="请选择"
+    class="change-color"
+    @change="selectChange"
+    :popper-append-to-body="false"
+  >
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+      class="color-item"
+    >
+      <span
+        class="background-box"
+        :style="{ backgroundColor: item.value }"
+      ></span>
+      <span class="content-box">{{ item.label }}</span>
+    </el-option>
+  </el-select>
 </template>
 
 <script>
-import { setStorage, getStorage } from '@/utils/storage'
-const version = require('element-ui/package.json').version
-const ORIGINAL_THEME = '#409EFF'
+import { setStorage, getStorage } from "@/utils/storage"
+const version = require("element-ui/package.json").version
+const ORIGINAL_THEME = "#409EFF"
 export default {
   data() {
     return {
-      theme: '#409EFF',
+      theme: "#409EFF",
       options: [
         {
-          value: '#409EFF',
-          label: '天蓝',
+          value: "#409EFF",
+          label: "天蓝",
         },
         {
-          value: '#14F7D1',
-          label: '淡绿',
+          value: "#14F7D1",
+          label: "淡绿",
         },
         {
-          value: '#E4F714',
-          label: '浅黄',
+          value: "#E4F714",
+          label: "浅黄",
         },
         {
-          value: '#FFC0CD',
-          label: '猛男',
+          value: "#FFC0CD",
+          label: "猛男",
         },
       ],
     }
@@ -41,67 +56,88 @@ export default {
   methods: {
     // 主题色初始化
     init() {
-      const theme = getStorage('theme') ? JSON.parse(getStorage('theme')) : this.theme
+      const theme = getStorage("theme")
+        ? JSON.parse(getStorage("theme"))
+        : this.theme
       this.theme = theme
-      const bodyDom = document.querySelector('#app')
-      bodyDom.setAttribute('data-theme', theme)
+      const bodyDom = document.querySelector("#app")
+      bodyDom.setAttribute("data-theme", theme)
     },
     selectChange(value) {
-      const bodyDom = document.querySelector('#app')
-      bodyDom.setAttribute('data-theme', '')
-      bodyDom.setAttribute('data-theme', `${value}`)
-      setStorage('theme', value)
-      const getTheme = getStorage('theme') ? JSON.parse(getStorage('theme')) : this.theme
+      const bodyDom = document.querySelector("#app")
+      bodyDom.setAttribute("data-theme", "")
+      bodyDom.setAttribute("data-theme", `${value}`)
+      setStorage("theme", value)
+      const getTheme = getStorage("theme")
+        ? JSON.parse(getStorage("theme"))
+        : this.theme
       this.changeElementColor(value, getTheme)
     },
     // 改变elementUI的主题色
     changeElementColor(val, oldVal) {
-      if (typeof val !== 'string') return
-      const themeCluster = this.getThemeCluster(val.replace('#', ''))
-      const originalCluster = this.getThemeCluster(oldVal.replace('#', ''))
+      if (typeof val !== "string") return
+      const themeCluster = this.getThemeCluster(val.replace("#", ""))
+      const originalCluster = this.getThemeCluster(oldVal.replace("#", ""))
       const getHandler = (variable, id) => {
         return () => {
-          const originalCluster = this.getThemeCluster(ORIGINAL_THEME.replace('#', ''))
-          let newStyle = this.updateStyle(this[variable], originalCluster, themeCluster)
+          const originalCluster = this.getThemeCluster(
+            ORIGINAL_THEME.replace("#", ""),
+          )
+          let newStyle = this.updateStyle(
+            this[variable],
+            originalCluster,
+            themeCluster,
+          )
           let styleTag = document.getElementById(id)
           if (!styleTag) {
-            styleTag = document.createElement('style')
-            styleTag.setAttribute('id', id)
+            styleTag = document.createElement("style")
+            styleTag.setAttribute("id", id)
             document.head.appendChild(styleTag)
           }
           styleTag.innerText = newStyle
         }
       }
-      const chalkHandler = getHandler('chalk', 'chalk-style')
-      const docsHandler = getHandler('docs', 'docs-style')
+      const chalkHandler = getHandler("chalk", "chalk-style")
+      const docsHandler = getHandler("docs", "docs-style")
       if (!this.chalk) {
         const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
-        this.getCSSString(url, chalkHandler, 'chalk')
+        this.getCSSString(url, chalkHandler, "chalk")
       } else {
         chalkHandler()
       }
       if (!this.docs) {
-        const links = [].filter.call(document.querySelectorAll('link'), (link) => {
-          return /docs\..+\.css/.test(link.href || '')
-        })
-        links[0] && this.getCSSString(links[0].href, docsHandler, 'docs')
+        const links = [].filter.call(
+          document.querySelectorAll("link"),
+          link => {
+            return /docs\..+\.css/.test(link.href || "")
+          },
+        )
+        links[0] && this.getCSSString(links[0].href, docsHandler, "docs")
       } else {
         docsHandler()
       }
-      const styles = [].slice.call(document.querySelectorAll('style')).filter((style) => {
-        const text = style.innerText
-        return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
-      })
-      styles.forEach((style) => {
+      const styles = [].slice
+        .call(document.querySelectorAll("style"))
+        .filter(style => {
+          const text = style.innerText
+          return (
+            new RegExp(oldVal, "i").test(text) && !/Chalk Variables/.test(text)
+          )
+        })
+      styles.forEach(style => {
         const { innerText } = style
-        if (typeof innerText !== 'string') return
-        style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
+        if (typeof innerText !== "string") return
+        style.innerText = this.updateStyle(
+          innerText,
+          originalCluster,
+          themeCluster,
+        )
       })
     },
     updateStyle(style, oldCluster, newCluster) {
       let newStyle = style
       oldCluster.forEach((color, index) => {
-        newStyle = newStyle.replace(new RegExp(color, 'ig'), newCluster[index])
+        newStyle = newStyle.replace(new RegExp(color, "ig"), newCluster[index])
       })
       return newStyle
     },
@@ -109,11 +145,11 @@ export default {
       const xhr = new XMLHttpRequest()
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          this[variable] = xhr.responseText.replace(/@font-face{[^}]+}/, '')
+          this[variable] = xhr.responseText.replace(/@font-face{[^}]+}/, "")
           callback()
         }
       }
-      xhr.open('GET', url)
+      xhr.open("GET", url)
       xhr.send()
     },
     getThemeCluster(theme) {
@@ -123,7 +159,7 @@ export default {
         let blue = parseInt(color.slice(4, 6), 16)
         if (tint === 0) {
           // when primary color is in its rgb space
-          return [red, green, blue].join(',')
+          return [red, green, blue].join(",")
         } else {
           red += Math.round(tint * (255 - red))
           green += Math.round(tint * (255 - green))
@@ -159,23 +195,22 @@ export default {
 
 <style lang="scss" scoped>
 .change-color {
-    width: 120px;
-    border-radius: 50%;
-    margin-right: 20px;
-    .color-item {
-        display: flex;
-        align-items: center;
-        .background-box {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-        }
-        .content-box {
-            flex: 1;
-            height: 100%;
-            text-align: center;
-        }
+  width: 120px;
+  border-radius: 50%;
+  margin-right: 20px;
+  .color-item {
+    display: flex;
+    align-items: center;
+    .background-box {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
     }
-    
+    .content-box {
+      flex: 1;
+      height: 100%;
+      text-align: center;
+    }
+  }
 }
 </style>
