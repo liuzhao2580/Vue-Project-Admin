@@ -80,14 +80,17 @@ export default class ThreeJSComponents extends Vue {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
     scene.add(directionalLight)
     // 添加半球光
-    var hemisLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1)
+    const hemisLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1)
     scene.add(hemisLight)
+
     const loader = new GLTFLoader()
     loader.setDRACOLoader(new DRACOLoader())
-    loader.setPath("/assets/model/")
+    loader.setPath("static/model/")
+    // "https://a.amap.com/jsapi_demos/static/gltf/Duck.gltf"
     loader.load(
-      "gltf/duck/Duck.gltf",
+      "/gltf/Duck/Duck.gltf",
       gltf => {
+        console.log(gltf, "")
         scene.add(gltf.scene)
       },
       undefined,

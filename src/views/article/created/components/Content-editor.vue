@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Emit } from "vue-property-decorator"
+import { Component, Vue } from "vue-property-decorator"
 import wangEditor from "wangeditor"
 import { configMenu, configColors, fontNames } from "./config"
 import { EventBus } from "../../shared/utils/EventBus"
@@ -17,8 +17,9 @@ export default class ContentEditor extends Vue {
   }
   /** 初始化 编辑器 */
   initWangEditor() {
-    const getHeight: number = (document.querySelector(".article-created-box") as Element)
-      .scrollHeight
+    const getHeight: number = (document.querySelector(
+      ".article-created-box",
+    ) as Element).scrollHeight
     let editor = new wangEditor("#WangEidtor-id")
     // 自定义菜单配置
     editor.config.menus = configMenu

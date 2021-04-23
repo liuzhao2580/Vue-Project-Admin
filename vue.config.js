@@ -45,11 +45,14 @@ module.exports = {
   outputDir: process.env.NODE_ENV === "production" ? "dist" : "test",
   assetsDir: "",
   indexPath: "index.html",
-  // lintOnSave: process.env.NODE_ENV === 'development',
-  lintOnSave: true,
+
   //   lintOnSave: false,
-  productionSourceMap: false, // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建
-  integrity: true, // 在生成的 HTML 中的 <link rel="stylesheet"> 和 <script> 标签上启用 Subresource Integrity (SRI)。如果你构建后的文件是部署在 CDN 上的，启用该选项可以提供额外的安全性
+  // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建
+  productionSourceMap: false,
+
+  // 在生成的 HTML 中的 <link rel="stylesheet"> 和 <script> 标签上启用 Subresource Integrity (SRI)。如果你构建后的文件是部署在 CDN 上的，启用该选项可以提供额外的安全性
+  integrity: true,
+
   // webpack 简单配置 如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中。
 
   configureWebpack: {
@@ -64,6 +67,7 @@ module.exports = {
     },
     plugins: process.env.NODE_ENV === "production" ? productionPlugins : [],
   },
+
   devServer: {
     port: port,
     open: true,
@@ -85,6 +89,7 @@ module.exports = {
       },
     },
   },
+
   // webpack 高级配置
   chainWebpack(config) {
     // 设置 images 转化为 base64位
@@ -125,5 +130,5 @@ module.exports = {
         })
         .end()
     })
-  },
+  }
 }
