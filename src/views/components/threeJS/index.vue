@@ -1,12 +1,27 @@
 <template>
   <div class="threejs-box">
-    <p class="document-url">
+    <div class="document-url">
       <a
         href="http://www.yanhuangxueyuan.com/threejs/docs/index.html#manual/zh/introduction/Creating-a-scene"
         target="_black"
         >文档地址</a
       >
-    </p>
+      <div class="select-box">
+        <el-select
+          v-model="selectValue"
+          placeholder="请选择"
+          @change="selectChange"
+        >
+          <el-option
+            v-for="item in selectOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+      </div>
+    </div>
     <div id="threeJS"></div>
   </div>
 </template>
@@ -20,91 +35,113 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
   name: "threeJSComponents",
 })
 export default class ThreeJSComponents extends Vue {
+  /** 下拉框选择的数据 */
+  selectValue: string = "Happy Face"
+  selectOptions: Array<any> = [
+    {
+      value: "Happy Face",
+      label: "笑脸",
+    },
+    {
+      value: "Apache Helicopter",
+      label: "直升机",
+    },
+    {
+      value: "Bee",
+      label: "小蜜蜂",
+    },
+  ]
+  /** 摄像机 */
+  scene
+  /** 摄像机 */
+  camera
+  /** 渲染器 */
+  renderer
+  /** gltf的加载器 */
+  gltfLoader
   mounted() {
-    // this.init()
-    this.initGLTF()
+    this.init()
   }
   /** 初始化 */
   init() {
-    // 1. 创建一个摄像头
-    const scene = new THREE.Scene()
-    // 2. 创建一个相机
-    const camera = new THREE.PerspectiveCamera()
-    // 3. 创建一个渲染器
-    const renderer = new THREE.WebGLRenderer()
-    // 4. 获取容器盒子
+    // 1. 获取dom元素
     const dom = document.querySelector("#threeJS") as Element
+    // 2. 创建一个 摄像机
+    this.scene = new THREE.Scene()
+    this.scene.background = new THREE.Color(0xeeeeee)
+    // 3. 创建一个 相机
+    this.camera = new THREE.PerspectiveCamera(
+      45,
+      window.innerWidth / window.innerHeight,
+      0.001,
+      1000,
+    )
+    this.camera.position.set(0, 0.1, 0.1)
+    // 4. 创建一个 渲染器
+    this.renderer = new THREE.WebGLRenderer()
     // 5. 设置渲染 canvas 大小
-    renderer.setSize(dom.clientWidth, dom.clientHeight)
+    this.renderer.setSize(dom.clientWidth, dom.clientHeight)
     // 6. 将渲染的元素添加到指定的容器中
-    dom.appendChild(renderer.domElement)
-    // 创建了一个立方体
-    const geometry = new THREE.BoxGeometry(1, 1, 1)
-    // 对于这个立方体，给定一个材质，这里所做的事情就是相当于在css中添加了一个颜色格式来设置颜色
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-    // 创建网格，网格是一个几何体以及应用在此几何体上的材质的对象，可以直接将网格对象放入到场景中
-    const cube = new THREE.Mesh(geometry, material)
-    // 当我们调用scene.add()的时候，物体将会被添加到坐标为(0,0,0)的位置
-    scene.add(cube)
-
-    const render = () => {
-      renderer.render(scene, camera)
-      requestAnimationFrame(render)
-    }
-    render()
-    // 添加控件
-    const controls = new OrbitControls(camera, renderer.domElement)
-    controls.target.set(1, 1, 1)
-    controls.update()
-  }
-  /** 创建一个 gltf  */
-  initGLTF() {
-    // 1. 创建一个 摄像机
-    const scene = new THREE.Scene()
-    // 2. 创建一个相机
-    const camera = new THREE.PerspectiveCamera()
-    camera.position.set(5, 2, 8)
-    // 3. 创建一个渲染器
-    const renderer = new THREE.WebGLRenderer()
-    // 4. 获取dom元素
-    const dom = document.querySelector("#threeJS") as Element
-    // 5. 设置渲染 canvas 大小
-    renderer.setSize(dom.clientWidth, dom.clientHeight)
-    // 6. 将渲染的元素添加到指定的容器中
-    dom.appendChild(renderer.domElement)
+    dom.appendChild(this.renderer.domElement)
 
     // 添加环境光
     const ambLight = new THREE.AmbientLight(0x404040)
-    scene.add(ambLight)
+    this.scene.add(ambLight)
     // 添加平行光
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5)
-    scene.add(directionalLight)
+    this.scene.add(directionalLight)
     // 添加半球光
     const hemisLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1)
-    scene.add(hemisLight)
+    this.scene.add(hemisLight)
 
-    const loader = new GLTFLoader()
-    loader.setDRACOLoader(new DRACOLoader())
-    loader.setPath("static/model/")
+    this.gltfLoader = new GLTFLoader()
+    const dracoLoader = new DRACOLoader()
+    dracoLoader.setDecoderPath("/draco/")
+    dracoLoader.preload()
+    this.gltfLoader.setDRACOLoader(dracoLoader)
+    this.gltfLoader.setPath("/static/model")
+
+    // 添加控件
+    const orbitControls = new OrbitControls(
+      this.camera,
+      this.renderer.domElement,
+    )
+    const render = () => {
+      this.renderer.render(this.scene, this.camera)
+      requestAnimationFrame(render)
+      orbitControls.update()
+    }
+    render()
+    this.initGLTF()
+  }
+  /** 创建一个 gltf  */
+  initGLTF(url?: string) {
     // "https://a.amap.com/jsapi_demos/static/gltf/Duck.gltf"
-    loader.load(
-      "/gltf/Duck/Duck.gltf",
+    this.gltfLoader.load(
+      `/gltf/${url ? url : "Happy Face"}.glb`,
       gltf => {
         console.log(gltf, "")
-        scene.add(gltf.scene)
+        if (gltf.animations && gltf.animations.length) {
+          const mixer = new THREE.AnimationMixer(gltf.scene)
+          gltf.animations.forEach(animation => {
+            const action = mixer.clipAction(animation)
+            action.play()
+          })
+        }
+        this.scene.add(gltf.scene)
       },
-      undefined,
+      xhr => {
+        console.log((xhr.loaded / xhr.total) * 100 + "% loaded")
+      },
       error => {
         console.log(error)
       },
     )
-    const render = () => {
-      renderer.render(scene, camera)
-      requestAnimationFrame(render)
-    }
-    render()
-    // 添加控件
-    new OrbitControls(camera, renderer.domElement)
+  }
+
+  /** 下拉框改变事件 */
+  selectChange(e) {
+    this.initGLTF(e)
   }
 }
 </script>
@@ -112,12 +149,16 @@ export default class ThreeJSComponents extends Vue {
 <style lang="scss" scoped>
 .threejs-box {
   .document-url {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     a {
       color: $brandColor;
     }
   }
   #threeJS {
-    height: 100%;
+    margin-top: 10px;
+    height: 80%;
   }
 }
 </style>
