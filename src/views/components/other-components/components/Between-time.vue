@@ -96,13 +96,13 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-import { BetweenTimeTypeEnum } from "../share/enum/other-components.enum"
+import { BetweenTimeTypeEnum } from "../shared/enum/other-components.enum"
 import {
   getBetweenDate,
   getBetweenMonth,
   getBetweenYear,
   getBetweenTime,
-} from "../share/utils/between-time"
+} from "../shared/utils/between-time"
 @Component({})
 export default class BetweenTime extends Vue {
   /** 实例化 单选框的枚举类型 */
