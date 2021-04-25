@@ -18,7 +18,6 @@ const externalsConfig = {
   mockjs: "Mock",
   "mavon-editor": "MavonEditor",
   "@antv/x6": "X6",
-  three: "THREE",
 }
 // 配置生产的 plugin
 const productionPlugins = [
@@ -130,5 +129,5 @@ module.exports = {
         })
         .end()
     })
-  }
+  },
 }
