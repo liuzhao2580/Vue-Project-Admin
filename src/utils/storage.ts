@@ -7,7 +7,11 @@
  * @param {any} storageExpire 过期时间 不传递默认为不删除 支持传递的格式 正整数 单位毫秒 string 1h(H) 1d(D) 其他均不支持
  * 过期时间是根据当前的时间戳 + 传递的过期时间，在获取 localStorage 的时候判断当前的时间和过期时间
  */
-export const setStorage = (storageName: string, storageData: any, storageExpire: any = null) => {
+export const setStorage = (
+  storageName: string,
+  storageData: any,
+  storageExpire: any = null,
+) => {
   const local = window.localStorage
   local.setItem(storageName, JSON.stringify(storageData))
   // 说明要设置过期时间
@@ -29,7 +33,8 @@ export const setStorage = (storageName: string, storageData: any, storageExpire:
       // 得到数据
       const timeData = +storageExpire.substr(0, storageExpire.length - 1)
       // 说明传递的是 小时
-      if (timeUnit === "h" || timeUnit === "H") setExpire = time + timeData * 60 * 60 * 1000
+      if (timeUnit === "h" || timeUnit === "H")
+        setExpire = time + timeData * 60 * 60 * 1000
       // 说明传递的是 天数
       else if (timeUnit === "d" || timeUnit === "D")
         setExpire = time + timeData * 24 * 60 * 60 * 1000

@@ -1,32 +1,24 @@
 <template>
-	<div id="map-box">
-		<AmapCom />
-	</div>
+  <div id="map-box">
+    <!-- 修改地图的配置 -->
+    <option-config />
+    <!-- 地图主体 -->
+    <a-map-com />
+  </div>
 </template>
 
-<script>
-import AmapCom from "./Amap";
-export default {
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator"
+import AMapCom from "./components/AMap.vue"
+import OptionConfig from "./components/OptionConfig.vue"
+@Component({
   name: "amap",
   components: {
-    AmapCom
+    AMapCom,
+    OptionConfig,
   },
-  props: {},
-  data() {
-    return{}
-  },
-  created() {},
-  mounted() {},
-  methods: {},
-  watch: {}
-};
+})
+export default class AMap extends Vue {}
 </script>
 
-<style lang="scss" scoped>
-#map-box {
-    border: 5px solid #ccc;
-	width: 100%;
-	height: 650px;
-    border-radius: 10px;
-}
-</style>
+<style lang="scss" scoped></style>
