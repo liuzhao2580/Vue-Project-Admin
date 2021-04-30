@@ -19,9 +19,10 @@ export default {
     AMapDom = AMap
   },
   /** 设置地图的样式 */
-  setAMapStyle(mapStyle) {
+  async setAMapStyle(mapStyle) {
     let styleName = "amap://styles/" + mapStyle
     AMapDom.setMapStyle(styleName)
+    await createScript("http://localhost:80/test")
   },
   /** 点聚合  */
   async markerClusterer(type: boolean) {
@@ -30,7 +31,8 @@ export default {
       // 说明是第一次加载
       if (firstClickMarker) {
         try {
-          await createScript("http://a.amap.com/jsapi_demos/static/china.js")
+          // await createScript("http://a.amap.com/jsapi_demos/static/china.js")
+          await createScript("http://localhost:80/test")
           const getWindow = window as any
           const points = getWindow.points
           const controlBar = AMapDom.plugin(["AMap.MarkerClusterer"], () => {
