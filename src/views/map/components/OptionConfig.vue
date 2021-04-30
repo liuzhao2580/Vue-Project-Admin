@@ -2,7 +2,7 @@
   <div class="option-config-box">
     <el-row :gutter="20">
       <!-- 选择地图的主题 -->
-      <el-col :xs="12" :sm="8" :md="6" :lg="6">
+      <el-col :xs="12" :sm="6" :md="6" :lg="4" :xl="2">
         <div class="select-theme">
           <el-select
             v-model="themeModel"
@@ -19,9 +19,14 @@
         </div>
       </el-col>
       <!-- 批量撒点 -->
-      <el-col :xs="12" :sm="8" :md="6" :lg="6">
+      <el-col :xs="12" :sm="10" :md="8" :lg="6" :xl="4">
         <div class="batch-point">
-          <el-button @click="batchPoint" type="primary">批量撒点</el-button>
+          <el-button @click="batchPoint(true)" type="primary"
+            >批量撒点</el-button
+          >
+          <el-button @click="batchPoint(false)" type="danger"
+            >清除点聚合</el-button
+          >
         </div>
       </el-col>
     </el-row>
@@ -90,8 +95,8 @@ export default class OptionConfig extends Vue {
     AMapInit.setAMapStyle(value)
   }
   /** 批量撒点 */
-  batchPoint() {
-    console.log("batchPoint", "")
+  batchPoint(type: boolean) {
+    AMapInit.markerClusterer(type)
   }
 }
 </script>
