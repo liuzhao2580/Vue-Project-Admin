@@ -1,20 +1,30 @@
 <template>
   <div class="option-config-box">
-    <!-- 选择地图的主题 -->
-    <div class="select-theme">
-      <el-select
-        v-model="themeModel"
-        placeholder="请选择地图主题"
-        @change="themeChange"
-      >
-        <el-option
-          v-for="themeItem in selectTheme"
-          :key="themeItem.label"
-          :label="themeItem.label"
-          :value="themeItem.value"
-        ></el-option>
-      </el-select>
-    </div>
+    <el-row :gutter="20">
+      <!-- 选择地图的主题 -->
+      <el-col :xs="12" :sm="8" :md="6" :lg="6">
+        <div class="select-theme">
+          <el-select
+            v-model="themeModel"
+            placeholder="请选择地图主题"
+            @change="themeChange"
+          >
+            <el-option
+              v-for="themeItem in selectTheme"
+              :key="themeItem.label"
+              :label="themeItem.label"
+              :value="themeItem.value"
+            ></el-option>
+          </el-select>
+        </div>
+      </el-col>
+      <!-- 批量撒点 -->
+      <el-col :xs="12" :sm="8" :md="6" :lg="6">
+        <div class="batch-point">
+          <el-button @click="batchPoint" type="primary">批量撒点</el-button>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -78,6 +88,10 @@ export default class OptionConfig extends Vue {
   /** 地图主题改变事件 */
   themeChange(value) {
     AMapInit.setAMapStyle(value)
+  }
+  /** 批量撒点 */
+  batchPoint() {
+    console.log("batchPoint", "")
   }
 }
 </script>
