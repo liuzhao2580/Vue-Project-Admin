@@ -66,12 +66,12 @@ audio,
 video,
 details,
 summary {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    background: transparent;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  background: transparent;
+  box-sizing: border-box;
 }
 
 html,
@@ -80,45 +80,39 @@ button,
 select,
 textarea,
 input {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-family: Helvetica Neue,
-    Helvetica,
-    PingFang SC,
-    Hiragino Sans GB,
-    Microsoft YaHei,
-    Arial,
-    sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+    Microsoft YaHei, Arial, sans-serif;
 }
 
-
 a {
-    color: #666;
-    text-decoration: none;
-    outline: 0;
+  color: #666;
+  text-decoration: none;
+  outline: 0;
 }
 
 a.text-meta .invisible {
-    visibility: visible;
-    font-size: 0;
-    line-height: 0;
+  visibility: visible;
+  font-size: 0;
+  line-height: 0;
 }
 
 ul,
 li {
-    list-style: none;
+  list-style: none;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 i,
 em {
-    font-style: normal;
+  font-style: normal;
 }
 
 img {
-    border: 0;
+  border: 0;
 }

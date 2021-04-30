@@ -1,35 +1,35 @@
 // 基本颜色
-$blue:#324157;
-$light-blue:#3A71A8;
-$red:#C03639;
-$pink: #E65D6E;
-$green: #30B08F;
-$tiffany: #4AB7BD;
-$yellow:#FEC171;
-$panGreen: #30B08F;
-$brandColor: #409EFF;
+$blue: #324157;
+$light-blue: #3a71a8;
+$red: #c03639;
+$pink: #e65d6e;
+$green: #30b08f;
+$tiffany: #4ab7bd;
+$yellow: #fec171;
+$panGreen: #30b08f;
+$brandColor: #409eff;
 
 // 侧边栏的颜色
-$menuText:#bfcbd9;              // 侧边栏的文字的颜色
-$menuActiveText:#409EFF;        // 当前选中侧边栏的文字的颜色
-$subMenuActiveText:#f4f4f5;     // 当前选中一级菜单的颜色
+$menuText: #bfcbd9; // 侧边栏的文字的颜色
+$menuActiveText: #409eff; // 当前选中侧边栏的文字的颜色
+$subMenuActiveText: #f4f4f5; // 当前选中一级菜单的颜色
 
-$menuBg:#304156;                // 侧边栏的背景色
-$menuHover:#263445;             // hover 的颜色
+$menuBg: #304156; // 侧边栏的背景色
+$menuHover: #263445; // hover 的颜色
 
-$subMenuBg:#1f2d3d;             // 一级菜单下二级菜单的背景色
-$subMenuHover:#001528;          // 二级菜单的 hover 背景色
+$subMenuBg: #1f2d3d; // 一级菜单下二级菜单的背景色
+$subMenuHover: #001528; // 二级菜单的 hover 背景色
 
 $sideBarWidth: 210px;
 
 // scss 导出颜色的语法
 :export {
-    menuText: $menuText;
-    menuActiveText: $menuActiveText;
-    subMenuActiveText: $subMenuActiveText;
-    menuBg: $menuBg;
-    menuHover: $menuHover;
-    subMenuBg: $subMenuBg;
-    subMenuHover: $subMenuHover;
-    sideBarWidth: $sideBarWidth;
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  menuBg: $menuBg;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+  sideBarWidth: $sideBarWidth;
 }
