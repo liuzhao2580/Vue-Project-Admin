@@ -22,21 +22,17 @@ export const deepClone = (obj: any) => {
   原理 动态创建script标签发送请求的时候，一般会传递一个字段过去类似于 www.baidu.com?responData 以问号的形式拼接，后台接收到请求之后，拿到问号后的字段，将返回的数据以 responData = { code: 200, data: {},...}的格式传递给前端，前端通过window.responData 的形式获取到返回的数据
 */
 export const createScript = (src: string, responStr?: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function doJson(res) {
-    const data = JSON.stringify(res)
-    console.log(data, "res")
-  }
   const scriptDom = document.createElement("script")
   scriptDom.type = "text/javascript"
-  responStr
-  // scriptDom.src = `${src}${responStr ? "?" + responStr : ""}`
-  scriptDom.src = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=123&cb=doJson&_=1544270132010`
-
+  scriptDom.src = responStr ? `${src}?callback=${responStr}` : src
+  const getWindow = window as any
   document.body.appendChild(scriptDom)
   return new Promise<void>((resolve, reject) => {
     scriptDom.onload = () => {
-      resolve()
+      if (responStr) {
+        const result = getWindow[responStr]()
+        resolve(result)
+      } else resolve()
       setTimeout(() => {
         document.body.removeChild(scriptDom)
       })
