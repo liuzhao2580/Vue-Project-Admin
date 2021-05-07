@@ -32,7 +32,11 @@ export default {
       if (firstClickMarker) {
         try {
           await createScript("http://a.amap.com/jsapi_demos/static/china.js")
-          // const getData = await createScript("http://localhost:80/test", "callbackJSONP")
+          // const getData = await createScript(
+          //   "http://localhost:80/test",
+          //   "callbackJSONP",
+          // )
+          // console.log(getData, "")
           const getWindow = window as any
           const points = getWindow.points
           const controlBar = AMapDom.plugin(["AMap.MarkerClusterer"], () => {
