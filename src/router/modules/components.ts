@@ -62,15 +62,6 @@ const components: RouteConfig = {
         ),
     },
     {
-      path: "threeJS",
-      meta: { title: "threeJS", icon: "3D" },
-      name: "threeJSComponents",
-      component: () =>
-        import(
-          /* webpackChunkName: "componentsPage" */ "@/views/components/threeJS/index.vue"
-        ),
-    },
-    {
       path: "other-components",
       meta: { title: "其他组件", icon: "other-components" },
       name: "otherComponents",
