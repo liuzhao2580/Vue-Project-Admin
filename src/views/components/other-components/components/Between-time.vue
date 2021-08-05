@@ -19,7 +19,7 @@
           start: '00:00',
           step: '00:60',
           end: '24:00',
-          maxTime: endTime,
+          maxTime: endTime
         }"
         @change="startTimeChange"
       >
@@ -32,7 +32,7 @@
           start: '00:00',
           step: '00:60',
           end: '24:00',
-          minTime: startTime,
+          minTime: startTime
         }"
         @change="endTimeChange"
       >
@@ -49,6 +49,7 @@
       v-model="datePickerValue"
       :type="radioValue"
       @change="event => datePickerChange(event, radioValue)"
+      style="width:200px"
     >
     </el-date-picker>
     <!-- 年份选择器 -->
@@ -59,7 +60,7 @@
         :picker-options="{
           disabledDate(time) {
             if (endYear) return time > endYear
-          },
+          }
         }"
         placeholder="选择年"
         @change="startYearChange"
@@ -71,7 +72,7 @@
         :picker-options="{
           disabledDate(time) {
             if (startYear) return time < startYear
-          },
+          }
         }"
         type="year"
         placeholder="选择年"
@@ -95,14 +96,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import { BetweenTimeTypeEnum } from "../shared/enum/other-components.enum"
+import { Component, Vue } from 'vue-property-decorator'
+import { BetweenTimeTypeEnum } from '../shared/enum/other-components.enum'
 import {
   getBetweenDate,
   getBetweenMonth,
   getBetweenYear,
-  getBetweenTime,
-} from "../shared/utils/between-time"
+  getBetweenTime
+} from '../shared/utils/between-time'
 @Component({})
 export default class BetweenTime extends Vue {
   /** 实例化 单选框的枚举类型 */
@@ -110,15 +111,15 @@ export default class BetweenTime extends Vue {
   /** 单选框选中的数据 */
   radioValue: BetweenTimeTypeEnum = BetweenTimeTypeEnum.date
   /** 开始时间 */
-  startTime: any = ""
+  startTime: any = ''
   /** 结束时间 */
-  endTime: any = ""
+  endTime: any = ''
   /** 开始年份 */
-  startYear: any = ""
+  startYear: any = ''
   /** 结束年份 */
-  endYear: any = ""
+  endYear: any = ''
   /** 日期选择器 绑定的 model */
-  datePickerValue: any = ""
+  datePickerValue: any = ''
   /** 时间选择器选中的数据 */
   selectedTimeData: string[] = []
 
@@ -158,6 +159,8 @@ export default class BetweenTime extends Vue {
 
 <style lang="scss" scoped>
 .between-time-box {
+  display: flex;
+  flex-direction: column;
   // radio 选择器
   .radio-box {
     margin-bottom: 10px;
@@ -186,7 +189,7 @@ export default class BetweenTime extends Vue {
         border: 1px solid #c0c0c0;
         padding: 2px 5px;
         font-size: 12px;
-        font-family: "宋体";
+        font-family: '宋体';
         margin-bottom: 5px;
       }
     }

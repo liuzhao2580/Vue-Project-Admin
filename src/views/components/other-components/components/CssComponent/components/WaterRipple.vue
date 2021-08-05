@@ -1,6 +1,6 @@
 <template>
   <div class="water-ripple-box">
-    <p>点击出现水波纹效果</p>
+    <p>水波纹</p>
     <div class="demo-box">
       <div :class="['demo-item cricle', clickFlag ? 'active' : '']">
         <span class="click-btn" @click="cricleClick">点击</span>
@@ -9,11 +9,10 @@
         <p class="cricle-bg"></p>
       </div>
     </div>
-    <div>{{ getMsg }}</div>
   </div>
 </template>
 <script lang="ts">
-/** 点击出现水波纹效果 */
+/** 水波纹 */
 import { Component, Vue } from 'vue-property-decorator'
 @Component({
   name: 'WaterRipple'
@@ -21,8 +20,6 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class WaterRipple extends Vue {
   /** 判断是否已经点击了 */
   clickFlag: boolean = false
-  /** 接受兄弟组件传递的参数 */
-  getMsg: string = ''
   /** 点击事件 */
   cricleClick(): void {
     this.clickFlag = !this.clickFlag
