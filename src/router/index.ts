@@ -124,6 +124,7 @@ export const asyncRoutes: RouteConfig[] = [
 const createRouter = () =>
   new Router({
     routes: constantRoutes,
+    mode: "history"
   })
 const router: any = createRouter()
 
