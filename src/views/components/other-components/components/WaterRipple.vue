@@ -9,17 +9,20 @@
         <p class="cricle-bg"></p>
       </div>
     </div>
+    <div>{{ getMsg }}</div>
   </div>
 </template>
 <script lang="ts">
 /** 点击出现水波纹效果 */
-import { Component, Vue } from "vue-property-decorator"
+import { Component, Vue } from 'vue-property-decorator'
 @Component({
-  name: "WaterRipple",
+  name: 'WaterRipple'
 })
 export default class WaterRipple extends Vue {
   /** 判断是否已经点击了 */
   clickFlag: boolean = false
+  /** 接受兄弟组件传递的参数 */
+  getMsg: string = ''
   /** 点击事件 */
   cricleClick(): void {
     this.clickFlag = !this.clickFlag
