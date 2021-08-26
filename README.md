@@ -1,29 +1,19 @@
-# vue_project
+# `vite`中的一些说明
 
-## Project setup
-```
-npm install
-```
+1. CSS 预处理器 但 Vite 也同时提供了对 .scss, .sass, .less, .styl 和 .stylus 文件的内置支持。没有必要为它们安装特定的 Vite 插件，但必须安装相应的预处理器依赖：
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+```sh
+# .scss and .sass
+npm install -D sass
 
-### Compiles and minifies for production
-```
-npm run build
+# .less
+npm install -D less
+
+# .styl and .stylus
+npm install -D stylus
 ```
 
-### Run your tests
+配置`eslint`
+```sh
+yarn add eslint eslint-plugin-vue @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
 ```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
