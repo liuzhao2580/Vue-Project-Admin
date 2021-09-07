@@ -10,7 +10,7 @@
           <el-input
             type="password"
             v-model="login_form.password"
-            @keydown.enter.native="submitForm('login_form')"
+            @keydown.enter="submitForm('login_form')"
           ></el-input>
         </el-form-item>
         <el-form-item>
@@ -23,6 +23,9 @@
           >
         </el-form-item>
       </el-form>
+
+      <!-- <DDScanLogin/> -->
+      <DDAccountLogin />
     </el-row>
   </el-col>
 </template>
@@ -32,9 +35,15 @@ import { Vue, Component } from "vue-property-decorator"
 import { namespace } from "vuex-class"
 import { userLogin } from "@/api/modules/user"
 import { ResultCodeEnum } from "@/typescript/shared/enum"
+// import DDScanLogin from './components/DDScanLogin.vue'
+import DDAccountLogin from './components/DDAccountLogin.vue'
 const USER_VUEX = namespace("user")
 @Component({
   name: "login",
+  components: {
+    // DDScanLogin,
+    DDAccountLogin
+  }
 })
 export default class LoginComponent extends Vue {
   @USER_VUEX.Action ACT_userInfo!: (params) => void
