@@ -24,6 +24,8 @@
         </el-form-item>
       </el-form>
 
+      <el-button @click="copyBtn">复制</el-button>
+
       <!-- <DDScanLogin/> -->
       <DDAccountLogin />
     </el-row>
@@ -99,6 +101,16 @@ export default class LoginComponent extends Vue {
         return false
       }
     })
+  }
+
+  copyBtn() {
+    let url = '0090090099009090';
+    let oInput = document.createElement('input');
+    oInput.value = url;
+    document.body.appendChild(oInput);
+    oInput.select(); // 选择对象;
+    console.log(oInput.value)
+    document.execCommand("Copy");
   }
 }
 </script>
