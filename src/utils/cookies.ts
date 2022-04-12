@@ -1,4 +1,4 @@
-import Cookies from "js-cookie"
+import Cookies from 'js-cookie'
 
 // 设置 cookies
 export const setCookie = (name: string, value: any, days = 1) => {

@@ -29,27 +29,27 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator"
+import { Vue, Component } from 'vue-property-decorator'
 interface ICard {
   iconClass: string
   titleText: string
   srcURL: string
 }
 @Component({
-  name: "documentation",
+  name: 'documentation'
 })
 export default class DocumentationComponent extends Vue {
   cardList: ICard[] = [
     {
-      iconClass: "vue",
-      titleText: "Vue",
-      srcURL: "https://cn.vuejs.org/v2/guide/",
+      iconClass: 'vue',
+      titleText: 'Vue',
+      srcURL: 'https://cn.vuejs.org/v2/guide/'
     },
     {
-      iconClass: "element",
-      titleText: "elementUI",
-      srcURL: "https://element.eleme.cn/#/zh-CN/component/installation",
-    },
+      iconClass: 'element',
+      titleText: 'elementUI',
+      srcURL: 'https://element.eleme.cn/#/zh-CN/component/installation'
+    }
   ]
   // 跳转页面
   jumpURL(URL) {

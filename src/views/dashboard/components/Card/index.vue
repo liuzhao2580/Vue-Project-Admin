@@ -16,7 +16,7 @@
 <script>
 import imageRotote from '@/directives/imgRotote'
 export default {
-  name: 'card',
+  name: 'Card',
   directives: { imageRotote },
   components: {},
   props: {},

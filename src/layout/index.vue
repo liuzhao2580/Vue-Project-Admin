@@ -1,10 +1,10 @@
 <template>
   <div class="app-warpper">
     <el-container :class="[isMobile ? 'mobile' : 'desktop', 'container-box']">
-      <el-aside :width="dynamicWidth()" class="sider-box">
+      <el-aside :width="dynamicWidth" class="sider-box">
         <Sidebar />
       </el-aside>
-      <el-main class="main-box" :style="{ marginLeft: dynamicWidth() }">
+      <el-main class="main-box" :style="{ marginLeft: dynamicWidth }">
         <Navbar class="nav-bar" />
         <AppMain class="app-main" />
       </el-main>
@@ -17,34 +17,57 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Mixins } from "vue-property-decorator"
-import { AppMain, Sidebar, Navbar } from "./components"
-import { namespace } from "vuex-class"
-import LayoutMixin from "./mixin/Resize"
-const App_VUEX = namespace("app")
-@Component({
-  components: {
-    AppMain,
-    Sidebar,
-    Navbar,
-  },
+<script lang="ts" setup>
+import { computed, onBeforeMount, onUnmounted } from 'vue'
+import { AppMain, Sidebar, Navbar } from './components'
+
+onBeforeMount(() => {
+  // 页面进来的时候监听 屏幕的变化  调用方法
+  window.addEventListener('resize', $_ResizeScreen)
 })
-export default class LayoutComponent extends Mixins(LayoutMixin) {
+
+onUnmounted(() => {
+  // 页面销毁的时候移除监听 屏幕的变化  调用方法
+  window.removeEventListener('resize', $_ResizeScreen)
+})
+
+const { body } = document
+// 设置一个宽度的大小, 用来判断当前的侧边栏展开折叠
+const WIDTH = 992
+
+const dynamicWidth = computed(() => {
+  if (this.isMobile) return '0'
+  if (this.side_status) return '64px'
+  return '200px'
+})
+
+
+// 在 mobile 移动端模式下显示隐藏 侧边栏按钮
+const showORhidden = () => {
+  this.ACT_unflodSide()
+}
+
+const $_isMobile = () => {
+  const react = body.getBoundingClientRect()
+  if (react.width < 768) store.dispatch('app/Act_setDevice', true)
+  else store.dispatch('app/Act_setDevice', false)
+  return react.width - 1 < WIDTH
+}
+
+/** 监听页面大小变化 */
+const $_ResizeScreen = (): void => {
+  const side_flag = $_isMobile()
+  if (side_flag) {
+    store.dispatch('app/Act_flodSide')
+  } else if (!side_flag) {
+    store.dispatch('app/ACT_unflodSide')
+  }
+}
+
+{
   @App_VUEX.Getter side_status: any
   @App_VUEX.Getter isMobile: any
   @App_VUEX.Action ACT_unflodSide!: () => void
-  dynamicWidth(): string {
-    if (this.isMobile) return "0"
-    if (this.side_status) return "64px"
-    return "200px"
-  }
-  created() {}
-  mounted() {}
-  // 在 mobile 移动端模式下显示隐藏 侧边栏按钮
-  showORhidden() {
-    this.ACT_unflodSide()
-  }
 }
 </script>
 

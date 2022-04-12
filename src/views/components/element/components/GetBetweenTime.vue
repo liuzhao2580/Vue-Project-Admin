@@ -15,7 +15,7 @@
 </template>
 <script>
 export default {
-  name: 'get-between-time',
+  name: 'GetBetweenTime',
   data() {
     return {
       datePValue: null

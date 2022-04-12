@@ -17,7 +17,7 @@ export class TableConfigModel {
   /** 点击搜索按钮之后 显示搜索栏 */
   showSearch?: boolean = false
   /** 表格的加载状态 */
-  loading: boolean = true
+  loading = true
   /** 表格的列配置 */
   columnConfig!: ColumnConfig[]
   /** 表格的操作 */
@@ -34,7 +34,7 @@ export class ColumnConfig {
   sortKey?: string
   /** 每列的宽度 */
   width?: string | number
-  /*** 每列的标题 */
+  /** * 每列的标题 */
   label!: string
   /** 每列的prop */
   prop!: string
@@ -43,7 +43,7 @@ export class ColumnConfig {
   /** 是否固定 默认false 不固定 */
   fixed?: boolean = false
   /** 是否可搜索  */
-  searchable: boolean = true
+  searchable = true
   /** 用于需要搜索的字段 */
   searchKey?: string
   /** 搜索的配置 */
@@ -78,54 +78,54 @@ class Operation {
   handle: any
 }
 
-//------------------------------------------------表格的枚举---------------------------------
+// ------------------------------------------------表格的枚举---------------------------------
 /** 表格列的类型 */
 export enum EColumnType {
   /** 日期 YYYY-MM-DD */
-  date = "date",
+  date = 'date',
   /** 日期时间 YYYY-MM-DD HH:mm:ss */
-  dateTime = "dateTime",
+  dateTime = 'dateTime',
 }
 
 /** 操作按钮的类型 */
 export enum EOperationType {
   /** 默认 */
-  default = "default",
+  default = 'default',
   /** 主要按钮 */
-  primary = "primary",
+  primary = 'primary',
   /** 成功 */
-  success = "success",
+  success = 'success',
   /** 信息 */
-  info = "info",
+  info = 'info',
   /** 警告 */
-  warning = "warning",
+  warning = 'warning',
   /** 危险 */
-  danger = "danger",
+  danger = 'danger',
 }
 
 /** 搜索栏的 搜索类型 */
 export enum ESearchType {
   /** 输入框 */
-  input = "input",
+  input = 'input',
   /** 下拉选 */
-  select = "select",
+  select = 'select',
   /** 年月日 YYYY-MM-DD */
-  date = "date",
+  date = 'date',
   /** 年月日 范围 YYYY-MM-DD~YYYY-MM-DD */
-  dateRange = "dateRange",
+  dateRange = 'dateRange',
   /** 年月日 时分秒 YYYY-MM-DD HH:mm:ss */
-  dateTime = "dateTime",
+  dateTime = 'dateTime',
   /** 年月日 时分秒范围 YYYY-MM-DD HH:mm:ss ~ YYYY-MM-DD HH:mm:ss*/
-  dateTimeRange = "dateTimeRange",
+  dateTimeRange = 'dateTimeRange',
   /** 步进器 */
-  inputNumber = "inputNumber",
+  inputNumber = 'inputNumber',
 }
 
 /** 搜索栏的搜索类型为 select 的时候 是多选还是单选 */
 export enum ESelectType {
   /** 多选 */
-  multiple = "multiple",
+  multiple = 'multiple',
   /** 单选 */
-  default = "default",
+  default = 'default',
 }
-//------------------------------------------------表格的枚举---------------------------------
+// ------------------------------------------------表格的枚举---------------------------------

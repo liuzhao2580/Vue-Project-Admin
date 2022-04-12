@@ -45,7 +45,7 @@ export default {
       })
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.quillEditor) this.quillEditor = null
   },
   watch: {}

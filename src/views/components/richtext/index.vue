@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import Quill from "./Quill"
-import WangEditor from "./WangEditor"
+import Quill from './Quill'
+import WangEditor from './WangEditor'
 export default {
-  name: "richtext",
+  name: 'Richtext',
   components: {
     Quill,
-    WangEditor,
-  },
+    WangEditor
+  }
 }
 </script>
 

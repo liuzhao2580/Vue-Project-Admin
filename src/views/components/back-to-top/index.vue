@@ -15,12 +15,12 @@
 
 <script>
 export default {
-  name: "back-to-top",
+  name: 'BackToTop',
   components: {},
   props: {},
   data() {
     return {
-      count: 0,
+      count: 0
     }
   },
   created() {},
@@ -28,9 +28,9 @@ export default {
   methods: {
     load() {
       this.count += 2
-    },
+    }
   },
-  watch: {},
+  watch: {}
 }
 </script>
 

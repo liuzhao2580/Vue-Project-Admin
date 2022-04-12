@@ -4,17 +4,17 @@
 
 <script>
 export default {
-  name: "page4011",
+  name: 'Page4011',
   components: {},
   props: {},
   data() {
-    return {};
+    return {}
   },
   created() {},
   mounted() {},
   methods: {},
   watch: {}
-};
+}
 </script>
 
 <style lang="scss" scoped>

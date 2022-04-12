@@ -13,15 +13,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator"
-import AMapCom from "./components/AMap.vue"
-import OptionConfig from "./components/OptionConfig.vue"
+import { Vue, Component } from 'vue-property-decorator'
+import AMapCom from './components/AMap.vue'
+import OptionConfig from './components/OptionConfig.vue'
 @Component({
-  name: "amap",
+  name: 'amap',
   components: {
     AMapCom,
-    OptionConfig,
-  },
+    OptionConfig
+  }
 })
 export default class AMap extends Vue {}
 </script>

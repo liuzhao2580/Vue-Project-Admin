@@ -75,12 +75,12 @@ class EditableCellTool extends ToolsView.ToolItem<EdgeView, EditableCellToolOpti
         cell.appendLabel({
           attrs: {
             text: {
-              text: value,
-            },
+              text: value
+            }
           },
           position: {
-            distance: this.getDistance(),
-          },
+            distance: this.getDistance()
+          }
         })
       }
       document.removeEventListener('mousedown', this.onMouseDown)
@@ -104,7 +104,7 @@ class EditableCellTool extends ToolsView.ToolItem<EdgeView, EditableCellToolOpti
 
 EditableCellTool.config({
   tagName: 'div',
-  isSVGElement: false,
+  isSVGElement: false
 })
 
 // tslint:disable-next-line: interface-name
@@ -119,7 +119,7 @@ Graph.registerNodeTool('editableCell', EditableCellTool, true)
 const container = document.getElementById('container') as HTMLDivElement
 const graph = new Graph({
   container: container,
-  grid: true,
+  grid: true
 })
 
 const source = graph.addNode({
@@ -131,9 +131,9 @@ const source = graph.addNode({
     body: {
       fill: '#f5f5f5',
       stroke: '#d9d9d9',
-      strokeWidth: 1,
-    },
-  },
+      strokeWidth: 1
+    }
+  }
 })
 
 const target = graph.addNode({
@@ -145,9 +145,9 @@ const target = graph.addNode({
     body: {
       fill: '#f5f5f5',
       stroke: '#d9d9d9',
-      strokeWidth: 1,
-    },
-  },
+      strokeWidth: 1
+    }
+  }
 })
 
 graph.addEdge({
@@ -156,9 +156,9 @@ graph.addEdge({
   attrs: {
     line: {
       stroke: '#a0a0a0',
-      strokeWidth: 1,
-    },
-  },
+      strokeWidth: 1
+    }
+  }
 })
 
 graph.on('cell:dblclick', ({ cell, e }) => {
@@ -168,8 +168,8 @@ graph.on('cell:dblclick', ({ cell, e }) => {
       name: 'editableCell',
       args: {
         x: p.x,
-        y: p.y,
-      },
-    },
+        y: p.y
+      }
+    }
   ])
 })

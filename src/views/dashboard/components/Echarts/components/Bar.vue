@@ -9,18 +9,18 @@ export default {
   props: {
     height: {
       type: String,
-      default: '400px',
+      default: '400px'
     },
     // Ecahrts 数据
     EchartsBarData: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     // Ecahrts 标题
     EchartsTitle: {
       type: String,
-      default: '统计-柱形图',
-    },
+      default: '统计-柱形图'
+    }
   },
   mixins: [mixins],
   data() {
@@ -37,42 +37,42 @@ export default {
       this.EchartsDom = Echarts.init(this.$refs.echartsBar, 'westeros')
       this.EchartsDom.setOption({
         title: {
-          text: this.EchartsTitle,
+          text: this.EchartsTitle
         },
         legend: {
           data: this.EchartsBarData.map((item) => {
             return item.name
-          }),
+          })
         },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
-            type: 'shadow',
-          },
+            type: 'shadow'
+          }
         },
         toolbox: {
           show: true,
           orient: 'vertical',
           left: 'right',
-          top: 'center',
+          top: 'center'
         },
         xAxis: {
-          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
         },
         yAxis: {},
         series: this.EchartsBarData.map((item) => {
           item.smooth = true
           return item
-        }),
+        })
       })
-    },
+    }
   },
   watch: {
     EchartsBarData() {
       this.EchartsDom.clear()
       this.init_Bar()
-    },
-  },
+    }
+  }
 }
 </script>
 

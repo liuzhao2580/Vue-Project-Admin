@@ -8,12 +8,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import * as X6 from "@antv/x6"
-import "./antv-x6"
+import { Component, Vue } from 'vue-property-decorator'
+import * as X6 from '@antv/x6'
+import './antv-x6'
 /** 拓扑图组件 */
 @Component({
-  name: "topology",
+  name: 'topology'
 })
 export default class TopologyComponent extends Vue {
   /** 定义 装拓扑图组件 */
@@ -24,30 +24,30 @@ export default class TopologyComponent extends Vue {
     // 节点
     nodes: [
       {
-        id: "node1", // String，可选，节点的唯一标识
-        shape: "rect", // 使用 rect 渲染
+        id: 'node1', // String，可选，节点的唯一标识
+        shape: 'rect', // 使用 rect 渲染
         x: 40, // Number，必选，节点位置的 x 值
         y: 40, // Number，必选，节点位置的 y 值
         width: 80, // Number，可选，节点大小的 width 值
         height: 40, // Number，可选，节点大小的 height 值
-        label: "hello", // String，节点标签
+        label: 'hello', // String，节点标签
         attrs: {
           body: {
-            fill: "#2ECC71",
-            stroke: "#000",
-            strokeDasharray: "10,2",
-          },
-        },
+            fill: '#2ECC71',
+            stroke: '#000',
+            strokeDasharray: '10,2'
+          }
+        }
       },
       {
-        id: "node2", // String，节点的唯一标识
-        shape: "ellipse", // 使用 ellipse 渲染
+        id: 'node2', // String，节点的唯一标识
+        shape: 'ellipse', // 使用 ellipse 渲染
         x: 160, // Number，必选，节点位置的 x 值
         y: 180, // Number，必选，节点位置的 y 值
         width: 80, // Number，可选，节点大小的 width 值
         height: 40, // Number，可选，节点大小的 height 值
-        label: "world", // String，节点标签
-      },
+        label: 'world' // String，节点标签
+      }
     ],
     /*
         边
@@ -55,20 +55,20 @@ export default class TopologyComponent extends Vue {
         */
     edges: [
       {
-        source: "node1", // String，必须，起始节点 id
-        target: "node2", // String，必须，目标节点 id
-        shape: "double-edge",
+        source: 'node1', // String，必须，起始节点 id
+        target: 'node2', // String，必须，目标节点 id
+        shape: 'double-edge',
         attrs: {
           line: {
-            stroke: "orange",
-          },
-        },
-      },
-    ],
+            stroke: 'orange'
+          }
+        }
+      }
+    ]
   }
   mounted() {
     this.topologyContent = document.querySelector(
-      "#antv-x6-container",
+      '#antv-x6-container'
     ) as HTMLDivElement
   }
   /** 初始化 */
@@ -79,53 +79,53 @@ export default class TopologyComponent extends Vue {
       width: 800,
       height: 600,
       background: {
-        color: "#fffbe6", // 设置画布背景颜色
+        color: '#fffbe6' // 设置画布背景颜色
       },
       grid: {
         size: 10, // 网格大小 10px
-        visible: true, // 渲染网格背景
-      },
+        visible: true // 渲染网格背景
+      }
     })
     // 创建节点
     const rect = new X6.Shape.Rect({
-      id: "rect1",
+      id: 'rect1',
       width: 80,
       height: 40,
       attrs: {
         body: {
-          fill: "blue",
+          fill: 'blue'
         },
         label: {
-          text: "Hello",
-          fill: "white",
-        },
-      },
+          text: 'Hello',
+          fill: 'white'
+        }
+      }
     })
     const rect2 = new X6.Shape.Rect({
-      id: "rect2",
+      id: 'rect2',
       x: 100,
       y: 200,
       width: 80,
       height: 40,
       attrs: {
         body: {
-          fill: "blue",
+          fill: 'blue'
         },
         label: {
-          text: "world",
-          fill: "white",
-        },
-      },
+          text: 'world',
+          fill: 'white'
+        }
+      }
     })
     const edge = new X6.Shape.Edge({
-      source: "rect1",
-      target: "rect2",
+      source: 'rect1',
+      target: 'rect2',
       attrs: {
         line: {
-          targetMaker: "block",
-          sourceMarker: "block",
-        },
-      },
+          targetMaker: 'block',
+          sourceMarker: 'block'
+        }
+      }
     })
     this.graph.addNode(rect)
     this.graph.addNode(rect2)

@@ -4,6 +4,6 @@ export enum UserRolesEnum {
     superAdmin = 1,
     /** 2 管理员 */
     admin,
-    /**3 普通用户 */
+    /** 3 普通用户 */
     user
 }

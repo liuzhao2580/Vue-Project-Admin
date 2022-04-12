@@ -1,12 +1,12 @@
 const routerList = [
   {
     path: '/amap',
-    title: "地图"
+    title: '地图'
   },
   {
     path: '/components',
-    title: "组件",
-    children : [
+    title: '组件',
+    children: [
       {
         path: 'richtext',
         title: '富文本编辑器'

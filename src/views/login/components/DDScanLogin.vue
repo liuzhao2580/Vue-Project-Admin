@@ -27,7 +27,7 @@ export default {
     ddInit() {
       window.DDLogin({
         id: 'dd-login',
-        goto, //请参考注释里的方式
+        goto, // 请参考注释里的方式
         style: 'border:none;background-color:#FFFFFF;',
         width: '365',
         height: '400'
@@ -37,14 +37,14 @@ export default {
     DDMessage(event) {
       const origin = event.origin
       if (origin === 'https://login.dingtalk.com') {
-        //判断是否来自ddLogin扫码事件。
+        // 判断是否来自ddLogin扫码事件。
         const loginTmpCode = event.data
-        //获取到loginTmpCode后就可以在这里构造跳转链接进行跳转了
+        // 获取到loginTmpCode后就可以在这里构造跳转链接进行跳转了
         console.log('loginTmpCode', loginTmpCode)
       }
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('message', this.DDMessage, false)
   }
 }

@@ -18,16 +18,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import BetweenTime from "./components/Between-time.vue"
-import CssComponent from "./components/CssComponent/index.vue"
+import { Component, Vue } from 'vue-property-decorator'
+import BetweenTime from './components/Between-time.vue'
+import CssComponent from './components/CssComponent/index.vue'
 @Component({
-  name: "other-components",
+  name: 'other-components',
   components: {
-    Calculator: () => import("./components/Calculator.vue"),
+    Calculator: () => import('./components/Calculator.vue'),
     BetweenTime,
-    CssComponent,
-  },
+    CssComponent
+  }
 })
 export default class OtherComponents extends Vue {}
 </script>

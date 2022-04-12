@@ -8,18 +8,18 @@ export default {
   props: {
     height: {
       type: String,
-      default: '400px',
+      default: '400px'
     },
     // Ecahrts 数据
     EchartsPieData: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     // Ecahrts 标题
     EchartsTitle: {
       type: String,
-      default: '统计-饼图',
-    },
+      default: '统计-饼图'
+    }
   },
   mixins: [mixins],
   data() {
@@ -37,16 +37,16 @@ export default {
       this.EchartsDom = Echarts.init(this.$refs.echartsPie, 'westeros')
       this.EchartsDom.setOption({
         title: {
-          text: this.EchartsTitle,
+          text: this.EchartsTitle
         },
         legend: {
           data: this.EchartsPieData.map((item) => {
             return item.name
-          }),
+          })
         },
         tooltip: {
           trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
         series: {
           name: this.EchartsTitle,
@@ -56,19 +56,19 @@ export default {
             itemStyle: {
               shadowBlur: 10,
               shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)',
-            },
-          },
-        },
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
       })
-    },
+    }
   },
   watch: {
     EchartsPieData() {
       this.EchartsDom.clear()
       this.init_Pie()
-    },
-  },
+    }
+  }
 }
 </script>
 

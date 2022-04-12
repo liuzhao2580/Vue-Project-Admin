@@ -5,7 +5,7 @@
 		</div>
 		<div class="img-box">
 			<userImg />
-			<p>{{nickname}}</p>
+			<p>{{ nickname }}</p>
 		</div>
 		<div class="experience">
 			<div class="Education">
@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import userImg from "@/components/UserImg";
+import { mapGetters } from 'vuex'
+import userImg from '@/components/UserImg'
 import Progress from '@/components/Progress'
 export default {
-  name: "Info",
+  name: 'Info',
   components: {
     userImg,
     Progress
@@ -44,19 +44,19 @@ export default {
   data() {
     return {
       items: [
-        { type: "", label: "唱" },
-        { type: "success", label: "跳" },
-        { type: "info", label: "rap" },
-        { type: "danger", label: "篮球" },
-        { type: "warning", label: "music" }
+        { type: '', label: '唱' },
+        { type: 'success', label: '跳' },
+        { type: 'info', label: 'rap' },
+        { type: 'danger', label: '篮球' },
+        { type: 'warning', label: 'music' }
       ]
-    };
+    }
   },
   created() {},
   mounted() {},
   methods: {},
   watch: {}
-};
+}
 </script>
 
 <style lang="scss" scoped>

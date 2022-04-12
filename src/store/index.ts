@@ -1,9 +1,7 @@
-import Vue from "vue"
-import Vuex from "vuex"
+import { createStore } from 'vuex'
 import user from './modules/user'
 import app from './modules/app'
 import TagsView from './modules/TagsView'
-Vue.use(Vuex)
 
 // https://webpack.js.org/guides/dependency-management/#requirecontext
 // const modulesFiles = require.context("./modules", true, /\.js$/)
@@ -18,7 +16,7 @@ Vue.use(Vuex)
 //     return modules
 // }, {})
 
-const store = new Vuex.Store({
+const store = createStore({
   modules: {
     user,
     app,

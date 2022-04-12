@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     title="文章预览"
-    :visible.sync="visibleFlag"
+    v-model:visible="visibleFlag"
     width="80%"
     :close-on-click-modal="false"
     class="article-dialog-box"
@@ -36,33 +36,33 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from "vue-property-decorator"
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 @Component({
-  name: "ReleaseContainer",
+  name: 'ReleaseContainer'
 })
 export default class ReleaseContainer extends Vue {
   /** 弹出框的 visible */
   @Prop({ default: false, type: Boolean, required: true }) visible
   /** 文章标题 */
-  @Prop({ default: "", type: String, required: true }) title
+  @Prop({ default: '', type: String, required: true }) title
   /** 文章内容 */
-  @Prop({ default: "", type: String, required: true }) articleContainer
+  @Prop({ default: '', type: String, required: true }) articleContainer
   /** 分类的数据 */
   @Prop({ default: () => [], type: Array, required: true }) categoryData
   /** 文章分类 选中项 id */
-  categoryValue: string = ""
+  categoryValue = ''
   /** 弹框 */
-  visibleFlag: boolean = false
+  visibleFlag = false
   /** 发布按钮的禁用 */
   get releaseDisabled(): boolean {
-    let flag: boolean = false
+    let flag = false
     if (!this.categoryValue) flag = true
     return flag
   }
   /** 选择分类的改变事件 */
   categoryChange(value: number) {
     const getFind = this.categoryData.find((item) => item.id === value)
-    console.log(getFind, "getFind")
+    console.log(getFind, 'getFind')
   }
   /** 发布按钮 */
   releaseArticle(): void {
@@ -70,7 +70,7 @@ export default class ReleaseContainer extends Vue {
     // this.dialogVisible = false
   }
   /** 监听 visible 变化 */
-  @Watch("visible") change() {
+  @Watch('visible') change() {
     this.visibleFlag = this.visible
   }
 }

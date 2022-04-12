@@ -19,7 +19,7 @@ import { Component, Vue } from 'vue-property-decorator'
 })
 export default class WaterRipple extends Vue {
   /** 判断是否已经点击了 */
-  clickFlag: boolean = false
+  clickFlag = false
   /** 点击事件 */
   cricleClick(): void {
     this.clickFlag = !this.clickFlag

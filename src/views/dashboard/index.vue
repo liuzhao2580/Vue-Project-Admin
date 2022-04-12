@@ -14,35 +14,35 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import { dashboardEcharts_Api } from "@/api/modules/dashboard"
-import EchartsComponents from "./components/Echarts/index.vue"
+import { Component, Vue } from 'vue-property-decorator'
+import { dashboardEcharts_Api } from '@/api/modules/dashboard'
+import EchartsComponents from './components/Echarts/index.vue'
 @Component({
-  name: "dashboard",
+  name: 'dashboard',
   components: {
-    card: () => import("./components/Card/index.vue"),
-    todoList: () => import("./components/TodoList/index.vue"),
-    EchartsComponents,
-  },
+    card: () => import('./components/Card/index.vue'),
+    todoList: () => import('./components/TodoList/index.vue'),
+    EchartsComponents
+  }
 })
 export default class Dashboard extends Vue {
-    /** Echarts 组件加载样式 */
-    EchartLoading: boolean = true
-    EchartsData: any = {}
-    created() {
-      this.init()
+  /** Echarts 组件加载样式 */
+  EchartLoading = true
+  EchartsData: any = {}
+  created() {
+    this.init()
+  }
+  // 初始化
+  async init() {
+    try {
+      const result = await dashboardEcharts_Api()
+      this.EchartLoading = false
+      this.EchartsData = result.data
+    } catch (error) {
+      this.EchartLoading = false
+      console.log(error)
     }
-    // 初始化
-    async init() {
-      try {
-        const result = await dashboardEcharts_Api()
-        this.EchartLoading = false
-        this.EchartsData = result.data
-      } catch (error) {
-        this.EchartLoading = false
-        console.log(error)
-      }
-    }
+  }
 }
 </script>
 

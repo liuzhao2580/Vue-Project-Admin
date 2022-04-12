@@ -1,4 +1,4 @@
-import { ResultCodeEnum } from "@/typescript/shared/enum/index"
+import { ResultCodeEnum } from '@/typescript/shared/enum/index'
 /** mockJS 的数据返回字段 */
 
 /** 1. 数据返回的字段标准 */

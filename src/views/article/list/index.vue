@@ -9,24 +9,24 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import { queryArticleList_API } from "@/api/modules/article"
-import { ResultCodeEnum } from "@/typescript/shared/enum"
+import { Component, Vue } from 'vue-property-decorator'
+import { queryArticleList_API } from '@/api/modules/article'
+import { ResultCodeEnum } from '@/typescript/shared/enum'
 import {
   TableConfigModel,
   EColumnType,
   EOperationType,
-  ESearchType,
-} from "@/typescript/shared/model/tableModel/table-config.model"
-import { PageModel } from "@/typescript/shared/model/tableModel/page-config.model"
-import { FilterConditionModel } from "@/typescript/shared/model/tableModel/filter-condition.model"
-import { IArticleBasic } from "@/typescript/views/article/interface/article-config.interface"
-import tableComponent from "@/components/Table/index.vue"
+  ESearchType
+} from '@/typescript/shared/model/tableModel/table-config.model'
+import { PageModel } from '@/typescript/shared/model/tableModel/page-config.model'
+import { FilterConditionModel } from '@/typescript/shared/model/tableModel/filter-condition.model'
+import { IArticleBasic } from '@/typescript/views/article/interface/article-config.interface'
+import tableComponent from '@/components/Table/index.vue'
 @Component({
-  name: "article-list",
+  name: 'article-list',
   components: {
-    tableComponent,
-  },
+    tableComponent
+  }
 })
 export default class ArticleListComponent extends Vue {
   /** 表格的数据 */
@@ -39,61 +39,61 @@ export default class ArticleListComponent extends Vue {
     print: true,
     columnConfig: [
       {
-        label: "文章标题",
-        prop: "article_title",
+        label: '文章标题',
+        prop: 'article_title',
         fixed: true,
         searchable: true,
         searchConfig: {
-          type: ESearchType.input,
-        },
+          type: ESearchType.input
+        }
       },
       {
-        label: "分类",
-        prop: "category_name",
-        searchable: false,
+        label: '分类',
+        prop: 'category_name',
+        searchable: false
       },
       {
-        label: "创建时间",
+        label: '创建时间',
         type: EColumnType.dateTime,
-        prop: "article_time",
+        prop: 'article_time',
         width: 200,
         searchable: true,
         searchConfig: {
-          type: ESearchType.dateTime,
-        },
+          type: ESearchType.dateTime
+        }
       },
       {
-        label: "更新时间",
+        label: '更新时间',
         type: EColumnType.dateTime,
-        prop: "article_update_time",
+        prop: 'article_update_time',
         width: 200,
         searchable: true,
         searchConfig: {
-          type: ESearchType.dateTime,
-        },
-      },
+          type: ESearchType.dateTime
+        }
+      }
     ],
     operation: [
       {
         type: EOperationType.primary,
-        text: "编辑",
-        icon: "el-icon-edit",
+        text: '编辑',
+        icon: 'el-icon-edit',
         handle: () => {
-          console.log("123")
-        },
+          console.log('123')
+        }
       },
       {
         type: EOperationType.danger,
-        text: "删除",
-        icon: "el-icon-delete",
+        text: '删除',
+        icon: 'el-icon-delete',
         handle: () => {
-          console.log(46, "123")
-        },
-      },
+          console.log(46, '123')
+        }
+      }
     ],
     handleSearch: (event: FilterConditionModel[]) => {
       console.log(event)
-    },
+    }
   }
   created() {
     this.init()
@@ -102,7 +102,7 @@ export default class ArticleListComponent extends Vue {
   async init() {
     const result = await queryArticleList_API()
     if (result.code === ResultCodeEnum.success) {
-      console.log(result, "data")
+      console.log(result, 'data')
       this.tableData = result.data
     }
     this.tableConfig.loading = false

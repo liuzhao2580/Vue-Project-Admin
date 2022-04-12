@@ -35,18 +35,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator"
-import { ESearchType, ColumnConfig } from "@/typescript/shared/model/tableModel/table-config.model"
-import { SearchModelValue } from "../shared/model/serach-model-value"
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { ESearchType, ColumnConfig } from '@/typescript/shared/model/tableModel/table-config.model'
+import { SearchModelValue } from '../shared/model/serach-model-value'
 @Component({
-  name: "tableHeaderSearch",
+  name: 'tableHeaderSearch'
 })
 export default class TableHeaderSearchComponent extends Vue {
   /** 表格的搜索配置 */
   @Prop({ required: true, default: () => {}, type: Object }) tableHeaderSearch!: ColumnConfig
   /** 给每个 model 赋值 */
   @Prop({ required: true, default: () => new SearchModelValue(), type: Object })
-  searchParamsValue!: SearchModelValue
+    searchParamsValue!: SearchModelValue
   /** 搜索的类型 */
   ESearchType = ESearchType
 }

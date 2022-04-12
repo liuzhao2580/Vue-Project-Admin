@@ -1,13 +1,13 @@
 <template>
     <el-row>
         <el-col :span="24">
-            <Echarts-line :EchartsLineData='EchartsData.line'/>
+            <Echarts-line :EchartsLineData="EchartsData.line" />
         </el-col>
         <el-col :lg="12" :sm="24">
-            <Echarts-bar :EchartsBarData='EchartsData.bar'/>
+            <Echarts-bar :EchartsBarData="EchartsData.bar" />
         </el-col>
         <el-col :lg="12" :sm="24">
-            <Echarts-pie :EchartsPieData='EchartsData.pie'/>
+            <Echarts-pie :EchartsPieData="EchartsData.pie" />
         </el-col>
     </el-row>
 </template>
@@ -20,13 +20,13 @@ export default {
   props: {
     EchartsData: {
       type: Object,
-      default: () => {},
-    },
+      default: () => {}
+    }
   },
   components: {
     EchartsLine,
     EchartsBar,
-    EchartsPie,
+    EchartsPie
   },
   data() {
     return {}
@@ -34,7 +34,7 @@ export default {
   computed: {},
   created() {},
   mounted() {},
-  methods: {},
+  methods: {}
 }
 </script>
 

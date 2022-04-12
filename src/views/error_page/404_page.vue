@@ -19,10 +19,10 @@
 
 <script>
 export default {
-  name: "Page404",
+  name: 'Page404',
   computed: {
     message() {
-      return "网站管理员说你不能进入这个页面…";
+      return '网站管理员说你不能进入这个页面…'
     }
   },
   methods: {
@@ -30,7 +30,7 @@ export default {
       this.$router.go(-1)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

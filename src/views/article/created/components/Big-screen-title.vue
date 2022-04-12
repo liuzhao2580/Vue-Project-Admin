@@ -13,39 +13,39 @@
       :title="titleValue"
       :articleContainer="articleContainer"
       :categoryData="categoryData"
-      :visible.sync="dialogVisible"
+      v-model:visible="dialogVisible"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import { EventBus } from "../../shared/utils/EventBus"
-import { queryArticleCategory_API } from "@/api/modules/article"
-import { ResultCodeEnum } from "@/typescript/shared/enum"
-import { IArticleCategory } from "@/typescript/views/article/interface/article-config.interface"
-import ReleaseContainer from "./Release-container.vue"
+import { Component, Vue } from 'vue-property-decorator'
+import { EventBus } from '../../shared/utils/EventBus'
+import { queryArticleCategory_API } from '@/api/modules/article'
+import { ResultCodeEnum } from '@/typescript/shared/enum'
+import { IArticleCategory } from '@/typescript/views/article/interface/article-config.interface'
+import ReleaseContainer from './Release-container.vue'
 @Component({
   components: {
-    ReleaseContainer,
-  },
+    ReleaseContainer
+  }
 })
 /** 大屏幕 下的 标题 */
 export default class BigScreenTitle extends Vue {
   /** 按钮是否禁用 */
-  btnDisabled: boolean = true
+  btnDisabled = true
   /** 文章标题 */
-  titleValue: string = ""
+  titleValue = ''
   /** 文章分类的数据 */
   categoryData: IArticleCategory[] = []
   /** 文章内容 */
-  articleContainer: any = ""
+  articleContainer: any = ''
   /** 预览内容弹出框 */
-  dialogVisible: boolean = false
+  dialogVisible = false
 
   /** 预览按钮禁用 */
   get disabled(): boolean {
-    let flag: boolean = false
+    let flag = false
     if (this.btnDisabled || !this.titleValue) flag = true
     return flag
   }
@@ -56,10 +56,10 @@ export default class BigScreenTitle extends Vue {
   }
   /** 使用事件总线获取 当前的内容和 设置按钮的样式 */
   init_EventBus() {
-    EventBus.$on("btnDisabled", (flag: boolean) => {
+    EventBus.$on('btnDisabled', (flag: boolean) => {
       this.btnDisabled = flag
     })
-    EventBus.$on("getContent", (html: HTMLDocument) => {
+    EventBus.$on('getContent', (html: HTMLDocument) => {
       this.articleContainer = html
     })
   }

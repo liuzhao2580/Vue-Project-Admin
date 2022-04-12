@@ -13,23 +13,15 @@
   </div>
 </template>
 
-<script>
-import Info from "./Info"
-import Introduce from "./Introduce"
+<script lang="ts" setup>
+import Info from './Info/index.vue'
+import Introduce from './Introduce/index.vue'
+
+</script>
+
+<script lang="ts">
 export default {
-  name: "personalCenter",
-  components: {
-    Info,
-    Introduce,
-  },
-  props: {},
-  data() {
-    return {}
-  },
-  created() {},
-  mounted() {},
-  methods: {},
-  watch: {},
+  name: 'PersonalCenter'
 }
 </script>
 

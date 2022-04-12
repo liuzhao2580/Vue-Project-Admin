@@ -5,7 +5,7 @@
     >
     <el-dialog
       v-el-drag-dialog
-      :visible.sync="dialogVisible"
+      v-model:visible="dialogVisible"
       width="30%"
       :close-on-click-modal="false"
       @closed="dialog_closed"
@@ -24,15 +24,15 @@
 </template>
 
 <script>
-import dragDialog from "@/directives/el-drag-dialog"
+import dragDialog from '@/directives/el-drag-dialog'
 export default {
-  name: "dragDialog",
+  name: 'DragDialog',
   components: {},
   directives: { dragDialog },
   props: {},
   data() {
     return {
-      dialogVisible: false,
+      dialogVisible: false
     }
   },
   created() {},
@@ -41,9 +41,9 @@ export default {
     dialog_closed() {
       this.$refs.dialogREF.style.left = 0
       this.$refs.dialogREF.style.top = 0
-    },
+    }
   },
-  watch: {},
+  watch: {}
 }
 </script>
 

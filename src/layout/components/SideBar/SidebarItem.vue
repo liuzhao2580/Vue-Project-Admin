@@ -16,7 +16,7 @@
       popper-append-to-body
       :class="{ MenuitemClass: side_status && !isMoreChild }"
     >
-      <template slot="title">
+      <template v-slot:title>
         <MenuItem
           :icon="onlyOneChild.meta.icon"
           :title="onlyOneChild.meta.title"
@@ -37,36 +37,36 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters } from 'vuex'
 // 引入 path 模块 用于拼接url地址
-import path from "path"
-import MenuItem from "./Item"
+import path from 'path'
+import MenuItem from './Item'
 export default {
-  name: "SidebarItem",
+  name: 'SidebarItem',
   components: {
-    MenuItem,
+    MenuItem
   },
   computed: {
     ...mapGetters({
-      side_status: "app/side_status",
-    }),
+      side_status: 'app/side_status'
+    })
   },
   props: {
     item: {
-      require: true,
+      require: true
     },
     basePath: {
       type: String,
-      default: "",
+      default: ''
     },
     isMoreChild: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
-      onlyOneChild: null,
+      onlyOneChild: null
     }
   },
   created() {},
@@ -89,7 +89,7 @@ export default {
         // 如果 isMoreChild 存在 说明当前的路由是通过递归传递的数据
         if (this.isMoreChild) {
           // 重新定义 path
-          this.onlyOneChild = { ...route, path: "" }
+          this.onlyOneChild = { ...route, path: '' }
         }
         // 说明 当前的路由是一级路由
         else {
@@ -97,9 +97,9 @@ export default {
         }
         return true
       }
-    },
+    }
   },
-  watch: {},
+  watch: {}
 }
 </script>
 

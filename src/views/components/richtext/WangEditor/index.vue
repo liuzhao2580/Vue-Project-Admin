@@ -48,7 +48,7 @@ export default {
       )
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.wangEditor) {
       this.wangEditor.destroy()
       this.wangEditor = null

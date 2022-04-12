@@ -30,19 +30,19 @@
 </template>
 <script lang="ts">
 /** 地图 */
-import { Vue, Component } from "vue-property-decorator"
-import AMapInit from "../utils"
+import { Vue, Component } from 'vue-property-decorator'
+import AMapInit from '../utils'
 @Component({
-  name: "AmapCom",
+  name: 'AmapCom'
 })
 export default class AmapCom extends Vue {
   /** 地图载体 */
   mapOBJ: any = null
   /** toolBar */
-  positionStatus: boolean = false
+  positionStatus = false
   /** 定位的基本信息 */
-  getPositionInfo: any = ""
-  search_input = ""
+  getPositionInfo: any = ''
+  search_input = ''
   /** window 挂载的AMap */
   AMap = (window as any).AMap
   /** toolBar */
@@ -51,15 +51,15 @@ export default class AmapCom extends Vue {
   }
   /** 初始化地图的生成 */
   init() {
-    this.mapOBJ = new this.AMap.Map("container-AMap", {
-      resizeEnable: true, //是否监控地图容器尺寸变化
-      zoom: 13, //初始化地图层级
+    this.mapOBJ = new this.AMap.Map('container-AMap', {
+      resizeEnable: true, // 是否监控地图容器尺寸变化
+      zoom: 13 // 初始化地图层级
     })
     // 地图加载完成的回调
-    this.mapOBJ.on("complete", () => {
+    this.mapOBJ.on('complete', () => {
       this.$message({
-        message: "地图加载完成！",
-        type: "success",
+        message: '地图加载完成！',
+        type: 'success'
       })
       this.exportMapEvent()
       AMapInit.AMapInit(this.mapOBJ)
@@ -74,14 +74,14 @@ export default class AmapCom extends Vue {
   }
   /** 导入地图控件 */
   ControlBar() {
-    this.mapOBJ.plugin(["AMap.ControlBar"], () => {
+    this.mapOBJ.plugin(['AMap.ControlBar'], () => {
       const controlBar = new this.AMap.ControlBar()
       this.mapOBJ.addControl(controlBar)
     })
   }
   /** 自动定位 */
   AutoPosition() {
-    this.mapOBJ.plugin("AMap.Geolocation", () => {
+    this.mapOBJ.plugin('AMap.Geolocation', () => {
       const geolocation = new this.AMap.Geolocation({
         enableHighAccuracy: true, // 是否使用高精度定位
         timeout: 10000, // 设置定位超时时间，默认：无穷大
@@ -89,53 +89,53 @@ export default class AmapCom extends Vue {
         // 定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
         zoomToAccuracy: true,
         // 定位按钮的排放位置, RB表示右下
-        buttonPosition: "RB",
+        buttonPosition: 'RB'
       })
       this.mapOBJ.addControl(geolocation)
       geolocation.getCurrentPosition()
       // 定位成功的回调函数
-      this.AMap.event.addListener(geolocation, "complete", (data: any) => {
+      this.AMap.event.addListener(geolocation, 'complete', (data: any) => {
         // data是具体的定位信息
-        console.log(data, "data")
-        if (data.info === "SUCCESS") {
+        console.log(data, 'data')
+        if (data.info === 'SUCCESS') {
           const {
             formattedAddress,
             location_type,
             position,
-            addressComponent,
+            addressComponent
           } = data
           let positionInfo = {
-            status: "定位成功",
+            status: '定位成功',
             position: position.P,
             adcode: addressComponent.adcode,
             formattedAddress,
-            location_type,
+            location_type
           }
           this.getPositionInfo = positionInfo
           this.positionStatus = true
         }
       })
       // 定位失败的回调函数
-      this.AMap.event.addListener(geolocation, "error", data => {
+      this.AMap.event.addListener(geolocation, 'error', data => {
         // 定位出错
-        console.log(data, "data")
+        console.log(data, 'data')
       })
     })
   }
   /** 搜索 */
   PlaceSearch() {
-    this.mapOBJ.plugin(["AMap.Autocomplete", "AMap.PlaceSearch"], () => {
+    this.mapOBJ.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], () => {
       let autoOptions = {
         // 城市，默认全国
         // 使用联想输入的input的id
-        input: "AMap-input",
+        input: 'AMap-input'
       }
       let autocomplete = new this.AMap.Autocomplete(autoOptions)
       let placeSearch = new this.AMap.PlaceSearch({
-        map: this.mapOBJ,
+        map: this.mapOBJ
       })
-      this.AMap.event.addListener(autocomplete, "select", e => {
-        //TODO 针对选中的poi实现自己的功能
+      this.AMap.event.addListener(autocomplete, 'select', e => {
+        // TODO 针对选中的poi实现自己的功能
         placeSearch.search(e.poi.name)
         this.positionStatus = false
       })
@@ -144,25 +144,25 @@ export default class AmapCom extends Vue {
   /** 导入地图事件 */
   exportMapEvent() {
     // 注册鼠标点击热点时触发
-    this.mapOBJ.on("hotspotclick", this.handleHotClick)
+    this.mapOBJ.on('hotspotclick', this.handleHotClick)
     this.rightEvent()
   }
   /** 点击地图热点事件 */
   handleHotClick(e) {
     const { id } = e
-    const placeSearch = new this.AMap.PlaceSearch() //构造地点查询类
+    const placeSearch = new this.AMap.PlaceSearch() // 构造地点查询类
     placeSearch.getDetails(id, (status, result) => {
-      if (status === "complete" && result.info === "OK") {
+      if (status === 'complete' && result.info === 'OK') {
         const poiInfo = result.poiList.pois[0]
         let content = [
-          "<div class='hot-menu'>",
+          '<div class=\'hot-menu\'>',
           `<span class='iconfont icon-tishi'></span><span class='text lineEllipsisOne'>${poiInfo.address}</span>`,
           `<span class='iconfont icon-luxian'></span>`,
-          "</div>",
+          '</div>'
         ]
         let contextMenu = new this.AMap.ContextMenu({
           isCustom: true,
-          content: content.join(""),
+          content: content.join('')
         })
         contextMenu.open(this.mapOBJ, poiInfo.location)
       }
@@ -170,16 +170,16 @@ export default class AmapCom extends Vue {
   }
   /** 鼠标右键事件 */
   rightEvent() {
-    this.mapOBJ.on("rightclick", e => {
+    this.mapOBJ.on('rightclick', e => {
       let content = [
-        "<div class='context-menu'>",
-        "<p class='li-item'><span class='iconfont icon-qidian'></span>设为起点</p>",
-        "<p class='li-item'><span class='iconfont icon-zhongdian'></span>设为终点</p>",
-        "</div>",
+        '<div class=\'context-menu\'>',
+        '<p class=\'li-item\'><span class=\'iconfont icon-qidian\'></span>设为起点</p>',
+        '<p class=\'li-item\'><span class=\'iconfont icon-zhongdian\'></span>设为终点</p>',
+        '</div>'
       ]
       let contextMenu = new this.AMap.ContextMenu({
         isCustom: true,
-        content: content.join(""),
+        content: content.join('')
       })
       contextMenu.open(this.mapOBJ, e.lnglat)
     })

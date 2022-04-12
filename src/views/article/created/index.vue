@@ -11,16 +11,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import ContentEditor from "./components/Content-editor.vue"
-import BigScreenTitle from "./components/Big-screen-title.vue"
-import { EventBus } from "../shared/utils/EventBus"
+import { Component, Vue } from 'vue-property-decorator'
+import ContentEditor from './components/Content-editor.vue'
+import BigScreenTitle from './components/Big-screen-title.vue'
+import { EventBus } from '../shared/utils/EventBus'
 @Component({
-  name: "created",
+  name: 'created',
   components: {
     ContentEditor,
-    BigScreenTitle,
-  },
+    BigScreenTitle
+  }
 })
 export default class CreateArticle extends Vue {
   beforeDestroy() {

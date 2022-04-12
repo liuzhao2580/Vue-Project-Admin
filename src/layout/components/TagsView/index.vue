@@ -31,10 +31,10 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
+import { mapGetters, mapActions } from 'vuex'
 // import path from 'path'
 export default {
-  name: "TagsView",
+  name: 'TagsView',
   components: {},
   props: {},
   data() {
@@ -45,19 +45,19 @@ export default {
       // tag 操作菜单的样式
       hideTagBox: {
         left: 0,
-        top: 0,
+        top: 0
       },
       // 记录当前右键的是哪个 tag
       saveCurrentTag: {
         currentIndex: -1,
-        currentTag: null,
-      },
+        currentTag: null
+      }
     }
   },
   computed: {
     ...mapGetters({
-      tags_data: "TagsView/tags_data",
-      sideBarList: "user/sideBarList",
+      tags_data: 'TagsView/tags_data',
+      sideBarList: 'user/sideBarList'
     }),
     // 当前的 tag 是否可以操作
     disabledFlag() {
@@ -65,7 +65,7 @@ export default {
       if (this.saveCurrentTag.currentIndex === 0 || this.saveCurrentTag.currentIndex === 1)
         flag = true
       return flag
-    },
+    }
   },
   created() {},
   mounted() {
@@ -74,8 +74,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      ACT_init_Tags: "TagsView/ACT_init_Tags",
-      ACT_setTags: "TagsView/ACT_setTags",
+      ACT_init_Tags: 'TagsView/ACT_init_Tags',
+      ACT_setTags: 'TagsView/ACT_setTags'
     }),
     // 初始化 tags
     init_tags() {
@@ -91,7 +91,7 @@ export default {
           return {
             fullPath: item.path,
             meta: item.meta,
-            name: item.name,
+            name: item.name
           }
         }
       })
@@ -103,7 +103,7 @@ export default {
       const currentTag = {
         fullPath: route.fullPath,
         meta: route.meta,
-        name: route.name,
+        name: route.name
       }
       this.ACT_setTags(currentTag)
     },
@@ -128,13 +128,13 @@ export default {
     // 点击 tags 跳转
     handleClick(tag) {
       this.$router.push({
-        name: tag.name,
+        name: tag.name
       })
     },
     // 鼠标右键菜单
     tagContextmenu(e, tag, index) {
       // 1.获取 tag-container-box html元素
-      const getTagBoxDom = document.querySelector(".tag-container-box")
+      const getTagBoxDom = document.querySelector('.tag-container-box')
       // 2.将伪数组变成真实的数组
       const getRealArr = Array.prototype.slice.call(getTagBoxDom.children)
       // 3.tag 的操作菜单需要left的 总长度
@@ -145,8 +145,8 @@ export default {
         // 5.计算每个元素的 宽度 并且 + margin-right的5个像素点
         getAllWidth += item.offsetWidth + 5
       })
-      this.hideTagBox.left = 20 + getAllWidth + "px"
-      this.hideTagBox.top = 40 + "px"
+      this.hideTagBox.left = 20 + getAllWidth + 'px'
+      this.hideTagBox.top = 40 + 'px'
       this.operaTagFlag = true
       this.saveCurrentTag.currentIndex = index
       this.saveCurrentTag.currentTag = tag
@@ -179,7 +179,7 @@ export default {
     // 全部关闭
     closeAll() {
       this.tags_data.splice(2)
-      this.$router.push("/")
+      this.$router.push('/')
     },
     // 关闭 可以 tag 的操作菜单
     closeTagOperation() {
@@ -188,18 +188,18 @@ export default {
     // 开启 tag 的操作菜单
     openTagOperation() {
       this.operaTagFlag = true
-    },
+    }
   },
   watch: {
-    "$route.path"() {
+    '$route.path'() {
       this.insertT_Tags()
     },
     operaTagFlag(flag) {
       // 每次只要 开启 就全局监听 click 事件，用来关闭
-      if (flag) document.body.addEventListener("click", this.closeTagOperation)
-      else document.body.removeEventListener("click", this.closeTagOperation)
-    },
-  },
+      if (flag) document.body.addEventListener('click', this.closeTagOperation)
+      else document.body.removeEventListener('click', this.closeTagOperation)
+    }
+  }
 }
 </script>
 

@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import SidebarItem from "./SidebarItem";
-import variables from "@/styles/variables.scss";
-import { mapGetters } from "vuex";
+import SidebarItem from './SidebarItem'
+import variables from '@/styles/variables.scss'
+import { mapGetters } from 'vuex'
 export default {
-  name: "SideBar",
+  name: 'SideBar',
   components: {
     SidebarItem
   },
@@ -46,23 +46,23 @@ export default {
     }),
     // 获取当前页面的 url 地址
     activeMenu() {
-      const route = this.$route;
-      const { path } = route;
-      return path;
+      const route = this.$route
+      const { path } = route
+      return path
     },
     // 导入 自定义的样式属性
     variables() {
-      return variables;
+      return variables
     }
   },
   data() {
-    return {};
+    return {}
   },
   created() {},
   mounted() {},
   methods: {},
   watch: {}
-};
+}
 </script>
 
 <style lang="scss" scoped>

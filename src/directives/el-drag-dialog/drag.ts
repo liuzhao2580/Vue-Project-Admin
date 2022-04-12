@@ -1,8 +1,8 @@
 export default {
   bind(el: { querySelector: (arg0: string) => any }){
-    const dialogHead = el.querySelector(".el-dialog__header")
-    const dialogBox = el.querySelector(".el-dialog")
-    dialogHead.style.cursor = "move"
+    const dialogHead = el.querySelector('.el-dialog__header')
+    const dialogBox = el.querySelector('.el-dialog')
+    dialogHead.style.cursor = 'move'
     const getNumStyle = ((leftORtop: string) => {
       if (leftORtop) {
         return parseInt(leftORtop)
@@ -61,8 +61,8 @@ export default {
         }
 
         // 设置位移
-        dialogBox.style.left = Move_BoxX + existedLeft + "px"
-        dialogBox.style.top = Move_BoxY + existedTop + "px"
+        dialogBox.style.left = Move_BoxX + existedLeft + 'px'
+        dialogBox.style.top = Move_BoxY + existedTop + 'px'
       }
       document.onmouseup = () => {
         document.onmousemove = null

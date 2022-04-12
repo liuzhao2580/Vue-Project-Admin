@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import Breadcrumb from "../Breadcrumb"
-import TagsView from "../TagsView"
+import Breadcrumb from '../Breadcrumb'
+import TagsView from '../TagsView'
 import Personal from '../Personal'
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   components: {
     Breadcrumb,
     TagsView,
@@ -26,18 +26,18 @@ export default {
   },
   props: {},
   data() {
-    return {};
+    return {}
   },
   created() {},
   mounted() {},
   methods: {
     // 侧边栏按钮点击事件
     side_Btn() {
-      this.$store.dispatch("app/change_SideStatus")
-    },
+      this.$store.dispatch('app/change_SideStatus')
+    }
   },
   watch: {}
-};
+}
 </script>
 
 <style lang="scss" scoped>

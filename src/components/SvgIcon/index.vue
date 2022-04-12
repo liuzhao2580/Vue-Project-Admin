@@ -6,18 +6,18 @@
 
 <script>
 export default {
-  name: "SvgIcon",
+  name: 'SvgIcon',
   props: {
     iconClass: {
-      default: "",
-      required: true,
-    },
+      default: '',
+      required: true
+    }
   },
   computed: {
     IconName() {
       return `#icon-${this.iconClass}`
-    },
-  },
+    }
+  }
 }
 </script>
 

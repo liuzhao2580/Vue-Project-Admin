@@ -17,9 +17,9 @@ const error_page: RouteConfig = {
         {
           path: '4011',
           component: () =>
-                        import(
-                          /* webpackChunkName: "errorPage" */ '@/views/error_page/4011_page.vue'
-                        ),
+            import(
+              /* webpackChunkName: "errorPage" */ '@/views/error_page/4011_page.vue'
+            ),
           name: 'errorPage4011',
           meta: { title: '4011', icon: 'warn' }
         }
@@ -28,7 +28,7 @@ const error_page: RouteConfig = {
     {
       path: '404',
       component: () =>
-                import(/* webpackChunkName: "errorPage" */ '@/views/error_page/404_page.vue'),
+        import(/* webpackChunkName: "errorPage" */ '@/views/error_page/404_page.vue'),
       name: 'errorPage404',
       meta: { title: '404', icon: '404' }
     }

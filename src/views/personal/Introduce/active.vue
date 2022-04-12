@@ -37,7 +37,7 @@
 <script>
 import ClickLike from '@/components/ClickLike'
 export default {
-  name: 'active',
+  name: 'Active',
   components: {
     ClickLike
   },
