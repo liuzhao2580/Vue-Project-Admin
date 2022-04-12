@@ -1,7 +1,13 @@
-import { createStore } from 'vuex'
+import { InjectionKey } from 'vue'
+import { createStore, Store, useStore as baseUseStore } from 'vuex'
+import {
+  StoreAppModel,
+  StoreTagsViewModel,
+  StoreUserModel
+} from '@/typescript/store'
 import user from './modules/user'
 import app from './modules/app'
-import TagsView from './modules/TagsView'
+import tagsView from './modules/tagsView'
 
 // https://webpack.js.org/guides/dependency-management/#requirecontext
 // const modulesFiles = require.context("./modules", true, /\.js$/)
@@ -16,12 +22,22 @@ import TagsView from './modules/TagsView'
 //     return modules
 // }, {})
 
-const store = createStore({
+export interface State {
+  app: StoreAppModel
+  user: StoreUserModel
+  tagsView: StoreTagsViewModel
+}
+
+export const key: InjectionKey<Store<State>> = Symbol()
+
+export const store = createStore<State>({
   modules: {
-    user,
     app,
-    TagsView
+    user,
+    tagsView
   }
 })
 
-export default store
+export function useStore() {
+  return baseUseStore(key)
+}

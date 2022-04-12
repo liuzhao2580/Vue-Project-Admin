@@ -1,70 +1,71 @@
-import { RouteConfig } from 'vue-router'
+import { RouteRecordRaw } from 'vue-router'
 import PageContent from '@/layout/components/AppMain.vue'
-const components: RouteConfig = {
-  path: '/components',
+import { RouterName, RouterPath } from '../RouteConst'
+const components: RouteRecordRaw = {
+  path: RouterPath.COMPONENTS,
   meta: { title: '组件', icon: 'components' },
-  redirect: '/components/richtext',
+  redirect: RouterPath.RICHTEXT,
   component: PageContent,
   name: 'components',
   children: [
     {
-      path: 'richtext',
+      path: RouterPath.RICHTEXT,
       meta: { title: '富文本编辑器', icon: 'richtext' },
-      name: 'richtextComponents',
+      name: RouterName.RICHTEXT,
       component: () =>
         import(
           /* webpackChunkName: "richtextComponents" */ '@/views/components/richtext/index.vue'
         )
     },
     {
-      path: 'markdown',
+      path: RouterPath.MARKDOWN,
       meta: { title: 'Markdown编辑器', icon: 'markdown' },
-      name: 'markdownComponents',
+      name: RouterName.MARKDOWN,
       component: () =>
         import(
           /* webpackChunkName: "markdownComponents" */ '@/views/components/markdown/index.vue'
         )
     },
     {
-      path: 'drag-dialog',
+      path: RouterPath.DRAG_DIALOG,
       meta: { title: '可拖拽Dialog', icon: 'dialog' },
-      name: 'dragDialogComponents',
+      name: RouterName.DRAG_DIALOG,
       component: () =>
         import(
           /* webpackChunkName: "componentsPage" */ '@/views/components/drag-dialog/index.vue'
         )
     },
     {
-      path: 'back-to-top',
+      path: RouterPath.BACK_TO_TOP,
       meta: { title: '返回顶部', icon: 'backtop' },
-      name: 'backToTopComponents',
+      name: RouterName.BACK_TO_TOP,
       component: () =>
         import(
           /* webpackChunkName: "componentsPage" */ '@/views/components/back-to-top/index.vue'
         )
     },
     {
-      path: 'element',
+      path: RouterPath.ELEMENT,
       meta: { title: 'element', icon: 'element' },
-      name: 'elementComponents',
+      name: RouterName.ELEMENT,
       component: () =>
         import(
           /* webpackChunkName: "componentsPage" */ '@/views/components/element/index.vue'
         )
     },
     {
-      path: 'topology',
+      path: RouterPath.TOPOLOGY,
       meta: { title: '拓扑图', icon: 'topology' },
-      name: 'topologyComponents',
+      name: RouterName.TOPOLOGY,
       component: () =>
         import(
           /* webpackChunkName: "componentsPage" */ '@/views/components/topology/index.vue'
         )
     },
     {
-      path: 'other-components',
+      path: RouterPath.OTHER_COMPONENTS,
       meta: { title: '其他组件', icon: 'other-components' },
-      name: 'otherComponents',
+      name: RouterName.OTHER_COMPONENTS,
       component: () =>
         import(
           /* webpackChunkName: "componentsPage" */ '@/views/components/other-components/index.vue'

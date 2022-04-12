@@ -1,35 +1,38 @@
-import { RouteConfig } from 'vue-router'
+import { RouteRecordRaw } from 'vue-router'
 import PageContent from '@/layout/components/AppMain.vue'
-const error_page: RouteConfig = {
-  path: '/errorPage',
+import { RouterName, RouterPath } from '../RouteConst'
+const error_page: RouteRecordRaw = {
+  path: RouterPath.ERROR_PAGE,
   meta: { title: 'Error', icon: 'error' },
-  redirect: '/errorPage/401',
+  redirect: RouterPath.ERROR_PAGE_401,
   component: PageContent,
-  name: 'errorPage',
+  name: RouterName.ERROR_PAGE,
   children: [
     {
-      path: '401',
+      path: RouterPath.ERROR_PAGE_401,
       component: () => import('@/views/error_page/401_page.vue'),
-      name: 'errorPage401',
+      name: RouterName.ERROR_PAGE_401,
       meta: { title: '401', icon: '401', breadcrumb: false },
-      redirect: '/errorPage/401/4011',
+      redirect: RouterPath.ERROR_PAGE_4011,
       children: [
         {
-          path: '4011',
+          path: RouterPath.ERROR_PAGE_4011,
           component: () =>
             import(
               /* webpackChunkName: "errorPage" */ '@/views/error_page/4011_page.vue'
             ),
-          name: 'errorPage4011',
+          name: RouterName.ERROR_PAGE_4011,
           meta: { title: '4011', icon: 'warn' }
         }
       ]
     },
     {
-      path: '404',
+      path: RouterPath.ERROR_PAGE_404,
       component: () =>
-        import(/* webpackChunkName: "errorPage" */ '@/views/error_page/404_page.vue'),
-      name: 'errorPage404',
+        import(
+          /* webpackChunkName: "errorPage" */ '@/views/error_page/404_page.vue'
+        ),
+      name: RouterName.ERROR_PAGE_404,
       meta: { title: '404', icon: '404' }
     }
   ]

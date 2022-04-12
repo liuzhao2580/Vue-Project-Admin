@@ -8,39 +8,44 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import { RouteConfig } from 'vue-router'
-import { namespace } from 'vuex-class'
-const App_VUEX = namespace('user')
-@Component({
-  name: 'AppMain'
+<script lang="ts" setup>
+import { RouteRecordRaw } from 'vue-router'
+import { computed, onMounted, ref } from 'vue'
+import { useStore } from '@/store'
+
+const store = useStore()
+
+/** 设置缓存路由 */
+const keepAliveRoutes = ref<string[]>([])
+
+const sideBarList = computed((): RouteRecordRaw[] => {
+  return store.getters.user.sideBarList
 })
-export default class AppMain extends Vue {
-  @App_VUEX.Getter sideBarList: any
 
-  /** 设置缓存路由 */
-  keepAliveRoutes: Array<string | undefined> = []
+onMounted(() => {
+  init()
+})
 
-  created() {
-    this.init()
+/** 获取 路由中的 数据 判断meta中 keepAlive 是否为true */
+const init = () => {
+  const getKeepAlive: string[] = []
+  function loopRoutes(listArr: RouteRecordRaw[]) {
+    listArr.forEach(item => {
+      if (item.meta && item.meta.keepAlive) {
+        getKeepAlive.push(item.name as string)
+      } else if (item.children) {
+        loopRoutes(item.children)
+      }
+    })
   }
+  loopRoutes(sideBarList.value)
+  keepAliveRoutes.value = getKeepAlive
+}
+</script>
 
-  /** 获取 路由中的数据 判断meta中 keepAlive 是否为true */
-  init() {
-    const getKeepAlive: Array<string | undefined> = []
-    function loopRoutes(listArr: RouteConfig[]) {
-      listArr.forEach(item => {
-        if (item.meta && item.meta.keepAlive) {
-          getKeepAlive.push(item.name)
-        } else if (item.children) {
-          loopRoutes(item.children)
-        }
-      })
-    }
-    loopRoutes(this.sideBarList)
-    this.keepAliveRoutes = getKeepAlive
-  }
+<script lang="ts">
+export default {
+  name: 'AppMain'
 }
 </script>
 

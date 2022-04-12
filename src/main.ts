@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import { store, key } from './store'
 
 import '@/styles/theme.scss' // 换肤功能
 import '@/permission' // 权限验证
@@ -18,4 +18,4 @@ import '@/directives/permission'
 const app = createApp(App)
 
 app.mount('#app')
-app.use(router).use(store)
+app.use(router).use(store, key)

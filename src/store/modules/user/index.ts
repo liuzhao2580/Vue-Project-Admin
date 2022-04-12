@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ElMessage } from 'element-plus'
-import { RouteLocationRaw } from 'vue-router'
 import { StoreUserModel } from '@/typescript/store'
 import { USER_MUTATIONS_TYPES, USER_ACTIONS_TYPES } from './types'
 import { userInfoApi } from '@/api/modules/user'
@@ -88,7 +88,7 @@ const actions = {
     })
   },
   // 页面刷新 重新获取用户信息, 路由信息
-  [USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID]({ commit }: any) {
+  [USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID]({ commit }:any) {
     return new Promise(async resolve => {
       const userId = getCookie('userId')
       // 获取用户的基本信息

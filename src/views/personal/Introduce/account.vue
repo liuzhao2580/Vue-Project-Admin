@@ -1,49 +1,36 @@
 <template>
-    <div class="account-box">
-        <el-form label-position="left" label-width="80px" :model="form_account">
-            <el-form-item label="名称">
-                <el-input v-model="form_account.name"></el-input>
-            </el-form-item>
-            <el-form-item label="邮箱">
-                <el-input v-model="form_account.Email"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary">更新数据</el-button>
-                <el-button>重置</el-button>
-            </el-form-item>
-        </el-form>
-    </div>
+  <div class="account-box">
+    <el-form label-position="left" label-width="80px" :model="form_account">
+      <el-form-item label="名称">
+        <el-input v-model="form_account.name"></el-input>
+      </el-form-item>
+      <el-form-item label="邮箱">
+        <el-input v-model="form_account.Email"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary">更新数据</el-button>
+        <el-button>重置</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
+<script lang="ts" setup>
+import { useStore } from '@/store'
+import { computed, ref } from 'vue'
+const store = useStore()
+const nickname = computed(() => {
+  return store.getters.nickname
+})
+const form_account = ref({
+  name: nickname,
+  Email: 'liuzhao2580'
+})
+</script>
+
 <script>
-import { mapGetters } from 'vuex'
 export default {
-  name: 'Account',
-  components: {},
-  computed: {
-    ...mapGetters({
-      nickname: 'user/nickname'
-    })
-  },
-  props: {},
-  data() {
-    return {
-      form_account: {
-        name: '',
-        Email: 'liuzhao2580'
-      }
-    }
-  },
-  created() {
-    this.init()
-  },
-  mounted() {},
-  methods: {
-    init() {
-      this.form_account.name = this.nickname
-    }
-  },
-  watch: {}
+  name: 'UserAccount'
 }
 </script>
 

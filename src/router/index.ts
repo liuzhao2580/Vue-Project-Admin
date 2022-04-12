@@ -4,12 +4,13 @@ import PageContent from '@/layout/components/AppMain.vue'
 // 使用 modules 引入嵌套过多的路由
 import error_page from './modules/error'
 import components from './modules/components'
+import { RouterName, RouterPath } from './RouteConst'
 // 公共的页面
 export const constantRoutes: RouteRecordRaw[] = [
   // 登录页面
   {
-    path: '/login',
-    name: 'login',
+    path: RouterPath.LOGIN,
+    name: RouterName.LOGIN,
     meta: { hidden: true },
     component: () =>
       import(/* webpackChunkName: "loginComponent" */ '@/views/login/index.vue')
@@ -41,54 +42,54 @@ export const constantRoutes: RouteRecordRaw[] = [
  */
 export const asyncRoutes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: RouterPath.LAYOUT,
     component: Layout,
-    redirect: '/dashboard',
+    redirect: RouterPath.DASHBOARD,
     children: [
       // 首页
       {
-        path: '/dashboard',
+        path: RouterPath.DASHBOARD,
         component: () =>
           import(
             /* webpackChunkName: "baseComponet" */ '@/views/dashboard/index.vue'
           ),
-        name: 'dashboard',
+        name: RouterName.DASHBOARD,
         meta: { title: '首页', icon: 'index', affix: true, keepAlive: true }
       },
       // 文档页
       {
-        path: '/documentation',
+        path: RouterPath.DOCUMENTATION,
         component: () =>
           import(
             /* webpackChunkName: "baseComponet" */ '@/views/documentation/index.vue'
           ),
-        name: 'documentation',
+        name: RouterName.DOCUMENTATION,
         meta: { title: '文档', icon: 'wendang', affix: true, keepAlive: true }
       },
       // 文章页
       {
-        path: '/article',
+        path: RouterPath.ARTICLE,
         meta: { title: '文章页', icon: 'article', roles: [1, 2, 3] },
-        redirect: '/article/created',
+        redirect: RouterPath.ARTICLE_CREATE,
         component: PageContent,
-        name: 'article',
+        name: RouterName.ARTICLE,
         children: [
           {
-            path: 'created',
+            path: RouterPath.ARTICLE_CREATE,
             component: () =>
               import(
                 /* webpackChunkName: "article" */ '@/views/article/created/index.vue'
               ),
-            name: 'articleCreated',
+            name: RouterName.ARTICLE_CREATE,
             meta: { title: '文章创建', icon: 'created', roles: [1, 2] }
           },
           {
-            path: 'list',
+            path: RouterPath.ARTICLE_LIST,
             component: () =>
               import(
                 /* webpackChunkName: "article" */ '@/views/article/list/index.vue'
               ),
-            name: 'articleList',
+            name: RouterName.ARTICLE_LIST,
             meta: {
               title: '文章列表',
               icon: 'list',
@@ -100,13 +101,13 @@ export const asyncRoutes: RouteRecordRaw[] = [
       },
       // 地图
       {
-        path: '/amap',
+        path: RouterPath.AMAP,
         component: () =>
           import(
             /* webpackChunkName: "baseComponet" */ '@/views/map/index.vue'
           ),
         meta: { title: '地图', icon: 'map', keepAlive: true },
-        name: 'amap'
+        name: RouterName.AMAP
       },
       // 组件
       components,
@@ -114,14 +115,14 @@ export const asyncRoutes: RouteRecordRaw[] = [
       error_page,
       // 个人中心
       {
-        path: '/personal',
+        path: RouterPath.PERSONAL,
         component: () =>
           import(
             /* webpackChunkName: "baseComponet" */ '@/views/personal/index.vue'
           ),
 
         meta: { title: '个人中心', icon: 'personal', hidden: true },
-        name: 'personalCenter'
+        name: RouterName.PERSONAL
       }
     ]
   }

@@ -2,7 +2,12 @@
   <el-col class="login-box">
     <el-row class="login-content">
       <p class="login-title">欢迎登录</p>
-      <el-form label-position="left" :model="login_form" ref="login_form">
+      <el-form
+        label-position="left"
+        :model="login_form"
+        ref="login_form"
+        :rules="rules"
+      >
         <el-form-item label="用户名" prop="userName" label-width="80px">
           <el-input v-model="login_form.userName"></el-input>
         </el-form-item>
@@ -10,21 +15,19 @@
           <el-input
             type="password"
             v-model="login_form.password"
-            @keydown.enter="submitForm('login_form')"
+            @keydown.enter="submitForm(formRef)"
           ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button
             class="loginBtn"
             type="primary"
-            @click="submitForm('login_form')"
+            @click="submitForm(formRef)"
             :loading="login_loading"
             >登录</el-button
           >
         </el-form-item>
       </el-form>
-
-      <el-button @click="copyBtn">复制</el-button>
 
       <!-- <DDScanLogin/> -->
       <DDAccountLogin />
@@ -32,86 +35,80 @@
   </el-col>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
+<script lang="ts" setup>
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import type { FormInstance } from 'element-plus'
+import { ElMessage } from 'element-plus'
+import { useStore } from '@/store'
 import { userLogin } from '@/api/modules/user'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
-// import DDScanLogin from './components/DDScanLogin.vue'
 import DDAccountLogin from './components/DDAccountLogin.vue'
-const USER_VUEX = namespace('user')
-@Component({
-  name: 'login',
-  components: {
-    // DDScanLogin,
-    DDAccountLogin
-  }
+import { USER_ACTIONS_TYPES } from '@/store/modules/user/types'
+
+const store = useStore()
+
+const router = useRouter()
+
+const login_form = reactive({
+  userName: 'admin',
+  password: 'admin'
 })
-export default class LoginComponent extends Vue {
-  @USER_VUEX.Action ACT_userInfo!: (params) => void
-  @USER_VUEX.Action ACT_Need_Refresh!: (params) => void
-  login_form = {
-    userName: 'admin',
-    password: 'admin'
-  }
-  rules = {
-    userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-    password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-  }
-  /** 登录的加载按钮样式 */
-  login_loading = false
+const rules = reactive({
+  userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+})
+/** 登录的加载按钮样式 */
+const login_loading = ref(false)
 
-  submitForm(formName) {
-    // @ts-ignore
-    this.$refs[formName].validate(async (valid: boolean) => {
-      if (valid) {
-        this.login_loading = true
-        const params = {
-          userName: this.login_form.userName,
-          password: this.login_form.password
-        }
-        try {
-          const result = await userLogin(params)
-          console.log(result, 'data')
-          if (result.code === ResultCodeEnum.success) {
-            this.$message({
-              message: '登录成功',
-              type: 'success'
-            })
-            try {
-              await this.ACT_userInfo(result.data)
-              await this.ACT_Need_Refresh(true)
-              this.$router
-                .push({ path: '/' })
-                .catch(error => console.log(error, 1111))
-            } catch (error) {
-              console.log(error, 111)
-            }
-          } else {
-            this.$message({
-              message: result.msg,
-              type: 'error'
-            })
-          }
-          this.login_loading = false
-        } catch (err) {
-          this.login_loading = false
-        }
-      } else {
-        return false
+const formRef = ref<FormInstance>()
+
+const submitForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate(async (valid: boolean) => {
+    if (valid) {
+      login_loading.value = true
+      const params = {
+        userName: login_form.userName,
+        password: login_form.password
       }
-    })
-  }
+      try {
+        const result = await userLogin(params)
+        console.log(result, 'data')
+        if (result.code === ResultCodeEnum.success) {
+          ElMessage({
+            message: '登录成功',
+            type: 'success'
+          })
+          try {
+            await store.dispatch(USER_ACTIONS_TYPES.ACT_FETCH_USERINFO, result.data)
+            await store.dispatch(USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID, true)
+            router
+              .push({ path: '/' })
+              .catch(error => console.log(error, 1111))
+          } catch (error) {
+            console.log(error, 111)
+          }
+        } else {
+          ElMessage({
+            message: result.msg,
+            type: 'error'
+          })
+        }
+        login_loading.value = false
+      } catch (err) {
+        login_loading.value = false
+      }
+    } else {
+      return false
+    }
+  })
+}
+</script>
 
-  copyBtn() {
-    let url = '0090090099009090'
-    let oInput = document.createElement('input')
-    oInput.value = url
-    document.body.appendChild(oInput)
-    oInput.select() // 选择对象;
-    console.log(oInput.value)
-    document.execCommand('Copy')
-  }
+<script>
+export default {
+  name: 'LoginPage'
 }
 </script>
 

@@ -5,18 +5,10 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
-  name: '',
-  components: {},
-  props: {},
-  data() {
-    return {}
-  },
-  created() {},
-  mounted() {},
-  methods: {},
-  watch: {}
+  name: RouterName.ERROR_PAGE_401
 }
 </script>
 

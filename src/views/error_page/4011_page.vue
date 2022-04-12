@@ -2,18 +2,10 @@
 	<div>4011</div>
 </template>
 
-<script>
+<script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
-  name: 'Page4011',
-  components: {},
-  props: {},
-  data() {
-    return {}
-  },
-  created() {},
-  mounted() {},
-  methods: {},
-  watch: {}
+  name: RouterName.ERROR_PAGE_4011
 }
 </script>
 
