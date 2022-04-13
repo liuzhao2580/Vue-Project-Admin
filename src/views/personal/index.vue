@@ -14,6 +14,7 @@
 </template>
 
 <script lang="ts" setup>
+import { RouterName } from '@/router/RouteConst'
 import Info from './Info/index.vue'
 import Introduce from './Introduce/index.vue'
 
@@ -21,7 +22,7 @@ import Introduce from './Introduce/index.vue'
 
 <script lang="ts">
 export default {
-  name: 'PersonalCenter'
+  name: RouterName.PERSONAL
 }
 </script>
 

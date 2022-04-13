@@ -70,7 +70,7 @@ activities.value = [
 
 <script lang="ts">
 export default {
-  name: 'Timeline'
+  name: 'TimeLine'
 }
 </script>
 

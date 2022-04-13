@@ -1,6 +1,6 @@
 .personalCenter-box {
   // 个人信息
-  /deep/ .personal-info {
+  :deep(.personal-info) {
     margin-bottom: 20px;
     .img-box {
       text-align: center;

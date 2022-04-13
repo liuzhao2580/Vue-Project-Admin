@@ -6,24 +6,24 @@
       >
     </p>
     <!-- 修改地图的配置 -->
-    <option-config />
+    <!-- <option-config /> -->
     <!-- 地图主体 -->
-    <a-map-com />
+    <!-- <a-map-com /> -->
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import AMapCom from './components/AMap.vue'
-import OptionConfig from './components/OptionConfig.vue'
-@Component({
-  name: 'amap',
-  components: {
-    AMapCom,
-    OptionConfig
-  }
-})
-export default class AMap extends Vue {}
+<script lang="ts" setup>
+// import AMapCom from './components/AMap.vue'
+
+import { RouterName } from '@/router/RouteConst'
+
+// import OptionConfig from './components/OptionConfig.vue'
+</script>
+
+<script>
+export default {
+  name: RouterName.AMAP
+}
 </script>
 
 <style lang="scss" scoped></style>
