@@ -1,17 +1,17 @@
 export default {
-  bind(el: { querySelector: (arg0: string) => any }){
+  bind(el: { querySelector: (arg0: string) => any }) {
     const dialogHead = el.querySelector('.el-dialog__header')
     const dialogBox = el.querySelector('.el-dialog')
     dialogHead.style.cursor = 'move'
-    const getNumStyle = ((leftORtop: string) => {
+    const getNumStyle = (leftORtop: string) => {
       if (leftORtop) {
         return parseInt(leftORtop)
       } else {
         return 0
       }
-    })
+    }
     // 鼠标按下
-    dialogHead.onmousedown = (e:any) => {
+    dialogHead.onmousedown = (e: MouseEvent) => {
       // 获取当前 body 可视区域的大小
       const screenW = document.body.offsetWidth
       const screenH = document.body.offsetHeight
@@ -39,7 +39,7 @@ export default {
       // 获取 盒子中 css 样式中已经存在的 left top
       const existedLeft = getNumStyle(dialogBox.style.left)
       const existedTop = getNumStyle(dialogBox.style.top)
-      document.onmousemove = (e) => {
+      document.onmousemove = e => {
         // 获取鼠标移动时 距离 body 左侧和顶部的距离
         const Move_MouseTOBodyL = e.clientX
         const Move_MouseTOBodyT = e.clientY

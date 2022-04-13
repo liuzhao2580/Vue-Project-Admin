@@ -1,48 +1,48 @@
 <template>
-    <div class="dashboard-box">
-        <!-- 卡片 -->
-        <card />
-        <!-- Echarts 图表 -->
-        <Echarts-components :EchartsData="EchartsData" v-loading="EchartLoading" />
-        <el-row :gutter="20">
-            <!-- todo-list -->
-            <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
-                <todo-list />
-            </el-col>
-        </el-row>
-    </div>
+  <div class="dashboard-box">
+    <!-- 卡片 -->
+    <card />
+    <!-- Echarts 图表 -->
+    <!-- <EchartsComponents :EchartsData="EchartsData" v-loading="EchartLoading" /> -->
+    <el-row :gutter="20">
+      <!-- todo-list -->
+      <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+        <todo-list />
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+<script lang="ts" setup>
 import { dashboardEcharts_Api } from '@/api/modules/dashboard'
-import EchartsComponents from './components/Echarts/index.vue'
-@Component({
-  name: 'dashboard',
-  components: {
-    card: () => import('./components/Card/index.vue'),
-    todoList: () => import('./components/TodoList/index.vue'),
-    EchartsComponents
-  }
+// import EchartsComponents from './components/Echarts/index.vue'
+import Card from './components/Card/index.vue'
+import todoList from './components/TodoList/index.vue'
+import { RouterName } from '@/router/RouteConst'
+import { onMounted, ref } from 'vue'
+/** Echarts 组件加载样式 */
+const EchartLoading = ref<boolean>(true)
+const EchartsData = ref({})
+
+onMounted(() => {
+  init()
 })
-export default class Dashboard extends Vue {
-  /** Echarts 组件加载样式 */
-  EchartLoading = true
-  EchartsData: any = {}
-  created() {
-    this.init()
+// 初始化
+const init = async () => {
+  try {
+    const result = await dashboardEcharts_Api()
+    EchartLoading.value = false
+    EchartsData.value = result.data
+  } catch (error) {
+    EchartLoading.value = false
+    console.log(error)
   }
-  // 初始化
-  async init() {
-    try {
-      const result = await dashboardEcharts_Api()
-      this.EchartLoading = false
-      this.EchartsData = result.data
-    } catch (error) {
-      this.EchartLoading = false
-      console.log(error)
-    }
-  }
+}
+</script>
+
+<script>
+export default {
+  name: RouterName.DASHBOARD
 }
 </script>
 

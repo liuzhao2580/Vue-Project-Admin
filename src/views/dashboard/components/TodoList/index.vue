@@ -5,10 +5,10 @@
       <!-- 输入框 -->
       <div class="input-box">
         <el-input
-          v-model="insertInput"
+          v-model="state.insertInput"
           placeholder="请输入内容"
           clearable
-          @keyup.enter.native="handleInsertInput"
+          @keyup.enter="handleInsertInput"
         ></el-input>
       </div>
       <!-- todo 展示列表 -->
@@ -22,19 +22,22 @@
           @mouseleave="handleMouseLeave"
         >
           <span
-            :class="[item.flag ? 'icon-xuanzhong' : 'icon-xuanze', 'iconfont list-icon']"
+            :class="[
+              item.flag ? 'icon-xuanzhong' : 'icon-xuanze',
+              'iconfont list-icon'
+            ]"
           ></span>
           <span class="list-title lineEllipsisOne">{{ item.title }}</span>
           <span
             class="iconfont icon-guanbi close-btn"
-            v-show="colse_isActive == index"
+            v-show="state.colse_isActive == index"
             @click.stop="removeList(index)"
           ></span>
         </div>
       </div>
     </main>
     <footer class="footer-box">
-      <el-radio-group v-model="status">
+      <el-radio-group v-model="state.status">
         <!-- 全部 -->
         <el-radio label="all">全部</el-radio>
         <!-- 未完成 -->
@@ -46,93 +49,104 @@
   </div>
 </template>
 
+<script lang="ts" setup>
+import { computed, reactive } from 'vue'
+
+interface IListArr {
+  title: string
+    flag: boolean
+}
+
+interface IState {
+  insertInput: string
+  checkAll: boolean
+  isIndeterminate: boolean
+  status: string
+  listArr: IListArr[]
+  colse_isActive: number
+}
+
+const state = reactive<IState>({
+  // 新增 todolist
+  insertInput: '',
+  // 全选状态  false 不全选  true 全选
+  checkAll: false,
+  // 用以表示 checkbox 的不确定状态 只负责样式控制 false
+  isIndeterminate: true,
+  // all 完成  active未完成  component已完成
+  status: 'all',
+  listArr: [
+    {
+      title: '吃饭',
+      flag: false
+    },
+    {
+      title: '睡觉',
+      flag: false
+    },
+    {
+      title: '打豆豆',
+      flag: true
+    }
+  ],
+  // 关闭按钮的显示
+  colse_isActive: -1
+})
+
+const checkedList = computed(() => {
+  let getAllListArr:IListArr[] = []
+  switch (state.status) {
+    // 全部
+    case 'all':
+      getAllListArr = state.listArr
+      break
+    // 未完成
+    case 'active':
+      getAllListArr = state.listArr.filter(item => {
+        if (!item.flag) return item
+      })
+      break
+    // 已完成
+    case 'component':
+      getAllListArr = state.listArr.filter(item => {
+        if (item.flag) return item
+      })
+      break
+  }
+  return getAllListArr
+})
+/** 输入框的回车新增事件 */
+const handleInsertInput = () => {
+  if (!state.insertInput) return
+  const setList = {
+    title: state.insertInput,
+    flag: true
+  }
+  state.listArr.push(setList)
+  state.insertInput = ''
+}
+
+/** 列表点击事件 */
+const handleItemClick = (index: number) => {
+  state.listArr[index].flag = !state.listArr[index].flag
+}
+// 鼠标移入
+const handleMouseEnter = (index: number) => {
+  state.colse_isActive = index
+}
+// 鼠标移除
+const handleMouseLeave = () => {
+  state.colse_isActive = -1
+}
+// 移除 指定的list
+const removeList = (index: number) => {
+  state.listArr.splice(index, 1)
+}
+</script>
+
 <script>
 export default {
-  name: 'TodoList',
-  components: {},
-  props: {},
-  data() {
-    return {
-      // 新增 todolist
-      insertInput: '',
-      // 全选状态  false 不全选  true 全选
-      checkAll: false,
-      // 用以表示 checkbox 的不确定状态 只负责样式控制 false
-      isIndeterminate: true,
-      // all 完成  active未完成  component已完成
-      status: 'all',
-      listArr: [
-        {
-          title: '吃饭',
-          flag: false
-        },
-        {
-          title: '睡觉',
-          flag: false
-        },
-        {
-          title: '打豆豆',
-          flag: true
-        }
-      ],
-      // 关闭按钮的显示
-      colse_isActive: -1
-    }
-  },
-  computed: {
-    checkedList() {
-      let getAllListArr = ''
-      switch (this.status) {
-        // 全部
-        case 'all':
-          getAllListArr = this.listArr
-          break
-        // 未完成
-        case 'active':
-          getAllListArr = this.listArr.filter((item) => {
-            if (!item.flag) return item
-          })
-          break
-        // 已完成
-        case 'component':
-          getAllListArr = this.listArr.filter((item) => {
-            if (item.flag) return item
-          })
-          break
-      }
-      return getAllListArr
-    }
-  },
-  created() {},
-  mounted() {},
-  methods: {
-    // 输入框的回车新增事件
-    handleInsertInput() {
-      if (!this.insertInput) return
-      const setList = {
-        title: this.insertInput,
-        flag: true
-      }
-      this.listArr.push(setList)
-      this.insertInput = ''
-    },
-    // 列表点击事件
-    handleItemClick(index) {
-      this.listArr[index].flag = !this.listArr[index].flag
-    },
-    // 鼠标移入
-    handleMouseEnter(index) {
-      this.colse_isActive = index
-    },
-    // 鼠标移除
-    handleMouseLeave() {
-      this.colse_isActive = -1
-    },
-    // 移除 指定的list
-    removeList(index) {
-      this.listArr.splice(index, 1)
-    }
-  }
+  name: 'TodoList'
 }
 </script>
 

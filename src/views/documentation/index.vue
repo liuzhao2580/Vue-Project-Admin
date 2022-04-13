@@ -13,7 +13,7 @@
         <el-card
           class="card-item-box"
           shadow="hover"
-          @click.native="jumpURL(cardItem.srcURL)"
+          @click="jumpURL(cardItem.srcURL)"
         >
           <div class="icon-box">
             <svg-icon
@@ -28,33 +28,34 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+<script lang="ts" setup>
+import { RouterName } from '@/router/RouteConst'
 interface ICard {
   iconClass: string
   titleText: string
   srcURL: string
 }
-@Component({
-  name: 'documentation'
-})
-export default class DocumentationComponent extends Vue {
-  cardList: ICard[] = [
-    {
-      iconClass: 'vue',
-      titleText: 'Vue',
-      srcURL: 'https://cn.vuejs.org/v2/guide/'
-    },
-    {
-      iconClass: 'element',
-      titleText: 'elementUI',
-      srcURL: 'https://element.eleme.cn/#/zh-CN/component/installation'
-    }
-  ]
-  // 跳转页面
-  jumpURL(URL) {
-    window.open(URL)
+const cardList: ICard[] = [
+  {
+    iconClass: 'vue',
+    titleText: 'Vue',
+    srcURL: 'https://cn.vuejs.org/v2/guide/'
+  },
+  {
+    iconClass: 'element',
+    titleText: 'elementUI',
+    srcURL: 'https://element.eleme.cn/#/zh-CN/component/installation'
   }
+]
+// 跳转页面
+const jumpURL = (URL: string) => {
+  window.open(URL)
+}
+</script>
+
+<script>
+export default {
+  name: RouterName.DOCUMENTATION
 }
 </script>
 

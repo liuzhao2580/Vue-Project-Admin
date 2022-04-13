@@ -13,24 +13,19 @@
   </div>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { RouterName } from '@/router/RouteConst'
+import { ref } from 'vue'
+const count = ref<number>(500)
+const load = ()=> {
+  count.value += 2
+}
+</script>
+
+<script lang="ts">
+
 export default {
-  name: 'BackToTop',
-  components: {},
-  props: {},
-  data() {
-    return {
-      count: 0
-    }
-  },
-  created() {},
-  mounted() {},
-  methods: {
-    load() {
-      this.count += 2
-    }
-  },
-  watch: {}
+  name: RouterName.BACK_TO_TOP
 }
 </script>
 
