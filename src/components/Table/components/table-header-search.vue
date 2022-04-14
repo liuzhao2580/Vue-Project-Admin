@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, reactive } from 'vue'
+import { reactive } from 'vue'
 import { ESearchType, ColumnConfig } from '@/typescript/shared/model/tableModel/table-config.model'
 import { SearchModelValue } from '../shared/model/serach-model-value'
 

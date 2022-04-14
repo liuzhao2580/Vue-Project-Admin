@@ -26,10 +26,6 @@
     "wangeditor": "^4.0.4"
   },
   "devDependencies": {
-    "@types/echarts": "^4.9.3",
-    "@types/js-cookie": "^2.2.6",
-    "@types/mockjs": "^1.0.3",
-    "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.19.0",
     "@vue/cli-plugin-babel": "^5.0.4",

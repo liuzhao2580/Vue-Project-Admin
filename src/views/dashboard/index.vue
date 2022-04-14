@@ -14,11 +14,12 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted, ref } from 'vue'
 import { dashboardEcharts_Api } from '@/api/modules/dashboard'
 // import EchartsComponents from './components/Echarts/index.vue'
 import Card from './components/Card/index.vue'
 import todoList from './components/TodoList/index.vue'
-import { onMounted, ref } from 'vue'
+
 /** Echarts 组件加载样式 */
 const EchartLoading = ref<boolean>(true)
 const EchartsData = ref({})
