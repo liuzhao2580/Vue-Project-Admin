@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     title="文章预览"
-    v-model:visible="visibleFlag"
+    v-model:visible="state.visibleFlag"
     width="80%"
     :close-on-click-modal="false"
     class="article-dialog-box"
@@ -13,7 +13,7 @@
     <div class="article-category-box">
       <p class="article-title">文章分类</p>
       <div class="article-category">
-        <el-radio-group v-model="categoryValue" @change="categoryChange">
+        <el-radio-group v-model="state.categoryValue" @change="categoryChange">
           <el-radio
             :label="categoryItem.id"
             v-for="categoryItem in categoryData"
@@ -40,44 +40,62 @@
   </el-dialog>
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
-@Component({
-  name: 'ReleaseContainer'
-})
-export default class ReleaseContainer extends Vue {
+<script lang="ts" setup>
+import { computed, defineProps, reactive, watch } from 'vue'
+
+interface IProps {
   /** 弹出框的 visible */
-  @Prop({ default: false, type: Boolean, required: true }) visible
+  visible: boolean
   /** 文章标题 */
-  @Prop({ default: '', type: String, required: true }) title
+  title: string
   /** 文章内容 */
-  @Prop({ default: '', type: String, required: true }) articleContainer
+  articleContainer: string
   /** 分类的数据 */
-  @Prop({ default: () => [], type: Array, required: true }) categoryData
+  categoryData: any[]
+}
+
+const props = defineProps<IProps>()
+
+interface IState {
   /** 文章分类 选中项 id */
-  categoryValue = ''
+  categoryValue: string
   /** 弹框 */
-  visibleFlag = false
-  /** 发布按钮的禁用 */
-  get releaseDisabled(): boolean {
-    let flag = false
-    if (!this.categoryValue) flag = true
-    return flag
+  visibleFlag: boolean
+}
+
+const state = reactive<IState>({
+  categoryValue: '',
+  visibleFlag: false
+})
+
+/** 发布按钮的禁用 */
+const releaseDisabled = computed(() => {
+  let flag = false
+  if (!state.categoryValue) flag = true
+  return flag
+})
+/** 选择分类的改变事件 */
+const categoryChange = (value: number) => {
+  const getFind = props.categoryData.find(item => item.id === value)
+  console.log(getFind, 'getFind')
+}
+/** 发布按钮 */
+const releaseArticle = (): void => {
+  console.log(props.articleContainer)
+  // this.dialogVisible = false
+}
+/** 监听 visible 变化 */
+watch(
+  () => props.visible,
+  () => {
+    state.visibleFlag = props.visible
   }
-  /** 选择分类的改变事件 */
-  categoryChange(value: number) {
-    const getFind = this.categoryData.find(item => item.id === value)
-    console.log(getFind, 'getFind')
-  }
-  /** 发布按钮 */
-  releaseArticle(): void {
-    console.log(this.articleContainer)
-    // this.dialogVisible = false
-  }
-  /** 监听 visible 变化 */
-  @Watch('visible') change() {
-    this.visibleFlag = this.visible
-  }
+)
+</script>
+
+<script lang="ts">
+export default {
+  name: 'ReleaseContainer'
 }
 </script>
 

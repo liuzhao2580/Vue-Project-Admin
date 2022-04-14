@@ -71,7 +71,7 @@ module.exports = defineConfig({
   devServer: {
     port,
     host: '0.0.0.0',
-    open: true,
+    open: false,
     https: false,
     // 配置跨域
     proxy: {

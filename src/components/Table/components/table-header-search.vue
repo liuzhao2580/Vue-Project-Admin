@@ -66,7 +66,7 @@ const state = reactive<IState>({
 
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: 'TableHeaderSearch'
 }

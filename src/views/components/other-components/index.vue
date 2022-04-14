@@ -21,10 +21,10 @@
 import BetweenTime from './components/Between-time.vue'
 import CssComponent from './components/CssComponent/index.vue'
 import Calculator from './components/Calculator.vue'
-import { RouterName } from '@/router/RouteConst'
 </script>
 
 <script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.OTHER_COMPONENTS
 }

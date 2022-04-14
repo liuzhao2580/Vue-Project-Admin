@@ -29,7 +29,6 @@
 </template>
 
 <script lang="ts" setup>
-import { RouterName } from '@/router/RouteConst'
 interface ICard {
   iconClass: string
   titleText: string
@@ -54,6 +53,7 @@ const jumpURL = (URL: string) => {
 </script>
 
 <script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.DOCUMENTATION
 }

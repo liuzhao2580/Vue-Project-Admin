@@ -9,7 +9,7 @@
 import WaterRipple from './components/WaterRipple.vue'
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: 'CssComponent'
 }

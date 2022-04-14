@@ -13,10 +13,10 @@
 <script lang="ts" setup>
 import ContentEditor from './components/Content-editor.vue'
 import BigScreenTitle from './components/Big-screen-title.vue'
-import { RouterName } from '@/router/RouteConst'
 </script>
 
-<script>
+<script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.ARTICLE_CREATE
 }

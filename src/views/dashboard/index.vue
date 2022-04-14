@@ -18,7 +18,6 @@ import { dashboardEcharts_Api } from '@/api/modules/dashboard'
 // import EchartsComponents from './components/Echarts/index.vue'
 import Card from './components/Card/index.vue'
 import todoList from './components/TodoList/index.vue'
-import { RouterName } from '@/router/RouteConst'
 import { onMounted, ref } from 'vue'
 /** Echarts 组件加载样式 */
 const EchartLoading = ref<boolean>(true)
@@ -41,6 +40,7 @@ const init = async () => {
 </script>
 
 <script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.DASHBOARD
 }

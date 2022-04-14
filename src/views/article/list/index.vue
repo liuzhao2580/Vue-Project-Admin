@@ -21,7 +21,6 @@ import { PageModel } from '@/typescript/shared/model/tableModel/page-config.mode
 import { FilterConditionModel } from '@/typescript/shared/model/tableModel/filter-condition.model'
 import { IArticleBasic } from '@/typescript/views/article/interface/article-config.interface'
 import tableComponent from '@/components/Table/index.vue'
-import { RouterName } from '@/router/RouteConst'
 import { onMounted, reactive, ref } from 'vue'
 /** 表格的数据 */
 const tableData = ref<IArticleBasic[]>([])
@@ -104,6 +103,7 @@ const init = async () => {
 </script>
 
 <script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.ARTICLE_LIST
 }

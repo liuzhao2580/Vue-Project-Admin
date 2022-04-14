@@ -27,7 +27,6 @@
 
 <script lang="ts" setup>
 // import dragDialog from '@/directives/el-drag-dialog'
-import { RouterName } from '@/router/RouteConst'
 import { ref } from 'vue'
 
 const dialogVisible = ref<boolean>(false)
@@ -44,6 +43,7 @@ const dialog_closed = () => {
 </script>
 
 <script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.DRAG_DIALOG
 }

@@ -66,9 +66,9 @@
           <!-- 数据栏 -->
           <template v-else>
             <!-- 时间,日期转换 -->
-            <span v-if="judgeTime(tableItem.type)"
+            <span v-if="EColumnTypeFlag(tableItem.type!)"
               >{{
-                handleTranslateTime(scope.row[tableItem.prop], tableItem.type)
+                handleTranslateTime(scope.row[tableItem.prop], tableItem.type!)
               }}
             </span>
             <span v-else>{{ scope.row[tableItem.prop] }}</span>
@@ -105,7 +105,7 @@
                 circle
                 :icon="operaIcon(operaItem.icon)"
                 :type="operaItem.type"
-                @click="operaHandle(operaItem.handle)"
+                @click="operaItem.handle"
               ></el-button>
             </el-tooltip>
           </template>
@@ -125,8 +125,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+<script lang="ts" setup>
+import { computed, defineProps, ref, withDefaults } from 'vue'
 import moment from 'moment'
 import {
   TableConfigModel,
@@ -137,104 +137,104 @@ import { initFilterField } from './shared/utils'
 import { SearchModelValue } from './shared/model/serach-model-value'
 import tableHeaderSearch from './components/table-header-search.vue'
 import { PageModel } from '@/typescript/shared/model/tableModel/page-config.model'
-@Component({
-  name: 'tableComponent',
-  components: {
-    tableHeaderSearch
-  }
-})
-export default class TableComponent extends Vue {
+
+interface IProps {
   /** 表格的数据 */
-  @Prop({ required: true, type: Array, default: () => [] })
-    tableData!: Array<any>
+  tableData: any[]
   /** 表格的列配置 */
-  @Prop({ required: true, type: Object, default: () => {} })
-    tableConfig!: TableConfigModel
+  tableConfig: TableConfigModel
   /** 表格的分页 */
-  @Prop({ required: true, type: Object, default: new PageModel() })
-    pageConfig!: PageModel
-  /** 表格的样式 */
-  get tableHeaderStyle() {
-    return { background: '#e0e0e0', color: '#333', fontWeight: 900 }
+  pageConfig: PageModel
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  tableData: () => [],
+  tableConfig: () => new TableConfigModel(),
+  pageConfig: () => new PageModel()
+})
+
+/** 表格过滤的条件 */
+const searchParamsValue = ref<SearchModelValue>(
+  initFilterField(props.tableConfig)
+)
+
+/** 表格的样式 */
+const tableHeaderStyle = computed(() => {
+  return { background: '#e0e0e0', color: '#333', fontWeight: 900 }
+})
+/** 用来设置 搜索按钮的显示隐藏 */
+const searchIconFlag = () => {
+  const searchable = props.tableConfig.columnConfig.some(
+    columnItem => columnItem.searchable
+  )
+  if (props.tableConfig.searchIcon !== false && searchable) return true
+}
+/** 自定义索引,当开启搜索栏的时候,索引为0的不显示 */
+const indexMethod = (index: number) => {
+  if (props.tableConfig.showSearch) {
+    if (index) return index
+  } else return index + 1
+}
+
+const EColumnTypeFlag = (type: EColumnType)=> {
+  return EColumnType[type]
+}
+
+/** 处理时间 */
+const handleTranslateTime = (time: Date, type: EColumnType) => {
+  let translateTime
+  if (type === EColumnType.date) {
+    translateTime = moment(time).format('YYYY-MM-DD')
+  } else if (type === EColumnType.dateTime) {
+    translateTime = moment(time).format('YYYY-MM-DD HH:mm:ss')
   }
-  /** 表格的列 type 的类型 */
-  EColumnType!: EColumnType
-  /** 表格过滤的条件 */
-  searchParamsValue: SearchModelValue = new SearchModelValue()
-  created() {
-    this.searchParamsValue = initFilterField(this.tableConfig)
+  return translateTime
+}
+/** 表格的操作按钮的样式,可能是直接使用的 elementUI默认的icon ,也可能使用的是iconfont的字体图标 */
+const operaIcon = (icon: string) => {
+  if (icon.startsWith('el-icon')) return icon
+  else return `iconfont ${icon}`
+}
+/** 表格的打印 */
+const tablePrint = () => {
+  window.print()
+}
+/** 展开关闭 表格的搜索 */
+const tableSearch = () => {
+  // 用来显示隐藏搜索栏
+  const showSearch: boolean = props.tableConfig.showSearch as boolean
+  // 说明搜索栏已经展开
+  if (showSearch) {
+    // props.tableData.splice(0, 1)
   }
-  /** 用来设置 搜索按钮的显示隐藏 */
-  searchIconFlag() {
-    const searchable = this.tableConfig.columnConfig.some(
-      columnItem => columnItem.searchable
-    )
-    if (this.tableConfig.searchIcon !== false && searchable) return true
-  }
-  /** 自定义索引,当开启搜索栏的时候,索引为0的不显示 */
-  indexMethod(index) {
-    if (this.tableConfig.showSearch) {
-      if (index) return index
-    } else return index + 1
-  }
-  /** 判断是否是时间type */
-  judgeTime(type: EColumnType) {
-    return EColumnType[type]
-  }
-  /** 处理时间 */
-  handleTranslateTime(time: Date, type: EColumnType) {
-    let translateTime
-    if (type === EColumnType.date) {
-      translateTime = moment(time).format('YYYY-MM-DD')
-    } else if (type === EColumnType.dateTime) {
-      translateTime = moment(time).format('YYYY-MM-DD HH:mm:ss')
+  // 说明搜索栏还未展开
+  else {
+    if (props.tableConfig.columnConfig) {
+      const getFilter = props.tableConfig.columnConfig.map(item => {
+        return item.prop
+      })
+      const filterObj = {}
+      // getFilter.forEach(item => (filterObj[item] = ''))
+      // props.tableData.unshift(filterObj)
     }
-    return translateTime
   }
-  /** 表格的操作按钮的样式,可能是直接使用的 elementUI默认的icon ,也可能使用的是iconfont的字体图标 */
-  operaIcon(icon: string) {
-    if (icon.startsWith('el-icon')) return icon
-    else return `iconfont ${icon}`
+  // props.tableConfig.showSearch = !showSearch
+}
+/** 表格点击搜索按钮 */
+const handleSearch = () => {
+  let queryParams: FilterConditionModel[] = []
+  // 用来过滤 只有当 filterValue 有值的时候才说明需要过滤数据
+  for (const key in searchParamsValue.value) {
+    if (searchParamsValue.value[key].filterValue)
+      queryParams.push(searchParamsValue.value[key])
   }
-  /** 表格按钮的操作 */
-  operaHandle(handle) {
-    handle()
-  }
-  /** 表格的打印 */
-  tablePrint() {
-    window.print()
-  }
-  /** 展开关闭 表格的搜索 */
-  tableSearch() {
-    // 用来显示隐藏搜索栏
-    const showSearch: boolean = this.tableConfig.showSearch as boolean
-    // 说明搜索栏已经展开
-    if (showSearch) {
-      this.tableData.splice(0, 1)
-    }
-    // 说明搜索栏还未展开
-    else {
-      if (this.tableConfig.columnConfig) {
-        const getFilter = this.tableConfig.columnConfig.map(item => {
-          return item.prop
-        })
-        const filterObj = {}
-        getFilter.forEach(item => (filterObj[item] = ''))
-        this.tableData.unshift(filterObj)
-      }
-    }
-    this.tableConfig.showSearch = !showSearch
-  }
-  /** 表格点击搜索按钮 */
-  handleSearch() {
-    let queryParams: FilterConditionModel[] = []
-    // 用来过滤 只有当 filterValue 有值的时候才说明需要过滤数据
-    for (const key in this.searchParamsValue) {
-      if (this.searchParamsValue[key].filterValue)
-        queryParams.push(this.searchParamsValue[key])
-    }
-    this.tableConfig.handleSearch(queryParams)
-  }
+  props.tableConfig.handleSearch && props.tableConfig.handleSearch(queryParams)
+}
+</script>
+
+<script lang="ts">
+export default {
+  name: 'TableComponent'
 }
 </script>
 

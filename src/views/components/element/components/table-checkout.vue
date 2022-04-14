@@ -100,7 +100,7 @@ const handleSelectionChange = (val: IUser[]) => {
 }
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: 'TableCheckout'
 }

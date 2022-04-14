@@ -24,10 +24,10 @@
 import tableCheckout from './components/table-checkout.vue'
 import tableHeader from './components/table-header.vue'
 import GetBetweenTime from './components/GetBetweenTime.vue'
-import { RouterName } from '@/router/RouteConst'
 </script>
 
 <script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.ELEMENT
 }

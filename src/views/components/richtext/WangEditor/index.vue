@@ -56,7 +56,7 @@ const initWangEditor = () => {
 }
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: 'WangEidtor'
 }
