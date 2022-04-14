@@ -44,7 +44,8 @@
     "vue/comma-dangle": "warn",
     "vue/require-name-property": "error",
     "vue/html-closing-bracket-spacing": "error",
-    "@typescript-eslint/no-var-requires": "off"
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "parserOptions": {
     "parser": "@typescript-eslint/parser"

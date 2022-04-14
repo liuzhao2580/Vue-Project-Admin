@@ -11,19 +11,20 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 /** 水波纹 */
-import { Component, Vue } from 'vue-property-decorator'
-@Component({
+import { ref } from 'vue'
+/** 判断是否已经点击了 */
+const clickFlag = ref<boolean>(false)
+/** 点击事件 */
+const cricleClick = () => {
+  clickFlag.value = !clickFlag.value
+}
+</script>
+
+<script>
+export default {
   name: 'WaterRipple'
-})
-export default class WaterRipple extends Vue {
-  /** 判断是否已经点击了 */
-  clickFlag = false
-  /** 点击事件 */
-  cricleClick(): void {
-    this.clickFlag = !this.clickFlag
-  }
 }
 </script>
 

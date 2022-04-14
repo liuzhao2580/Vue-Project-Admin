@@ -15,17 +15,15 @@
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 export default {
-  name: 'Markdown',
+  name: 'MarkdownCom',
   components: {
     mavonEditor
   },
-  props: {},
   data() {
     return {
       mavon_model: ''
     }
   },
-  mounted() {},
   methods: {
     mavon_save(value, render) {
       console.log(value, render)
@@ -33,8 +31,7 @@ export default {
     onSubmit() {
       console.log(this.mavon_model)
     }
-  },
-  watch: {}
+  }
 }
 </script>
 

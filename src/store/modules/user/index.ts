@@ -76,9 +76,9 @@ const actions = {
   ) {
     return new Promise<void>((resolve, reject) => {
       // 存入 token
-      setCookie('token', data.token)
-      setCookie('userId', data.id)
-      setCookie('roleId', data.roleId)
+      setCookie('token', data.token as string)
+      setCookie('userId', data.id as string)
+      data.roleId && setCookie('roleId', data.roleId.toString())
       commit(USER_MUTATIONS_TYPES.MUT_USER_INFO, data)
       try {
         resolve()
@@ -88,7 +88,8 @@ const actions = {
     })
   },
   // 页面刷新 重新获取用户信息, 路由信息
-  [USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID]({ commit }:any) {
+  [USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID]({ commit }: any) {
+    // eslint-disable-next-line no-async-promise-executor
     return new Promise(async resolve => {
       const userId = getCookie('userId')
       // 获取用户的基本信息

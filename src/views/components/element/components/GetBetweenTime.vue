@@ -13,21 +13,13 @@
     </el-date-picker>
   </div>
 </template>
-<script>
-export default {
-  name: 'GetBetweenTime',
-  data() {
-    return {
-      datePValue: null
-    }
-  },
-  created() {},
-  mounted() {},
-  methods: {
-    dateChange(value) {
-      console.log(value, 'value')
-    }
-  }
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const datePValue = ref()
+
+const dateChange = (value: string) => {
+  console.log(value, 'value')
 }
 </script>
 

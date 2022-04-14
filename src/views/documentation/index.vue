@@ -53,7 +53,7 @@ const jumpURL = (URL: string) => {
 }
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: RouterName.DOCUMENTATION
 }

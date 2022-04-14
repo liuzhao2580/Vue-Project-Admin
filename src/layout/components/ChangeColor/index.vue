@@ -24,9 +24,10 @@
 
 <script>
 import { setStorage, getStorage } from '@/utils/storage'
-const version = require('element-ui/package.json').version
+// const version = require('element-ui/package.json').version
 const ORIGINAL_THEME = '#409EFF'
 export default {
+  name: 'ChangeColor',
   data() {
     return {
       theme: '#409EFF',
@@ -100,7 +101,7 @@ export default {
       const chalkHandler = getHandler('chalk', 'chalk-style')
       const docsHandler = getHandler('docs', 'docs-style')
       if (!this.chalk) {
-        const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
+        const url = `https://unpkg.com/element-@/lib/theme-chalk/index.css`
         this.getCSSString(url, chalkHandler, 'chalk')
       } else {
         chalkHandler()

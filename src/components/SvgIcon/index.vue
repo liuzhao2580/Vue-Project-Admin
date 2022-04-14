@@ -16,7 +16,7 @@ const IconName = computed(()=> {
 })
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: 'SvgIcon'
 }

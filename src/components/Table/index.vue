@@ -92,11 +92,9 @@
             </el-tooltip>
           </template>
           <!-- 其他操作 -->
-          <template
-            v-else
-            v-for="(operaItem, operaIndex) in tableConfig.operation"
-          >
+          <template v-else>
             <el-tooltip
+              v-for="(operaItem, operaIndex) in tableConfig.operation"
               :key="operaIndex"
               :content="operaItem.text"
               placement="top"
@@ -147,9 +145,8 @@ import { PageModel } from '@/typescript/shared/model/tableModel/page-config.mode
 })
 export default class TableComponent extends Vue {
   /** 表格的数据 */
-  @Prop({ required: true, type: Array, default: () => [] }) tableData!: Array<
-    any
-  >
+  @Prop({ required: true, type: Array, default: () => [] })
+    tableData!: Array<any>
   /** 表格的列配置 */
   @Prop({ required: true, type: Object, default: () => {} })
     tableConfig!: TableConfigModel
@@ -242,5 +239,5 @@ export default class TableComponent extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "./index.scss";
+@import './index.scss';
 </style>

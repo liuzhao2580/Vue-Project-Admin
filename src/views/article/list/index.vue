@@ -103,7 +103,7 @@ const init = async () => {
 }
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: RouterName.ARTICLE_LIST
 }

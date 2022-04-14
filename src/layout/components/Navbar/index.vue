@@ -17,26 +17,19 @@ import Breadcrumb from '../Breadcrumb'
 import TagsView from '../TagsView'
 import Personal from '../Personal'
 export default {
-  name: 'Navbar',
+  name: 'NavBar',
   components: {
     Breadcrumb,
     TagsView,
     Personal,
     ChangeColor: () => import('../ChangeColor')
   },
-  props: {},
-  data() {
-    return {}
-  },
-  created() {},
-  mounted() {},
   methods: {
     // 侧边栏按钮点击事件
     side_Btn() {
       this.$store.dispatch('app/change_SideStatus')
     }
-  },
-  watch: {}
+  }
 }
 </script>
 

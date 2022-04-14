@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts" setup>
-import { RouterName } from '@/router/RouteConst'
 import Info from './Info/index.vue'
 import Introduce from './Introduce/index.vue'
 
 </script>
 
 <script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.PERSONAL
 }

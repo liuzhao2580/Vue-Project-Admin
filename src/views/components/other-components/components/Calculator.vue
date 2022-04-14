@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: 'Calculator',
+  name: 'CalculatorCom',
   components: {},
   props: {},
   computed: {
@@ -82,8 +82,6 @@ export default {
       ]
     }
   },
-  created() {},
-  mounted() {},
   methods: {
     clear() {
       this.fullName = ''

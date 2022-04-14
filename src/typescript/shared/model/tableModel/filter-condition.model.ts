@@ -16,11 +16,11 @@ export class FilterConditionModel {
   /** 过滤字段 */
   filterField: string
   /** 操作符 */
-  operator: string
+  operator: string | undefined
   /** 过滤值 */
   filterValue: any = null
 
-  constructor(filterField?: string, operator?, filterValue: any = null) {
+  constructor(filterField?: string, operator?: string, filterValue: any = null) {
     this.filterField = filterField as string
     this.operator = operator
     this.filterValue = filterValue

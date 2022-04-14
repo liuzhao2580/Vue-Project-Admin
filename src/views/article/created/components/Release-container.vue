@@ -26,12 +26,17 @@
     </div>
     <!-- 文章内容 -->
     <div class="release-container" v-html="articleContainer"></div>
-    <span slot="footer" class="dialog-footer">
-      <el-button @click="$emit('update:visible', false)">取 消</el-button>
-      <el-button type="primary" :disabled="releaseDisabled" @click="releaseArticle"
-        >发 布</el-button
-      >
-    </span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="$emit('update:visible', false)">取 消</el-button>
+        <el-button
+          type="primary"
+          :disabled="releaseDisabled"
+          @click="releaseArticle"
+          >发 布</el-button
+        >
+      </span>
+    </template>
   </el-dialog>
 </template>
 
@@ -61,7 +66,7 @@ export default class ReleaseContainer extends Vue {
   }
   /** 选择分类的改变事件 */
   categoryChange(value: number) {
-    const getFind = this.categoryData.find((item) => item.id === value)
+    const getFind = this.categoryData.find(item => item.id === value)
     console.log(getFind, 'getFind')
   }
   /** 发布按钮 */

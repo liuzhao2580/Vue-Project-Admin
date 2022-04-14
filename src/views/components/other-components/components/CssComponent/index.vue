@@ -1,20 +1,17 @@
 <template>
   <div class="css-component-box">
     <p class="title">Css的样式</p>
-    <Water-Ripple />
+    <WaterRipple />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 /** Css的样式 */
-import { Component, Vue } from 'vue-property-decorator'
 import WaterRipple from './components/WaterRipple.vue'
-@Component({
-  name: 'CssComponent',
-  components: {
-    WaterRipple
-  }
-})
-export default class CssComponent extends Vue {
+</script>
+
+<script>
+export default {
+  name: 'CssComponent'
 }
 </script>
 

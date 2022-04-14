@@ -11,15 +11,15 @@
   </div>
 </template>
 
-<script>
-import Quill from './Quill'
-import WangEditor from './WangEditor'
+
+<script lang="ts" setup>
+import Quill from './Quill/index.vue'
+import WangEditor from './WangEditor/index.vue'
+</script>
+
+<script lang="ts">
 export default {
-  name: 'Richtext',
-  components: {
-    Quill,
-    WangEditor
-  }
+  name: 'RichText'
 }
 </script>
 

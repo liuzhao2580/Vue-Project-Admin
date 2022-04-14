@@ -1,5 +1,5 @@
 export default {
-  bind(el: { querySelector: (arg0: string) => any }) {
+  beforeMount(el: { querySelector: (arg0: string) => any }) {
     const dialogHead = el.querySelector('.el-dialog__header')
     const dialogBox = el.querySelector('.el-dialog')
     dialogHead.style.cursor = 'move'

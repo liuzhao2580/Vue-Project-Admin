@@ -7,29 +7,27 @@
       </el-col>
       <!-- 计算两者的时间 -->
       <el-col :xs="24" :sm="8">
-        <Between-time />
+        <BetweenTime />
       </el-col>
       <!-- 点击出现水波纹效果 -->
       <el-col :xs="24" :sm="8">
-        <Css-component />
+        <CssComponent />
       </el-col>
     </el-row>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+<script lang="ts" setup>
 import BetweenTime from './components/Between-time.vue'
 import CssComponent from './components/CssComponent/index.vue'
-@Component({
-  name: 'other-components',
-  components: {
-    Calculator: () => import('./components/Calculator.vue'),
-    BetweenTime,
-    CssComponent
-  }
-})
-export default class OtherComponents extends Vue {}
+import Calculator from './components/Calculator.vue'
+import { RouterName } from '@/router/RouteConst'
+</script>
+
+<script lang="ts">
+export default {
+  name: RouterName.OTHER_COMPONENTS
+}
 </script>
 
 <style lang="scss" scoped>

@@ -43,7 +43,7 @@ const dialog_closed = () => {
 
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: RouterName.DRAG_DIALOG
 }

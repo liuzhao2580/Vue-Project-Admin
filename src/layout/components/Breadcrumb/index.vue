@@ -22,7 +22,7 @@
 <script>
 import defaultConfig from '@/setting'
 export default {
-  name: 'Breadcrumb',
+  name: 'BreadcrumbCom',
   computed: {
     breadcrumbTitle() {
       return defaultConfig.title
@@ -33,7 +33,6 @@ export default {
       getMatched: []
     }
   },
-  created() {},
   methods: {
     init() {
       const nowRoute = this.$route.matched

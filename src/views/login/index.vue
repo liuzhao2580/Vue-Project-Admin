@@ -106,7 +106,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 }
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: 'LoginPage'
 }

@@ -1,9 +1,9 @@
 /** 深拷贝 */
-export const deepClone = (obj: any) => {
+export const deepClone = (obj: object) => {
   const result: any =
     Object.prototype.toString.call(obj) === '[object Object]' ? {} : []
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (isValidKey(key, obj)) {
       const element = obj[key]
       if (typeof element === 'object') {
         result[key] = deepClone(element)
@@ -13,6 +13,14 @@ export const deepClone = (obj: any) => {
     }
   }
   return result
+}
+
+export function isValidKey(
+  key: string | number | symbol,
+  object: object
+): key is keyof typeof object {
+  undefined
+  return key in object
 }
 
 /** 动态创建 script 标签 发送 get 请求 */

@@ -1,33 +1,35 @@
 <template>
-    <div class="TagsView-box">
-        <el-scrollbar class="TagsView-scrollbar">
-            <div class="tag-container-box">
-                <template v-for="(tag, index) in tags_data">
-                    <el-tag
-                        :key="index"
-                        :closable="is_closable(tag)"
-                        effect="dark"
-                        @close="handleClose(tag)"
-                        size="small"
-                        @click="handleClick(tag)"
-                        disable-transitions
-                        :class="{ 'is-active': is_active(tag.meta.title) }"
-                        @contextmenu.prevent.native="tagContextmenu($event, tag, index)"
-                        >{{ tag.meta.title }}</el-tag
-                    >
-                </template>
-            </div>
-        </el-scrollbar>
-        <!-- 用来操作开启的 tag 标签 -->
-        <ul v-show="operaTagFlag" class="hide-tag-box" :style="hideTagBox">
-            <li :class="[disabledFlag ? 'disabled-operation' : 'hide-item']" @click="closeNow">
-                关闭当前
-            </li>
-            <li class="hide-item" @click="closeOther">关闭其他</li>
-            <li class="hide-item" @click="closeRight">关闭右侧</li>
-            <li class="hide-item" @click="closeAll">全部关闭</li>
-        </ul>
-    </div>
+  <div class="TagsView-box">
+    <el-scrollbar class="TagsView-scrollbar">
+      <div class="tag-container-box">
+        <el-tag
+          v-for="(tag, index) in tags_data"
+          :key="index"
+          :closable="is_closable(tag)"
+          effect="dark"
+          @close="handleClose(tag)"
+          size="small"
+          @click="handleClick(tag)"
+          disable-transitions
+          :class="{ 'is-active': is_active(tag.meta.title) }"
+          @contextmenu.prevent="tagContextmenu($event, tag, index)"
+          >{{ tag.meta.title }}</el-tag
+        >
+      </div>
+    </el-scrollbar>
+    <!-- 用来操作开启的 tag 标签 -->
+    <ul v-show="operaTagFlag" class="hide-tag-box" :style="hideTagBox">
+      <li
+        :class="[disabledFlag ? 'disabled-operation' : 'hide-item']"
+        @click="closeNow"
+      >
+        关闭当前
+      </li>
+      <li class="hide-item" @click="closeOther">关闭其他</li>
+      <li class="hide-item" @click="closeRight">关闭右侧</li>
+      <li class="hide-item" @click="closeAll">全部关闭</li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -62,12 +64,14 @@ export default {
     // 当前的 tag 是否可以操作
     disabledFlag() {
       let flag = false
-      if (this.saveCurrentTag.currentIndex === 0 || this.saveCurrentTag.currentIndex === 1)
+      if (
+        this.saveCurrentTag.currentIndex === 0 ||
+        this.saveCurrentTag.currentIndex === 1
+      )
         flag = true
       return flag
     }
   },
-  created() {},
   mounted() {
     this.init_tags()
     this.insertT_Tags()
@@ -86,7 +90,7 @@ export default {
     // 初始化的时候取出 固定的tags
     filterAffixTags(routes) {
       let tags = []
-      tags = routes.filter((item) => {
+      tags = routes.filter(item => {
         if (item.meta.affix) {
           return {
             fullPath: item.path,
@@ -205,31 +209,31 @@ export default {
 
 <style lang="scss" scoped>
 .TagsView-box {
-    position: relative;
+  position: relative;
 }
 .hide-tag-box {
-    position: absolute;
-    background-color: #fafafa;
-    box-shadow: 0px 0px 5px #a6a6a6;
-    z-index: 9999;
-    display: inline-block;
-    border-radius: 5px;
-    .hide-item,
-    .disabled-operation {
-        cursor: pointer;
-        height: 30px;
-        line-height: 30px;
-        padding: 0px 10px;
-        font-size: 14px;
+  position: absolute;
+  background-color: #fafafa;
+  box-shadow: 0px 0px 5px #a6a6a6;
+  z-index: 9999;
+  display: inline-block;
+  border-radius: 5px;
+  .hide-item,
+  .disabled-operation {
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    padding: 0px 10px;
+    font-size: 14px;
+  }
+  .disabled-operation {
+    cursor: not-allowed;
+  }
+  .hide-item {
+    &:hover {
+      background-color: pink;
+      color: #fff;
     }
-    .disabled-operation {
-        cursor: not-allowed;
-    }
-    .hide-item {
-        &:hover {
-            background-color: pink;
-            color: #fff;
-        }
-    }
+  }
 }
 </style>

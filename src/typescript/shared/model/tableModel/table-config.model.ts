@@ -1,5 +1,7 @@
 /** 表格的基本配置 */
 
+import { FilterConditionModel } from './filter-condition.model'
+
 /** 表格配置 */
 export class TableConfigModel {
   /** 表格是否需要序号 默认 true 带有序号 */
@@ -23,7 +25,7 @@ export class TableConfigModel {
   /** 表格的操作 */
   operation?: Operation[]
   /** 搜索事件 */
-  handleSearch?: any
+  handleSearch?: (event: FilterConditionModel[]) => void
 }
 
 /** 表格的列配置 */
@@ -56,11 +58,11 @@ class SearchConfig {
   /** 当搜索类型为下拉选择时 默认多选 */
   selectType?: ESelectType
   /** 当搜索类型为下拉选择时 下拉框中的数据 */
-  selectData?: any
+  selectData?: string
   label?: string
   value?: string
   /** 初始值 */
-  initialValue?: any
+  initialValue?: string
   /** 当搜索类型为 步进器的时候 最小数字 */
   min?: number
   /** 当搜索类型为 步进器的时候 数字步长 */
@@ -84,7 +86,7 @@ export enum EColumnType {
   /** 日期 YYYY-MM-DD */
   date = 'date',
   /** 日期时间 YYYY-MM-DD HH:mm:ss */
-  dateTime = 'dateTime',
+  dateTime = 'dateTime'
 }
 
 /** 操作按钮的类型 */
@@ -100,7 +102,7 @@ export enum EOperationType {
   /** 警告 */
   warning = 'warning',
   /** 危险 */
-  danger = 'danger',
+  danger = 'danger'
 }
 
 /** 搜索栏的 搜索类型 */
@@ -118,7 +120,7 @@ export enum ESearchType {
   /** 年月日 时分秒范围 YYYY-MM-DD HH:mm:ss ~ YYYY-MM-DD HH:mm:ss*/
   dateTimeRange = 'dateTimeRange',
   /** 步进器 */
-  inputNumber = 'inputNumber',
+  inputNumber = 'inputNumber'
 }
 
 /** 搜索栏的搜索类型为 select 的时候 是多选还是单选 */
@@ -126,6 +128,6 @@ export enum ESelectType {
   /** 多选 */
   multiple = 'multiple',
   /** 单选 */
-  default = 'default',
+  default = 'default'
 }
 // ------------------------------------------------表格的枚举---------------------------------

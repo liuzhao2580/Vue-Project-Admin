@@ -3,7 +3,9 @@ import Nprogress from 'nprogress'
 import { getCookie } from '@/utils/cookies'
 import 'nprogress/nprogress.css' // 必须要的样式
 import setPageTitle from '@/utils/setPageTitle'
-import store from '@/store'
+import { useStore } from '@/store'
+
+const store = useStore()
 
 router.beforeEach(async (to: any | string, from: any, next: any) => {
   const token = getCookie('token')
@@ -30,7 +32,7 @@ router.beforeEach(async (to: any | string, from: any, next: any) => {
     if (Need_refresh) {
       try {
         const routesList = await store.dispatch('user/ACT_findByIDUser')
-        router.addRoutes(routesList)
+        router.addRoute(routesList)
         next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
         Nprogress.done()
       } catch (error) {

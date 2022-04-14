@@ -54,14 +54,7 @@ export default {
     variables() {
       return variables
     }
-  },
-  data() {
-    return {}
-  },
-  created() {},
-  mounted() {},
-  methods: {},
-  watch: {}
+  }
 }
 </script>
 

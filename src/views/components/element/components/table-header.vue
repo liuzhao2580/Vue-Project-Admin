@@ -11,11 +11,18 @@
         >
           <!-- 表头的 slot -->
           <template #header>
-            <el-popover placement="bottom" title="请选择" width="200" trigger="click">
-              <div slot="reference" class="search-header">
-                <span class="search-title">{{ headerItem.label }}</span>
-                <i class="search-icon el-icon-search"></i>
-              </div>
+            <el-popover
+              placement="bottom"
+              title="请选择"
+              width="200"
+              trigger="click"
+            >
+              <template #reference>
+                <div class="search-header">
+                  <span class="search-title">{{ headerItem.label }}</span>
+                  <i class="search-icon el-icon-search"></i>
+                </div>
+              </template>
               <el-select v-model="headerItem.selectValue" placeholder="请选择">
                 <el-option
                   v-for="item in headerItem.selectOptions"
@@ -28,70 +35,81 @@
             </el-popover>
           </template>
           <!-- 表格的 内容 slot -->
-          <template slot-scope="scope">
+          <template #default="scope">
             {{ scope.row[headerItem.prop] }}
           </template>
         </el-table-column>
         <!-- 日期选择器 -->
-        <el-table-column
-          v-else-if="headerItem.dateSelect"
-          :label="headerItem.label"
-          :prop="headerItem.prop"
-          :key="headerIndex"
-        >
-          <template #header>
-            <el-popover placement="bottom" title="请选择" trigger="click">
-              <div class="search-header" slot="reference">
-                <span class="search-title">{{ headerItem.label }}</span>
-                <i class="el-icon-arrow-down search-icon"></i>
-              </div>
-              <el-date-picker
-                v-model="headerItem.dateValue"
-                type="daterange"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-              >
-              </el-date-picker>
-            </el-popover>
-          </template>
-          <template slot-scope="scope">
-            {{ scope.row[headerItem.prop] }}
-          </template>
-        </el-table-column>
+        <template v-else-if="headerItem.dateSelect">
+          <el-table-column
+            :label="headerItem.label"
+            :prop="headerItem.prop"
+            :key="headerIndex"
+          >
+            <template #header>
+              <el-popover placement="bottom" title="请选择" trigger="click">
+                <template #reference>
+                  <div class="search-header">
+                    <span class="search-title">{{ headerItem.label }}</span>
+                    <i class="el-icon-arrow-down search-icon"></i>
+                  </div>
+                </template>
+                <el-date-picker
+                  v-model="headerItem.dateValue"
+                  type="daterange"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                >
+                </el-date-picker>
+              </el-popover>
+            </template>
+            <template #default="scope">
+              {{ scope.row[headerItem.prop] }}
+            </template>
+          </el-table-column>
+        </template>
         <!-- 输入框 -->
-        <el-table-column
-          v-else-if="headerItem.inputSelect"
-          :label="headerItem.label"
-          :prop="headerItem.prop"
-          :key="headerIndex"
-        >
-          <template #header>
-            <el-popover placement="bottom" title="请选择" trigger="click">
-              <div slot="reference" class="search-header">
-                <span class="search-title">{{ headerItem.label }}</span>
-                <i class="search-icon el-icon-search"></i>
-              </div>
-              <el-input v-model="headerItem.inputValue" placeholder="请输入内容"></el-input>
-            </el-popover>
-          </template>
-          <template slot-scope="scope">
-            {{ scope.row[headerItem.prop] }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          v-else
-          :label="headerItem.label"
-          :prop="headerItem.prop"
-          :key="headerIndex"
-        >
-        </el-table-column>
+        <template v-else-if="headerItem.inputSelect">
+          <el-table-column
+            :label="headerItem.label"
+            :prop="headerItem.prop"
+            :key="headerIndex"
+          >
+            <template #header>
+              <el-popover placement="bottom" title="请选择" trigger="click">
+                <template #reference>
+                  <div class="search-header">
+                    <span class="search-title">{{ headerItem.label }}</span>
+                    <i class="search-icon el-icon-search"></i>
+                  </div>
+                </template>
+                <el-input
+                  v-model="headerItem.inputValue"
+                  placeholder="请输入内容"
+                ></el-input>
+              </el-popover>
+            </template>
+            <template #default="scope">
+              {{ scope.row[headerItem.prop] }}
+            </template>
+          </el-table-column>
+        </template>
+        <template v-else>
+          <el-table-column
+            :label="headerItem.label"
+            :prop="headerItem.prop"
+            :key="headerIndex"
+          >
+          </el-table-column>
+        </template>
       </template>
     </el-table>
   </div>
 </template>
 <script>
 export default {
+  name: 'TableHeaderCom',
   data() {
     return {
       headerData: [
@@ -146,10 +164,7 @@ export default {
         }
       ]
     }
-  },
-  created() {},
-  mounted() {},
-  methods: {}
+  }
 }
 </script>
 

@@ -39,7 +39,6 @@
 <script>
 import { mapGetters } from 'vuex'
 // 引入 path 模块 用于拼接url地址
-import path from 'path'
 import MenuItem from './Item'
 export default {
   name: 'SidebarItem',
@@ -53,7 +52,8 @@ export default {
   },
   props: {
     item: {
-      require: true
+      require: true,
+      type: Object
     },
     basePath: {
       type: String,
@@ -69,12 +69,10 @@ export default {
       onlyOneChild: null
     }
   },
-  created() {},
-  mounted() {},
   methods: {
     // 用于拼接 url 地址
     resolvePath(routePath) {
-      return path.resolve(this.basePath, routePath)
+      return routePath
     },
     // 用户判断多级路由
     checkMoreRouter(route) {

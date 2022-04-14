@@ -14,7 +14,6 @@
 </template>
 
 <script lang="ts" setup>
-import { RouterName } from '@/router/RouteConst'
 import { ref } from 'vue'
 const count = ref<number>(500)
 const load = ()=> {
@@ -23,7 +22,7 @@ const load = ()=> {
 </script>
 
 <script lang="ts">
-
+import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.BACK_TO_TOP
 }

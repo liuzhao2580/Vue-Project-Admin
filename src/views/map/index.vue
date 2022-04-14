@@ -15,12 +15,12 @@
 <script lang="ts" setup>
 // import AMapCom from './components/AMap.vue'
 
-import { RouterName } from '@/router/RouteConst'
 
 // import OptionConfig from './components/OptionConfig.vue'
 </script>
 
-<script>
+<script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.AMAP
 }

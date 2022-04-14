@@ -41,7 +41,7 @@ watch(dzd_status, val => {
 })
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: 'ClickLike'
 }

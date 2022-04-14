@@ -19,7 +19,11 @@
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, onUnmounted } from 'vue'
+import { useStore } from '@/store'
 import { AppMain, Sidebar, Navbar } from './components'
+import { APP_MUTATIONS_TYPES } from '@/store/modules/app/types'
+
+const store = useStore()
 
 onBeforeMount(() => {
   // 页面进来的时候监听 屏幕的变化  调用方法
@@ -35,16 +39,24 @@ const { body } = document
 // 设置一个宽度的大小, 用来判断当前的侧边栏展开折叠
 const WIDTH = 992
 
+const isMobile = computed(() => {
+  return store.state.app.isMobile
+})
+
+const side_status = computed(()=> {
+  return store.state.app.side_status
+})
+
 const dynamicWidth = computed(() => {
-  if (this.isMobile) return '0'
-  if (this.side_status) return '64px'
+  if (isMobile.value) return '0'
+  if (side_status.value) return '64px'
   return '200px'
 })
 
 
 // 在 mobile 移动端模式下显示隐藏 侧边栏按钮
 const showORhidden = () => {
-  this.ACT_unflodSide()
+  store.commit(APP_MUTATIONS_TYPES.MUT_UNFLOD_SIDE)
 }
 
 const $_isMobile = () => {
@@ -62,12 +74,6 @@ const $_ResizeScreen = (): void => {
   } else if (!side_flag) {
     store.dispatch('app/ACT_unflodSide')
   }
-}
-
-{
-  @App_VUEX.Getter side_status: any
-  @App_VUEX.Getter isMobile: any
-  @App_VUEX.Action ACT_unflodSide!: () => void
 }
 </script>
 

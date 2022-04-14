@@ -28,7 +28,7 @@ const form_account = ref({
 })
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: 'UserAccount'
 }

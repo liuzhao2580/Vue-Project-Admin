@@ -144,7 +144,7 @@ const removeList = (index: number) => {
 }
 </script>
 
-<script>
+<script lang="ts">
 export default {
   name: 'TodoList'
 }
