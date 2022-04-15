@@ -17,7 +17,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
   // 404
   {
-    path: '/:pathMatch(.*)*',
+    path: '/:catchAll(.*)*',
     meta: {
       hidden: true
     },

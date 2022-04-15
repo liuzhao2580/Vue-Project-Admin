@@ -45,28 +45,12 @@ module.exports = defineConfig({
   outputDir: process.env.NODE_ENV === 'production' ? 'dist' : 'test',
   assetsDir: '',
   indexPath: 'index.html',
-
-  //   lintOnSave: false,
+  // lintOnSave: false,
   // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建
   productionSourceMap: false,
 
   // 在生成的 HTML 中的 <link rel="stylesheet"> 和 <script> 标签上启用 Subresource Integrity (SRI)。如果你构建后的文件是部署在 CDN 上的，启用该选项可以提供额外的安全性
   integrity: true,
-
-  // webpack 简单配置 如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中。
-
-  configureWebpack: {
-    externals: process.env.NODE_ENV === 'production' ? externalsConfig : {},
-    name,
-    resolve: {
-      alias: {
-        '@': resolve('src'),
-        '@api': resolve('src/api/modules')
-      },
-      extensions: ['.tsx', '.ts', '.js', '.vue']
-    },
-    plugins: process.env.NODE_ENV === 'production' ? productionPlugins : []
-  },
 
   devServer: {
     port,
@@ -84,6 +68,36 @@ module.exports = defineConfig({
           [`^${process.env.VUE_APP_BASE_API}`]: ''
         }
       }
+    }
+  },
+
+  // webpack 简单配置 如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中。
+  configureWebpack: {
+    externals: process.env.NODE_ENV === 'production' ? externalsConfig : {},
+    name,
+    resolve: {
+      alias: {
+        '@': resolve('src'),
+        '@api': resolve('src/api/modules')
+      },
+      extensions: ['.tsx', '.ts', '.js', '.vue']
+    },
+    plugins: process.env.NODE_ENV === 'production' ? productionPlugins : [],
+    module: {
+      rules: [
+        // 全局导入 scss
+        {
+          test: /\.scss$/,
+          use: [
+            {
+              loader: 'style-resources-loader',
+              options: {
+                patterns: ['./src/styles/variables.scss']
+              }
+            }
+          ]
+        }
+      ]
     }
   },
 
@@ -113,10 +127,7 @@ module.exports = defineConfig({
     //   .end()
     // set svg-sprite-loader
     // 设置 svg 导入
-    config.module
-      .rule('svg')
-      .exclude.add(resolve('src/icons'))
-      .end()
+    config.module.rule('svg').exclude.add(resolve('src/icons')).end()
     config.module
       .rule('icons')
       .test(/\.svg$/)
@@ -128,18 +139,5 @@ module.exports = defineConfig({
         symbolId: 'icon-[name]'
       })
       .end()
-
-    // 全局导入 scss
-    const oneOfsMap = config.module.rule('scss').oneOfs.store
-    oneOfsMap.forEach(item => {
-      item
-        .use('sass-resources-loader')
-        .loader('sass-resources-loader')
-        .options({
-          // 可以使用数组的方式导入,数组里面的文件就可以全局使用了
-          resources: ['./src/styles/variables.scss']
-        })
-        .end()
-    })
   }
 })

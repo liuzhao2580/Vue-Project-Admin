@@ -18,10 +18,10 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@antv/x6@^1.12.30":
-  version "1.12.30"
-  resolved "https://registry.npm.taobao.org/@antv/x6/download/@antv/x6-1.12.30.tgz#9520050d0ad74450157986ba6391f67c03a8c217"
-  integrity sha1-lSAFDQrXRFAVeYa6Y5H2fAOowhc=
+"@antv/x6@^1.31.3":
+  version "1.31.3"
+  resolved "https://repo.huaweicloud.com/repository/npm/@antv/x6/-/x6-1.31.3.tgz#285416c20284a1c6b0ff35d06d5f1b775893dd7c"
+  integrity sha512-aJhFfn+JYlWsKsgOCtfDL+xEFR4st6pBU9LBdfbo/BgZhFgkttNybBMkx3M3hnNW1C2CEt+3xCwrJelqxRrAZw==
   dependencies:
     csstype "^3.0.3"
     jquery "^3.5.1"
@@ -406,7 +406,7 @@
   resolved "https://registry.nlark.com/@babel/parser/download/@babel/parser-7.13.16.tgz?cache=0&sync_timestamp=1618917702146&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Fparser%2Fdownload%2F%40babel%2Fparser-7.13.16.tgz#0f18179b0448e6939b1f3f5c4c355a3a9bcdfd37"
   integrity sha1-DxgXmwRI5pObHz9cTDVaOpvN/Tc=
 
-"@babel/parser@^7.16.4", "@babel/parser@^7.16.7", "@babel/parser@^7.17.9":
+"@babel/parser@^7.15.0", "@babel/parser@^7.16.7", "@babel/parser@^7.17.9":
   version "7.17.9"
   resolved "https://repo.huaweicloud.com/repository/npm/@babel/parser/-/parser-7.17.9.tgz#9c94189a6062f0291418ca021077983058e171ef"
   integrity sha512-vqUSBLP8dQHFPdPi9bc5GK9vRkYHJ49fsZdtoJ8EQ8ibpwk5rPKfvNIwChB0KVXcIjcepEBBd2VHC5r9Gy8ueg==
@@ -1341,13 +1341,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/echarts@^4.9.3":
-  version "4.9.3"
-  resolved "https://registry.npm.taobao.org/@types/echarts/download/@types/echarts-4.9.3.tgz#8a143cf315f6ae88d0778d75a133b378974d37d5"
-  integrity sha1-ihQ88xX2rojQd411oTOzeJdNN9U=
-  dependencies:
-    "@types/zrender" "*"
-
 "@types/eslint-scope@^3.7.3":
   version "3.7.3"
   resolved "https://repo.huaweicloud.com/repository/npm/@types/eslint-scope/-/eslint-scope-3.7.3.tgz#125b88504b61e3c8bc6f870882003253005c3224"
@@ -1408,10 +1401,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/js-cookie@^2.2.6":
-  version "2.2.6"
-  resolved "https://registry.npm.taobao.org/@types/js-cookie/download/@types/js-cookie-2.2.6.tgz#f1a1cb35aff47bc5cfb05cb0c441ca91e914c26f"
-  integrity sha1-8aHLNa/0e8XPsFywxEHKkekUwm8=
+"@types/js-cookie@^3.0.1":
+  version "3.0.1"
+  resolved "https://repo.huaweicloud.com/repository/npm/@types/js-cookie/-/js-cookie-3.0.1.tgz#04aa743e2e0a85a22ee9aa61f6591a8bc19b5d68"
+  integrity sha512-7wg/8gfHltklehP+oyJnZrz9XBuX5ZPP4zB6UsI84utdlkRYLnOm2HfpLXazTwZA+fpGn0ir8tGNgVnMEleBGQ==
 
 "@types/json-schema@*", "@types/json-schema@^7.0.8", "@types/json-schema@^7.0.9":
   version "7.0.11"
@@ -1450,10 +1443,10 @@
   resolved "https://repo.huaweicloud.com/repository/npm/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
-"@types/mockjs@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.npm.taobao.org/@types/mockjs/download/@types/mockjs-1.0.3.tgz#bd8ee3c7cbbd9a18788ab677b9e4f97c8d0bb0bf"
-  integrity sha1-vY7jx8u9mhh4irZ3ueT5fI0LsL8=
+"@types/mockjs@^1.0.6":
+  version "1.0.6"
+  resolved "https://repo.huaweicloud.com/repository/npm/@types/mockjs/-/mockjs-1.0.6.tgz#dafdd5de65156f7aa63eab4e29fa3d532cd95609"
+  integrity sha512-Yu5YlqbYZyqsd6LjO4e8ONJDN9pTSnciHDcRP4teNOh/au2b8helFhgRx+3w8xsTFEnwr9jtfTVJbAx+eYmlHA==
 
 "@types/node@*":
   version "14.14.20"
@@ -1523,11 +1516,6 @@
   integrity sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==
   dependencies:
     "@types/node" "*"
-
-"@types/zrender@*":
-  version "4.0.0"
-  resolved "https://registry.npm.taobao.org/@types/zrender/download/@types/zrender-4.0.0.tgz?cache=0&sync_timestamp=1605057466822&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fzrender%2Fdownload%2F%40types%2Fzrender-4.0.0.tgz#a6806f12ec4eccaaebd9b0d816f049aca6188fbd"
-  integrity sha1-poBvEuxOzKrr2bDYFvBJrKYYj70=
 
 "@typescript-eslint/eslint-plugin@^5.0.0", "@typescript-eslint/eslint-plugin@^5.18.0":
   version "5.18.0"
@@ -1803,6 +1791,13 @@
     webpack "^5.54.0"
     yorkie "^2.0.0"
 
+"@vue/cli-plugin-router@5.0.0":
+  version "5.0.0"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/cli-plugin-router/-/cli-plugin-router-5.0.0.tgz#bdb56f86d2ccbeb6feb87350b04974a9326a7502"
+  integrity sha512-gRTZzEbsThqPhxw3TZgQbg0iuNr6YkteMMDJdZOglUONELH+RHCG52itgCAU8NR7kJHapu+x0HLcYohF1gLtXQ==
+  dependencies:
+    "@vue/cli-shared-utils" "^5.0.0"
+
 "@vue/cli-plugin-router@^5.0.4":
   version "5.0.4"
   resolved "https://repo.huaweicloud.com/repository/npm/@vue/cli-plugin-router/-/cli-plugin-router-5.0.4.tgz#d30b20125408d39c7ad19a7f8a4a82aee9e033a9"
@@ -1892,7 +1887,7 @@
     webpack-virtual-modules "^0.4.2"
     whatwg-fetch "^3.6.2"
 
-"@vue/cli-shared-utils@^5.0.4":
+"@vue/cli-shared-utils@^5.0.0", "@vue/cli-shared-utils@^5.0.4":
   version "5.0.4"
   resolved "https://repo.huaweicloud.com/repository/npm/@vue/cli-shared-utils/-/cli-shared-utils-5.0.4.tgz#e3f42575cb6b70e021272ef2c8bb52ca544ecf27"
   integrity sha512-nfAsj8Nopu5sVHMBIaut/YL7NaJFVmTBSTJD7LM17jc5uytrM9JwiRtzCiv3JWRBG78Xdb/s2Xb/1YR4fkdmkQ==
@@ -1910,52 +1905,52 @@
     semver "^7.3.4"
     strip-ansi "^6.0.0"
 
-"@vue/compat@^3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compat/-/compat-3.2.31.tgz#9c8bdf265eeba1777e5edb56cda73581e351a648"
-  integrity sha512-hhwJk/SRwpT2OADctj+t7QZCRIgh04AcelGpe6gdj0OxA75xpHnPrG+fmG37U3Z6WDrNHZpGvu2eXBzWXM4OVA==
+"@vue/compat@^3.2.33":
+  version "3.2.33"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compat/-/compat-3.2.33.tgz#d7080bf24247e730fe9c33e9782ae4fba66ec347"
+  integrity sha512-8g2W2Na+vEKq9dhj/OkfesgSdr8kXx7ehC1tPCngGq1MD/Q6Q0ydnpcD0sNaGFP4R/8Zccp0LIpMSnj8qKGXBQ==
 
-"@vue/compiler-core@3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compiler-core/-/compiler-core-3.2.31.tgz#d38f06c2cf845742403b523ab4596a3fda152e89"
-  integrity sha512-aKno00qoA4o+V/kR6i/pE+aP+esng5siNAVQ422TkBNM6qA4veXiZbSe8OTXHXquEi/f6Akc+nLfB4JGfe4/WQ==
+"@vue/compiler-core@3.2.13":
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compiler-core/-/compiler-core-3.2.13.tgz#901268088b98a53c43be0f02bfa0e3a389ad6bf4"
+  integrity sha512-H8MUuKVCfAT6C0vth/+1LAriKnM+RTFo/5MoFycwRPwworTvkpWq/EuGoIXdLBblo8Y2/bNsOmIBEEoOtrb/bQ==
   dependencies:
-    "@babel/parser" "^7.16.4"
-    "@vue/shared" "3.2.31"
+    "@babel/parser" "^7.15.0"
+    "@vue/shared" "3.2.13"
     estree-walker "^2.0.2"
     source-map "^0.6.1"
 
-"@vue/compiler-dom@3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compiler-dom/-/compiler-dom-3.2.31.tgz#b1b7dfad55c96c8cc2b919cd7eb5fd7e4ddbf00e"
-  integrity sha512-60zIlFfzIDf3u91cqfqy9KhCKIJgPeqxgveH2L+87RcGU/alT6BRrk5JtUso0OibH3O7NXuNOQ0cDc9beT0wrg==
+"@vue/compiler-dom@3.2.13":
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compiler-dom/-/compiler-dom-3.2.13.tgz#028982494fb9d97807d5275b42355732686f8ed7"
+  integrity sha512-5+2dYgQyNzM97EEgbdAusUpLjulcKkvLM26jOGpd14+qwEcW/KCnns5DGjlZD/tsdEwToOoTDCm+mjx7cO/G1Q==
   dependencies:
-    "@vue/compiler-core" "3.2.31"
-    "@vue/shared" "3.2.31"
+    "@vue/compiler-core" "3.2.13"
+    "@vue/shared" "3.2.13"
 
-"@vue/compiler-sfc@3.2.31", "@vue/compiler-sfc@^3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compiler-sfc/-/compiler-sfc-3.2.31.tgz#d02b29c3fe34d599a52c5ae1c6937b4d69f11c2f"
-  integrity sha512-748adc9msSPGzXgibHiO6T7RWgfnDcVQD+VVwYgSsyyY8Ans64tALHZANrKtOzvkwznV/F4H7OAod/jIlp/dkQ==
+"@vue/compiler-sfc@3.2.13":
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compiler-sfc/-/compiler-sfc-3.2.13.tgz#a38475048aad9c96cf04dfe635129b417e0f9295"
+  integrity sha512-3j970d969aOILykcTstdihP33xH1Onm0wsvcl+rGv9AGxivB9xicRxBw93HCIA4dAPivr42WjHEoci9q2/85uw==
   dependencies:
-    "@babel/parser" "^7.16.4"
-    "@vue/compiler-core" "3.2.31"
-    "@vue/compiler-dom" "3.2.31"
-    "@vue/compiler-ssr" "3.2.31"
-    "@vue/reactivity-transform" "3.2.31"
-    "@vue/shared" "3.2.31"
+    "@babel/parser" "^7.15.0"
+    "@vue/compiler-core" "3.2.13"
+    "@vue/compiler-dom" "3.2.13"
+    "@vue/compiler-ssr" "3.2.13"
+    "@vue/ref-transform" "3.2.13"
+    "@vue/shared" "3.2.13"
     estree-walker "^2.0.2"
     magic-string "^0.25.7"
     postcss "^8.1.10"
     source-map "^0.6.1"
 
-"@vue/compiler-ssr@3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compiler-ssr/-/compiler-ssr-3.2.31.tgz#4fa00f486c9c4580b40a4177871ebbd650ecb99c"
-  integrity sha512-mjN0rqig+A8TVDnsGPYJM5dpbjlXeHUm2oZHZwGyMYiGT/F4fhJf/cXy8QpjnLQK4Y9Et4GWzHn9PS8AHUnSkw==
+"@vue/compiler-ssr@3.2.13":
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compiler-ssr/-/compiler-ssr-3.2.13.tgz#98434672e0b488c2affa4b0570731d6be5cda187"
+  integrity sha512-ZbO6uDhUWTdKBRguYNEZXj2FU3nh1cudoHBiidbxj9q5J0tVT+j1PSVFAXPq6SquUBdJpa4HvGkQ5kQzv6upXg==
   dependencies:
-    "@vue/compiler-dom" "3.2.31"
-    "@vue/shared" "3.2.31"
+    "@vue/compiler-dom" "3.2.13"
+    "@vue/shared" "3.2.13"
 
 "@vue/component-compiler-utils@^3.1.0":
   version "3.2.0"
@@ -1989,7 +1984,7 @@
   optionalDependencies:
     prettier "^1.18.2 || ^2.0.0"
 
-"@vue/devtools-api@^6.0.0", "@vue/devtools-api@^6.0.0-beta.11":
+"@vue/devtools-api@^6.0.0-beta.11":
   version "6.1.4"
   resolved "https://repo.huaweicloud.com/repository/npm/@vue/devtools-api/-/devtools-api-6.1.4.tgz#b4aec2f4b4599e11ba774a50c67fa378c9824e53"
   integrity sha512-IiA0SvDrJEgXvVxjNkHPFfDx6SXw0b/TUkqMcDZWNg9fnCAHbTpoo59YfJ9QLFkwa3raau5vSlRVzMSLDnfdtQ==
@@ -2014,53 +2009,53 @@
     "@typescript-eslint/parser" "^5.0.0"
     vue-eslint-parser "^8.0.0"
 
-"@vue/reactivity-transform@3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/reactivity-transform/-/reactivity-transform-3.2.31.tgz#0f5b25c24e70edab2b613d5305c465b50fc00911"
-  integrity sha512-uS4l4z/W7wXdI+Va5pgVxBJ345wyGFKvpPYtdSgvfJfX/x2Ymm6ophQlXXB6acqGHtXuBqNyyO3zVp9b1r0MOA==
+"@vue/reactivity@3.2.13":
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/reactivity/-/reactivity-3.2.13.tgz#d269b09aaafef06a91bf3eb98defd41a2c3daf54"
+  integrity sha512-j3ByCiRgrr4uEZpXJM8XowrbYKeNHMHlbmMZE/2QpVzVPIfrQWS2fpLmbchJeMrnwIrzEl+dub3hgwkV4KRn4w==
   dependencies:
-    "@babel/parser" "^7.16.4"
-    "@vue/compiler-core" "3.2.31"
-    "@vue/shared" "3.2.31"
+    "@vue/shared" "3.2.13"
+
+"@vue/ref-transform@3.2.13":
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/ref-transform/-/ref-transform-3.2.13.tgz#6adfce50d388cc03683d9d2ba58f3a3bde5166f4"
+  integrity sha512-q6GXHZFzXjpx1K3UFRF8fa+xSmD9xV/FjhGzTNnfrryBr8tBUNYgP2f0s5K5N+21Ay7+MlQ1XXMUp8McGvsryQ==
+  dependencies:
+    "@babel/parser" "^7.15.0"
+    "@vue/compiler-core" "3.2.13"
+    "@vue/shared" "3.2.13"
     estree-walker "^2.0.2"
     magic-string "^0.25.7"
 
-"@vue/reactivity@3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/reactivity/-/reactivity-3.2.31.tgz#fc90aa2cdf695418b79e534783aca90d63a46bbd"
-  integrity sha512-HVr0l211gbhpEKYr2hYe7hRsV91uIVGFYNHj73njbARVGHQvIojkImKMaZNDdoDZOIkMsBc9a1sMqR+WZwfSCw==
+"@vue/runtime-core@3.2.13":
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/runtime-core/-/runtime-core-3.2.13.tgz#8b62f92642e56af71d0d35a9f0065daf6f9eb3fb"
+  integrity sha512-VQedL9Wa7yWMPVDrIkxzLCm6cWCDBoXcXc+jrsOJkqpWhEeA7+zGOsDsHzhLH8aaJD6vdnUR5Cy0EKvoJDqEWQ==
   dependencies:
-    "@vue/shared" "3.2.31"
+    "@vue/reactivity" "3.2.13"
+    "@vue/shared" "3.2.13"
 
-"@vue/runtime-core@3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/runtime-core/-/runtime-core-3.2.31.tgz#9d284c382f5f981b7a7b5971052a1dc4ef39ac7a"
-  integrity sha512-Kcog5XmSY7VHFEMuk4+Gap8gUssYMZ2+w+cmGI6OpZWYOEIcbE0TPzzPHi+8XTzAgx1w/ZxDFcXhZeXN5eKWsA==
+"@vue/runtime-dom@3.2.13":
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/runtime-dom/-/runtime-dom-3.2.13.tgz#238f517a75765719f8373409cee853775c636f92"
+  integrity sha512-DVG+ItkrnCOEa9HSrmGBTLwv/gBVYCO8wkm/yv+d5ChoTnyIILxP0oCiZEPJsgWZfUSRPNi5rXozwo7F99MiwQ==
   dependencies:
-    "@vue/reactivity" "3.2.31"
-    "@vue/shared" "3.2.31"
-
-"@vue/runtime-dom@3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/runtime-dom/-/runtime-dom-3.2.31.tgz#79ce01817cb3caf2c9d923f669b738d2d7953eff"
-  integrity sha512-N+o0sICVLScUjfLG7u9u5XCjvmsexAiPt17GNnaWHJUfsKed5e85/A3SWgKxzlxx2SW/Hw7RQxzxbXez9PtY3g==
-  dependencies:
-    "@vue/runtime-core" "3.2.31"
-    "@vue/shared" "3.2.31"
+    "@vue/runtime-core" "3.2.13"
+    "@vue/shared" "3.2.13"
     csstype "^2.6.8"
 
-"@vue/server-renderer@3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/server-renderer/-/server-renderer-3.2.31.tgz#201e9d6ce735847d5989403af81ef80960da7141"
-  integrity sha512-8CN3Zj2HyR2LQQBHZ61HexF5NReqngLT3oahyiVRfSSvak+oAvVmu8iNLSu6XR77Ili2AOpnAt1y8ywjjqtmkg==
+"@vue/server-renderer@3.2.13":
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/server-renderer/-/server-renderer-3.2.13.tgz#b10a564be67eec6721f90b36c3c817c19e6064b4"
+  integrity sha512-KI+JFV+vRb95+Jb6IwRRm4Vhvj8wrJTNs+OlATfqwwIRpBGAyxn/4knDJYzlnUf/mrKAkrbw751mHhi+pEwILQ==
   dependencies:
-    "@vue/compiler-ssr" "3.2.31"
-    "@vue/shared" "3.2.31"
+    "@vue/compiler-ssr" "3.2.13"
+    "@vue/shared" "3.2.13"
 
-"@vue/shared@3.2.31":
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/shared/-/shared-3.2.31.tgz#c90de7126d833dcd3a4c7534d534be2fb41faa4e"
-  integrity sha512-ymN2pj6zEjiKJZbrf98UM2pfDd6F2H7ksKw7NDt/ZZ1fh5Ei39X5tABugtT03ZRlWd9imccoK0hE8hpjpU7irQ==
+"@vue/shared@3.2.13":
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/shared/-/shared-3.2.13.tgz#c830ef966d7af12598e0ea862a55695ea589cd47"
+  integrity sha512-F/gs3kHQ8Xeo24F6EImOvBiIoYQsBjF9qoLzvk+LHxYN6ZhIDEL1NWrBFYzdFQ7NphjEYd4EvPZ+Qee+WX8P6w==
 
 "@vue/vue-loader-v15@npm:vue-loader@^15.9.7":
   version "15.9.8"
@@ -2516,11 +2511,6 @@ async@^2.6.2:
   integrity sha1-1yYl4jRKNlbjo61Pp0n6gymdgv8=
   dependencies:
     lodash "^4.17.14"
-
-async@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.npm.taobao.org/async/download/async-3.2.0.tgz#b3a2685c5ebb641d3de02d161002c60fc9f85720"
-  integrity sha1-s6JoXF67ZB094C0WEALGD8n4VyA=
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -3374,7 +3364,12 @@ core-js-pure@^3.0.0:
   resolved "https://registry.npm.taobao.org/core-js-pure/download/core-js-pure-3.8.2.tgz?cache=0&sync_timestamp=1609682026404&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcore-js-pure%2Fdownload%2Fcore-js-pure-3.8.2.tgz#286f885c0dac1cdcd6d78397392abc25ddeca225"
   integrity sha1-KG+IXA2sHNzW14OXOSq8Jd3soiU=
 
-core-js@^3.21.1, core-js@^3.8.3:
+core-js@^3.22.0:
+  version "3.22.0"
+  resolved "https://repo.huaweicloud.com/repository/npm/core-js/-/core-js-3.22.0.tgz#b52007870c5e091517352e833b77f0b2d2b259f3"
+  integrity sha512-8h9jBweRjMiY+ORO7bdWSeWfHhLPO7whobj7Z2Bl0IDo00C228EdGgH7FE4jGumbEjzcFfkfW8bXgdkEDhnwHQ==
+
+core-js@^3.8.3:
   version "3.21.1"
   resolved "https://repo.huaweicloud.com/repository/npm/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
   integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
@@ -4930,6 +4925,18 @@ glob@^7.0.0, glob@^7.0.3, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6, gl
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
+glob@^7.2.0:
+  version "7.2.0"
+  resolved "https://repo.huaweicloud.com/repository/npm/glob/-/glob-7.2.0.tgz#d15535af7732e02e948f4c41628bd910293f6023"
+  integrity sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.4"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
 globals@^11.1.0:
   version "11.12.0"
   resolved "https://registry.npm.taobao.org/globals/download/globals-11.12.0.tgz?cache=0&sync_timestamp=1608438496776&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fglobals%2Fdownload%2Fglobals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
@@ -5093,20 +5100,10 @@ he@^1.1.1, he@^1.2.0:
   resolved "https://registry.npm.taobao.org/he/download/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha1-hK5l+n6vsWX922FWauFLrwVmTw8=
 
-highlight.js-async-webpack@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.npm.taobao.org/highlight.js-async-webpack/download/highlight.js-async-webpack-1.0.4.tgz#c06b67bf99f049045d62b756e5855b0912ec616c"
-  integrity sha1-wGtnv5nwSQRdYrdW5YVbCRLsYWw=
-
 highlight.js@^10.7.1:
   version "10.7.3"
   resolved "https://repo.huaweicloud.com/repository/npm/highlight.js/-/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
   integrity sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==
-
-highlight.js@^9.11.0:
-  version "9.18.5"
-  resolved "https://registry.npm.taobao.org/highlight.js/download/highlight.js-9.18.5.tgz#d18a359867f378c138d6819edfc2a8acd5f29825"
-  integrity sha1-0Yo1mGfzeME41oGe38KorNXymCU=
 
 hosted-git-info@^2.1.4:
   version "2.8.8"
@@ -6112,13 +6109,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mavon-editor@^2.9.0:
-  version "2.9.1"
-  resolved "https://registry.npm.taobao.org/mavon-editor/download/mavon-editor-2.9.1.tgz#59adc7cbd1a1a71f691cf5b2a27e60ec3e6997cc"
-  integrity sha1-Wa3Hy9Ghpx9pHPWyon5g7D5pl8w=
+mavon-editor@^2.10.4:
+  version "2.10.4"
+  resolved "https://repo.huaweicloud.com/repository/npm/mavon-editor/-/mavon-editor-2.10.4.tgz#58d6c4dc208933f0ac4595c10c60655899ba8ba8"
+  integrity sha512-CFsBLkgt/KZBDg+SJYe2fyYv4zClY149PiwpH0rDAiiP4ae1XNs0GC8nBsoTeipsHcebDLN1QMkt3bUsnMDjQw==
   dependencies:
-    highlight.js "^9.11.0"
-    highlight.js-async-webpack "^1.0.4"
     xss "^1.0.6"
 
 mdn-data@2.0.14:
@@ -6395,10 +6390,10 @@ module-alias@^2.2.2:
   resolved "https://repo.huaweicloud.com/repository/npm/module-alias/-/module-alias-2.2.2.tgz#151cdcecc24e25739ff0aa6e51e1c5716974c0e0"
   integrity sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q==
 
-moment@^2.29.1:
-  version "2.29.1"
-  resolved "https://registry.npm.taobao.org/moment/download/moment-2.29.1.tgz?cache=0&sync_timestamp=1601983320283&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmoment%2Fdownload%2Fmoment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
-  integrity sha1-sr52n6MZQL6e7qZGnAdeNQBvo9M=
+moment@^2.29.2:
+  version "2.29.2"
+  resolved "https://repo.huaweicloud.com/repository/npm/moment/-/moment-2.29.2.tgz#00910c60b20843bcba52d37d58c628b47b1f20e4"
+  integrity sha512-UgzG4rvxYpN15jgCmVJwac49h9ly9NurikMWGPdVxm8GZD6XjkKPxDTjQQ43gtGgnV3X0cAyWDdP2Wexoquifg==
 
 mousetrap@^1.6.5:
   version "1.6.5"
@@ -8008,16 +8003,6 @@ sass-loader@^7.1.0:
     pify "^4.0.1"
     semver "^6.3.0"
 
-sass-resources-loader@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npm.taobao.org/sass-resources-loader/download/sass-resources-loader-2.1.1.tgz#a231b7c4e326d9c8d141909c901233bef9453151"
-  integrity sha1-ojG3xOMm2cjRQZCckBIzvvlFMVE=
-  dependencies:
-    async "^3.2.0"
-    chalk "^4.1.0"
-    glob "^7.1.6"
-    loader-utils "^2.0.0"
-
 schema-utils@2.7.0:
   version "2.7.0"
   resolved "https://registry.npm.taobao.org/schema-utils/download/schema-utils-2.7.0.tgz?cache=0&sync_timestamp=1601922425223&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fschema-utils%2Fdownload%2Fschema-utils-2.7.0.tgz#17151f76d8eae67fbbf77960c33c676ad9f4efc7"
@@ -8036,7 +8021,7 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
-schema-utils@^2.6.5:
+schema-utils@^2.6.5, schema-utils@^2.7.0:
   version "2.7.1"
   resolved "https://registry.npm.taobao.org/schema-utils/download/schema-utils-2.7.1.tgz?cache=0&sync_timestamp=1601922425223&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fschema-utils%2Fdownload%2Fschema-utils-2.7.1.tgz#1ca4f32d1b24c590c203b8e7a50bf0ea4cd394d7"
   integrity sha1-HKTzLRskxZDCA7jnpQvw6kzTlNc=
@@ -8677,6 +8662,16 @@ strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
   resolved "https://repo.huaweicloud.com/repository/npm/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
+style-resources-loader@^1.5.0:
+  version "1.5.0"
+  resolved "https://repo.huaweicloud.com/repository/npm/style-resources-loader/-/style-resources-loader-1.5.0.tgz#6e0585ca475b9dac45387c308be90d74c814f41f"
+  integrity sha512-fIfyvQ+uvXaCBGGAgfh+9v46ARQB1AWdaop2RpQw0PBVuROsTBqGvx8dj0kxwjGOAyq3vepe4AOK3M6+Q/q2jw==
+  dependencies:
+    glob "^7.2.0"
+    loader-utils "^2.0.0"
+    schema-utils "^2.7.0"
+    tslib "^2.3.1"
+
 stylehacks@^5.1.0:
   version "5.1.0"
   resolved "https://repo.huaweicloud.com/repository/npm/stylehacks/-/stylehacks-5.1.0.tgz#a40066490ca0caca04e96c6b02153ddc39913520"
@@ -8987,7 +8982,7 @@ tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.14.1.tgz?cache=0&sync_timestamp=1609887446826&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
 
-tslib@^2.0.3:
+tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.1:
   version "2.3.1"
   resolved "https://repo.huaweicloud.com/repository/npm/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
@@ -9046,10 +9041,10 @@ typedarray@^0.0.6:
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^4.2.4:
-  version "4.2.4"
-  resolved "https://registry.nlark.com/typescript/download/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
-  integrity sha1-hhC1l0feAo/aiYqK7w4QPxVtCWE=
+typescript@^4.6.3:
+  version "4.6.3"
+  resolved "https://repo.huaweicloud.com/repository/npm/typescript/-/typescript-4.6.3.tgz#eefeafa6afdd31d725584c67a0eaba80f6fc6c6c"
+  integrity sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==
 
 uglify-js@^3.6.0:
   version "3.12.4"
@@ -9269,12 +9264,10 @@ vue-loader@^17.0.0:
     hash-sum "^2.0.0"
     loader-utils "^2.0.0"
 
-vue-router@^4.0.14:
-  version "4.0.14"
-  resolved "https://repo.huaweicloud.com/repository/npm/vue-router/-/vue-router-4.0.14.tgz#ce2028c1c5c33e30c7287950c973f397fce1bd65"
-  integrity sha512-wAO6zF9zxA3u+7AkMPqw9LjoUCjSxfFvINQj3E/DceTt6uEz1XZLraDhdg2EYmvVwTBSGlLYsUw8bDmx0754Mw==
-  dependencies:
-    "@vue/devtools-api" "^6.0.0"
+vue-router@4.0.3:
+  version "4.0.3"
+  resolved "https://repo.huaweicloud.com/repository/npm/vue-router/-/vue-router-4.0.3.tgz#8b26050c88b2dec7e27a88835f71046b365823ec"
+  integrity sha512-AD1OjtVPyQHTSpoRsEGfPpxRQwhAhxcacOYO3zJ3KNkYP/r09mileSp6kdMQKhZWP2cFsPR3E2M3PZguSN5/ww==
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
@@ -9297,16 +9290,16 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha1-HuO8mhbsv1EYvjNLsV+cRvgvWCU=
 
-vue@^3.2.31:
-  version "3.2.31"
-  resolved "https://repo.huaweicloud.com/repository/npm/vue/-/vue-3.2.31.tgz#e0c49924335e9f188352816788a4cca10f817ce6"
-  integrity sha512-odT3W2tcffTiQCy57nOT93INw1auq5lYLLYtWpPYQQYQOOdHiqFct9Xhna6GJ+pJQaF67yZABraH47oywkJgFw==
+vue@3.2.13:
+  version "3.2.13"
+  resolved "https://repo.huaweicloud.com/repository/npm/vue/-/vue-3.2.13.tgz#9d1a94fc62dc29ae21a3dd0d8ee24198e421671e"
+  integrity sha512-raTGvLXXTdMxrhQKY1r1YFXZMmjbjTe7QHBW9EU4CgCBhq8DbgyLqgILcSUZmeFyazk5WY7a7xu0VYmHElf4lA==
   dependencies:
-    "@vue/compiler-dom" "3.2.31"
-    "@vue/compiler-sfc" "3.2.31"
-    "@vue/runtime-dom" "3.2.31"
-    "@vue/server-renderer" "3.2.31"
-    "@vue/shared" "3.2.31"
+    "@vue/compiler-dom" "3.2.13"
+    "@vue/compiler-sfc" "3.2.13"
+    "@vue/runtime-dom" "3.2.13"
+    "@vue/server-renderer" "3.2.13"
+    "@vue/shared" "3.2.13"
 
 vuex@^4.0.2:
   version "4.0.2"
@@ -9315,13 +9308,14 @@ vuex@^4.0.2:
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.11"
 
-wangeditor@^4.0.4:
-  version "4.6.2"
-  resolved "https://registry.npm.taobao.org/wangeditor/download/wangeditor-4.6.2.tgz#35f39ed795c2fcff2e7c6be08cd64707be9abe8a"
-  integrity sha1-NfOe15XC/P8ufGvgjNZHB76avoo=
+wangeditor@^4.7.15:
+  version "4.7.15"
+  resolved "https://repo.huaweicloud.com/repository/npm/wangeditor/-/wangeditor-4.7.15.tgz#38c5e279a79d0428e4fd77ae5be46367e9c819e5"
+  integrity sha512-aPTdREd8BxXVyJ5MI+LU83FQ7u1EPd341iXIorRNYSOvoimNoZ4nPg+yn3FGbB93/owEa6buLw8wdhYnMCJQLg==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@babel/runtime-corejs3" "^7.11.2"
+    tslib "^2.1.0"
 
 watchpack@^2.3.1:
   version "2.3.1"

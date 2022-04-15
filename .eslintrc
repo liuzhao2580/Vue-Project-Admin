@@ -1,4 +1,5 @@
 {
+  "root": true,
   "env": {
     "node": true
   },
@@ -46,6 +47,7 @@
     "@typescript-eslint/no-explicit-any": "off"
   },
   "parserOptions": {
-    "parser": "@typescript-eslint/parser"
+    "parser": "@typescript-eslint/parser",
+    "ecmaVersion": 2020
   }
 }

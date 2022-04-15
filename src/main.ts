@@ -4,7 +4,7 @@ import router from './router'
 import { store, key } from './store'
 
 import '@/styles/theme.scss' // 换肤功能
-import '@/permission' // 权限验证
+// import '@/permission' // 权限验证
 import '@/styles/index.scss' // 公共的样式
 import 'element-plus/theme-chalk/display.css' // 基于断点的隐藏类 Element 额外提供了一系列类名，用于在某些条件下隐藏元素
 
@@ -16,6 +16,4 @@ import '@/directives/permission'
 // 打包的时候注释 不然 externals 还是会将 elementUI 打包
 
 const app = createApp(App)
-
-app.mount('#app')
-app.use(router).use(store, key)
+app.use(store, key).use(router).mount('#app')
