@@ -41,16 +41,10 @@ const name = title
 // 设置项目的端口号
 const port = 9527
 module.exports = defineConfig({
-  publicPath: './',
   outputDir: process.env.NODE_ENV === 'production' ? 'dist' : 'test',
-  assetsDir: '',
-  indexPath: 'index.html',
   // lintOnSave: false,
   // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建
   productionSourceMap: false,
-
-  // 在生成的 HTML 中的 <link rel="stylesheet"> 和 <script> 标签上启用 Subresource Integrity (SRI)。如果你构建后的文件是部署在 CDN 上的，启用该选项可以提供额外的安全性
-  integrity: true,
 
   devServer: {
     port,
@@ -60,14 +54,14 @@ module.exports = defineConfig({
     // 配置跨域
     proxy: {
       // 定义代理的名称
-      [`${process.env.VUE_APP_BASE_API}`]: {
-        target: process.env.VUE_APP_BASE_URL,
-        changeOrigin: true, // 是否启动代理
-        // 设置之后请求会默认加上  如果你的真实的api路径中没有 /api 这一个路径，把这句加上
-        pathRewrite: {
-          [`^${process.env.VUE_APP_BASE_API}`]: ''
-        }
-      }
+      // [`${process.env.VUE_APP_BASE_API}`]: {
+      //   target: process.env.VUE_APP_BASE_URL,
+      //   changeOrigin: true, // 是否启动代理
+      //   // 设置之后请求会默认加上  如果你的真实的api路径中没有 /api 这一个路径，把这句加上
+      //   pathRewrite: {
+      //     [`^${process.env.VUE_APP_BASE_API}`]: ''
+      //   }
+      // }
     }
   },
 

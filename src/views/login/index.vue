@@ -5,7 +5,7 @@
       <el-form
         label-position="left"
         :model="login_form"
-        ref="login_form"
+        ref="formRef"
         :rules="rules"
       >
         <el-form-item label="用户名" prop="userName" label-width="80px">
@@ -30,7 +30,7 @@
       </el-form>
 
       <!-- <DDScanLogin/> -->
-      <DDAccountLogin />
+      <!-- <DDAccountLogin /> -->
     </el-row>
   </el-col>
 </template>
@@ -43,7 +43,7 @@ import { ElMessage } from 'element-plus'
 import { useStore } from '@/store'
 import { userLogin } from '@/api/modules/user'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
-import DDAccountLogin from './components/DDAccountLogin.vue'
+// import DDAccountLogin from './components/DDAccountLogin.vue'
 import { USER_ACTIONS_TYPES } from '@/store/modules/user/types'
 
 const store = useStore()
