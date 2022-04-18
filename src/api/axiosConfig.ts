@@ -5,7 +5,7 @@ import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { ResultModel } from '@/typescript/shared/model/'
 import { getCookie, removeCookie } from '@/utils/cookies'
 import { resetRouter } from '@/router'
-const baseURL = 'http://localhost:9527/mock'
+const baseURL = process.env.VUE_APP_BASE_API
 const Axios = axios.create({
   baseURL,
   withCredentials: true,
