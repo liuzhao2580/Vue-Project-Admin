@@ -1,6 +1,6 @@
 <template>
-  <el-col class="login-box">
-    <el-row class="login-content">
+  <div class="login-box">
+    <div class="login-content">
       <p class="login-title">欢迎登录</p>
       <el-form
         label-position="left"
@@ -28,11 +28,10 @@
           >
         </el-form-item>
       </el-form>
-
       <!-- <DDScanLogin/> -->
       <!-- <DDAccountLogin /> -->
-    </el-row>
-  </el-col>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -81,11 +80,15 @@ const submitForm = async (formEl: FormInstance | undefined) => {
             type: 'success'
           })
           try {
-            await store.dispatch(USER_ACTIONS_TYPES.ACT_FETCH_USERINFO, result.data)
-            await store.dispatch(USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID, true)
-            router
-              .push({ path: '/' })
-              .catch(error => console.log(error, 1111))
+            await store.dispatch(
+              USER_ACTIONS_TYPES.ACT_FETCH_USERINFO,
+              result.data
+            )
+            await store.dispatch(
+              USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID,
+              true
+            )
+            router.push({ path: '/' }).catch(error => console.log(error, 1111))
           } catch (error) {
             console.log(error, 111)
           }
@@ -107,8 +110,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 </script>
 
 <script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
-  name: 'LoginPage'
+  name: RouterName.LOGIN
 }
 </script>
 
