@@ -44,8 +44,8 @@ Axios.interceptors.response.use(
       removeCookie('user_id')
       // 重置 路由
       resetRouter()
-      return response
-    } else return response
+      return response.data
+    } else return response.data
   },
   // 请求失败
   error => {

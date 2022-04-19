@@ -1,24 +1,21 @@
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css' // 基于断点的隐藏类 Element 额外提供了一系列类名，用于在某些条件下隐藏元素
 import App from './App.vue'
 import router from './router'
 import { store, key } from './store'
+import mockXHR from '@/mock/index'
 
 import '@/styles/theme.scss' // 换肤功能
 // import '@/permission' // 权限验证
 import '@/styles/index.scss' // 公共的样式
-import 'element-plus/dist/index.css' // 基于断点的隐藏类 Element 额外提供了一系列类名，用于在某些条件下隐藏元素
-
-if (process.env.NODE_ENV === 'development') {
-  // const { mockXHR } = require('./mock/index.js')
-  // console.log(mockXHR, 'mockXHR')
-  // mockXHR()
-}
 
 import './icons' // 导入 icon 字体
 
 import '@/directives/permission'
 // 打包的时候注释 不然 externals 还是会将 elementUI 打包
+
+mockXHR() // 导入 mock
 
 const app = createApp(App)
 

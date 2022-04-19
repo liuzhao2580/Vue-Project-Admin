@@ -1,6 +1,6 @@
 
 // import { IMockResponse } from '../shared/interface'
-export const EchartsData = (Mock) => {
+export const EchartsData = (Mock : any) => {
   return {
     code: 0,
     data: Mock.mock({
