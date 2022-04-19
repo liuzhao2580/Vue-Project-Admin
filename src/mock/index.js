@@ -1,6 +1,6 @@
 // 引入 mock
-import Mock from 'mockjs'
-import user from './modules/user'
+const Mock = require('mockjs')
+const user = require('./modules/user')
 // import { EchartsData } from './modules/dashboard'
 const mocks = [...user]
 

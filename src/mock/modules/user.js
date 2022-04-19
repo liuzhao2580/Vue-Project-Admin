@@ -1,8 +1,6 @@
-import { ResultCodeEnum, ResultTypeEnum } from '@/typescript/shared/enum'
-import { IUserBaseInfo } from '@/typescript/shared/interface/user-interface'
-import { IMockResponse } from '../shared/interface'
+const { ResultTypeEnum } = require('../shared')
 // 用户的基本信息
-const userInfo: IUserBaseInfo[] = [
+const userInfo = [
   {
     id: 1,
     roleId: 1,
@@ -37,7 +35,7 @@ const userInfo: IUserBaseInfo[] = [
       'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-minions/326b7250-34a6-11eb-97b7-0dc4655d6e68.png'
   }
 ]
-const userModules: IMockResponse<IUserBaseInfo | {}>[] = [
+module.exports = [
   {
     type: ResultTypeEnum.GET,
     url: '/user/info.*',
@@ -74,7 +72,7 @@ const userModules: IMockResponse<IUserBaseInfo | {}>[] = [
     url: '/user/login',
     response(options) {
       const { url } = options
-      const splitArray: string[] = url.split('/')
+      const splitArray = url.split('/')
       const id = +splitArray[splitArray.length - 1]
       // 判断该用户是否存在
       const is_True = userInfo.find(item => {
@@ -101,5 +99,3 @@ const userModules: IMockResponse<IUserBaseInfo | {}>[] = [
     }
   }
 ]
-
-export default userModules

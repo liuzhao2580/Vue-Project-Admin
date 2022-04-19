@@ -17,9 +17,6 @@ const Axios = axios.create({
 // 添加请求拦截器
 Axios.interceptors.request.use(
   config => {
-    const reg = /\/login$/
-    if (config.url && reg.test(config.url)) return config
-    config.headers['x-csrf-token'] = getCookie('csrfToken')
     config.headers['Authorization'] = `Bearer ${getCookie('token')}`
     return config
   },
