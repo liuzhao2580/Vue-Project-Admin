@@ -11,7 +11,7 @@ export default function mockXHR() {
     timeout: 1500 // 设置延迟响应，模拟向后端请求数据
   })
   for (const mock of mocks) {
-    Mock.mock(`${baseURL}${mock.url}`, mock.type || ResultTypeEnum.GET, mock.response)
+    Mock.mock(new RegExp(`${baseURL}${mock.url}`), mock.type || ResultTypeEnum.GET, mock.response)
   }
   // // 登录
   // Mock.mock(`${baseURL}/login`, 'post', user.userLogin)

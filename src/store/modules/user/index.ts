@@ -89,7 +89,6 @@ const actions = {
   },
   // 页面刷新 重新获取用户信息, 路由信息
   [USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID]({ commit }: any) {
-    // eslint-disable-next-line no-async-promise-executor
     return new Promise(async resolve => {
       const userId = getCookie('userId')
       // 获取用户的基本信息

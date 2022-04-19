@@ -71,7 +71,7 @@ const userModules: IMockResponse[] = [
   },
   {
     type: ResultTypeEnum.GET,
-    url: '/user/info.*',
+    url: '/user/info/.*',
     response(options) {
       const { url } = options
       const splitArray = url.split('/')

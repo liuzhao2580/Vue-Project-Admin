@@ -4,17 +4,17 @@
       <p class="login-title">欢迎登录</p>
       <el-form
         label-position="left"
-        :model="login_form"
+        :model="loginForm"
         ref="formRef"
         :rules="rules"
       >
         <el-form-item label="用户名" prop="userName" label-width="80px">
-          <el-input v-model="login_form.userName"></el-input>
+          <el-input v-model="loginForm.userName"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password" label-width="80px">
           <el-input
             type="password"
-            v-model="login_form.password"
+            v-model="loginForm.password"
             @keydown.enter="submitForm(formRef)"
           ></el-input>
         </el-form-item>
@@ -23,7 +23,7 @@
             class="loginBtn"
             type="primary"
             @click="submitForm(formRef)"
-            :loading="login_loading"
+            :loading="loginLoading"
             >登录</el-button
           >
         </el-form-item>
@@ -37,7 +37,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import type { FormInstance } from 'element-plus'
+import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { useStore } from '@/store'
 import { userLogin } from '@/api/modules/user'
@@ -49,16 +49,21 @@ const store = useStore()
 
 const router = useRouter()
 
-const login_form = reactive({
+interface ILoginForm {
+  userName: string
+  password: string
+}
+
+const loginForm = reactive<ILoginForm>({
   userName: 'admin',
   password: 'admin'
 })
-const rules = reactive({
+const rules = reactive<FormRules>({
   userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 /** 登录的加载按钮样式 */
-const login_loading = ref(false)
+const loginLoading = ref(false)
 
 const formRef = ref<FormInstance>()
 
@@ -66,10 +71,10 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate(async (valid: boolean) => {
     if (valid) {
-      login_loading.value = true
+      loginLoading.value = true
       const params = {
-        userName: login_form.userName,
-        password: login_form.password
+        userName: loginForm.userName,
+        password: loginForm.password
       }
       try {
         const result = await userLogin(params)
@@ -81,14 +86,16 @@ const submitForm = async (formEl: FormInstance | undefined) => {
           })
           try {
             await store.dispatch(
-              USER_ACTIONS_TYPES.ACT_FETCH_USERINFO,
+              `user/${USER_ACTIONS_TYPES.ACT_FETCH_USERINFO}`,
               result.data
             )
             await store.dispatch(
-              USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID,
+              `user/${USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID}`,
               true
             )
-            router.push({ path: '/' }).catch(error => console.log(error, 1111))
+            if(false) {
+              router.push({ path: '/' }).catch(error => console.log(error, 1111))
+            }
           } catch (error) {
             console.log(error, 111)
           }
@@ -98,9 +105,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
             type: 'error'
           })
         }
-        login_loading.value = false
+        loginLoading.value = false
       } catch (err) {
-        login_loading.value = false
+        loginLoading.value = false
       }
     } else {
       return false
