@@ -26,67 +26,65 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'CalculatorCom',
-  components: {},
-  props: {},
-  computed: {
-    total() {
-      let getTotal = 0
-      this.CalculatorData.forEach(item => {
-        getTotal += Number(item.value)
-      })
-      return getTotal
-    },
-    fullName: {
-      get() {
-        let getFullName = ''
-        this.nameDate.forEach(item => {
-          getFullName += item.value
-        })
-        return getFullName
-      },
-      set() {
-        this.nameDate.forEach(item => {
-          item.value = ''
-        })
-      }
-    }
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
+const CalculatorData = ref([
+  {
+    name: '早餐',
+    value: ''
   },
-  data() {
-    return {
-      CalculatorData: [
-        {
-          name: '早餐',
-          value: ''
-        },
-        {
-          name: '中餐',
-          value: ''
-        },
-        {
-          name: '晚餐',
-          value: ''
-        }
-      ],
-      nameDate: [
-        {
-          name: '姓',
-          value: ''
-        },
-        {
-          name: '名',
-          value: ''
-        }
-      ]
-    }
+  {
+    name: '中餐',
+    value: ''
   },
-  methods: {
-    clear() {
-      this.fullName = ''
-    }
+  {
+    name: '晚餐',
+    value: ''
   }
+])
+
+const nameDate = ref([
+  {
+    name: '姓',
+    value: ''
+  },
+  {
+    name: '名',
+    value: ''
+  }
+])
+
+const total = computed(() => {
+  let getTotal = 0
+  CalculatorData.value.forEach(item => {
+    getTotal += Number(item.value)
+  })
+  return getTotal
+})
+
+const fullName = computed({
+  get() {
+    let getFullName = ''
+    nameDate.value.forEach(item => {
+      getFullName += item.value
+    })
+    return getFullName
+  },
+  set() {
+    nameDate.value.forEach(item => {
+      item.value = ''
+    })
+  }
+})
+
+const clear = () => {
+  fullName.value = ''
+}
+</script>
+
+<script lang="ts">
+export default {
+  name: 'CalculatorCom'
 }
 </script>
 
