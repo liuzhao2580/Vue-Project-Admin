@@ -81,7 +81,7 @@ export default {
 .Personal-box {
   margin-right: 10px;
   cursor: pointer;
-  /deep/ .el-avatar {
+  :deep(.el-avatar) {
     width: 50px;
     height: 50px;
     img {

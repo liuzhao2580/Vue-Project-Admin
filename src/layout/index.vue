@@ -104,7 +104,7 @@ const $_ResizeScreen = (): void => {
   .main-box {
     display: flex;
     flex-direction: column;
-    /deep/ .app-main {
+    :deep(.app-main) {
       flex: 1;
       > div {
         height: 100%;

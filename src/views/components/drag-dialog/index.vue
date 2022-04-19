@@ -51,7 +51,7 @@ export default {
 
 <style lang="scss" scoped>
 .dialog-box {
-  /deep/ .el-dialog {
+  :deep(.el-dialog) {
     margin-bottom: 0;
   }
 }

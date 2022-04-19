@@ -32,7 +32,7 @@
         box-shadow: 0px 2px 2px #ccc;
         white-space: nowrap;
         width: 100%;
-        /deep/ .TagsView-scrollbar {
+        :deep(.TagsView-scrollbar) {
             .el-scrollbar__wrap {
                 overflow-y: hidden;
                 .el-scrollbar__view {
