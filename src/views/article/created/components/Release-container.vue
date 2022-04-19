@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, reactive, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 
 interface IProps {
   /** 弹出框的 visible */

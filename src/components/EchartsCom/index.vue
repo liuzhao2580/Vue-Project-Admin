@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, nextTick, watch, withDefaults, ref, onMounted } from 'vue'
+import { nextTick, watch, withDefaults, ref, onMounted } from 'vue'
 import Echarts, { LegendComponentOption } from 'echarts'
 import EchartMixins from './mixins'
 

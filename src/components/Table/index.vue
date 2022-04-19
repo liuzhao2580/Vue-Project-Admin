@@ -126,7 +126,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, ref, withDefaults } from 'vue'
+import { computed, ref, withDefaults } from 'vue'
 import moment from 'moment'
 import {
   TableConfigModel,
