@@ -91,3 +91,9 @@ export const RouterPath = {
   /** 我的 */
   PERSONAL: '/personal'
 }
+
+/** 路由的其他设置 */
+export const RouterConfig = {
+  /** 表示不用重定向 */
+  NoRedirect: 'noRedirect'
+}

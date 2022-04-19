@@ -72,8 +72,7 @@ export default {
           break
       }
     }
-  },
-  watch: {}
+  }
 }
 </script>
 

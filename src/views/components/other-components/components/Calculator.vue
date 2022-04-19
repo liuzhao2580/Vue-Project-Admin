@@ -86,8 +86,7 @@ export default {
     clear() {
       this.fullName = ''
     }
-  },
-  watch: {}
+  }
 }
 </script>
 

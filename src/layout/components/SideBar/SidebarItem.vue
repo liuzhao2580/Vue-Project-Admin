@@ -96,8 +96,7 @@ export default {
         return true
       }
     }
-  },
-  watch: {}
+  }
 }
 </script>
 
