@@ -63,7 +63,8 @@ module.exports = defineConfig({
           [`^${process.env.VUE_APP_BASE_API}`]: ''
         }
       }
-    }
+    },
+    onBeforeSetupMiddleware: require('./src/mock/mock-server.js')
   },
 
   // webpack 简单配置 如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中。
