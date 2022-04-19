@@ -13,7 +13,6 @@ import '@/styles/index.scss' // 公共的样式
 import './icons' // 导入 icon 字体
 
 import '@/directives/permission'
-// 打包的时候注释 不然 externals 还是会将 elementUI 打包
 
 mockXHR() // 导入 mock
 
