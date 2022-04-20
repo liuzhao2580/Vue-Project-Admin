@@ -127,11 +127,14 @@ export default {
 .login-box {
   width: 100%;
   height: 100%;
+  position: relative;
   .login-content {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
     width: 500px;
     max-width: 100%;
-    margin: 0 auto;
-    margin-top: 200px;
     .login-title {
       text-align: center;
       height: 60px;
