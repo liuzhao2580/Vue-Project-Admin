@@ -28,51 +28,53 @@
   </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { removeCookie } from '@/utils/cookies'
 import { resetRouter } from '@/router'
-export default {
-  name: 'PersonalCom',
-  components: {},
-  props: {},
-  computed: {
-    ...mapGetters({
-      avatar: 'user/avatar'
-    })
-  },
-  data() {
-    return {}
-  },
-  methods: {
-    // 登出
-    login_Out() {
-      removeCookie('token')
-      removeCookie('user_id')
-      // 重置 路由
-      resetRouter()
-      this.$router.push({ path: '/login' })
-    },
-    handleCommand(command) {
-      switch (command) {
-        case 'a':
-          this.$router.push('/personal')
-          break
-        case 'b':
-          this.$router.push('/')
-          break
-        case 'c':
-          this.$router.push('/documentation')
-          break
-        case 'd':
-          window.open('https://github.com/liuzhao2580/Vue_project')
-          break
-        case 'e':
-          this.login_Out()
-          break
-      }
-    }
+import { useStore } from '@/store'
+import { RouterPath } from '@/router/RouteConst'
+
+const store = useStore()
+
+const router = useRouter()
+
+const avatar = computed(() => {
+  return store.getters['user/avatar']
+})
+// 登出
+const login_Out = () => {
+  removeCookie('token')
+  removeCookie('user_id')
+  // 重置 路由
+  resetRouter()
+  router.push({ path: RouterPath.LOGIN })
+}
+const handleCommand = (command: string) => {
+  switch (command) {
+    case 'a':
+      router.push(RouterPath.PERSONAL)
+      break
+    case 'b':
+      router.push(RouterPath.DASHBOARD)
+      break
+    case 'c':
+      router.push(RouterPath.DOCUMENTATION)
+      break
+    case 'd':
+      window.open('https://github.com/liuzhao2580/Vue_project')
+      break
+    case 'e':
+      login_Out()
+      break
   }
+}
+</script>
+
+<script lang="ts">
+export default {
+  name: 'PersonalCom'
 }
 </script>
 

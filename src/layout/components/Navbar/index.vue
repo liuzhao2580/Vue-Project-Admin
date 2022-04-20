@@ -1,38 +1,36 @@
 <template>
-	<div class="Navbar-box">
-        <div class="Navbar-Breadcrumb">
-            <div class="side-btn hidden-xs-only" @click="side_Btn">
-                <i class="el-icon-s-operation"></i>
-            </div>
-            <Breadcrumb />
-            <Change-color />
-            <Personal />
-        </div>
-        <TagsView />
+  <div class="Navbar-box">
+    <div class="Navbar-Breadcrumb">
+      <div class="side-btn hidden-xs-only" @click="side_Btn">
+        <i class="el-icon-s-operation"></i>
+      </div>
+      <Breadcrumb />
+      <Personal />
     </div>
+    <TagsView />
+  </div>
 </template>
 
-<script>
-import Breadcrumb from '../Breadcrumb'
-import TagsView from '../TagsView'
-import Personal from '../Personal'
+<script lang="ts" setup>
+import { useStore } from '@/store'
+import Breadcrumb from '../Breadcrumb/index.vue'
+import TagsView from '../TagsView/index.vue'
+import Personal from '../Personal/index.vue'
+import { APP_MUTATIONS_TYPES } from '@/store/modules/app/types'
+
+const store = useStore()
+// 侧边栏按钮点击事件
+const side_Btn = () => {
+  store.dispatch(`app/${APP_MUTATIONS_TYPES.MUT_CHANGE_SIDESTATUS}`)
+}
+</script>
+
+<script lang="ts">
 export default {
-  name: 'NavBar',
-  components: {
-    Breadcrumb,
-    TagsView,
-    Personal,
-    ChangeColor: () => import('../ChangeColor')
-  },
-  methods: {
-    // 侧边栏按钮点击事件
-    side_Btn() {
-      this.$store.dispatch('app/change_SideStatus')
-    }
-  }
+  name: 'NavBar'
 }
 </script>
 
 <style lang="scss" scoped>
-@import "./index.scss"
+@import './index.scss';
 </style>
