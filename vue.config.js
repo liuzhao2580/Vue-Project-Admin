@@ -98,20 +98,6 @@ module.exports = defineConfig({
 
   // webpack 高级配置
   chainWebpack(config) {
-    config.resolve.alias.set('vue', '@vue/compat')
-    config.module
-      .rule('vue')
-      .use('vue-loader')
-      .tap(options => {
-        return {
-          ...options,
-          compilerOptions: {
-            compatConfig: {
-              MODE: 2
-            }
-          }
-        }
-      })
     // 设置 images 转化为 base64位
     // config.module
     //   .rule("images")
