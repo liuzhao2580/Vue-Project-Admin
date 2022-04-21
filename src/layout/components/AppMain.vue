@@ -19,7 +19,7 @@ const store = useStore()
 const keepAliveRoutes = ref<string[]>([])
 
 const sideBarList = computed((): RouteRecordRaw[] => {
-  return store.getters.user.sideBarList
+  return store.state.user.sideBarList
 })
 
 onMounted(() => {

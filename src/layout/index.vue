@@ -61,8 +61,8 @@ const showORhidden = () => {
 
 const $_isMobile = () => {
   const react = body.getBoundingClientRect()
-  if (react.width < 768) store.dispatch('app/Act_setDevice', true)
-  else store.dispatch('app/Act_setDevice', false)
+  if (react.width < 768) store.commit(`app/${APP_MUTATIONS_TYPES.MUT_SET_DEVICE}`, true)
+  else store.commit(`app/${APP_MUTATIONS_TYPES.MUT_SET_DEVICE}`, false)
   return react.width - 1 < WIDTH
 }
 
@@ -70,9 +70,9 @@ const $_isMobile = () => {
 const $_ResizeScreen = (): void => {
   const side_flag = $_isMobile()
   if (side_flag) {
-    store.dispatch('app/Act_flodSide')
+    store.commit(`app/${APP_MUTATIONS_TYPES.MUT_FLOD_SIDE}`)
   } else if (!side_flag) {
-    store.dispatch('app/ACT_unflodSide')
+    store.commit(`app/${APP_MUTATIONS_TYPES.MUT_UNFLOD_SIDE}`)
   }
 }
 </script>

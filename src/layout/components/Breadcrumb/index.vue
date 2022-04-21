@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 import { RouterConfig } from '@/router/RouteConst'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { RouteLocationMatched, RouteRecordRaw, useRoute } from 'vue-router'
 const defaultConfig = require('@/setting')
 
@@ -55,11 +55,8 @@ const handleClick = (item : RouteRecordRaw) => {
   }
 }
 
-watch(
-  () => route.path,
-  () => {
-    init()
-  }
+watchEffect(
+  () => init()
 )
 </script>
 

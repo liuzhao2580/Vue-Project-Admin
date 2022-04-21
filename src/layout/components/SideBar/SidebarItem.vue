@@ -16,7 +16,7 @@
       popper-append-to-body
       :class="{ MenuitemClass: side_status && !isMoreChild }"
     >
-      <template v-slot:title>
+      <template #title>
         <MenuItem
           :icon="onlyOneChild.meta.icon"
           :title="onlyOneChild.meta.title"
@@ -65,7 +65,7 @@ const onlyOneChild = ref()
 const resolvePath = (routePath: string) => {
   return routePath
 }
-// 用户判断多级路由
+/** 判断多级路由 */
 const checkMoreRouter = (route: RouteRecordRaw) => {
   // 判断 是否含有多级路由
   // 当 children 存在时, 说明还存在子路由

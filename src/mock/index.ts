@@ -8,7 +8,7 @@ const mocks = [...user]
 export default function mockXHR() {
   const baseURL = process.env.VUE_APP_BASE_API
   Mock.setup({
-    timeout: 1500 // 设置延迟响应，模拟向后端请求数据
+    timeout: 500 // 设置延迟响应，模拟向后端请求数据
   })
   for (const mock of mocks) {
     Mock.mock(new RegExp(`${baseURL}${mock.url}`), mock.type || ResultTypeEnum.GET, mock.response)

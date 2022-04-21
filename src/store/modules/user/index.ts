@@ -5,9 +5,10 @@ import { USER_MUTATIONS_TYPES, USER_ACTIONS_TYPES } from './types'
 import { userInfoApi } from '@/api/modules/user'
 import { setCookie, getCookie, removeCookie } from '@/utils/cookies'
 import { deepClone } from '@/utils/config'
-import { asyncRoutes, resetRouter } from '@/router'
+import { asyncRoutes, resetRouter, insertRouter } from '@/router'
 import { IUserBaseInfo } from '@/typescript/shared/interface/user-interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
+import { RouteRecordRaw } from 'vue-router'
 // 定义一个接受的参数，避免 在请求拦截的时候出现 Message undefined 报错问题
 const _Message = ElMessage
 /**
@@ -107,8 +108,9 @@ const actions = {
         // 通过递归获取用户的路由权限，侧边栏数据
         const getList = creatRouter(asyncRoutes[0], result.data?.roleId)
         // 深拷贝用户的侧边栏数据
-        const newRoutesList = deepClone(asyncRoutes[0])
+        const newRoutesList = deepClone<RouteRecordRaw>(asyncRoutes[0])
         newRoutesList.children = getList
+        insertRouter(newRoutesList)
         // 存储数据
         commit(USER_MUTATIONS_TYPES.MUT_SET_ROUTER_LIST, newRoutesList.children)
         commit(USER_MUTATIONS_TYPES.MUT_NEED_REFRESH, false)

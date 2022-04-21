@@ -3,7 +3,7 @@
     <el-scrollbar class="TagsView-scrollbar">
       <div class="tag-container-box">
         <el-tag
-          v-for="(tag, index) in tags_data"
+          v-for="(tag, index) in tagsArray"
           :key="index"
           :closable="is_closable(tag)"
           effect="dark"
@@ -11,14 +11,14 @@
           size="small"
           @click="handleClick(tag)"
           disable-transitions
-          :class="{ 'is-active': is_active(tag.meta.title) }"
+          :class="{ 'is-active': is_active(tag.meta?.title) }"
           @contextmenu.prevent="tagContextmenu($event, tag, index)"
-          >{{ tag.meta.title }}</el-tag
+          >{{ tag.meta?.title }}</el-tag
         >
       </div>
     </el-scrollbar>
     <!-- 用来操作开启的 tag 标签 -->
-    <ul v-show="operaTagFlag" class="hide-tag-box" :style="hideTagBox">
+    <ul v-show="state.operaTagFlag" class="hide-tag-box" :style="state.hideTagBox">
       <li
         :class="[disabledFlag ? 'disabled-operation' : 'hide-item']"
         @click="closeNow"
@@ -32,178 +32,205 @@
   </div>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex'
-// import path from 'path'
-export default {
-  name: 'TagsView',
-  components: {},
-  props: {},
-  data() {
-    return {
-      affixTags: [],
-      // tag 操作菜单的显示隐藏
-      operaTagFlag: false,
-      // tag 操作菜单的样式
-      hideTagBox: {
-        left: 0,
-        top: 0
-      },
-      // 记录当前右键的是哪个 tag
-      saveCurrentTag: {
-        currentIndex: -1,
-        currentTag: null
-      }
-    }
-  },
-  computed: {
-    ...mapGetters({
-      tags_data: 'TagsView/tags_data',
-      sideBarList: 'user/sideBarList'
-    }),
-    // 当前的 tag 是否可以操作
-    disabledFlag() {
-      let flag = false
-      if (
-        this.saveCurrentTag.currentIndex === 0 ||
-        this.saveCurrentTag.currentIndex === 1
-      )
-        flag = true
-      return flag
-    }
-  },
-  mounted() {
-    this.init_tags()
-    this.insertT_Tags()
-  },
-  methods: {
-    ...mapActions({
-      ACT_init_Tags: 'TagsView/ACT_init_Tags',
-      ACT_setTags: 'TagsView/ACT_setTags'
-    }),
-    // 初始化 tags
-    init_tags() {
-      const routes = this.sideBarList
-      const affixTags = this.filterAffixTags(routes)
-      this.ACT_init_Tags(affixTags)
-    },
-    // 初始化的时候取出 固定的tags
-    filterAffixTags(routes) {
-      let tags = []
-      tags = routes.filter(item => {
-        if (item.meta.affix) {
-          return {
-            fullPath: item.path,
-            meta: item.meta,
-            name: item.name
-          }
-        }
-      })
-      return tags
-    },
-    // 增加 tags
-    insertT_Tags() {
-      const route = this.$route
-      const currentTag = {
-        fullPath: route.fullPath,
-        meta: route.meta,
-        name: route.name
-      }
-      this.ACT_setTags(currentTag)
-    },
-    // 用于高亮当前的tags
-    is_active(tag) {
-      return tag === this.$route.meta.title
-    },
-    // 用于设置 不显示关闭按钮 affix 存在 说明不能被关闭
-    is_closable(tag) {
-      if (tag.meta.affix) return false
-      return true
-    },
-    // 点击关闭按钮
-    handleClose(tag) {
-      const getIndex = this.tags_data.indexOf(tag)
-      const route = this.$route
-      if (route.fullPath === tag.fullPath) {
-        this.handleClick(this.tags_data[getIndex - 1])
-      }
-      this.tags_data.splice(getIndex, 1)
-    },
-    // 点击 tags 跳转
-    handleClick(tag) {
-      this.$router.push({
-        name: tag.name
-      })
-    },
-    // 鼠标右键菜单
-    tagContextmenu(e, tag, index) {
-      // 1.获取 tag-container-box html元素
-      const getTagBoxDom = document.querySelector('.tag-container-box')
-      // 2.将伪数组变成真实的数组
-      const getRealArr = Array.prototype.slice.call(getTagBoxDom.children)
-      // 3.tag 的操作菜单需要left的 总长度
-      let getAllWidth = 0
-      getRealArr.forEach((item, Iindex) => {
-        // 4.如果当前鼠标右键的元素索引小于其他元素，说明右边的元素长度不考虑
-        if (Iindex >= index) return
-        // 5.计算每个元素的 宽度 并且 + margin-right的5个像素点
-        getAllWidth += item.offsetWidth + 5
-      })
-      this.hideTagBox.left = 20 + getAllWidth + 'px'
-      this.hideTagBox.top = 40 + 'px'
-      this.operaTagFlag = true
-      this.saveCurrentTag.currentIndex = index
-      this.saveCurrentTag.currentTag = tag
-    },
-    // 关闭当前
-    closeNow() {
-      const { currentIndex, currentTag } = this.saveCurrentTag
-      if (currentIndex === 0 || currentIndex === 1) return
-      this.handleClose(currentTag)
-    },
-    // 关闭其他
-    closeOther() {
-      const { currentIndex, currentTag } = this.saveCurrentTag
-      this.tags_data.forEach((item, index) => {
-        if (index === 0 || index === 1 || index === currentIndex) return
-        this.tags_data.splice(index, 1)
-      })
-      // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
-      if (!this.is_active(currentTag.meta.title)) this.handleClick(currentTag)
-    },
-    // 关闭右侧
-    closeRight() {
-      const { currentIndex, currentTag } = this.saveCurrentTag
-      this.tags_data.forEach((item, index) => {
-        if (index > currentIndex) this.tags_data.splice(index, 1)
-      })
-      // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
-      if (!this.is_active(currentTag.meta.title)) this.handleClick(currentTag)
-    },
-    // 全部关闭
-    closeAll() {
-      this.tags_data.splice(2)
-      this.$router.push('/')
-    },
-    // 关闭 可以 tag 的操作菜单
-    closeTagOperation() {
-      this.operaTagFlag = false
-    },
-    // 开启 tag 的操作菜单
-    openTagOperation() {
-      this.operaTagFlag = true
-    }
-  },
-  watch: {
-    '$route.path'() {
-      this.insertT_Tags()
-    },
-    operaTagFlag(flag) {
-      // 每次只要 开启 就全局监听 click 事件，用来关闭
-      if (flag) document.body.addEventListener('click', this.closeTagOperation)
-      else document.body.removeEventListener('click', this.closeTagOperation)
-    }
+<script lang="ts" setup>
+import { useStore } from '@/store'
+import { TAGS_VIEW_MUTATIONS_TYPES } from '@/store/modules/tagsView/types'
+import { computed, onMounted, reactive, watch } from 'vue'
+import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
+
+const store = useStore()
+
+const route = useRoute()
+
+const router = useRouter()
+
+interface IState {
+  affixTags: RouteRecordRaw[]
+  /** tag 操作菜单的显示隐藏 */
+  operaTagFlag: boolean
+  /** tag 操作菜单的样式 */
+  hideTagBox: {
+    left: number | string
+    top: number | string
   }
+  /** 记录当前右键的是哪个 tag */
+  saveCurrentTag: {
+    currentIndex: number
+    currentTag: any
+  }
+}
+
+const state = reactive<IState>({
+  affixTags: [],
+  operaTagFlag: false,
+  hideTagBox: {
+    left: 0,
+    top: 0
+  },
+  // 记录当前右键的是哪个 tag
+  saveCurrentTag: {
+    currentIndex: -1,
+    currentTag: null
+  }
+})
+
+/** 当前的 tag 是否可以操作 */
+const disabledFlag = computed((): boolean => {
+  let flag = false
+  if (
+    state.saveCurrentTag.currentIndex === 0 ||
+    state.saveCurrentTag.currentIndex === 1
+  )
+    flag = true
+  return flag
+})
+
+const tagsArray = computed(() => {
+  return store.state.tagsView.tagsArray
+})
+
+const sideBarList = computed(() => {
+  return store.state.user.sideBarList
+})
+
+onMounted(() => {
+  initTags()
+  insertTags()
+})
+/** 初始化 tags */
+const initTags = () => {
+  const routes = sideBarList.value
+  const affixTags = filterAffixTags(routes)
+  store.commit(
+    `tagsView/${TAGS_VIEW_MUTATIONS_TYPES.MUT_INIT_TAGS}`,
+    affixTags
+  )
+}
+/** 初始化的时候取出 固定的tags */
+const filterAffixTags = (routes: RouteRecordRaw[]) => {
+  let tags = []
+  tags = routes.filter(item => {
+    if (item.meta?.affix) {
+      return {
+        fullPath: item.path,
+        meta: item.meta,
+        name: item.name
+      }
+    }
+  })
+  return tags
+}
+/** 增加 tags */
+const insertTags = () => {
+  const currentTag = {
+    fullPath: route.fullPath,
+    meta: route.meta,
+    name: route.name
+  }
+  store.commit(
+    `tagsView/${TAGS_VIEW_MUTATIONS_TYPES.MUT_INSERT_TAGS}`,
+    currentTag
+  )
+}
+/** 用于高亮当前的tags */
+const is_active = (tag: string) => {
+  return tag === route.meta.title
+}
+/** 用于设置 不显示关闭按钮 affix 存在 说明不能被关闭 */
+const is_closable = (tag: RouteRecordRaw) => {
+  if (tag.meta?.affix) return false
+  return true
+}
+/** 点击关闭按钮 */
+const handleClose = (tag: any) => {
+  const getIndex = tagsArray.value.indexOf(tag)
+  if (route.fullPath === tag.fullPath) {
+    handleClick(tagsArray.value[getIndex - 1])
+  }
+  tagsArray.value.splice(getIndex, 1)
+}
+/** 点击 tags 跳转 */
+const handleClick = (tag: any) => {
+  router.push({
+    name: tag.name
+  })
+}
+/** 鼠标右键菜单 */
+const tagContextmenu = (e: Event, tag: any, index: number) => {
+  // 1.获取 tag-container-box html元素
+  const getTagBoxDom = document.querySelector(
+    '.tag-container-box'
+  ) as HTMLElement
+  // 2.将伪数组变成真实的数组
+  const getRealArr = Array.prototype.slice.call(getTagBoxDom.children)
+  // 3.tag 的操作菜单需要left的 总长度
+  let getAllWidth = 0
+  getRealArr.forEach((item, Iindex) => {
+    // 4.如果当前鼠标右键的元素索引小于其他元素，说明右边的元素长度不考虑
+    if (Iindex >= index) return
+    // 5.计算每个元素的 宽度 并且 + margin-right的5个像素点
+    getAllWidth += item.offsetWidth + 5
+  })
+  state.hideTagBox.left = 20 + getAllWidth + 'px'
+  state.hideTagBox.top = 40 + 'px'
+  state.operaTagFlag = true
+  state.saveCurrentTag.currentIndex = index
+  state.saveCurrentTag.currentTag = tag
+}
+/** 关闭当前 */
+const closeNow = () => {
+  const { currentIndex, currentTag } = state.saveCurrentTag
+  if (currentIndex === 0 || currentIndex === 1) return
+  handleClose(currentTag)
+}
+/** 关闭其他 */
+const closeOther = () => {
+  const { currentIndex, currentTag } = state.saveCurrentTag
+  tagsArray.value.forEach((item, index) => {
+    if (index === 0 || index === 1 || index === currentIndex) return
+    tagsArray.value.splice(index, 1)
+  })
+  // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
+  if (!is_active(currentTag.meta.title)) handleClick(currentTag)
+}
+/** 关闭右侧 */
+const closeRight = () => {
+  const { currentIndex, currentTag } = state.saveCurrentTag
+  tagsArray.value.forEach((item, index) => {
+    if (index > currentIndex) tagsArray.value.splice(index, 1)
+  })
+  // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
+  if (!is_active(currentTag.meta.title)) handleClick(currentTag)
+}
+/** 全部关闭 */
+const closeAll = () => {
+  tagsArray.value.splice(2)
+  router.push('/')
+}
+/** 关闭 可以 tag 的操作菜单 */
+const closeTagOperation = () => {
+  state.operaTagFlag = false
+}
+
+watch(
+  () => route.path,
+  () => {
+    insertTags()
+  }
+)
+watch(
+  () => state.operaTagFlag,
+  flag => {
+    // 每次只要 开启 就全局监听 click 事件，用来关闭
+    if (flag) document.body.addEventListener('click', closeTagOperation)
+    else document.body.removeEventListener('click', closeTagOperation)
+  }
+)
+</script>
+
+<script lang="ts">
+export default {
+  name: 'TagsView'
 }
 </script>
 

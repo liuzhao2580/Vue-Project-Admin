@@ -1,13 +1,13 @@
 <template>
   <div class="dashboard-box">
     <!-- 卡片 -->
-    <card />
+    <!-- <CardCom /> -->
     <!-- Echarts 图表 -->
     <!-- <EchartsComponents :EchartsData="EchartsData" v-loading="EchartLoading" /> -->
     <el-row :gutter="20">
       <!-- todo-list -->
       <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
-        <todo-list />
+        <TodoList />
       </el-col>
     </el-row>
   </div>
@@ -17,8 +17,8 @@
 import { onMounted, ref } from 'vue'
 import { dashboardEcharts_Api } from '@/api/modules/dashboard'
 // import EchartsComponents from './components/Echarts/index.vue'
-import Card from './components/Card/index.vue'
-import todoList from './components/TodoList/index.vue'
+// import CardCom from './components/CardCom/index.vue'
+import TodoList from './components/TodoList/index.vue'
 
 /** Echarts 组件加载样式 */
 const EchartLoading = ref<boolean>(true)
