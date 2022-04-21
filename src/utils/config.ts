@@ -1,5 +1,5 @@
 /** 深拷贝 */
-export const deepClone = (obj: object) => {
+export const deepClone = <T extends object>(obj: T): T => {
   const result: any =
     Object.prototype.toString.call(obj) === '[object Object]' ? {} : []
   for (const key in obj) {
