@@ -4,10 +4,10 @@ import 'element-plus/dist/index.css' // 基于断点的隐藏类 Element 额外�
 import App from './App.vue'
 import router from './router'
 import { store, key } from './store'
-import mockXHR from '@/mock/index'
+import mockXHR from '@/mock'
 
 import '@/styles/theme.scss' // 换肤功能
-// import '@/permission' // 权限验证
+import '@/permission' // 权限验证
 import '@/styles/index.scss' // 公共的样式
 
 import './icons' // 导入 icon 字体
