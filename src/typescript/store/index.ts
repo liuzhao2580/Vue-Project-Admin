@@ -25,5 +25,5 @@ export class StoreUserModel {
 /** tagsView */
 export class StoreTagsViewModel {
   /** 存放 tags 的数组 */
-  tagsArray: Array<string> = []
+  tagsArray: RouteRecordRaw[] = []
 }
