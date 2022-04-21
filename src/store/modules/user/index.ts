@@ -9,6 +9,7 @@ import { asyncRoutes, resetRouter, insertRouter } from '@/router'
 import { IUserBaseInfo } from '@/typescript/shared/interface/user-interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { RouteRecordRaw } from 'vue-router'
+import { ActionContext } from 'vuex'
 // 定义一个接受的参数，避免 在请求拦截的时候出现 Message undefined 报错问题
 const _Message = ElMessage
 /**
@@ -72,7 +73,7 @@ const mutations = {
 const actions = {
   // 用户登陆 获取用户信息 路由信息
   [USER_ACTIONS_TYPES.ACT_FETCH_USERINFO](
-    { commit }: any,
+    { commit }: ActionContext<StoreUserModel, any>,
     data: IUserBaseInfo
   ) {
     return new Promise<void>((resolve, reject) => {
@@ -89,7 +90,7 @@ const actions = {
     })
   },
   // 页面刷新 重新获取用户信息, 路由信息
-  [USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID]({ commit }: any) {
+  [USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID]({ commit }: ActionContext<StoreUserModel, any>) {
     return new Promise(async resolve => {
       const userId = getCookie('userId')
       // 获取用户的基本信息
@@ -130,7 +131,6 @@ const getters = {
   sideBarList: (state: StoreUserModel) => state.sideBarList
 }
 export default {
-  namespaced: true, // 之后在不同页面中引入getter、actions、mutations时，需要加上所属的模块名
   state,
   mutations,
   actions,
