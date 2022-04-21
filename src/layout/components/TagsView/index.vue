@@ -102,7 +102,7 @@ const initTags = () => {
   const routes = sideBarList.value
   const affixTags = filterAffixTags(routes)
   store.commit(
-    `tagsView/${TAGS_VIEW_MUTATIONS_TYPES.MUT_INIT_TAGS}`,
+    TAGS_VIEW_MUTATIONS_TYPES.MUT_INIT_TAGS,
     affixTags
   )
 }
@@ -128,7 +128,7 @@ const insertTags = () => {
     name: route.name
   }
   store.commit(
-    `tagsView/${TAGS_VIEW_MUTATIONS_TYPES.MUT_INSERT_TAGS}`,
+    TAGS_VIEW_MUTATIONS_TYPES.MUT_INSERT_TAGS,
     currentTag
   )
 }

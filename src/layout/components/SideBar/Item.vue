@@ -1,23 +1,20 @@
-<script>
+<template>
+  <SvgIcon :icon-class="icon" />
+  <span>{{ title }}</span>
+</template>
+
+<script lang="ts" setup>
+import SvgIcon from '@/components/SvgIcon/index.vue'
+interface IProps {
+  icon: string
+  title: string
+}
+
+defineProps<IProps>()
+</script>
+
+<script lang="ts">
 export default {
-  name: 'MenuItem',
-  functional: true,
-  props: {
-    icon: {
-      type: String,
-      default: ''
-    },
-    title: {
-      type: String,
-      default: ''
-    }
-  }
-  // render(h, context) {
-  //   const { icon, title } = context.props
-  //   const vnode = []
-  //   vnode.push(<SvgIcon icon-class={icon} />)
-  //   vnode.push(<span slot="title">{title}</span>)
-  //   return vnode
-  // }
+  name: 'MenuItem'
 }
 </script>
