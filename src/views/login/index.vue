@@ -86,11 +86,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
           })
           try {
             await store.dispatch(
-              `user/${USER_ACTIONS_TYPES.ACT_FETCH_USERINFO}`,
+              USER_ACTIONS_TYPES.ACT_FETCH_USERINFO,
               result.data
             )
             await store.dispatch(
-              `user/${USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID}`,
+              USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID,
               true
             )
             router.push({

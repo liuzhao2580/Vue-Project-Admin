@@ -4,7 +4,6 @@
 </template>
 
 <script lang="ts" setup>
-import SvgIcon from '@/components/SvgIcon/index.vue'
 interface IProps {
   icon: string
   title: string

@@ -10,13 +10,13 @@
       </el-menu-item>
     </template>
     <!-- 当级路由下存在多级路由 -->
-    <el-submenu
+    <el-sub-menu
       v-else
       :index="resolvePath(item.path)"
       popper-append-to-body
       :class="{ MenuitemClass: side_status && !isMoreChild }"
     >
-      <template #title>
+      <template #default v-if="!item.children">
         <MenuItem
           :icon="onlyOneChild.meta.icon"
           :title="onlyOneChild.meta.title"
@@ -32,7 +32,7 @@
           class="More-Sildbar"
         />
       </template>
-    </el-submenu>
+    </el-sub-menu>
   </div>
 </template>
 
@@ -48,7 +48,7 @@ const store = useStore()
 interface IProps {
   item: RouteRecordRaw
   basePath: string
-  isMoreChild: boolean
+  isMoreChild?: boolean
 }
 
 const props = withDefaults(defineProps<IProps>(), {

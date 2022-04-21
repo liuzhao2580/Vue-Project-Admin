@@ -17,7 +17,7 @@
             >文档</el-dropdown-item
           >
           <el-dropdown-item command="d">
-            <svg-icon iconClass="github" /> GitHub
+            <SvgIcon iconClass="github" /> GitHub
           </el-dropdown-item>
           <el-dropdown-item command="e" icon="el-icon-switch-button" divided
             >退出登录</el-dropdown-item

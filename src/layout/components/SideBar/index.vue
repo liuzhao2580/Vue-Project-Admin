@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import SidebarItem from './SidebarItem.vue'
+import SidebarItem from './components/SidebarItem.vue'
 import { useStore } from '@/store'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
