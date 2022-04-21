@@ -93,9 +93,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
               `user/${USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID}`,
               true
             )
-            if(false) {
-              router.push({ path: '/' }).catch(error => console.log(error, 1111))
-            }
+            router.push({
+              path: RouterPath.DASHBOARD
+            })
           } catch (error) {
             console.log(error, 111)
           }
@@ -117,7 +117,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 </script>
 
 <script lang="ts">
-import { RouterName } from '@/router/RouteConst'
+import { RouterName, RouterPath } from '@/router/RouteConst'
 export default {
   name: RouterName.LOGIN
 }
