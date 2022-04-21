@@ -132,10 +132,19 @@ const router = createRouter({
   routes: constantRoutes
 })
 
-// 重置路由
+/** 重置路由 只有登录和404页面 */
 export const resetRouter = () => {
-  // const newRouter = router
-  // router.matcher = newRouter.matcher
+  const newRouter = asyncRoutes
+  newRouter.forEach(route => {
+    if(route.name) router.removeRoute(route.name)
+  })
+}
+
+/** 添加路由作为新的路由 */
+export const insertRouter = (routes: RouteRecordRaw) => {
+  resetRouter()
+  console.log(routes)
+  router.addRoute(routes)
 }
 
 export default router
