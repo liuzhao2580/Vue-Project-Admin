@@ -3,7 +3,7 @@
     <!-- 卡片 -->
     <!-- <CardCom /> -->
     <!-- Echarts 图表 -->
-    <!-- <EchartsComponents :EchartsData="EchartsData" v-loading="EchartLoading" /> -->
+    <EchartsCom :echartsData="echartsData" />
     <el-row :gutter="20">
       <!-- todo-list -->
       <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
@@ -14,12 +14,14 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { dashboardEchartsApi } from '@/api/modules/dashboard'
-// import EchartsComponents from './components/Echarts/index.vue'
+import EchartsCom from '@/components/EchartsCom/index.vue'
 // import CardCom from './components/CardCom/index.vue'
 import TodoList from './components/TodoList/index.vue'
+import { ResultCodeEnum } from '@/typescript/shared/enum'
 
+const echartsData = ref()
 
 onMounted(() => {
   init()
@@ -29,6 +31,24 @@ const init = async () => {
   try {
     const result = await dashboardEchartsApi()
     console.log(result, 'result')
+    if (result.code === ResultCodeEnum.success) {
+      echartsData.value = {
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line',
+            smooth: true
+          }
+        ]
+      }
+    }
   } catch (error) {
     console.log(error)
   }

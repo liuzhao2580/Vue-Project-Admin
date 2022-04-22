@@ -1,15 +1,15 @@
-import { onActivated, onDeactivated, onMounted, onUnmounted, ref } from 'vue'
+import { onActivated, onDeactivated, onMounted, onUnmounted, shallowRef } from 'vue'
 import type { ECharts } from 'echarts'
-import './Echarts-theme'
 
 export default () => {
-  const EchartsDom = ref<ECharts>()
+  /** Echarts 的实例 */
+  const EchartsInstances = shallowRef<ECharts>()
 
   onMounted(() => {
     $_init_resize()
   })
   const handleResize = () => {
-    if (EchartsDom.value) EchartsDom.value.resize()
+    if (EchartsInstances.value) EchartsInstances.value.resize()
   }
   // 监听屏幕变化
   const $_init_resize = () => {
@@ -20,7 +20,6 @@ export default () => {
     window.removeEventListener('resize', handleResize)
   }
   onActivated(() => {
-    handleResize()
     $_init_resize()
   })
 
@@ -31,10 +30,10 @@ export default () => {
   onUnmounted(() => {
     $_destroy_resize()
     // 销毁Echarts
-    EchartsDom.value?.dispose()
+    EchartsInstances.value?.dispose()
   })
 
   return {
-    EchartsDom
+    EchartsInstances
   }
 }

@@ -1,73 +1,73 @@
 <template>
-  <div ref="echartsBar" :style="{ height }"></div>
+  <div :style="{ height }" :id="echartsId"></div>
 </template>
 
 <script lang="ts" setup>
-import { nextTick, watch, withDefaults, ref, onMounted } from 'vue'
-import Echarts, { LegendComponentOption } from 'echarts'
+import { watch, withDefaults, ref, onMounted, nextTick } from 'vue'
+import { init } from 'echarts'
+import type { EChartsOption } from 'echarts'
 import EchartMixins from './mixins'
 
 interface IProps {
   height?: string
-  echartsData: LegendComponentOption[]
+  echartsData: EChartsOption | object
   echartsTitle?: string
 }
 const props = withDefaults(defineProps<IProps>(), {
   height: '400px',
-  echartsTitle: '统计-柱形图'
+  echartsTitle: 'Echarts',
+  echartsData: () => {
+    return {}
+  }
 })
-const { EchartsDom } = EchartMixins()
+const { EchartsInstances } = EchartMixins()
 
-const echartsBar = ref<HTMLDivElement>()
+const echartsId = `echarts-${
+  new Date().getTime() + 10000 * Math.floor(Math.random())
+}`
 
-onMounted(()=> {
+const EchartsDom = ref<HTMLElement>()
+
+onMounted(() => {
+  EchartsDom.value = document.querySelector(`#${echartsId}`) as HTMLElement
   nextTick(() => {
-    init_Bar()
+    initEcharts()
   })
 })
 
-const init_Bar = () => {
-  EchartsDom.value = Echarts.init(echartsBar.value as HTMLDivElement, 'westeros')
-  EchartsDom.value.setOption({
-    title: {
-      text: props.echartsTitle
-    },
-    legend: {
-      data: props.echartsData.map(item => {
-        return item.name
-      })
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow'
-      }
-    },
-    toolbox: {
-      show: true,
-      orient: 'vertical',
-      left: 'right',
-      top: 'center'
-    },
+/** 初始化 Echarts */
+const initEcharts = () => {
+  if (!EchartsInstances.value) {
+    EchartsInstances.value = init(EchartsDom.value as HTMLElement)
+  }
+
+  EchartsInstances.value.setOption({
     xAxis: {
-      data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     },
-    yAxis: {},
-    series: props.echartsData.map(item => {
-      return item
-    })
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar'
+      }
+    ]
   })
 }
 
-watch(props.echartsData, () => {
-  EchartsDom.value?.clear()
-  init_Bar()
+watch(props, () => {
+  EchartsInstances.value?.clear()
+  initEcharts()
+  console.log(1234)
 })
 </script>
 
-<script>
+<script lang="ts">
 export default {
-  name: 'BarCom'
+  name: 'EchartsCom'
 }
 </script>
 
