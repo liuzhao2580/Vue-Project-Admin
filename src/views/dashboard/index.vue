@@ -14,15 +14,12 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { dashboardEcharts_Api } from '@/api/modules/dashboard'
+import { onMounted } from 'vue'
+import { dashboardEchartsApi } from '@/api/modules/dashboard'
 // import EchartsComponents from './components/Echarts/index.vue'
 // import CardCom from './components/CardCom/index.vue'
 import TodoList from './components/TodoList/index.vue'
 
-/** Echarts 组件加载样式 */
-const EchartLoading = ref<boolean>(true)
-const EchartsData = ref({})
 
 onMounted(() => {
   init()
@@ -30,11 +27,9 @@ onMounted(() => {
 // 初始化
 const init = async () => {
   try {
-    const result = await dashboardEcharts_Api()
-    EchartLoading.value = false
-    EchartsData.value = result.data
+    const result = await dashboardEchartsApi()
+    console.log(result, 'result')
   } catch (error) {
-    EchartLoading.value = false
     console.log(error)
   }
 }

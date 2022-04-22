@@ -2,8 +2,8 @@
 import { ResultTypeEnum } from '@/typescript/shared/enum'
 import Mock from 'mockjs'
 import user from './modules/user'
-// import { EchartsData } from './modules/dashboard'
-const mocks = [...user]
+import dashboard from './modules/dashboard'
+const mocks = [...user, ...dashboard]
 
 export default function mockXHR() {
   const baseURL = process.env.VUE_APP_BASE_API
@@ -11,7 +11,11 @@ export default function mockXHR() {
     timeout: 500 // 设置延迟响应，模拟向后端请求数据
   })
   for (const mock of mocks) {
-    Mock.mock(new RegExp(`${baseURL}${mock.url}`), mock.type || ResultTypeEnum.GET, mock.response)
+    Mock.mock(
+      new RegExp(`${baseURL}${mock.url}`),
+      mock.type || ResultTypeEnum.GET,
+      mock.response
+    )
   }
   // // 登录
   // Mock.mock(`${baseURL}/login`, 'post', user.userLogin)

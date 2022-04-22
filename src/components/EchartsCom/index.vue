@@ -9,7 +9,7 @@ import EchartMixins from './mixins'
 
 interface IProps {
   height?: string
-  echartsBarData: LegendComponentOption[]
+  echartsData: LegendComponentOption[]
   echartsTitle?: string
 }
 const props = withDefaults(defineProps<IProps>(), {
@@ -33,7 +33,7 @@ const init_Bar = () => {
       text: props.echartsTitle
     },
     legend: {
-      data: props.echartsBarData.map(item => {
+      data: props.echartsData.map(item => {
         return item.name
       })
     },
@@ -53,13 +53,13 @@ const init_Bar = () => {
       data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     },
     yAxis: {},
-    series: props.echartsBarData.map(item => {
+    series: props.echartsData.map(item => {
       return item
     })
   })
 }
 
-watch(props.echartsBarData, () => {
+watch(props.echartsData, () => {
   EchartsDom.value?.clear()
   init_Bar()
 })
