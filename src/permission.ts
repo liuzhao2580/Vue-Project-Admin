@@ -1,12 +1,14 @@
-import router from '@/router'
+import router, { insertRouter } from '@/router'
 import Nprogress from 'nprogress'
 import { getCookie } from '@/utils/cookies'
 import 'nprogress/nprogress.css' // 必须要的样式
 import setPageTitle from '@/utils/setPageTitle'
 import { store } from '@/store'
 import { USER_ACTIONS_TYPES } from './store/modules/user/types'
+import { RouterPath } from './router/RouteConst'
+import { RouteLocationNormalized } from 'vue-router'
 
-router.beforeEach(async (to: any | string, from: any, next: any) => {
+router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: Function) => {
   const token = getCookie('token')
   // 用于设置 浏览器的 title 显示
   document.title = setPageTitle(to.meta.title)
@@ -18,10 +20,9 @@ router.beforeEach(async (to: any | string, from: any, next: any) => {
      * 在退出登录的时候会清除 token
      */
     const Need_refresh = store.state.user.Need_refresh
-    if (to.path === '/login') {
-      next(false)
+    if (to.path === RouterPath.LOGIN) {
       Nprogress.done()
-      return
+      return false
     }
     /**
      * 说明是正常的路由页面
@@ -30,10 +31,12 @@ router.beforeEach(async (to: any | string, from: any, next: any) => {
      */
     if (Need_refresh) {
       try {
-        const routesList = await store.dispatch(USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID)
-        router.addRoute(routesList)
-        next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
+        const routesList = await store.dispatch(
+          USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID
+        )
+        insertRouter(routesList)
         Nprogress.done()
+        next(to)
       } catch (error) {
         console.log(error)
       }
@@ -42,11 +45,11 @@ router.beforeEach(async (to: any | string, from: any, next: any) => {
       Nprogress.done()
     }
   } else {
-    if (to.path === '/login') {
+    if (to.path === RouterPath.LOGIN) {
       next(true)
     } else {
       next({
-        path: '/login'
+        path: RouterPath.LOGIN
       })
     }
     Nprogress.done()

@@ -16,7 +16,6 @@ import '@/directives/permission'
 
 import globalComponent from '@/components/index'
 
-console.log(globalComponent, 'globalComponent')
 
 mockXHR() // 导入 mock
 
@@ -24,6 +23,7 @@ const app = createApp(App)
 
 app.use(store, key).use(router).use(ElementPlus).mount('#app')
 
+// 注册全局的组件
 for (const componentItme in globalComponent) {
   app.component(componentItme, globalComponent[componentItme])
 }

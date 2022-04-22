@@ -143,7 +143,6 @@ export const resetRouter = () => {
 /** 添加路由作为新的路由 */
 export const insertRouter = (routes: RouteRecordRaw) => {
   resetRouter()
-  console.log(routes)
   router.addRoute(routes)
 }
 

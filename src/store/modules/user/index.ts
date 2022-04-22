@@ -95,6 +95,7 @@ const actions = {
       const userId = getCookie('userId')
       // 获取用户的基本信息
       const result = await userInfoApi(userId)
+      console.log(result, 'result')
       if (result.code === ResultCodeEnum.invalidToken) {
         _Message.error({
           message: 'token 无效'
