@@ -21,15 +21,3 @@ $subMenuBg: #1f2d3d; // 一级菜单下二级菜单的背景色
 $subMenuHover: #001528; // 二级菜单的 hover 背景色
 
 $sideBarWidth: 210px;
-
-// scss 导出颜色的语法
-:export {
-  menuText: $menuText;
-  menuActiveText: $menuActiveText;
-  subMenuActiveText: $subMenuActiveText;
-  menuBg: $menuBg;
-  menuHover: $menuHover;
-  subMenuBg: $subMenuBg;
-  subMenuHover: $subMenuHover;
-  sideBarWidth: $sideBarWidth;
-}

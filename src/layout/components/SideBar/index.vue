@@ -56,7 +56,7 @@ const sideBarList = computed(() => {
   return store.state.user.sideBarList
 })
 const variables = computed(() => {
-  return require('@/styles/variables.scss')
+  return require('@/styles/variables.module.scss')
 })
 </script>
 
