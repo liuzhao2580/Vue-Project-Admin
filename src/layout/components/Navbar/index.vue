@@ -1,8 +1,8 @@
 <template>
   <div class="Navbar-box">
     <div class="Navbar-Breadcrumb">
-      <div class="side-btn hidden-xs-only" @click="side_Btn">
-        <i class="el-icon-s-operation"></i>
+      <div class="side-btn hidden-xs-only" @click="sideBtn">
+        <el-icon><Operation /></el-icon>
       </div>
       <Breadcrumb />
       <Personal />
@@ -17,11 +17,12 @@ import Breadcrumb from '../Breadcrumb/index.vue'
 import TagsView from '../TagsView/index.vue'
 import Personal from '../Personal/index.vue'
 import { APP_MUTATIONS_TYPES } from '@/store/modules/app/types'
+import { Operation } from '@element-plus/icons-vue'
 
 const store = useStore()
 // 侧边栏按钮点击事件
-const side_Btn = () => {
-  store.dispatch(`app/${APP_MUTATIONS_TYPES.MUT_CHANGE_SIDESTATUS}`)
+const sideBtn = () => {
+  store.commit(APP_MUTATIONS_TYPES.MUT_CHANGE_SIDESTATUS)
 }
 </script>
 
