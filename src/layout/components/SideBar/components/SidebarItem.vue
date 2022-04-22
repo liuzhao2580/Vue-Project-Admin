@@ -1,38 +1,28 @@
-<template>
-  <div v-if="!item.meta.hidden" class="SidebarItem-box">
-    <!-- 首先判断 当级路由下不存在多级路由 -->
-    <el-menu-item
-      v-if="checkMoreRouter(item)"
-      :index="item.path"
-    >
-      <MenuTitle
-        :icon="item.meta.icon"
-        :title="item.meta.title"
+<template v-if="!item.meta.hidden">
+  <!-- 首先判断 当级路由下不存在多级路由 -->
+  <el-menu-item v-if="checkMoreRouter(item)" :index="item.path">
+    <SvgIcon :iconClass="item.meta.icon" />
+    <span class="menu-title">{{ item.meta.title }}</span>
+  </el-menu-item>
+  <!-- 当级路由下存在多级路由 -->
+  <el-sub-menu
+    v-else
+    :index="item.path"
+    :class="{ MenuitemClass: side_status && !isMoreChild }"
+  >
+    <template #title>
+      <SvgIcon :iconClass="item.meta.icon" />
+      <span class="menu-title">{{ item.meta.title }}</span>
+    </template>
+    <template v-if="item.children">
+      <SidebarItem
+        v-for="child in item.children"
+        :key="child.path"
+        :item="child"
+        :isMoreChild="true"
       />
-    </el-menu-item>
-    <!-- 当级路由下存在多级路由 -->
-    <el-sub-menu
-      v-else
-      :index="item.path"
-      :class="{ MenuitemClass: side_status && !isMoreChild }"
-    >
-      <template #title>
-        <MenuTitle
-          :icon="item.meta.icon"
-          :title="item.meta.title"
-        />
-      </template>
-      <template v-if="item.children">
-        <SidebarItem
-          v-for="child in item.children"
-          :key="child.path"
-          :item="child"
-          :isMoreChild="true"
-          class="More-Sildbar"
-        />
-      </template>
-    </el-sub-menu>
-  </div>
+    </template>
+  </el-sub-menu>
 </template>
 
 <script lang="ts" setup>
@@ -40,7 +30,6 @@ import { useStore } from '@/store'
 import { computed } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 // 引入 path 模块 用于拼接url地址
-import MenuTitle from './MenuTitle.vue'
 
 const store = useStore()
 
@@ -73,4 +62,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.menu-title {
+  margin-left: 10px;
+}
+</style>

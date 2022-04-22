@@ -1,7 +1,7 @@
 <template>
   <div class="breadcrumb-box">
     <el-breadcrumb separator-class="el-icon-arrow-right" class="hidden-xs-only">
-      <el-breadcrumb-item :to="{ path: '/' }">{{
+      <el-breadcrumb-item :to="{ path: RouterPath.DASHBOARD }">{{
         breadcrumbTitle
       }}</el-breadcrumb-item>
       <!--面包屑的切换动画 -->
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { RouterConfig } from '@/router/RouteConst'
+import { RouterConfig, RouterPath } from '@/router/RouteConst'
 import { computed, ref, watchEffect } from 'vue'
 import { RouteLocationMatched, RouteRecordRaw, useRoute } from 'vue-router'
 const defaultConfig = require('@/setting')
