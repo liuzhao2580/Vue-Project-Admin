@@ -15,14 +15,13 @@
       :text-color="variables.menuText"
       :active-text-color="variables.menuActiveText"
       :collapse-transition="false"
-      :router="true"
-      :unique-opened="true"
+      router
+      unique-opened
     >
       <SidebarItem
         v-for="(route, index) in sideBarList"
         :key="index"
         :item="route"
-        :base-path="route.path"
       />
     </el-menu>
   </el-scrollbar>

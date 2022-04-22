@@ -14,6 +14,6 @@ defineProps<IProps>()
 
 <script lang="ts">
 export default {
-  name: 'MenuItem'
+  name: 'MenuTitle'
 }
 </script>
