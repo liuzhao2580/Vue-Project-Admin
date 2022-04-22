@@ -1,27 +1,21 @@
 <template>
   <div class="Personal-box">
-    <el-dropdown trigger="click" @command="handleCommand">
+    <el-dropdown @command="handleCommand">
       <span style="display: inline-block">
         <el-avatar :src="avatar"></el-avatar>
-        <i class="el-icon-arrow-down el-icon--right"></i>
+        <el-icon class="el-icon--right"><ArrowDown /></el-icon>
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="a" icon="el-icon-user-solid"
-            >个人中心</el-dropdown-item
+          <el-dropdown-item
+            v-for="(item, index) in dropdownList"
+            :key="index"
+            :command="item.command"
+            :divided="item.dividedFlag"
+            :icon="item.icon"
           >
-          <el-dropdown-item command="b" icon="el-icon-s-home"
-            >首页</el-dropdown-item
-          >
-          <el-dropdown-item command="c" icon="el-icon-document"
-            >文档</el-dropdown-item
-          >
-          <el-dropdown-item command="d">
-            <SvgIcon iconClass="github" /> GitHub
+            {{ item.title }}
           </el-dropdown-item>
-          <el-dropdown-item command="e" icon="el-icon-switch-button" divided
-            >退出登录</el-dropdown-item
-          >
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -29,19 +23,63 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { Component, computed, shallowRef } from 'vue'
 import { useRouter } from 'vue-router'
 import { removeCookie } from '@/utils/cookies'
 import { resetRouter } from '@/router'
 import { useStore } from '@/store'
 import { RouterPath } from '@/router/RouteConst'
+import {
+  User,
+  HomeFilled,
+  Document,
+  SwitchButton,
+  Guide,
+  ArrowDown
+} from '@element-plus/icons-vue'
 
 const store = useStore()
 
 const router = useRouter()
 
+interface IRef {
+  command: string
+  title: string
+  icon: Component
+  dividedFlag?: boolean
+}
+
+const dropdownList = shallowRef<IRef[]>([
+  {
+    command: RouterPath.PERSONAL,
+    title: '个人中心',
+    icon: User
+  },
+  {
+    command: RouterPath.DASHBOARD,
+    title: '首页',
+    icon: HomeFilled
+  },
+  {
+    command: RouterPath.DOCUMENTATION,
+    title: '文档',
+    icon: Document
+  },
+  {
+    command: 'https://github.com/liuzhao2580/Vue_project',
+    title: 'GitHub',
+    icon: Guide
+  },
+  {
+    command: RouterPath.LOGIN,
+    title: '退出登录',
+    icon: SwitchButton,
+    dividedFlag: true
+  }
+])
+
 const avatar = computed(() => {
-  return store.getters['user/avatar']
+  return store.state.user.avatar
 })
 // 登出
 const login_Out = () => {
@@ -52,22 +90,10 @@ const login_Out = () => {
   router.push({ path: RouterPath.LOGIN })
 }
 const handleCommand = (command: string) => {
-  switch (command) {
-    case 'a':
-      router.push(RouterPath.PERSONAL)
-      break
-    case 'b':
-      router.push(RouterPath.DASHBOARD)
-      break
-    case 'c':
-      router.push(RouterPath.DOCUMENTATION)
-      break
-    case 'd':
-      window.open('https://github.com/liuzhao2580/Vue_project')
-      break
-    case 'e':
-      login_Out()
-      break
+  if (command === RouterPath.LOGIN) {
+    login_Out()
+  } else if (/http(s?):/.test(command)) {
+    window.open(command)
   }
 }
 </script>

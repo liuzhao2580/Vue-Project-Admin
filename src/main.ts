@@ -16,7 +16,6 @@ import '@/directives/permission'
 
 import globalComponent from '@/components/index'
 
-
 mockXHR() // 导入 mock
 
 const app = createApp(App)
