@@ -1914,11 +1914,6 @@
     semver "^7.3.4"
     strip-ansi "^6.0.0"
 
-"@vue/compat@^3.2.33":
-  version "3.2.33"
-  resolved "https://repo.huaweicloud.com/repository/npm/@vue/compat/-/compat-3.2.33.tgz#d7080bf24247e730fe9c33e9782ae4fba66ec347"
-  integrity sha512-8g2W2Na+vEKq9dhj/OkfesgSdr8kXx7ehC1tPCngGq1MD/Q6Q0ydnpcD0sNaGFP4R/8Zccp0LIpMSnj8qKGXBQ==
-
 "@vue/compiler-core@3.2.33":
   version "3.2.33"
   resolved "https://repo.huaweicloud.com/repository/npm/@vue/compiler-core/-/compiler-core-3.2.33.tgz#e915d59cce85898f5c5cfebe4c09e539278c3d59"
@@ -6015,7 +6010,12 @@ lodash@^4.0.0, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.2
   resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.20.tgz?cache=0&sync_timestamp=1597336196663&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash%2Fdownload%2Flodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha1-tEqbYpe8tpjxxRo1RaKzs2jVnFI=
 
-lodash@^4.17.21, lodash@^4.2.0:
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://repo.huaweicloud.com/repository/npm/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
+lodash@^4.2.0:
   version "4.17.21"
   resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=
