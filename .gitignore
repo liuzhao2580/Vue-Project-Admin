@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-/dist
 /node_api/node_modules
 /test
 # local env files
