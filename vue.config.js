@@ -1,5 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 const CompressionPlugin = require('compression-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const { title } = require('./src/setting.ts')
 const path = require('path')
 
@@ -28,6 +29,23 @@ const productionPlugins = [
     threshold: 10240 // 只处理比这个值大的资源。按字节计算 设置的是 10kb
   })
 ]
+// 只要不是开发环境的配置
+const minimizer = [
+  new TerserPlugin({
+    test: /\.js(\?.*)$/i,
+    parallel: true,
+    minify: TerserPlugin.uglifyJsMinify,
+    terserOptions: {
+      format: {
+        comments: true // https://webpack.docschina.org/plugins/terser-webpack-plugin/#remove-comments 如果要在构建时去除注释，请使用以下配置
+      },
+      compress: {
+        drop_console: true
+      }
+    },
+    extractComments: false
+  })
+]
 // 设置 项目名称
 const name = title
 // 设置项目的端口号
@@ -35,12 +53,15 @@ const port = 9527
 // 设置公共的目录
 let publicPath = '/'
 // 说明是需要打包到 Pages 上进行预览
-if(process.env.NODE_ENV === 'pages') {
+if (process.env.NODE_ENV === 'pages') {
   publicPath = '/Vue-Project-Admin/'
 }
+
+/** 判断是否不是开发环境 */
+const isNotDev = process.env.NODE_ENV !== 'development'
 module.exports = defineConfig({
   publicPath,
-  outputDir: process.env.NODE_ENV === 'production' ? 'dist' : 'test',
+  outputDir: 'dist',
   // lintOnSave: false,
   // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建
   productionSourceMap: false,
@@ -66,16 +87,18 @@ module.exports = defineConfig({
 
   // webpack 简单配置 如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中。
   configureWebpack: {
-    // externals: process.env.NODE_ENV === 'production' ? externalsConfig : {},
+    // externals: process.env.NODE_ENV !== 'development' ? externalsConfig : {},
     name,
     resolve: {
       alias: {
-        '@': resolve('src'),
-        '@api': resolve('src/api/modules')
+        '@': resolve('src')
       },
       extensions: ['.tsx', '.ts', '.js', '.vue']
     },
-    plugins: process.env.NODE_ENV === 'production' ? productionPlugins : [],
+    plugins: isNotDev ? productionPlugins : [],
+    optimization: {
+      minimizer: isNotDev ? minimizer : []
+    },
     module: {
       rules: [
         // 全局导入 scss
