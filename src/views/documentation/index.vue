@@ -37,13 +37,13 @@ interface ICard {
 const cardList: ICard[] = [
   {
     iconClass: 'vue',
-    titleText: 'Vue',
-    srcURL: 'https://cn.vuejs.org/v2/guide/'
+    titleText: 'Vue3',
+    srcURL: 'https://v3.cn.vuejs.org/'
   },
   {
-    iconClass: 'element',
-    titleText: 'elementUI',
-    srcURL: 'https://element.eleme.cn/#/zh-CN/component/installation'
+    iconClass: 'element-plus',
+    titleText: 'element-plus',
+    srcURL: 'https://element-plus.gitee.io/zh-CN/'
   }
 ]
 // 跳转页面
