@@ -20,7 +20,7 @@ import { useStore } from '@/store'
 import { computed, ref } from 'vue'
 const store = useStore()
 const nickname = computed(() => {
-  return store.getters.nickname
+  return store.state.user.nickname
 })
 const form_account = ref({
   name: nickname,

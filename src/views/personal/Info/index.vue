@@ -14,13 +14,9 @@
         <i class="el-icon-star-on"></i>
         爱好
         <el-divider></el-divider>
-        <el-tag
-          v-for="item in items"
-          :key="item.label"
-          :type="item.type"
-          effect="dark"
-          >{{ item.label }}</el-tag
-        >
+        <el-tag v-for="tag in tags" :key="tag.name" :type="tag.type">{{
+          tag.name
+        }}</el-tag>
       </div>
       <div class="Skills">
         <i class="el-icon-s-order"></i>
@@ -36,15 +32,14 @@
 import { useStore } from '@/store'
 import UserImg from '@/components/UserImg/index.vue'
 import Progress from '@/components/Progress/index.vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
-const items = [
-  { type: '', label: '唱' },
-  { type: 'success', label: '跳' },
-  { type: 'info', label: 'rap' },
-  { type: 'danger', label: '篮球' },
-  { type: 'warning', label: 'music' }
-]
+const tags = ref([
+  { name: '唱', type: 'success' },
+  { name: '跳', type: 'info' },
+  { name: 'Rap', type: 'warning' },
+  { name: '篮球', type: 'danger' }
+])
 
 const store = useStore()
 
@@ -53,7 +48,7 @@ const store = useStore()
 // })
 
 const nickname = computed(() => {
-  return store.getters.user.nickname
+  return store.state.user.nickname
 })
 </script>
 

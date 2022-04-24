@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card">
-    <el-tabs value="active">
+    <el-tabs model-value="active">
       <el-tab-pane label="最近活跃" name="active">
         <active />
       </el-tab-pane>
