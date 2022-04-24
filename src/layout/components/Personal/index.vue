@@ -94,6 +94,8 @@ const handleCommand = (command: string) => {
     login_Out()
   } else if (/http(s?):/.test(command)) {
     window.open(command)
+  } else {
+    router.push({ path: command })
   }
 }
 </script>
