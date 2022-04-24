@@ -1,5 +1,4 @@
 const { defineConfig } = require('@vue/cli-service')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const { title } = require('./src/setting.ts')
 const path = require('path')
@@ -8,29 +7,21 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 // 配置 externals
-const externalsConfig = {
-  vue: 'Vue',
-  'vue-router': 'VueRouter',
-  vuex: 'Vuex',
-  'element-ui': 'ELEMENT',
-  echarts: 'echarts',
-  quill: 'Quill',
-  wangeditor: 'wangEditor',
-  axios: 'axios',
-  mockjs: 'Mock',
-  'mavon-editor': 'MavonEditor',
-  '@antv/x6': 'X6'
-}
+// const externalsConfig = {
+//   vue: 'Vue',
+//   'vue-router': 'VueRouter',
+//   vuex: 'Vuex',
+//   'element-ui': 'ELEMENT',
+//   echarts: 'echarts',
+//   quill: 'Quill',
+//   wangeditor: 'wangEditor',
+//   axios: 'axios',
+//   mockjs: 'Mock',
+//   'mavon-editor': 'MavonEditor',
+//   '@antv/x6': 'X6'
+// }
 // 配置生产的 plugin
 const productionPlugins = [
-  // 删除生产环境的 console
-  new UglifyJSPlugin({
-    uglifyOptions: {
-      compress: {
-        drop_console: true
-      }
-    }
-  }),
   // 开启 gzip
   new CompressionPlugin({
     test: /\.js$|\.ts$|\.html$|\.css/,
@@ -41,7 +32,14 @@ const productionPlugins = [
 const name = title
 // 设置项目的端口号
 const port = 9527
+// 设置公共的目录
+let publicPath = '/'
+// 说明是需要打包到 Pages 上进行预览
+if(process.env.NODE_ENV === 'pages') {
+  publicPath = '/Vue-Project-Admin/'
+}
 module.exports = defineConfig({
+  publicPath,
   outputDir: process.env.NODE_ENV === 'production' ? 'dist' : 'test',
   // lintOnSave: false,
   // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建
@@ -68,7 +66,7 @@ module.exports = defineConfig({
 
   // webpack 简单配置 如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中。
   configureWebpack: {
-    externals: process.env.NODE_ENV === 'production' ? externalsConfig : {},
+    // externals: process.env.NODE_ENV === 'production' ? externalsConfig : {},
     name,
     resolve: {
       alias: {
