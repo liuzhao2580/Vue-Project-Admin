@@ -1,5 +1,4 @@
 const { defineConfig } = require('@vue/cli-service')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const { title } = require('./src/setting.ts')
 const path = require('path')
@@ -7,30 +6,8 @@ const path = require('path')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
-// 配置 externals
-const externalsConfig = {
-  vue: 'Vue',
-  'vue-router': 'VueRouter',
-  vuex: 'Vuex',
-  'element-ui': 'ELEMENT',
-  echarts: 'echarts',
-  quill: 'Quill',
-  wangeditor: 'wangEditor',
-  axios: 'axios',
-  mockjs: 'Mock',
-  'mavon-editor': 'MavonEditor',
-  '@antv/x6': 'X6'
-}
 // 配置生产的 plugin
 const productionPlugins = [
-  // 删除生产环境的 console
-  new UglifyJSPlugin({
-    uglifyOptions: {
-      compress: {
-        drop_console: true
-      }
-    }
-  }),
   // 开启 gzip
   new CompressionPlugin({
     test: /\.js$|\.ts$|\.html$|\.css/,
@@ -68,7 +45,6 @@ module.exports = defineConfig({
 
   // webpack 简单配置 如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中。
   configureWebpack: {
-    externals: process.env.NODE_ENV === 'production' ? externalsConfig : {},
     name,
     resolve: {
       alias: {
@@ -98,15 +74,6 @@ module.exports = defineConfig({
 
   // webpack 高级配置
   chainWebpack(config) {
-    // 设置 images 转化为 base64位
-    // config.module
-    //   .rule("images")
-    //   .test(/\.(png|jpe?g|gif|webp)(\?.*)?$/)
-    //   .use("url-loader")
-    //   .loader("url-loader")
-    //   .tap(options => Object.assign(options, { limit: 20000 }))
-    //   .end()
-    // set svg-sprite-loader
     // 设置 svg 导入
     config.module.rule('svg').exclude.add(resolve('src/icons')).end()
     config.module
