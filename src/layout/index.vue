@@ -19,6 +19,7 @@
 
 <script lang="ts" setup>
 import { computed, onBeforeMount, onUnmounted } from 'vue'
+import { debounce } from 'lodash'
 import { useStore } from '@/store'
 import { AppMain, Sidebar, Navbar } from './components'
 import { APP_MUTATIONS_TYPES } from '@/store/modules/app/types'
@@ -67,14 +68,14 @@ const $_isMobile = () => {
 }
 
 /** 监听页面大小变化 */
-const $_ResizeScreen = (): void => {
+const $_ResizeScreen = debounce((): void => {
   const side_flag = $_isMobile()
   if (side_flag) {
     store.commit(APP_MUTATIONS_TYPES.MUT_FLOD_SIDE)
   } else if (!side_flag) {
     store.commit(APP_MUTATIONS_TYPES.MUT_UNFLOD_SIDE)
   }
-}
+}, 500)
 </script>
 
 <style lang="scss" scoped>
