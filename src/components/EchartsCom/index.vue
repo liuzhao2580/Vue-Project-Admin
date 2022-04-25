@@ -10,7 +10,7 @@ import EchartMixins from './mixins'
 
 interface IProps {
   height?: string
-  echartsData: EChartsOption | object
+  echartsData: EChartsOption
   echartsTitle?: string
 }
 const props = withDefaults(defineProps<IProps>(), {
@@ -22,6 +22,7 @@ const props = withDefaults(defineProps<IProps>(), {
 })
 const { EchartsInstances } = EchartMixins()
 
+/** echarts 的id */
 const echartsId = `echarts-${
   new Date().getTime() + 10000 * Math.floor(Math.random())
 }`
@@ -41,28 +42,17 @@ const initEcharts = () => {
     EchartsInstances.value = init(EchartsDom.value as HTMLElement)
   }
 
-  EchartsInstances.value.setOption({
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [
-      {
-        data: [120, 200, 150, 80, 70, 110, 130],
-        type: 'bar'
-      }
-    ]
-  })
+  EchartsInstances.value.setOption(props.echartsData)
 }
 
-watch(props, () => {
-  EchartsInstances.value?.clear()
-  initEcharts()
-  console.log(1234)
-})
+// 用来监听 echartsData 的数据变化
+watch(
+  () => props.echartsData,
+  () => {
+    EchartsInstances.value?.clear()
+    initEcharts()
+  }
+)
 </script>
 
 <script lang="ts">
