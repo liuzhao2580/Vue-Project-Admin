@@ -5,7 +5,7 @@
         <Quill />
       </el-tab-pane>
       <el-tab-pane label="wangEditor" name="wangEditor">
-        <WangEditor />
+        <!-- <WangEditor /> -->
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import Quill from './Quill/index.vue'
-import WangEditor from './WangEditor/index.vue'
+// import WangEditor from './WangEditor/index.vue'
 </script>
 
 <script lang="ts">

@@ -1,11 +1,11 @@
 <template>
   <el-dialog
     title="文章预览"
-    v-model:visible="state.visibleFlag"
+    v-model="state.visibleFlag"
     width="80%"
     :close-on-click-modal="false"
     class="article-dialog-box"
-    @close="$emit('update:visible', false)"
+    @close="closeDialog"
   >
     <!-- 文章标题 -->
     <div class="article-title">{{ title }}</div>
@@ -28,7 +28,7 @@
     <div class="release-container" v-html="articleContainer"></div>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="$emit('update:visible', false)">取 消</el-button>
+        <el-button @click="closeDialog">取 消</el-button>
         <el-button
           type="primary"
           :disabled="releaseDisabled"
@@ -56,6 +56,12 @@ interface IProps {
 
 const props = defineProps<IProps>()
 
+const emit = defineEmits<{
+  (e: 'update:visible', value: boolean): void
+}>()
+/** 关闭 弹出框 */
+const closeDialog = () => emit('update:visible', false)
+
 interface IState {
   /** 文章分类 选中项 id */
   categoryValue: string
@@ -75,7 +81,7 @@ const releaseDisabled = computed(() => {
   return flag
 })
 /** 选择分类的改变事件 */
-const categoryChange = (value: number) => {
+const categoryChange = (value: string | number | boolean) => {
   const getFind = props.categoryData.find(item => item.id === value)
   console.log(getFind, 'getFind')
 }
