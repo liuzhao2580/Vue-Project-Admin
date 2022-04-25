@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ElMessage } from 'element-plus'
 import { StoreUserModel } from '@/typescript/store'
 import { USER_MUTATIONS_TYPES, USER_ACTIONS_TYPES } from './types'

@@ -1,4 +1,4 @@
-import router, { insertRouter } from '@/router'
+import router from '@/router'
 import Nprogress from 'nprogress'
 import { getCookie } from '@/utils/cookies'
 import 'nprogress/nprogress.css' // 必须要的样式
@@ -31,10 +31,9 @@ router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormali
      */
     if (Need_refresh) {
       try {
-        const routesList = await store.dispatch(
+        await store.dispatch(
           USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID
         )
-        insertRouter(routesList)
         Nprogress.done()
         next(to)
       } catch (error) {

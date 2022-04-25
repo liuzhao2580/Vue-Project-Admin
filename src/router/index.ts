@@ -21,7 +21,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     meta: {
       hidden: true
     },
-    component: () => import('@/views/error_page/404_page.vue')
+    component: () => import(/* webpackChunkName: "baseComponet" */ '@/views/error_page/404_page.vue')
   }
 ]
 // 需要权限的页面
