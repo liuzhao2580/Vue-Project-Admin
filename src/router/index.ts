@@ -5,6 +5,7 @@ import PageContent from '@/layout/components/AppMain.vue'
 import error_page from './modules/error'
 import components from './modules/components'
 import { RouterName, RouterPath } from './RouteConst'
+const { basePrefix } = require('@/setting')
 // 公共的页面
 export const constantRoutes: RouteRecordRaw[] = [
   // 登录页面
@@ -128,7 +129,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
   }
 ]
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(basePrefix),
   routes: constantRoutes
 })
 

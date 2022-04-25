@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 const CompressionPlugin = require('compression-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const { title } = require('./src/setting.ts')
+const { title, basePrefix } = require('./src/setting.ts')
 const path = require('path')
 
 function resolve(dir) {
@@ -54,7 +54,7 @@ const port = 9527
 let publicPath = '/'
 // 说明是需要打包到 Pages 上进行预览
 if (process.env.NODE_ENV === 'pages') {
-  publicPath = '/Vue-Project-Admin/'
+  publicPath = basePrefix
 }
 
 /** 判断是否不是开发环境 */
