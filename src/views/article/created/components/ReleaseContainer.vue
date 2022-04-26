@@ -4,14 +4,18 @@
     v-model="state.visibleFlag"
     width="80%"
     :close-on-click-modal="false"
-    class="article-dialog-box"
+    custom-class="article-dialog-box"
     @close="closeDialog"
   >
     <!-- 文章标题 -->
     <div class="article-title">{{ title }}</div>
+    <!-- 文章内容 -->
+    <div class="release-container-box">
+      <div class="release-container" v-html="articleContainer"></div>
+    </div>
     <!-- 文章分类 -->
     <div class="article-category-box">
-      <p class="article-title">文章分类</p>
+      <p class="article-category-title">文章分类</p>
       <div class="article-category">
         <el-radio-group v-model="state.categoryValue" @change="categoryChange">
           <el-radio
@@ -24,8 +28,6 @@
         </el-radio-group>
       </div>
     </div>
-    <!-- 文章内容 -->
-    <div class="release-container" v-html="articleContainer"></div>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="closeDialog">取 消</el-button>
@@ -111,16 +113,25 @@ export default {
 .article-dialog-box {
   .article-title {
     margin-bottom: 10px;
-  }
-  .article-name {
-    margin: 10px 0;
     font-size: 20px;
-    font-weight: 900;
+    font-weight: 700;
+  }
+  .release-container-box {
+    max-height: 800px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 10px 0;
+    .release-container {
+      min-height: 500px;
+    }
   }
   // 分类
   .article-category-box {
-    .article-title {
+    .article-category-title {
       font-size: 18px;
+      margin-bottom: 10px;
     }
     .article-category {
       min-height: 100px;
