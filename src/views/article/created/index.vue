@@ -1,19 +1,20 @@
 <template>
   <div class="article-created-box">
     <el-col :xs="24" :sm="24">
-      <BigScreenTitle />
+      <ArticleTitle />
     </el-col>
-    <el-col :xs="24" :sm="24">
+    <!-- 编辑器 -->
+    <el-col :xs="24" :sm="24" class="editor-box">
       <div id="toolbar-container"></div>
       <div id="editor-container"></div>
     </el-col>
     <!-- 预览 -->
-    <!-- <ReleaseContainer
-      :title="state.titleValue"
+    <ReleaseContainer
+      :title="state.articleTitle"
       :articleContainer="state.articleContainer"
       :categoryData="state.categoryData"
       :visible="state.dialogVisible"
-    /> -->
+    />
   </div>
 </template>
 
@@ -26,54 +27,58 @@ import {
   IDomEditor
 } from '@wangeditor/editor'
 import '@wangeditor/editor/dist/css/style.css'
-// import { configMenu, configColors, fontNames } from './components/config'
-import BigScreenTitle from './components/Big-screen-title.vue'
-// import ReleaseContainer from './components/Release-container.vue'
+import { ElMessage } from 'element-plus'
+import { queryArticleCategoryAPI } from '@/api/modules/article'
+import { ResultCodeEnum } from '@/typescript/shared/enum'
+import ArticleTitle from './components/ArticleTitle.vue'
+import ReleaseContainer from './components/ReleaseContainer.vue'
+import { IArticleCategory } from '@/typescript/views/article/interface/article-config.interface'
 
 interface IState {
-  wangEditorObj: any
-  btnDisabled: boolean
+  /** 编辑器的实例 */
+  wangEditor: IDomEditor | null
+  /** 文章的标题 */
+  articleTitle: string
+  /** 文章的内容 */
+  articleContainer: string
+  /** 弹出框 */
+  dialogVisible: boolean
+  /** 文章分类的数据 */
+  categoryData: IArticleCategory[]
 }
 
 const state = reactive<IState>({
-  wangEditorObj: '',
-  btnDisabled: true
+  wangEditor: null,
+  articleTitle: '',
+  articleContainer: '',
+  dialogVisible: false,
+  categoryData: []
 })
 /** 传递给 title 组件 发布按钮和预览按钮禁用取消 */
 
 onMounted(() => {
+  queryArticleCategory()
   initWangEditor()
 })
+
+/** 获取文章分类 */
+const queryArticleCategory = async () => {
+  const result = await queryArticleCategoryAPI({ level: 2 })
+  if (result.code === ResultCodeEnum.success) state.categoryData = result.data
+  else ElMessage.error(result.msg)
+}
 /** 初始化 编辑器 */
 const initWangEditor = () => {
-  // const getHeight: number = (
-  //   document.querySelector('.article-created-box') as Element
-  // ).scrollHeight
-  // let editor = new WE('#WangEidtor-id')
-  // // 自定义菜单配置
-  // editor.config.menus = configMenu
-  // // 使用 base64 保存图片
-  // editor.config.uploadImgShowBase64 = true
-  // // 配置字体颜色、背景色
-  // editor.config.colors = configColors
-  // editor.config.fontNames = fontNames
-  // // 设置 高度
-  // editor.config.height = getHeight - 200
-  // editor.config.zIndex = 500
-
-  // /** 编辑器监听内容变化 */
-  // editor.config.onchange = (newHtml: HTMLElement) => {
-  //   if (newHtml) state.btnDisabled = false
-  //   else state.btnDisabled = true
-  // }
-  // /** 监听触发的时间修改 */
-  // editor.config.onchangeTimeout = 500 // 修改为 500ms
-
-  // /** 创建 编辑器实例 */
-  // editor.create()
-  // state.wangEditorObj = editor
+  const getHeight: number = (
+    document.querySelector('.article-created-box') as Element
+  ).scrollHeight
+  const getEditorDom = document.querySelector(
+    '#editor-container'
+  ) as HTMLElement
+  getEditorDom.style.height = `${getHeight - 200}px`
 
   const editorConfig: Partial<IEditorConfig> = {
+    scroll: false
   }
   editorConfig.placeholder = '请输入内容'
   editorConfig.onChange = (editor: IDomEditor) => {
@@ -93,11 +98,12 @@ const initWangEditor = () => {
     selector: '#toolbar-container',
     mode: 'default' // 或 'simple' 参考下文
   })
+  state.wangEditor = editor
 }
 
 onBeforeUnmount(() => {
-  state.wangEditorObj.destroy()
-  state.wangEditorObj = null
+  state.wangEditor?.destroy()
+  state.wangEditor = null
 })
 </script>
 
@@ -112,6 +118,15 @@ export default {
 .article-created-box {
   :deep(.el-col) {
     width: 100%;
+  }
+  .editor-box {
+    border: 1px solid #ccc;
+    #toolbar-container {
+      border-bottom: 1px solid #ccc;
+    }
+    #editor-container {
+      overflow-y: auto;
+    }
   }
 }
 </style>

@@ -6,7 +6,7 @@ import {
 } from '@/typescript/views/article/interface/article-config.interface'
 
 /** 获取文章分类 */
-export const queryArticleCategory_API = (params: {
+export const queryArticleCategoryAPI = (params: {
   id?: string
   level?: number
 }): Promise<ResultModel<any>> => {

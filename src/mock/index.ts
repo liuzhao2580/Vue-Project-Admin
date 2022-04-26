@@ -3,7 +3,8 @@ import { ResultTypeEnum } from '@/typescript/shared/enum'
 import Mock from 'mockjs'
 import user from './modules/user'
 import dashboard from './modules/dashboard'
-const mocks = [...user, ...dashboard]
+import article from './modules/article'
+const mocks = [...user, ...dashboard, ...article]
 
 export default function mockXHR() {
   const baseURL = process.env.VUE_APP_BASE_API

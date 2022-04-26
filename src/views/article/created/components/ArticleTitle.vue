@@ -18,10 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, reactive } from 'vue'
-import { ElMessage } from 'element-plus'
-import { queryArticleCategory_API } from '@/api/modules/article'
-import { ResultCodeEnum } from '@/typescript/shared/enum'
+import { computed, reactive } from 'vue'
 /** 大屏幕 下的 标题 */
 interface IState {
   /** 文章标题 */
@@ -43,15 +40,7 @@ const disabled = computed(() => {
   if (!state.titleValue) flag = true
   return flag
 })
-onMounted(() => {
-  queryArticleCategory()
-})
-/** 获取文章分类 */
-const queryArticleCategory = async () => {
-  const result = await queryArticleCategory_API({ level: 2 })
-  if (result.code === ResultCodeEnum.success) state.categoryData = result.data
-  else ElMessage.error(result.msg)
-}
+
 </script>
 
 <style lang="scss" scoped>
