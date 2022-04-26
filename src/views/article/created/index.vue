@@ -1,7 +1,7 @@
 <template>
   <div class="article-created-box">
     <el-col :xs="24" :sm="24">
-      <ArticleTitle />
+      <ArticleTitle @release-click="releaseClick" />
     </el-col>
     <!-- 编辑器 -->
     <el-col :xs="24" :sm="24" class="editor-box">
@@ -14,6 +14,7 @@
       :articleContainer="state.articleContainer"
       :categoryData="state.categoryData"
       :visible="state.dialogVisible"
+      @update:visible="state.dialogVisible = $event"
     />
   </div>
 </template>
@@ -78,14 +79,19 @@ const initWangEditor = () => {
   getEditorDom.style.height = `${getHeight - 200}px`
 
   const editorConfig: Partial<IEditorConfig> = {
-    scroll: false
+    scroll: false,
+    MENU_CONF: {
+      uploadImage: {
+        base64LimitSize: 5000 * 1024 // 5kb
+      }
+    }
   }
   editorConfig.placeholder = '请输入内容'
-  editorConfig.onChange = (editor: IDomEditor) => {
-    // 当编辑器选区、内容变化时，即触发
-    console.log('content', editor.children)
-    console.log('html', editor.getHtml())
-  }
+  // editorConfig.onChange = (editor: IDomEditor) => {
+  //   // 当编辑器选区、内容变化时，即触发
+  //   console.log('content', editor.children)
+  //   console.log('html', editor.getHtml())
+  // }
   // 创建编辑器
   const editor = createEditor({
     selector: '#editor-container',
@@ -99,6 +105,16 @@ const initWangEditor = () => {
     mode: 'default' // 或 'simple' 参考下文
   })
   state.wangEditor = editor
+}
+
+/** 预览按钮点击事件 */
+const releaseClick = (titleValue: string)=> {
+  state.articleTitle = titleValue
+  if(state.wangEditor) {
+    if(!state.wangEditor?.getText()) return ElMessage.warning('输入内容')
+    state.articleContainer = state.wangEditor?.getHtml() as string
+    state.dialogVisible = true
+  }
 }
 
 onBeforeUnmount(() => {

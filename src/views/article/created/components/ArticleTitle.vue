@@ -10,7 +10,7 @@
     </div>
     <!-- 预览按钮 -->
     <div class="button-box">
-      <el-button type="primary" :disabled="disabled" @click="state.dialogVisible = true"
+      <el-button type="primary" :disabled="disabled" @click="releaseClick"
         >预览</el-button
       >
     </div>
@@ -23,16 +23,14 @@ import { computed, reactive } from 'vue'
 interface IState {
   /** 文章标题 */
   titleValue: string
-  /** 文章内容 */
-  articleContainer: string
-  /** 预览内容弹出框 */
-  dialogVisible: boolean
 }
 const state = reactive<IState>({
-  titleValue: '',
-  articleContainer: '',
-  dialogVisible: false
+  titleValue: ''
 })
+
+const emit = defineEmits<{
+  (e: 'releaseClick', title: string): void
+}>()
 
 /** 预览按钮禁用 */
 const disabled = computed(() => {
@@ -40,6 +38,11 @@ const disabled = computed(() => {
   if (!state.titleValue) flag = true
   return flag
 })
+
+/** 预览按钮 */
+const releaseClick = ()=> {
+  emit('releaseClick', state.titleValue)
+}
 
 </script>
 
@@ -56,7 +59,7 @@ $headerHeight: 40px;
     margin-right: 10px;
     height: $headerHeight;
     .article-title {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 900;
       height: $headerHeight;
     }

@@ -41,6 +41,7 @@
 </template>
 
 <script lang="ts" setup>
+import { IArticleCategory } from '@/typescript/views/article/interface/article-config.interface'
 import { computed, reactive, watch } from 'vue'
 
 interface IProps {
@@ -51,7 +52,7 @@ interface IProps {
   /** 文章内容 */
   articleContainer: string
   /** 分类的数据 */
-  categoryData: any[]
+  categoryData: IArticleCategory[]
 }
 
 const props = defineProps<IProps>()
