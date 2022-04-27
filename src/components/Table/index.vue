@@ -82,13 +82,13 @@
             <el-tooltip placement="top" effect="light" content="搜索">
               <el-button
                 icon="el-icon-search"
-                size="mini"
+                size="small"
                 circle
                 @click="handleSearch"
               ></el-button>
             </el-tooltip>
             <el-tooltip placement="top" effect="light" content="重置">
-              <el-button icon="el-icon-refresh" size="mini" circle></el-button>
+              <el-button icon="el-icon-refresh" size="small" circle></el-button>
             </el-tooltip>
           </template>
           <!-- 其他操作 -->
@@ -101,9 +101,9 @@
               effect="light"
             >
               <el-button
-                size="mini"
+                size="small"
                 circle
-                :icon="operaIcon(operaItem.icon)"
+                :icon="operaItem.icon"
                 :type="operaItem.type"
                 @click="operaItem.handle"
               ></el-button>
@@ -176,7 +176,7 @@ const indexMethod = (index: number) => {
   } else return index + 1
 }
 
-const EColumnTypeFlag = (type: EColumnType)=> {
+const EColumnTypeFlag = (type: EColumnType) => {
   return EColumnType[type]
 }
 
@@ -191,10 +191,10 @@ const handleTranslateTime = (time: Date, type: EColumnType) => {
   return translateTime
 }
 /** 表格的操作按钮的样式,可能是直接使用的 elementUI默认的icon ,也可能使用的是iconfont的字体图标 */
-const operaIcon = (icon: string) => {
-  if (icon.startsWith('el-icon')) return icon
-  else return `iconfont ${icon}`
-}
+// const operaIcon = (icon: string) => {
+//   if (icon.startsWith('el-icon')) return icon
+//   else return `iconfont ${icon}`
+// }
 /** 表格的打印 */
 const tablePrint = () => {
   window.print()

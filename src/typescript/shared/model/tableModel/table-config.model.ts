@@ -1,5 +1,6 @@
 /** 表格的基本配置 */
 
+import { Component } from 'vue'
 import { FilterConditionModel } from './filter-condition.model'
 
 /** 表格配置 */
@@ -69,15 +70,15 @@ class SearchConfig {
   step?: number
 }
 /** 表格的操作按钮 */
-class Operation {
+interface Operation {
   /** 按钮的类型 */
-  type!: EOperationType
+  type: EOperationType
   /** 按钮的名称 */
-  text!: string
+  text: string
   /** 按钮的icon */
-  icon!: string
+  icon: Component | string
   /** 操作 */
-  handle: any
+  handle<T>():T
 }
 
 // ------------------------------------------------表格的枚举---------------------------------

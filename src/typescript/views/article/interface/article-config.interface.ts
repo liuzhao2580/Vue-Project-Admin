@@ -29,23 +29,23 @@ export interface IArticleBasic {
   /** 文章 id */
   id?: string
   /** 文章 名称 */
-  article_title: string
+  title: string
   /** 内容 */
-  article_content: string
+  content: string
   /** 创建时间 */
-  article_time: Date
+  create_time: Date
   /** 更新时间 */
-  article_update_time: Date
+  update_time: Date
   /** 创建者 id */
-  creator_id: string
+  user_id: string
   /** 创建者 用户名 */
   /** 创建者 头像 */
   /** 文章分类 id */
-  article_categoryId: number
+  category_id: number
   /** 分类名称 */
   category_name: string
   /** 父级分类的id */
-  category_parentId: number
+  category_parent_id: number
   /** 父级分类的名称 */
-  category_parentName: string
+  category_parent_name: string
 }

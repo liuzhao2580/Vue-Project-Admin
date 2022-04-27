@@ -19,6 +19,6 @@ export const insertArticle_API = (params: IArticleInsert): Promise<ResultModel<a
 }
 
 /** 获取文章列表 */
-export const queryArticleList_API = (): Promise<ResultModel<IArticleBasic[]>> => {
-  return axios.get('article/list')
+export const queryArticleListAPI = (): Promise<ResultModel<IArticleBasic[]>> => {
+  return axios.get('/article/list')
 }

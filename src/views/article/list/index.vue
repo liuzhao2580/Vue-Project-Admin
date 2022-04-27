@@ -9,7 +9,9 @@
 </template>
 
 <script lang="ts" setup>
-import { queryArticleList_API } from '@/api/modules/article'
+import { onMounted, reactive, ref } from 'vue'
+import { Edit, Delete } from '@element-plus/icons-vue'
+import { queryArticleListAPI } from '@/api/modules/article'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import {
   TableConfigModel,
@@ -21,7 +23,6 @@ import { PageModel } from '@/typescript/shared/model/tableModel/page-config.mode
 import { FilterConditionModel } from '@/typescript/shared/model/tableModel/filter-condition.model'
 import { IArticleBasic } from '@/typescript/views/article/interface/article-config.interface'
 import tableComponent from '@/components/Table/index.vue'
-import { onMounted, reactive, ref } from 'vue'
 /** 表格的数据 */
 const tableData = ref<IArticleBasic[]>([])
 /** 表格的分页 */
@@ -33,7 +34,7 @@ const tableConfig = reactive<TableConfigModel>({
   columnConfig: [
     {
       label: '文章标题',
-      prop: 'article_title',
+      prop: 'title',
       fixed: true,
       searchable: true,
       searchConfig: {
@@ -48,7 +49,7 @@ const tableConfig = reactive<TableConfigModel>({
     {
       label: '创建时间',
       type: EColumnType.dateTime,
-      prop: 'article_time',
+      prop: 'create_time',
       width: 200,
       searchable: true,
       searchConfig: {
@@ -58,7 +59,7 @@ const tableConfig = reactive<TableConfigModel>({
     {
       label: '更新时间',
       type: EColumnType.dateTime,
-      prop: 'article_update_time',
+      prop: 'update_time',
       width: 200,
       searchable: true,
       searchConfig: {
@@ -70,7 +71,7 @@ const tableConfig = reactive<TableConfigModel>({
     {
       type: EOperationType.primary,
       text: '编辑',
-      icon: 'el-icon-edit',
+      icon: Edit,
       handle: () => {
         console.log('123')
       }
@@ -78,7 +79,7 @@ const tableConfig = reactive<TableConfigModel>({
     {
       type: EOperationType.danger,
       text: '删除',
-      icon: 'el-icon-delete',
+      icon: Delete,
       handle: () => {
         console.log(46, '123')
       }
@@ -93,7 +94,7 @@ onMounted(() => {
 })
 /** 初始化 */
 const init = async () => {
-  const result = await queryArticleList_API()
+  const result = await queryArticleListAPI()
   if (result.code === ResultCodeEnum.success) {
     console.log(result, 'data')
     tableData.value = result.data
