@@ -6,6 +6,7 @@
     :close-on-click-modal="false"
     custom-class="article-dialog-box"
     @close="closeDialog"
+    draggable
   >
     <!-- 文章标题 -->
     <div class="article-title">{{ title }}</div>
@@ -83,6 +84,7 @@ const releaseDisabled = computed(() => {
   if (!state.categoryValue) flag = true
   return flag
 })
+
 /** 选择分类的改变事件 */
 const categoryChange = (value: string | number | boolean) => {
   const getFind = props.categoryData.find(item => item.id === value)
