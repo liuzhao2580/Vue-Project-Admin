@@ -45,6 +45,7 @@
 
 <script lang="ts" setup>
 import { IArticleCategory } from '@/typescript/views/article/interface/article-config.interface'
+import { ElMessage } from 'element-plus'
 import { computed, reactive, watch } from 'vue'
 
 interface IProps {
@@ -92,8 +93,8 @@ const categoryChange = (value: string | number | boolean) => {
 }
 /** 发布按钮 */
 const releaseArticle = (): void => {
-  console.log(props.articleContainer)
-  // this.dialogVisible = false
+  ElMessage.success('只做测试哟~~~~~')
+  closeDialog()
 }
 /** 监听 visible 变化 */
 watch(
