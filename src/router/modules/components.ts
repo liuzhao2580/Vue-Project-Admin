@@ -10,7 +10,7 @@ const components: RouteRecordRaw = {
   children: [
     {
       path: RouterPath.RICHTEXT,
-      meta: { title: '富文本编辑器', icon: 'richtext' },
+      meta: { title: '富文本', icon: 'richtext' },
       name: RouterName.RICHTEXT,
       component: () =>
         import(
@@ -19,7 +19,7 @@ const components: RouteRecordRaw = {
     },
     {
       path: RouterPath.MARKDOWN,
-      meta: { title: 'Markdown编辑器', icon: 'markdown' },
+      meta: { title: 'Markdown', icon: 'markdown' },
       name: RouterName.MARKDOWN,
       component: () =>
         import(
