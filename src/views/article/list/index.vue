@@ -1,6 +1,6 @@
 <template>
   <div class="article-list-box">
-    <table-component
+    <TableComponent
       :tableData="tableData"
       :tableConfig="tableConfig"
       :pageConfig="pageConfig"
@@ -22,7 +22,7 @@ import {
 import { PageModel } from '@/typescript/shared/model/tableModel/page-config.model'
 import { FilterConditionModel } from '@/typescript/shared/model/tableModel/filter-condition.model'
 import { IArticleBasic } from '@/typescript/views/article/interface/article-config.interface'
-import tableComponent from '@/components/Table/index.vue'
+import TableComponent from '@/components/Table/index.vue'
 /** 表格的数据 */
 const tableData = ref<IArticleBasic[]>([])
 /** 表格的分页 */

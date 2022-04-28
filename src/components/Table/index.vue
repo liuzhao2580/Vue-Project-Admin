@@ -9,14 +9,14 @@
           v-if="searchIconFlag()"
           title="搜索"
           @click="tableSearch"
-          class="right-icon el-icon-search"
+          class="right-icon iconfont icon-sousuo"
         ></span>
         <!-- 打印 -->
         <span
           v-if="tableConfig.print"
           title="打印"
           @click="tablePrint"
-          class="right-icon el-icon-printer"
+          class="right-icon iconfont icon-dayin-dayinji"
         ></span>
       </div>
     </div>
@@ -58,7 +58,7 @@
         <template v-slot="scope">
           <!-- 搜索栏 -->
           <template v-if="scope.$index === 0 && tableConfig.showSearch">
-            <table-header-search
+            <TableHeaderSearch
               :tableHeaderSearch="tableItem"
               :searchParamsValue="searchParamsValue"
             />
@@ -135,7 +135,7 @@ import {
 import { FilterConditionModel } from '@/typescript/shared/model/tableModel/filter-condition.model'
 import { initFilterField } from './shared/utils'
 import { SearchModelValue } from './shared/model/serach-model-value'
-import tableHeaderSearch from './components/table-header-search.vue'
+import TableHeaderSearch from './components/TableHeaderSearch.vue'
 import { PageModel } from '@/typescript/shared/model/tableModel/page-config.model'
 
 interface IProps {
