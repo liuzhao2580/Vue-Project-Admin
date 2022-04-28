@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, ref, shallowReactive, shallowRef } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
 import { queryArticleListAPI } from '@/api/modules/article'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
@@ -26,9 +26,9 @@ import tableComponent from '@/components/Table/index.vue'
 /** 表格的数据 */
 const tableData = ref<IArticleBasic[]>([])
 /** 表格的分页 */
-const pageConfig = ref<PageModel>(new PageModel())
+const pageConfig = shallowRef<PageModel>(new PageModel())
 /** 表格的列配置 */
-const tableConfig = reactive<TableConfigModel>({
+const tableConfig = shallowReactive<TableConfigModel>({
   loading: true,
   print: true,
   columnConfig: [
@@ -36,6 +36,7 @@ const tableConfig = reactive<TableConfigModel>({
       label: '文章标题',
       prop: 'title',
       fixed: true,
+      width: 'auto',
       searchable: true,
       searchConfig: {
         type: ESearchType.input
@@ -72,9 +73,7 @@ const tableConfig = reactive<TableConfigModel>({
       type: EOperationType.primary,
       text: '编辑',
       icon: Edit,
-      handle: () => {
-        console.log('123')
-      }
+      handle: () => handleEdit
     },
     {
       type: EOperationType.danger,
@@ -100,6 +99,11 @@ const init = async () => {
     tableData.value = result.data
   }
   tableConfig.loading = false
+}
+
+/** 编辑按钮触发 */
+const handleEdit = ()=> {
+  console.log(12345)
 }
 </script>
 

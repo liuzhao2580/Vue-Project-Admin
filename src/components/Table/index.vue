@@ -126,7 +126,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, withDefaults } from 'vue'
+import { computed, shallowRef, withDefaults } from 'vue'
 import moment from 'moment'
 import {
   TableConfigModel,
@@ -154,7 +154,7 @@ const props = withDefaults(defineProps<IProps>(), {
 })
 
 /** 表格过滤的条件 */
-const searchParamsValue = ref<SearchModelValue>(
+const searchParamsValue = shallowRef<SearchModelValue>(
   initFilterField(props.tableConfig)
 )
 

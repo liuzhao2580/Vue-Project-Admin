@@ -78,7 +78,7 @@ interface Operation {
   /** 按钮的icon */
   icon: Component | string
   /** 操作 */
-  handle<T>():T
+  handle(): void
 }
 
 // ------------------------------------------------表格的枚举---------------------------------

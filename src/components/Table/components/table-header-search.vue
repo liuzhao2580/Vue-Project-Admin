@@ -5,7 +5,7 @@
       <!-- 输入框 -->
       <el-input
         style="width: 100%"
-        size="mini"
+        size="small"
         v-model="state.inputValue"
         v-if="tableHeaderSearch.searchConfig.type === ESearchType.input"
         placeholder="请输入"
@@ -13,7 +13,7 @@
       <!-- 年月日 -->
       <el-date-picker
         style="width: 100%"
-        size="mini"
+        size="small"
         v-else-if="tableHeaderSearch.searchConfig.type === ESearchType.date"
         type="date"
         v-model="state.dateValue"
@@ -23,7 +23,7 @@
       <!-- 年月日时分秒 -->
       <el-date-picker
         style="width: 100%"
-        size="mini"
+        size="small"
         v-else-if="tableHeaderSearch.searchConfig.type === ESearchType.dateTime"
         type="datetime"
         v-model="state.dateTimeValue"
