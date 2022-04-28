@@ -1,43 +1,73 @@
 <template>
-    <div class="markdown-box">
-        <p>
-            依赖于 mavon-editor
-            <a href="https://github.com/hinesboy/mavonEditor" style="color: #409eff" target="block"
-                >GitHub地址</a
-            >
-        </p>
-        <mavon-editor @save="mavon_save" v-model="mavon_model" :ishljs="true" />
-        <el-button type="primary" @click="onSubmit" class="tinymce-btn">提交</el-button>
-    </div>
+  <div class="markdown-box">
+    <!-- 书写区域 -->
+    <textarea class="markdown-box-write" @input="writeChange"></textarea>
+    <!-- 编译区域 -->
+    <div class="markdown-box-compile" v-html="compileHtml"></div>
+  </div>
 </template>
 
-<script>
-import { mavonEditor } from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
+<script lang="ts" setup>
+import { marked } from 'marked'
+import { shallowRef } from 'vue'
+import 'highlight.js/styles/monokai-sublime.css'
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  highlight: function (code, lang) {
+    const hljs = require('highlight.js')
+    const language = hljs.getLanguage(lang) ? lang : 'plaintext'
+    return hljs.highlight(code, { language }).value
+  },
+  langPrefix: 'hljs language-',
+  breaks: false,
+  gfm: true,
+  headerIds: true,
+  headerPrefix: '',
+  mangle: true,
+  pedantic: false,
+  sanitize: false,
+  silent: false,
+  smartLists: false,
+  smartypants: false,
+  xhtml: false
+})
+const compileHtml = shallowRef()
+
+/** 输入框改变事件 */
+const writeChange = (e: Event) => {
+  const getTextArea = e.target as HTMLTextAreaElement
+  compileHtml.value = marked.parse(getTextArea.value)
+}
+</script>
+
+<script lang="ts">
+import { RouterName } from '@/router/RouteConst'
 export default {
-  name: 'MarkdownCom',
-  components: {
-    mavonEditor
-  },
-  data() {
-    return {
-      mavon_model: ''
-    }
-  },
-  methods: {
-    mavon_save(value, render) {
-      console.log(value, render)
-    },
-    onSubmit() {
-      console.log(this.mavon_model)
-    }
-  }
+  name: RouterName.MARKDOWN
 }
 </script>
 
 <style lang="scss" scoped>
 .markdown-box {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  > * {
+    width: 49%;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  &-write {
+    resize: none;
+    font-size: 16px;
+  }
+  :deep(&-compile) {
+    ul,
+    li {
+      list-style: inside;
+    }
+  }
 }
 </style>
