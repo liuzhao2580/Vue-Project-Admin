@@ -33,10 +33,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from '@/store'
-import { TAGS_VIEW_MUTATIONS_TYPES } from '@/store/modules/tagsView/types'
 import { computed, onMounted, reactive, watch } from 'vue'
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
+import { cloneDeep } from 'lodash'
+import { useStore } from '@/store'
+import { TAGS_VIEW_MUTATIONS_TYPES } from '@/store/modules/tagsView/types'
 
 const store = useStore()
 
@@ -85,6 +86,7 @@ const disabledFlag = computed((): boolean => {
   return flag
 })
 
+/** tags 的数组 */
 const tagsArray = computed(() => {
   return store.state.tagsView.tagsArray
 })
@@ -141,22 +143,22 @@ const is_closable = (tag: RouteRecordRaw) => {
   if (tag.meta?.affix) return false
   return true
 }
-/** 点击关闭按钮 */
-const handleClose = (tag: any) => {
+/** 点击关闭按钮 路由会跳转到上一个 tagView 页面 */
+const handleClose = (tag: RouteRecordRaw) => {
   const getIndex = tagsArray.value.indexOf(tag)
-  if (route.fullPath === tag.fullPath) {
+  if (route.fullPath === tag.path) {
     handleClick(tagsArray.value[getIndex - 1])
   }
   tagsArray.value.splice(getIndex, 1)
 }
 /** 点击 tags 跳转 */
-const handleClick = (tag: any) => {
+const handleClick = (tag: RouteRecordRaw) => {
   router.push({
     name: tag.name
   })
 }
 /** 鼠标右键菜单 */
-const tagContextmenu = (e: Event, tag: any, index: number) => {
+const tagContextmenu = (e: Event, tag: RouteRecordRaw, index: number) => {
   // 1.获取 tag-container-box html元素
   const getTagBoxDom = document.querySelector(
     '.tag-container-box'
@@ -186,10 +188,16 @@ const closeNow = () => {
 /** 关闭其他 */
 const closeOther = () => {
   const { currentIndex, currentTag } = state.saveCurrentTag
-  tagsArray.value.forEach((item, index) => {
-    if (index === 0 || index === 1 || index === currentIndex) return
-    tagsArray.value.splice(index, 1)
-  })
+  const getCloneTags = cloneDeep(tagsArray.value)
+  for (let index = getCloneTags.length - 1; index >= 0; index--) {
+    if (index !== 0 && index !== 1 && index !== currentIndex) {
+      getCloneTags.splice(index, 1)
+    }
+  }
+  store.commit(
+    TAGS_VIEW_MUTATIONS_TYPES.MUT_INIT_TAGS,
+    getCloneTags
+  )
   // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
   if (!is_active(currentTag.meta.title)) handleClick(currentTag)
 }
