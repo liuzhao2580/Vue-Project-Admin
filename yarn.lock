@@ -5043,6 +5043,11 @@ graceful-fs@^4.2.4, graceful-fs@^4.2.6, graceful-fs@^4.2.9:
   resolved "https://repo.huaweicloud.com/repository/npm/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
+gsap@^3.10.4:
+  version "3.10.4"
+  resolved "https://repo.huaweicloud.com/repository/npm/gsap/-/gsap-3.10.4.tgz#db89a6b8f6d5cb76e274eae822cbc1aa4d31e88f"
+  integrity sha512-6QatdkKxXCMfvCW4rM++0RqyLQAzFX5nwl3yHS0XPgkZBkiSEY3VZVbMltrdtsbER/xZonLtyHt684wRp4erlQ==
+
 gzip-size@^6.0.0:
   version "6.0.0"
   resolved "https://repo.huaweicloud.com/repository/npm/gzip-size/-/gzip-size-6.0.0.tgz#065367fd50c239c0671cbcbad5be3e2eeb10e462"
