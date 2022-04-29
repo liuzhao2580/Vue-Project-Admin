@@ -18,7 +18,11 @@
       </div>
     </el-scrollbar>
     <!-- 用来操作开启的 tag 标签 -->
-    <ul v-show="state.operaTagFlag" class="hide-tag-box" :style="state.hideTagBox">
+    <ul
+      v-show="state.operaTagFlag"
+      class="hide-tag-box"
+      :style="state.hideTagBox"
+    >
       <li
         :class="[disabledFlag ? 'disabled-operation' : 'hide-item']"
         @click="closeNow"
@@ -34,10 +38,11 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, reactive, watch } from 'vue'
-import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
+import { RouteRecordName, useRoute, useRouter } from 'vue-router'
 import { cloneDeep } from 'lodash'
 import { useStore } from '@/store'
 import { TAGS_VIEW_MUTATIONS_TYPES } from '@/store/modules/tagsView/types'
+import { ITagsView } from '@/typescript/shared/interface'
 
 const store = useStore()
 
@@ -46,7 +51,7 @@ const route = useRoute()
 const router = useRouter()
 
 interface IState {
-  affixTags: RouteRecordRaw[]
+  affixTags: ITagsView[]
   /** tag 操作菜单的显示隐藏 */
   operaTagFlag: boolean
   /** tag 操作菜单的样式 */
@@ -102,25 +107,22 @@ onMounted(() => {
 /** 初始化 tags */
 const initTags = () => {
   const routes = sideBarList.value
-  const affixTags = filterAffixTags(routes)
-  store.commit(
-    TAGS_VIEW_MUTATIONS_TYPES.MUT_INIT_TAGS,
-    affixTags
-  )
-}
-/** 初始化的时候取出 固定的tags */
-const filterAffixTags = (routes: RouteRecordRaw[]) => {
-  let tags = []
-  tags = routes.filter(item => {
+  const affixTags: ITagsView[] = []
+  routes.forEach(item => {
     if (item.meta?.affix) {
-      return {
+      affixTags.push({
         fullPath: item.path,
         meta: item.meta,
         name: item.name
-      }
+      })
     }
   })
-  return tags
+  changeStoreTags(affixTags)
+}
+
+/** 修改 store 中的 tags */
+const changeStoreTags = (tags: ITagsView[]) => {
+  store.commit(TAGS_VIEW_MUTATIONS_TYPES.MUT_INIT_TAGS, tags)
 }
 /** 增加 tags */
 const insertTags = () => {
@@ -129,36 +131,35 @@ const insertTags = () => {
     meta: route.meta,
     name: route.name
   }
-  store.commit(
-    TAGS_VIEW_MUTATIONS_TYPES.MUT_INSERT_TAGS,
-    currentTag
-  )
+  store.commit(TAGS_VIEW_MUTATIONS_TYPES.MUT_INSERT_TAGS, currentTag)
 }
 /** 用于高亮当前的tags */
 const is_active = (tag: string) => {
   return tag === route.meta.title
 }
 /** 用于设置 不显示关闭按钮 affix 存在 说明不能被关闭 */
-const is_closable = (tag: RouteRecordRaw) => {
+const is_closable = (tag: ITagsView) => {
   if (tag.meta?.affix) return false
   return true
 }
 /** 点击关闭按钮 路由会跳转到上一个 tagView 页面 */
-const handleClose = (tag: RouteRecordRaw) => {
+const handleClose = (tag: ITagsView) => {
   const getIndex = tagsArray.value.indexOf(tag)
-  if (route.fullPath === tag.path) {
+  const getCloneTags = cloneDeep(tagsArray.value)
+  if (route.fullPath === tag.fullPath) {
     handleClick(tagsArray.value[getIndex - 1])
   }
-  tagsArray.value.splice(getIndex, 1)
+  getCloneTags.splice(getIndex, 1)
+  changeStoreTags(getCloneTags)
 }
 /** 点击 tags 跳转 */
-const handleClick = (tag: RouteRecordRaw) => {
+const handleClick = (tag: ITagsView) => {
   router.push({
-    name: tag.name
+    name: tag.name as RouteRecordName
   })
 }
 /** 鼠标右键菜单 */
-const tagContextmenu = (e: Event, tag: RouteRecordRaw, index: number) => {
+const tagContextmenu = (e: Event, tag: ITagsView, index: number) => {
   // 1.获取 tag-container-box html元素
   const getTagBoxDom = document.querySelector(
     '.tag-container-box'
@@ -194,10 +195,7 @@ const closeOther = () => {
       getCloneTags.splice(index, 1)
     }
   }
-  store.commit(
-    TAGS_VIEW_MUTATIONS_TYPES.MUT_INIT_TAGS,
-    getCloneTags
-  )
+  changeStoreTags(getCloneTags)
   // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
   if (!is_active(currentTag.meta.title)) handleClick(currentTag)
 }

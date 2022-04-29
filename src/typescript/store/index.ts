@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
+import { ITagsView } from '../shared/interface'
 
 /** 系统 app 的 store */
 export class StoreAppModel {
@@ -25,5 +26,5 @@ export class StoreUserModel {
 /** tagsView */
 export class StoreTagsViewModel {
   /** 存放 tags 的数组 */
-  tagsArray: RouteRecordRaw[] = []
+  tagsArray: ITagsView[] = []
 }
