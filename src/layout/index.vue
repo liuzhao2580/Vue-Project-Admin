@@ -106,7 +106,10 @@ const $_ResizeScreen = debounce((): void => {
     display: flex;
     flex-direction: column;
     :deep(.app-main) {
+      position: relative;
       flex: 1;
+      height: 100%;
+      padding: 12px;
       > div {
         height: 100%;
       }

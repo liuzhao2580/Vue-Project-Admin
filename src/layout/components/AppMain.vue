@@ -53,6 +53,8 @@ export default {
 
 <style lang="scss" scoped>
 .AppMain-box {
+  position: relative;
+  width: 100%;
   > div {
     height: 100%;
   }
