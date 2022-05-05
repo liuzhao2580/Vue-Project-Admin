@@ -39,7 +39,7 @@ const userInfo: IUserBaseInfo [] = [
   }
 ]
 
-const userModules: IMockResponse[] = [
+const userModules: IMockResponse<any>[] = [
   {
     type: ResultTypeEnum.POST,
     url: '/user/login',

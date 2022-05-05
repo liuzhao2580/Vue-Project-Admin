@@ -2,7 +2,7 @@ import { ResultCodeEnum, ResultTypeEnum } from '@/typescript/shared/enum'
 import { IMockResponse } from '../shared'
 import Mock from 'mockjs'
 
-const dashboardModules: IMockResponse[] = [
+const dashboardModules: IMockResponse<any>[] = [
   {
     url: '/dashboard/echarts',
     type: ResultTypeEnum.GET,
@@ -49,7 +49,8 @@ const dashboardModules: IMockResponse[] = [
             { 'value|100-1000': 1000, name: 'React' },
             { 'value|100-1000': 1000, name: 'Angular' }
           ]
-        })
+        }),
+        msg: ''
       }
     }
   }
