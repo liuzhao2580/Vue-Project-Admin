@@ -4,6 +4,7 @@
       :tableData="tableData"
       :tableConfig="tableConfig"
       :pageConfig="pageConfig"
+      @pageCurrentChange="pageCurrentChange"
     />
   </div>
 </template>
@@ -93,8 +94,8 @@ onMounted(() => {
 })
 /** 初始化 */
 const init = async () => {
-  const params = new PageModel()
-  const result = await queryArticleListAPI(params)
+  tableConfig.loading = true
+  const result = await queryArticleListAPI(pageConfig.value)
   if (result.code === ResultCodeEnum.success) {
     console.log(result, 'data')
     tableData.value = result.data
@@ -106,6 +107,13 @@ const init = async () => {
 /** 编辑按钮触发 */
 const handleEdit = ()=> {
   console.log(12345)
+}
+
+/** 页码改变时触发 */
+const pageCurrentChange = (current: number)=> {
+  console.log(current)
+  pageConfig.value.pageNum = current
+  init()
 }
 </script>
 

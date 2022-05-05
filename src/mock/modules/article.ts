@@ -25,10 +25,11 @@ const articleModules: IMockResponse<any>[] = [
     type: ResultTypeEnum.POST,
     response: (options: any): ResultModel<any> => {
       const { pageNum, pageSize } = JSON.parse(options.body) as PageModel
-      const articleListSlice = pageNum * pageSize
+      const startLength = (pageNum - 1) * pageSize
+      const endLength = pageNum * pageSize
       const data: IArticleBasic[] = articleListData.article_list.slice(
-        pageNum - 1,
-        articleListSlice
+        startLength,
+        endLength
       )
       const totalCount = articleListData.article_list.length
       return {

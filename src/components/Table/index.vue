@@ -119,6 +119,7 @@
         :page-sizes="[10, 20, 50, 100]"
         background
         :total="pageConfig.total"
+        @current-change="currentChange"
       >
       </el-pagination>
     </div>
@@ -152,6 +153,8 @@ const props = withDefaults(defineProps<IProps>(), {
   tableConfig: () => new TableConfigModel(),
   pageConfig: () => new PageModel()
 })
+
+const emits = defineEmits<{ (e: 'pageCurrentChange', current: number): void }>()
 
 /** 表格过滤的条件 */
 const searchParamsValue = shallowRef<SearchModelValue>(
@@ -229,6 +232,11 @@ const handleSearch = () => {
       queryParams.push(searchParamsValue.value[key])
   }
   props.tableConfig.handleSearch && props.tableConfig.handleSearch(queryParams)
+}
+
+/** 表格的页码改变事件 */
+const currentChange = (current: number) => {
+  emits('pageCurrentChange', current)
 }
 </script>
 
