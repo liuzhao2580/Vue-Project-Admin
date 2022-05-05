@@ -36,12 +36,13 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { ESearchType, ColumnConfig } from '@/typescript/shared/model/tableModel/table-config.model'
 import { SearchModelValue } from '../shared/model/serach-model-value'
+import { IColumnConfig } from '@/typescript/shared/interface/table-interface'
+import { ESearchType } from '@/typescript/shared/enum/table-enum'
 
 interface IProps {
   /** 表格的搜索配置 */
-  tableHeaderSearch: ColumnConfig
+  tableHeaderSearch: IColumnConfig
   /** 给每个 model 赋值 */
   searchParamsValue: SearchModelValue
 }

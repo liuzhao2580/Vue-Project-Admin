@@ -6,14 +6,14 @@
       <div class="operation-right">
         <!-- 搜索 -->
         <span
-          v-if="searchIconFlag()"
+          v-if="searchIconFlag"
           title="搜索"
           @click="tableSearch"
           class="right-icon iconfont icon-sousuo"
         ></span>
         <!-- 打印 -->
         <span
-          v-if="tableConfig.print"
+          v-if="tableConfig.printFlag"
           title="打印"
           @click="tablePrint"
           class="right-icon iconfont icon-dayin-dayinji"
@@ -24,8 +24,8 @@
       style="width: 100%"
       class="table"
       v-loading="tableConfig.loading"
-      :border="tableConfig.border !== false"
-      :stripe="tableConfig.stripe !== false"
+      :border="tableConfig.borderFlag"
+      :stripe="tableConfig.stripeFlag"
       :data="tableData"
       :header-cell-style="tableHeaderStyle"
     >
@@ -34,7 +34,7 @@
         fixed
         type="selection"
         width="60"
-        v-if="tableConfig.checkout"
+        v-if="tableConfig.checkoutFlag"
       >
       </el-table-column>
       <!-- 序号 -->
@@ -44,20 +44,20 @@
         label="序号"
         width="60"
         :index="indexMethod"
-        v-if="tableConfig.index !== false"
+        v-if="tableConfig.indexFlag"
       >
       </el-table-column>
       <el-table-column
         :fixed="tableItem.fixed"
         :label="tableItem.label"
-        :width="tableItem.width ? tableItem.width : 150"
-        :show-overflow-tooltip="tableItem.showTooltip !== false"
+        :width="tableItem.width || 150"
+        :show-overflow-tooltip="tableItem.tooltipFlag"
         v-for="(tableItem, tableIndex) in tableConfig.columnConfig"
         :key="tableIndex"
       >
-        <template v-slot="scope">
+        <template #default="scope">
           <!-- 搜索栏 -->
-          <template v-if="scope.$index === 0 && tableConfig.showSearch">
+          <template v-if="scope.$index === 0 && tableConfig.searchFlag">
             <TableHeaderSearch
               :tableHeaderSearch="tableItem"
               :searchParamsValue="searchParamsValue"
@@ -76,9 +76,9 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right" min-width="100">
-        <template v-slot="scope">
+        <template #default="scope">
           <!-- 搜索栏开启时的操作 -->
-          <template v-if="scope.$index === 0 && tableConfig.showSearch">
+          <template v-if="scope.$index === 0 && tableConfig.searchFlag">
             <el-tooltip placement="top" effect="light" content="搜索">
               <el-button
                 icon="el-icon-search"
@@ -130,14 +130,14 @@
 import { computed, shallowRef, withDefaults } from 'vue'
 import moment from 'moment'
 import {
-  TableConfigModel,
-  EColumnType
+  TableConfigModel
 } from '@/typescript/shared/model/tableModel/table-config.model'
 import { FilterConditionModel } from '@/typescript/shared/model/tableModel/filter-condition.model'
 import { initFilterField } from './shared/utils'
 import { SearchModelValue } from './shared/model/serach-model-value'
 import TableHeaderSearch from './components/TableHeaderSearch.vue'
 import { PageModel } from '@/typescript/shared/model/tableModel/page-config.model'
+import { EColumnType } from '@/typescript/shared/enum/table-enum'
 
 interface IProps {
   /** 表格的数据 */
@@ -166,15 +166,17 @@ const tableHeaderStyle = computed(() => {
   return { background: '#e0e0e0', color: '#333', fontWeight: 900 }
 })
 /** 用来设置 搜索按钮的显示隐藏 */
-const searchIconFlag = () => {
+const searchIconFlag = computed(() => {
+  let flag = false
   const searchable = props.tableConfig.columnConfig.some(
     columnItem => columnItem.searchable
   )
-  if (props.tableConfig.searchIcon !== false && searchable) return true
-}
+  if (props.tableConfig.searchFlag || searchable) flag = true
+  return flag
+})
 /** 自定义索引,当开启搜索栏的时候,索引为0的不显示 */
 const indexMethod = (index: number) => {
-  if (props.tableConfig.showSearch) {
+  if (props.tableConfig.searchFlag) {
     if (index) return index
   } else return index + 1
 }
@@ -205,9 +207,10 @@ const tablePrint = () => {
 /** 展开关闭 表格的搜索 */
 const tableSearch = () => {
   // 用来显示隐藏搜索栏
-  const showSearch: boolean = props.tableConfig.showSearch as boolean
+  const searchFlag = props.tableConfig.searchFlag
+  console.log(searchFlag, 'searchFlag')
   // 说明搜索栏已经展开
-  if (showSearch) {
+  if (searchFlag) {
     // props.tableData.splice(0, 1)
   }
   // 说明搜索栏还未展开
@@ -231,7 +234,7 @@ const handleSearch = () => {
     if (searchParamsValue.value[key].filterValue)
       queryParams.push(searchParamsValue.value[key])
   }
-  props.tableConfig.handleSearch && props.tableConfig.handleSearch(queryParams)
+  props.tableConfig.handleSearch && props.tableConfig.handleSearch()
 }
 
 /** 表格的页码改变事件 */
