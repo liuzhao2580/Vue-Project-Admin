@@ -4,6 +4,7 @@ import {
   IArticleInsert,
   IArticleBasic
 } from '@/typescript/views/article/interface/article-config.interface'
+import { PageModel } from '@/typescript/shared/model/tableModel/page-config.model'
 
 /** 获取文章分类 */
 export const queryArticleCategoryAPI = (params: {
@@ -19,6 +20,6 @@ export const insertArticle_API = (params: IArticleInsert): Promise<ResultModel<a
 }
 
 /** 获取文章列表 */
-export const queryArticleListAPI = (): Promise<ResultModel<IArticleBasic[]>> => {
-  return axios.get('/article/list')
+export const queryArticleListAPI = (params: PageModel): Promise<ResultModel<IArticleBasic[]>> => {
+  return axios.post('/article/list', params)
 }

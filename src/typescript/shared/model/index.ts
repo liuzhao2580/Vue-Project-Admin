@@ -14,7 +14,7 @@ export class ResultModel<T> {
   public pageNum?: number
   /** 如果是列表 返回有分页每页条数 */
   public size?: number
-  /** 如果是列表 返回有分页总页数 */
+  /** 如果是列表 返回总数据条数 */
   public totalCount?: number
   /** 如果是列表 返回有分页总条数 */
   public totalPage?: number

@@ -93,10 +93,12 @@ onMounted(() => {
 })
 /** 初始化 */
 const init = async () => {
-  const result = await queryArticleListAPI()
+  const params = new PageModel()
+  const result = await queryArticleListAPI(params)
   if (result.code === ResultCodeEnum.success) {
     console.log(result, 'data')
     tableData.value = result.data
+    pageConfig.value.total = result.totalCount as number
   }
   tableConfig.loading = false
 }

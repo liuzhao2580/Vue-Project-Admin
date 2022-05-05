@@ -33,19 +33,19 @@ export interface IArticleBasic {
   /** 内容 */
   content: string
   /** 创建时间 */
-  create_time: Date
+  create_time: Date | string
   /** 更新时间 */
-  update_time: Date
+  update_time: Date | string
   /** 创建者 id */
   user_id: string
   /** 创建者 用户名 */
   /** 创建者 头像 */
   /** 文章分类 id */
-  category_id: number
+  category_id: number | string
   /** 分类名称 */
   category_name: string
   /** 父级分类的id */
-  category_parent_id: number
+  category_parent_id: number | string
   /** 父级分类的名称 */
   category_parent_name: string
 }
