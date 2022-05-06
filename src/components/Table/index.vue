@@ -20,9 +20,8 @@
         ></span>
       </div>
     </div>
-    <div class="table-component-search" v-show="tableSearchShow">
-      tableSearchShow
-    </div>
+    <!-- 搜索组件 -->
+    <TableSearch v-show="tableSearchShow" @maskClick="searchShow = false" />
     <el-table
       style="width: 100%"
       class="table"
@@ -101,12 +100,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, withDefaults } from 'vue'
+import { computed, onMounted, ref, withDefaults } from 'vue'
 import moment from 'moment'
 import { TableConfigModel } from '@/typescript/shared/model/tableModel/table-config.model'
 import { PageModel } from '@/typescript/shared/model/tableModel/page-config.model'
 import { EColumnType } from '@/typescript/shared/enum/table-enum'
-
+import TableSearch from './components/TableSearch/index.vue'
+import { onBeforeRouteLeave } from 'vue-router'
 interface IProps {
   /** 表格的数据 */
   tableData: any[]
@@ -151,6 +151,10 @@ const EColumnTypeFlag = (type: EColumnType) => {
   return EColumnType[type]
 }
 
+onMounted(() => {
+  window.addEventListener('keydown', listenerEscKey)
+})
+
 /** 处理时间 */
 const handleTranslateTime = (time: Date, type: EColumnType) => {
   let translateTime
@@ -180,6 +184,17 @@ const tableSearch = () => {
 const currentChange = (current: number) => {
   emits('pageCurrentChange', current)
 }
+
+/** 监听 esc 按钮按下 */
+const listenerEscKey = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    if (searchShow.value) searchShow.value = false
+  }
+}
+
+onBeforeRouteLeave(() => {
+  window.removeEventListener('keydown', listenerEscKey)
+})
 </script>
 
 <script lang="ts">
