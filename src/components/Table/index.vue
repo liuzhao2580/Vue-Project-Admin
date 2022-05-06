@@ -20,6 +20,9 @@
         ></span>
       </div>
     </div>
+    <div class="table-component-search" v-show="tableSearchShow">
+      tableSearchShow
+    </div>
     <el-table
       style="width: 100%"
       class="table"
@@ -43,7 +46,6 @@
         type="index"
         label="序号"
         width="60"
-        :index="indexMethod"
         v-if="tableConfig.indexFlag"
       >
       </el-table-column>
@@ -56,60 +58,32 @@
         :key="tableIndex"
       >
         <template #default="scope">
-          <!-- 搜索栏 -->
-          <template v-if="scope.$index === 0 && tableConfig.searchFlag">
-            <TableHeaderSearch
-              :tableHeaderSearch="tableItem"
-              :searchParamsValue="searchParamsValue"
-            />
-          </template>
-          <!-- 数据栏 -->
-          <template v-else>
-            <!-- 时间,日期转换 -->
-            <span v-if="EColumnTypeFlag(tableItem.type!)"
-              >{{
+          <!-- 时间,日期转换 -->
+          <span v-if="EColumnTypeFlag(tableItem.type!)"
+            >{{
                 handleTranslateTime(scope.row[tableItem.prop], tableItem.type!)
-              }}
-            </span>
-            <span v-else>{{ scope.row[tableItem.prop] }}</span>
-          </template>
+            }}
+          </span>
+          <span v-else>{{ scope.row[tableItem.prop] }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right" min-width="100">
-        <template #default="scope">
-          <!-- 搜索栏开启时的操作 -->
-          <template v-if="scope.$index === 0 && tableConfig.searchFlag">
-            <el-tooltip placement="top" effect="light" content="搜索">
-              <el-button
-                icon="el-icon-search"
-                size="small"
-                circle
-                @click="handleSearch"
-              ></el-button>
-            </el-tooltip>
-            <el-tooltip placement="top" effect="light" content="重置">
-              <el-button icon="el-icon-refresh" size="small" circle></el-button>
-            </el-tooltip>
-          </template>
-          <!-- 其他操作 -->
-          <template v-else>
-            <el-tooltip
-              v-for="(operaItem, operaIndex) in tableConfig.operation"
-              :key="operaIndex"
-              :content="operaItem.text"
-              placement="top"
-              effect="light"
-            >
-              <el-button
-                size="small"
-                circle
-                :icon="operaItem.icon"
-                :type="operaItem.type"
-                @click="operaItem.handle"
-              ></el-button>
-            </el-tooltip>
-          </template>
-        </template>
+        <!-- 其他操作 -->
+        <el-tooltip
+          v-for="(operaItem, operaIndex) in tableConfig.operation"
+          :key="operaIndex"
+          :content="operaItem.text"
+          placement="top"
+          effect="light"
+        >
+          <el-button
+            size="small"
+            circle
+            :icon="operaItem.icon"
+            :type="operaItem.type"
+            @click="operaItem.handle"
+          ></el-button>
+        </el-tooltip>
       </el-table-column>
     </el-table>
     <!-- 分页组件 -->
@@ -127,15 +101,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, shallowRef, withDefaults } from 'vue'
+import { computed, ref, withDefaults } from 'vue'
 import moment from 'moment'
-import {
-  TableConfigModel
-} from '@/typescript/shared/model/tableModel/table-config.model'
-import { FilterConditionModel } from '@/typescript/shared/model/tableModel/filter-condition.model'
-import { initFilterField } from './shared/utils'
-import { SearchModelValue } from './shared/model/serach-model-value'
-import TableHeaderSearch from './components/TableHeaderSearch.vue'
+import { TableConfigModel } from '@/typescript/shared/model/tableModel/table-config.model'
 import { PageModel } from '@/typescript/shared/model/tableModel/page-config.model'
 import { EColumnType } from '@/typescript/shared/enum/table-enum'
 
@@ -156,10 +124,15 @@ const props = withDefaults(defineProps<IProps>(), {
 
 const emits = defineEmits<{ (e: 'pageCurrentChange', current: number): void }>()
 
-/** 表格过滤的条件 */
-const searchParamsValue = shallowRef<SearchModelValue>(
-  initFilterField(props.tableConfig)
-)
+/** 用来处理 表格搜索组件的显示隐藏 */
+const searchShow = ref<boolean>(false)
+/** 表格搜索组件的显示隐藏 */
+const tableSearchShow = computed(() => {
+  let flag = false
+  if (props.tableConfig.searchFlag) flag = false
+  if (searchShow.value) flag = true
+  return flag
+})
 
 /** 表格的样式 */
 const tableHeaderStyle = computed(() => {
@@ -174,13 +147,6 @@ const searchIconFlag = computed(() => {
   if (props.tableConfig.searchFlag || searchable) flag = true
   return flag
 })
-/** 自定义索引,当开启搜索栏的时候,索引为0的不显示 */
-const indexMethod = (index: number) => {
-  if (props.tableConfig.searchFlag) {
-    if (index) return index
-  } else return index + 1
-}
-
 const EColumnTypeFlag = (type: EColumnType) => {
   return EColumnType[type]
 }
@@ -207,34 +173,7 @@ const tablePrint = () => {
 /** 展开关闭 表格的搜索 */
 const tableSearch = () => {
   // 用来显示隐藏搜索栏
-  const searchFlag = props.tableConfig.searchFlag
-  console.log(searchFlag, 'searchFlag')
-  // 说明搜索栏已经展开
-  if (searchFlag) {
-    // props.tableData.splice(0, 1)
-  }
-  // 说明搜索栏还未展开
-  else {
-    if (props.tableConfig.columnConfig) {
-      const getFilter = props.tableConfig.columnConfig.map(item => {
-        return item.prop
-      })
-      const filterObj = {}
-      // getFilter.forEach(item => (filterObj[item] = ''))
-      // props.tableData.unshift(filterObj)
-    }
-  }
-  // props.tableConfig.showSearch = !showSearch
-}
-/** 表格点击搜索按钮 */
-const handleSearch = () => {
-  let queryParams: FilterConditionModel[] = []
-  // 用来过滤 只有当 filterValue 有值的时候才说明需要过滤数据
-  for (const key in searchParamsValue.value) {
-    if (searchParamsValue.value[key].filterValue)
-      queryParams.push(searchParamsValue.value[key])
-  }
-  props.tableConfig.handleSearch && props.tableConfig.handleSearch()
+  searchShow.value = !searchShow.value
 }
 
 /** 表格的页码改变事件 */

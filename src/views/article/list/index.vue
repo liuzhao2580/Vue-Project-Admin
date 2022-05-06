@@ -14,14 +14,16 @@ import { onMounted, ref, shallowReactive, shallowRef } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
 import { queryArticleListAPI } from '@/api/modules/article'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
-import {
-  TableConfigModel
-} from '@/typescript/shared/model/tableModel/table-config.model'
+import { TableConfigModel } from '@/typescript/shared/model/tableModel/table-config.model'
 import { PageModel } from '@/typescript/shared/model/tableModel/page-config.model'
 import { FilterConditionModel } from '@/typescript/shared/model/tableModel/filter-condition.model'
 import { IArticleBasic } from '@/typescript/views/article/interface/article-config.interface'
 import TableComponent from '@/components/Table/index.vue'
-import { EColumnType, EOperationType, ESearchType } from '@/typescript/shared/enum/table-enum'
+import {
+  EColumnType,
+  EOperationType,
+  ESearchType
+} from '@/typescript/shared/enum/table-enum'
 /** 表格的数据 */
 const tableData = ref<IArticleBasic[]>([])
 /** 表格的分页 */
