@@ -58,7 +58,7 @@ export interface ISearchConfig {
   /** 当搜索类型为下拉选择时 默认多选 */
   selectType?: ESelectType
   /** 当搜索类型为下拉选择时 下拉框中的数据 */
-  selectData?: string
+  selectOptions?: string
   label?: string
   value?: string
   /** 初始值 */

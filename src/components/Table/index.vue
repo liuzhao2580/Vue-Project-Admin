@@ -21,7 +21,11 @@
       </div>
     </div>
     <!-- 搜索组件 -->
-    <TableSearch v-show="tableSearchShow" @maskClick="searchShow = false" />
+    <TableSearch
+      v-show="tableSearchShow"
+      :column-config="tableSearchFilterData"
+      @maskClick="searchShow = false"
+    />
     <el-table
       style="width: 100%"
       class="table"
@@ -146,6 +150,13 @@ const searchIconFlag = computed(() => {
   )
   if (props.tableConfig.searchFlag || searchable) flag = true
   return flag
+})
+
+/** 用来过滤 表格搜索组件需要的参数 */
+const tableSearchFilterData = computed(()=> {
+  return props.tableConfig.columnConfig.filter(item => {
+    return item.searchable
+  })
 })
 const EColumnTypeFlag = (type: EColumnType) => {
   return EColumnType[type]

@@ -34,7 +34,7 @@ export enum ESearchType {
   dateRange = 'dateRange',
   /** 年月日 时分秒 YYYY-MM-DD HH:mm:ss */
   dateTime = 'dateTime',
-  /** 年月日 时分秒范围 YYYY-MM-DD HH:mm:ss ~ YYYY-MM-DD HH:mm:ss*/
+  /** 年月日 时分秒范围 YYYY-MM-DD HH:mm:ss ~ YYYY-MM-DD HH:mm:ss */
   dateTimeRange = 'dateTimeRange',
   /** 步进器 */
   inputNumber = 'inputNumber'
