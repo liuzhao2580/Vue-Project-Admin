@@ -24,6 +24,7 @@
     <TableSearch
       v-show="tableSearchShow"
       :column-config="tableSearchFilterData"
+      :search-model="tableSearchModel"
       @maskClick="searchShow = false"
     />
     <el-table
@@ -158,6 +159,18 @@ const tableSearchFilterData = computed(()=> {
     return item.searchable
   })
 })
+
+/** 表格搜索组件中, 用来绑定 model */
+const tableSearchModel = computed(()=> {
+  let returnObj: {
+    [key: string]: string
+  } = {}
+  tableSearchFilterData.value.forEach(item => {
+    returnObj[item.prop] = ''
+  })
+  return returnObj
+})
+
 const EColumnTypeFlag = (type: EColumnType) => {
   return EColumnType[type]
 }

@@ -40,12 +40,12 @@ router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormali
         console.log(error)
       }
     } else {
-      next(true)
       Nprogress.done()
+      next()
     }
   } else {
     if (to.path === RouterPath.LOGIN) {
-      next(true)
+      next()
     } else {
       next({
         path: RouterPath.LOGIN

@@ -11,7 +11,7 @@
           <span class="">{{ column.label }}</span>
           <!-- 输入框 -->
           <template v-if="column.searchConfig?.type === ESearchType.input">
-            <el-input v-model="input" />
+            <el-input v-model="modelObj[column.prop]" />
           </template>
           <!-- 下拉选 -->
           <template
@@ -35,7 +35,7 @@
       </div>
       <div class="table-search-box-btn">
         <el-button @click="searchCancel">取消</el-button>
-        <el-button type="primary">搜索</el-button>
+        <el-button type="primary" @click="searchClick">搜索</el-button>
         <el-button type="info">重置</el-button>
       </div>
     </div>
@@ -45,18 +45,25 @@
 </template>
 
 <script setup lang="ts">
+import { cloneDeep } from 'lodash'
 import { ESearchType } from '@/typescript/shared/enum/table-enum'
 import { IColumnConfig } from '@/typescript/shared/interface/table-interface'
 import { ref } from 'vue'
 interface IProps {
   columnConfig: IColumnConfig[]
+  searchModel: {}
 }
 
-defineProps<IProps>()
+const props = defineProps<IProps>()
 
 const emits = defineEmits<{ (e: 'maskClick'): void }>()
 
-const input = ref()
+const modelObj = ref(cloneDeep(props.searchModel))
+
+/** 搜索按钮点击事件 */
+const searchClick = ()=> {
+  console.log(modelObj.value)
+}
 
 /** 取消按钮点击 */
 const searchCancel = () => {
@@ -67,6 +74,7 @@ const searchCancel = () => {
 const maskClick = () => {
   emits('maskClick')
 }
+
 </script>
 
 <script lang="ts">

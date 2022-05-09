@@ -1,8 +1,3 @@
-/** 用来处理 ts 中 for in 出现 报错的问题 */
-export const validKeyFlag = (key: string | number | symbol, object: Object): key is keyof typeof object => {
-  return key in object
-}
-
 /** 深拷贝 */
 export const deepClone = <T extends object>(obj: T): T => {
   const result: any =
