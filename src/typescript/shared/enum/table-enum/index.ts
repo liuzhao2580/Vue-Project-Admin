@@ -28,6 +28,8 @@ export enum ESearchType {
   input = 'input',
   /** 下拉选 */
   select = 'select',
+  /** 时间选择器 */
+  timePicker = 'timePicker',
   /** 年月日 YYYY-MM-DD */
   date = 'date',
   /** 年月日 范围 YYYY-MM-DD~YYYY-MM-DD */

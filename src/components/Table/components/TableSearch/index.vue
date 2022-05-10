@@ -8,7 +8,7 @@
           :key="index"
           class="table-search-box-container-item"
         >
-          <span class="">{{ column.label }}</span>
+          <span>{{ column.label }}</span>
           <!-- 输入框 -->
           <template v-if="column.searchConfig?.type === ESearchType.input">
             <el-input v-model="modelObj[column.prop]" />
@@ -26,9 +26,21 @@
               />
             </el-select> -->
           </template>
+          <!-- 时间选择器 -->
+          <template
+            v-else-if="column.searchConfig?.type === ESearchType.timePicker"
+          >
+            <el-time-picker v-model="modelObj[column.prop]" />
+          </template>
           <!-- 年月日 YYYY-MM-DD -->
+          <template v-else-if="column.searchConfig?.type === ESearchType.date">
+            <el-date-picker v-model="modelObj[column.prop]" type="date" />
+          </template>
           <!-- 年月日 范围 YYYY-MM-DD~YYYY-MM-DD -->
           <!-- 年月日 时分秒 YYYY-MM-DD HH:mm:ss -->
+          <template v-else-if="column.searchConfig?.type === ESearchType.dateTime">
+            <el-date-picker v-model="modelObj[column.prop]" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" />
+          </template>
           <!-- 年月日 时分秒范围 YYYY-MM-DD HH:mm:ss ~ YYYY-MM-DD HH:mm:ss -->
           <!-- 步进器 -->
         </div>
@@ -61,7 +73,7 @@ const emits = defineEmits<{ (e: 'maskClick'): void }>()
 const modelObj = ref(cloneDeep(props.searchModel))
 
 /** 搜索按钮点击事件 */
-const searchClick = ()=> {
+const searchClick = () => {
   console.log(modelObj.value)
 }
 
@@ -74,7 +86,6 @@ const searchCancel = () => {
 const maskClick = () => {
   emits('maskClick')
 }
-
 </script>
 
 <script lang="ts">
@@ -112,7 +123,7 @@ export default {
         > span {
           width: 100px;
         }
-        .el-input {
+        :deep(.el-input) {
           flex: 1;
         }
       }
