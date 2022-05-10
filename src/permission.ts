@@ -20,10 +20,7 @@ router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormali
      * 在退出登录的时候会清除 token
      */
     const Need_refresh = store.state.user.Need_refresh
-    if (to.path === RouterPath.LOGIN) {
-      Nprogress.done()
-      return false
-    }
+    if (to.path === RouterPath.LOGIN) return false
     /**
      * 说明是正常的路由页面
      * 判断是否刷新页面 false 否 true 是
@@ -34,13 +31,11 @@ router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormali
         await store.dispatch(
           USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID
         )
-        Nprogress.done()
         next(to)
       } catch (error) {
         console.log(error)
       }
     } else {
-      Nprogress.done()
       next()
     }
   } else {
@@ -51,7 +46,6 @@ router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormali
         path: RouterPath.LOGIN
       })
     }
-    Nprogress.done()
   }
 })
 router.afterEach(() => {
