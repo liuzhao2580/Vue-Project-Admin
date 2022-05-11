@@ -18,28 +18,22 @@
       <el-time-select
         placeholder="起始时间"
         v-model="state.startTime"
-        :picker-options="{
-          start: '00:00',
-          step: '00:60',
-          end: '24:00',
-          maxTime: state.endTime
-        }"
+        start="00:00"
+        step="00:60"
+        end="24:00"
+        :max-time="state.endTime"
         @change="startTimeChange"
-      >
-      </el-time-select>
+      />
       <el-time-select
         placeholder="结束时间"
         v-model="state.endTime"
         :disabled="!state.startTime"
-        :picker-options="{
-          start: '00:00',
-          step: '00:60',
-          end: '24:00',
-          minTime: state.startTime
-        }"
+        start="00:00"
+        step="00:60"
+        end="24:00"
+        :min-time="state.startTime"
         @change="endTimeChange"
-      >
-      </el-time-select>
+      />
     </div>
     <!-- 日期选择器 日期 和 月份 -->
     <el-date-picker
@@ -51,8 +45,7 @@
       end-placeholder="结束日期"
       v-model="state.datePickerValue"
       :type="state.radioValue"
-      @change="(event: Array<Date>) => datePickerChange(event, state.radioValue)"
-      style="width: 200px"
+      @change="(value: Event | Date[]) => datePickerChange(value, state.radioValue)"
     >
     </el-date-picker>
     <!-- 年份选择器 -->
@@ -64,7 +57,7 @@
         v-model="state.startYear"
         type="year"
         :disabled-date="(time:Date) =>{
-            if (state.endYear) return time > state.endYear
+            if (state.endYear) return time.toString() > state.endYear
           }"
         placeholder="选择年"
         @change="startYearChange"
@@ -73,7 +66,7 @@
       <el-date-picker
         v-model="state.endYear"
         :disabled="!state.startYear"
-        :disabled-date="(time: Date)=> {if (state.startYear) return time < state.startYear}"
+        :disabled-date="(time: Date)=> {if (state.startYear) return time.toString() < state.startYear}"
         type="year"
         placeholder="选择年"
         @change="endYearChange"
@@ -105,9 +98,11 @@ import {
   getBetweenTime
 } from '../shared/utils/between-time'
 
+type BetweenTimeType = BetweenTimeTypeEnum | string | number | boolean
+
 interface IState {
   /** 单选框选中的数据 */
-  radioValue: BetweenTimeTypeEnum
+  radioValue: BetweenTimeType
   /** 开始时间 */
   startTime: string
   /** 结束时间 */
@@ -134,13 +129,13 @@ const state = reactive<IState>({
   /** 结束年份 */
   endYear: '',
   /** 日期选择器 绑定的 model */
-  datePickerValue: '',
+  datePickerValue: 'date',
   /** 时间选择器选中的数据 */
   selectedTimeData: []
 })
 
 /** 单选框绑定值 发生变化 改变事件 */
-const radioChange = (value: BetweenTimeTypeEnum) => {
+const radioChange = (value: BetweenTimeType) => {
   state.radioValue = value
   state.selectedTimeData = []
 }
@@ -153,8 +148,8 @@ const endTimeChange = (value: string | null) => {
   if (value) state.selectedTimeData = getBetweenTime(state.startTime, value)
 }
 /** 日期选择器 改变事件 */
-const datePickerChange = (value: Array<Date>, type: BetweenTimeTypeEnum) => {
-  if (!value) return
+const datePickerChange = (value: Event | Date[], type: BetweenTimeType) => {
+  if (!value || !Array.isArray(value)) return
   // 日期
   if (type === BetweenTimeTypeEnum.date)
     state.selectedTimeData = getBetweenDate(value[0], value[1])
@@ -163,12 +158,13 @@ const datePickerChange = (value: Array<Date>, type: BetweenTimeTypeEnum) => {
     state.selectedTimeData = getBetweenMonth(value[0], value[1])
 }
 /** 年份选择器 改变事件 开始年份 */
-const startYearChange = (value: Date | null) => {
+const startYearChange = (value: Event) => {
   if (!value) state.endYear = ''
 }
 /** 年份选择器 改变事件 结束年份 */
-const endYearChange = (value: Date | null) => {
-  if (value) state.selectedTimeData = getBetweenYear(state.startYear, value)
+const endYearChange = (value: Event) => {
+  if (value)
+    state.selectedTimeData = getBetweenYear(state.startYear, value.toString())
 }
 </script>
 

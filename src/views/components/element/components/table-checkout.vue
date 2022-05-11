@@ -28,7 +28,7 @@ import { ref } from 'vue'
 import { ElTable } from 'element-plus'
 
 interface IUser {
-  id: number|string
+  id: number | string
   date: string
   name: string
   address: string

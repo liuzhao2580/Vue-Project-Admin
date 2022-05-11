@@ -107,64 +107,65 @@
     </el-table>
   </div>
 </template>
-<script>
-export default {
-  name: 'TableHeaderCom',
-  data() {
-    return {
-      headerData: [
-        {
-          label: '日期',
-          prop: 'date',
-          dateSelect: true,
-          dateValue: ''
-        },
-        {
-          label: '名称',
-          prop: 'name',
-          inputSelect: true,
-          inputValue: ''
-        },
-        {
-          label: '类型',
-          prop: 'type',
-          select: true,
-          selectValue: '',
-          selectOptions: [
-            {
-              value: 'Vue',
-              label: 'Vue'
-            },
-            {
-              value: 'React',
-              label: 'React'
-            },
-            {
-              value: 'Angular',
-              label: 'Angular'
-            }
-          ]
-        }
-      ],
-      tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          type: 'Vue'
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          type: 'React'
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          type: 'Angular'
-        }
-      ]
-    }
+
+<script lang="ts" setup>
+import { shallowRef } from 'vue'
+const headerData = shallowRef([
+  {
+    label: '日期',
+    prop: 'date',
+    dateSelect: true,
+    dateValue: ''
+  },
+  {
+    label: '名称',
+    prop: 'name',
+    inputSelect: true,
+    inputValue: ''
+  },
+  {
+    label: '类型',
+    prop: 'type',
+    select: true,
+    selectValue: '',
+    selectOptions: [
+      {
+        value: 'Vue',
+        label: 'Vue'
+      },
+      {
+        value: 'React',
+        label: 'React'
+      },
+      {
+        value: 'Angular',
+        label: 'Angular'
+      }
+    ]
   }
+])
+const tableData = shallowRef([
+  {
+    date: '2016-05-02',
+    name: '王小虎',
+    type: 'Vue'
+  },
+  {
+    date: '2016-05-04',
+    name: '王小虎',
+    type: 'React'
+  },
+  {
+    date: '2016-05-01',
+    name: '王小虎',
+    type: 'Angular'
+  }
+])
+</script>
+
+<script lang="ts">
+export default {
+  name: 'TableHeaderCom'
 }
 </script>
 
