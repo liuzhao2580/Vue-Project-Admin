@@ -1,5 +1,5 @@
 <template>
-  <div id="map-box">
+  <div class="map-box">
     <p class="href-box">
       <a href="https://lbs.amap.com/api/javascript-api/summary/" target="_black"
         >高德地图API</a
@@ -8,15 +8,18 @@
     <!-- 修改地图的配置 -->
     <!-- <option-config /> -->
     <!-- 地图主体 -->
-    <!-- <a-map-com /> -->
+    <div id="AMap"></div>
   </div>
 </template>
 
 <script lang="ts" setup>
-// import AMapCom from './components/AMap.vue'
+import { onMounted } from 'vue'
+import AMapUtils from './utils'
 
+onMounted(()=> {
+  AMapUtils.init()
+})
 
-// import OptionConfig from './components/OptionConfig.vue'
 </script>
 
 <script lang="ts">
@@ -26,4 +29,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.map-box {
+  .href-box {
+    height: 100px;
+  }
+  #AMap {
+    height: 800px;
+  }
+}
+</style>
