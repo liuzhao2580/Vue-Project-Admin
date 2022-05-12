@@ -5,37 +5,36 @@
         >高德地图API</a
       >
     </p>
-    <!-- 修改地图的配置 -->
-    <!-- <option-config /> -->
     <!-- 地图主体 -->
-    <div id="AMap"></div>
+    <div id="GDMap"></div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue'
-import AMapUtils from './utils'
-
-onMounted(()=> {
-  AMapUtils.init()
-})
 
 </script>
 
 <script lang="ts">
 import { RouterName } from '@/router/RouteConst'
+import MapUtils from './utils'
 export default {
-  name: RouterName.AMAP
+  name: RouterName.AMAP,
+  mounted() {
+    MapUtils.init()
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+$height: 100px;
 .map-box {
+  display: flex;
+  flex-direction: column;
   .href-box {
-    height: 100px;
+    height: $height;
   }
-  #AMap {
-    height: 800px;
+  #GDMap {
+    height: 800px;;
   }
 }
 </style>
