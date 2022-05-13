@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-box">
     <!-- 卡片 -->
-    <!-- <CardCom /> -->
+    <CardCom />
     <!-- Echarts 图表 -->
     <EchartsCom :echartsData="echartsData" />
     <el-row :gutter="20">
@@ -17,7 +17,7 @@
 import { onMounted, ref } from 'vue'
 import { dashboardEchartsApi } from '@/api/modules/dashboard'
 import EchartsCom from '@/components/EchartsCom/index.vue'
-// import CardCom from './components/CardCom/index.vue'
+import CardCom from './components/CardCom/index.vue'
 import TodoList from './components/TodoList/index.vue'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 

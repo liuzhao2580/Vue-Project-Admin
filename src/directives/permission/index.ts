@@ -1,10 +1,8 @@
 /** 用来设置权限功能的全局指令 */
-import { createApp } from 'vue'
 import { getCookie } from '@/utils/cookies'
-// eslint-disable-next-line vue/require-name-property
-const app = createApp({})
-app.directive('permission', {
-  beforeMount(el, binding) {
+import { DirectiveBinding } from 'vue'
+const permission = {
+  beforeMount(el: HTMLElement, binding:DirectiveBinding) {
     const { value: permissionValue } = binding
     const roleId = getCookie('roleId')?.toString()
     // 说明用户的 权限id 和 当前功能需要的 权限id 不相同
@@ -18,4 +16,6 @@ app.directive('permission', {
       el.style.pointerEvents = 'none'
     }
   }
-})
+}
+
+export default permission

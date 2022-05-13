@@ -12,7 +12,7 @@
     >
       <div class="card-item">
         <div class="img">
-          <img v-image-rotote src="~@/assets/images/funny.png" />
+          <img v-img-rotote src="~@/assets/images/funny.png" />
         </div>
         <div class="text-title lineEllipsisOne">小火车况且况且</div>
       </div>
@@ -20,11 +20,12 @@
   </el-row>
 </template>
 
+<script lang="ts" setup>
+</script>
+
 <script lang="ts">
-import imageRotote from '@/directives/imgRotote'
 export default {
-  name: 'CardCom',
-  directives: { imageRotote }
+  name: 'CardCom'
 }
 </script>
 

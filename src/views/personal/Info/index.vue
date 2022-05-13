@@ -14,7 +14,7 @@
         <i class="el-icon-star-on"></i>
         爱好
         <el-divider></el-divider>
-        <el-tag v-for="tag in tags" :key="tag.name" :type="tag.type">{{
+        <el-tag v-for="tag in tags" :key="tag.name">{{
           tag.name
         }}</el-tag>
       </div>
