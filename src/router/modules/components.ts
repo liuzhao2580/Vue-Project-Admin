@@ -63,6 +63,15 @@ const components: RouteRecordRaw = {
         )
     },
     {
+      path: RouterPath.AUDIO_VIDEO,
+      meta: { title: '音视频', icon: 'audio-video' },
+      name: RouterName.AUDIO_VIDEO,
+      component: () =>
+        import(
+          /* webpackChunkName: "componentsPage" */ '@/views/components/audio-video/index.vue'
+        )
+    },
+    {
       path: RouterPath.OTHER_COMPONENTS,
       meta: { title: '其他组件', icon: 'other-components' },
       name: RouterName.OTHER_COMPONENTS,

@@ -32,6 +32,8 @@ export const RouterName = {
   ELEMENT: 'ElementPage',
   /** 拓扑图 */
   TOPOLOGY: 'TopologyPage',
+  /** 音视频 */
+  AUDIO_VIDEO: 'AudioVideoPage',
   /** 其他组件 */
   OTHER_COMPONENTS: 'OtherComponents',
   /** 错误页面 */
@@ -78,6 +80,8 @@ export const RouterPath = {
   ELEMENT: '/components/element',
   /** 拓扑图 */
   TOPOLOGY: '/components/topology',
+  /** 音视频 */
+  AUDIO_VIDEO: '/components/audio-video',
   /** 其他组件 */
   OTHER_COMPONENTS: '/components/other-components',
   /** 错误页面 */
