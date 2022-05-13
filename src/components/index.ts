@@ -1,4 +1,4 @@
-import { Component } from 'vue'
+import type { Component } from 'vue'
 import SvgIcon from './SvgIcon/index.vue'
 
 const components: {

@@ -1,8 +1,8 @@
 <template v-if="!item.meta.hidden">
   <!-- 首先判断 当级路由下不存在多级路由 -->
   <el-menu-item v-if="checkMoreRouter(item)" :index="item.path">
-    <SvgIcon :iconClass="item.meta.icon" />
-    <span class="menu-title">{{ item.meta.title }}</span>
+    <SvgIcon :iconClass="item.meta?.icon" />
+    <span class="menu-title">{{ item.meta?.title }}</span>
   </el-menu-item>
   <!-- 当级路由下存在多级路由 -->
   <el-sub-menu
@@ -11,8 +11,8 @@
     :class="{ MenuitemClass: side_status && !isMoreChild }"
   >
     <template #title>
-      <SvgIcon :iconClass="item.meta.icon" />
-      <span class="menu-title">{{ item.meta.title }}</span>
+      <SvgIcon :iconClass="item.meta?.icon" />
+      <span class="menu-title">{{ item.meta?.title }}</span>
     </template>
     <template v-if="item.children">
       <SidebarItem

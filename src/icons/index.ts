@@ -1,11 +1,3 @@
-import { createApp } from 'vue'
-import SvgIcon from '@/components/SvgIcon/index.vue'
-
-// eslint-disable-next-line vue/require-name-property
-const app = createApp({})
-// 注册全局组件
-app.component('svg-icon', SvgIcon)
-
 /**
  * 固定语法 , webpack 上下文模块API 上下文模块导出一个带一个参数的（require）函数：
  * 请求。导出的功能有3个属性：resolve，keys，id。
