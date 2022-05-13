@@ -11,17 +11,17 @@
 </template>
 
 <script lang="ts" setup>
-
+import { onMounted } from 'vue'
+import MapUtils from './utils'
+onMounted(() => {
+  MapUtils.init()
+})
 </script>
 
 <script lang="ts">
 import { RouterName } from '@/router/RouteConst'
-import MapUtils from './utils'
 export default {
-  name: RouterName.AMAP,
-  mounted() {
-    MapUtils.init()
-  }
+  name: RouterName.AMAP
 }
 </script>
 
@@ -34,7 +34,7 @@ $height: 100px;
     height: $height;
   }
   #GDMap {
-    height: 800px;;
+    height: 800px;
   }
 }
 </style>
