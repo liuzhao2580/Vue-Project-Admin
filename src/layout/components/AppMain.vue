@@ -1,11 +1,9 @@
 <template>
   <div class="AppMain-box">
     <router-view v-slot="{ Component }">
-      <transition name="fade-transition" mode="out-in">
-        <keep-alive :include="keepAliveRoutes">
-          <component :is="Component" />
-        </keep-alive>
-      </transition>
+      <keep-alive :include="keepAliveRoutes">
+        <component :is="Component" />
+      </keep-alive>
     </router-view>
   </div>
 </template>
