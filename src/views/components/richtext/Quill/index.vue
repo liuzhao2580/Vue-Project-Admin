@@ -45,6 +45,12 @@ onUnmounted(() => {
 })
 </script>
 
+<script lang="ts">
+export default {
+  name: 'QuillIndex'
+}
+</script>
+
 <style lang="scss" scoped>
 #quill-editor {
   height: 500px;

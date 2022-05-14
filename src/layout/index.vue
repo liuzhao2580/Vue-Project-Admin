@@ -78,6 +78,12 @@ const $_ResizeScreen = debounce((): void => {
 }, 500)
 </script>
 
+<script lang="ts">
+export default {
+  name: 'LayoutIndex'
+}
+</script>
+
 <style lang="scss" scoped>
 .app-warpper {
   .container-box {

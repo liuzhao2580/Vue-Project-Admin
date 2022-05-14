@@ -82,6 +82,12 @@ const content_Item = [
 ]
 </script>
 
+<script lang="ts">
+export default {
+  name: 'ActiveIndex'
+}
+</script>
+
 <style lang="scss" scoped>
 .active-box {
   .active-content {

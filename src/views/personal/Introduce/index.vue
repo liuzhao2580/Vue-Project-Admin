@@ -20,4 +20,10 @@ import timeline from './timeline.vue'
 import account from './account.vue'
 </script>
 
+<script lang="ts">
+export default {
+  name: 'PersonalIndex'
+}
+</script>
+
 <style lang="scss" scoped></style>

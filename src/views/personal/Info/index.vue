@@ -52,4 +52,10 @@ const nickname = computed(() => {
 })
 </script>
 
+<script lang="ts">
+export default {
+  name: 'InfoIndex'
+}
+</script>
+
 <style lang="scss" scoped></style>
