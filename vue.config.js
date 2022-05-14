@@ -1,6 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 const CompressionPlugin = require('compression-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+
 const { title, basePrefix } = require('./src/setting.ts')
 const path = require('path')
 
@@ -21,7 +22,7 @@ function resolve(dir) {
 //   'mavon-editor': 'MavonEditor',
 //   '@antv/x6': 'X6'
 // }
-// 配置生产的 plugin
+/** 配置生产的 plugin */
 const productionPlugins = [
   // 开启 gzip
   new CompressionPlugin({
@@ -29,7 +30,7 @@ const productionPlugins = [
     threshold: 10240 // 只处理比这个值大的资源。按字节计算 设置的是 10kb
   })
 ]
-// 只要不是开发环境的配置
+/** 只要不是开发环境的配置 */
 const minimizer = [
   new TerserPlugin({
     test: /\.js(\?.*)$/i,
@@ -59,6 +60,7 @@ if (process.env.NODE_ENV === 'pages') {
 
 /** 判断是否不是开发环境 */
 const isNotDev = process.env.NODE_ENV !== 'development'
+console.log(isNotDev, 'isNotDev')
 module.exports = defineConfig({
   publicPath,
   outputDir: 'dist',
@@ -101,14 +103,30 @@ module.exports = defineConfig({
     },
     module: {
       rules: [
+        // 开启多线程打包
+        {
+          test: /\.js$/,
+          include: resolve('src'),
+          use: [
+            {
+              loader: 'thread-loader',
+              options: {
+                // 产生的 worker 的数量，默认是 (cpu 核心数 - 1)，或者，
+                // 在 require('os').cpus() 是 undefined 时回退至 1
+                workers: 2
+              }
+            }
+          ]
+        },
         // 全局导入 scss
         {
           test: /\.scss$/,
+          exclude: /node_modules/,
           use: [
             {
-              loader: 'style-resources-loader',
+              loader: 'sass-resources-loader',
               options: {
-                patterns: ['./src/styles/variables.scss']
+                resources: ['./src/styles/variables.scss']
               }
             }
           ]
@@ -130,6 +148,7 @@ module.exports = defineConfig({
     // set svg-sprite-loader
     // 设置 svg 导入
     config.module.rule('svg').exclude.add(resolve('src/icons')).end()
+
     config.module
       .rule('icons')
       .test(/\.svg$/)

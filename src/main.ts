@@ -27,3 +27,4 @@ for (const componentItme in globalComponent) {
   app.component(componentItme, globalComponent[componentItme])
 }
 
+console.log(process.env.NODE_ENV, 'NODE_ENV')
