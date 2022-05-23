@@ -74,15 +74,15 @@
                 &.is-active {
                   .el-submenu__title {
                     span {
-                      color: $subMenuActiveText;
+                      color: #f4f4f5;
                     }
                   }
                 }
                 .el-menu-item {
-                  background-color: $subMenuBg !important;
+                  background-color: #1f2d3d !important;
 
                   &:hover {
-                    background-color: $subMenuHover !important;
+                    background-color: #001528 !important;
                   }
                 }
                 .el-icon-arrow-right {

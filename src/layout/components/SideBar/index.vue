@@ -11,9 +11,9 @@
     <el-menu
       :collapse="side_status"
       :default-active="activeMenu"
-      :background-color="variables.menuBg"
-      :text-color="variables.menuText"
-      :active-text-color="variables.menuActiveText"
+      background-color="#304156"
+      text-color="#bfcbd9"
+      active-text-color="#409eff"
       router
       unique-opened
     >
@@ -54,12 +54,6 @@ const side_status = computed(() => {
 const sideBarList = computed(() => {
   return store.state.user.sideBarList
 })
-
-/** 导入 自定义的样式属性 */
-const variables = computed(() => {
-  return require('@/styles/variables.module.scss')
-})
-
 /** logo 点击事件 */
 const sideBarTitleClick = () => {
   router.push(RouterPath.DASHBOARD)

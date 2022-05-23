@@ -53,7 +53,6 @@ if (process.env.NODE_ENV === 'pages') {
 
 /** 判断是否不是开发环境 */
 const notDevFlag = process.env.NODE_ENV !== 'development'
-console.log(notDevFlag, 'notDevFlag')
 module.exports = defineConfig({
   publicPath,
   outputDir: 'dist',
@@ -92,7 +91,7 @@ module.exports = defineConfig({
     },
     plugins: notDevFlag ? productionPlugins : [],
     optimization: {
-      minimizer: isNotDev ? minimizer : []
+      minimizer: notDevFlag ? minimizer : []
     },
     module: {
       rules: [
