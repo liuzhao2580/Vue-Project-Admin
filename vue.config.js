@@ -26,24 +26,17 @@ function resolve(dir) {
 const productionPlugins = [
   // 开启 gzip
   new CompressionPlugin({
-    test: /\.js$|\.ts$|\.html$|\.css/,
+    test: /\.(js|ts|html|css)$/,
     threshold: 10240 // 只处理比这个值大的资源。按字节计算 设置的是 10kb
   })
 ]
 /** 只要不是开发环境的配置 */
 const minimizer = [
   new TerserPlugin({
-    test: /\.js(\?.*)$/i,
+    // 使用多进程并发运行以提高构建速度
     parallel: true,
     minify: TerserPlugin.uglifyJsMinify,
-    terserOptions: {
-      format: {
-        comments: true // https://webpack.docschina.org/plugins/terser-webpack-plugin/#remove-comments 如果要在构建时去除注释，请使用以下配置
-      },
-      compress: {
-        drop_console: true
-      }
-    },
+    // 是否将注释剥离到单独的文件中
     extractComments: false
   })
 ]
@@ -59,8 +52,8 @@ if (process.env.NODE_ENV === 'pages') {
 }
 
 /** 判断是否不是开发环境 */
-const isNotDev = process.env.NODE_ENV !== 'development'
-console.log(isNotDev, 'isNotDev')
+const notDevFlag = process.env.NODE_ENV !== 'development'
+console.log(notDevFlag, 'notDevFlag')
 module.exports = defineConfig({
   publicPath,
   outputDir: 'dist',
@@ -97,7 +90,7 @@ module.exports = defineConfig({
       },
       extensions: ['.tsx', '.ts', '.js', '.vue']
     },
-    plugins: isNotDev ? productionPlugins : [],
+    plugins: notDevFlag ? productionPlugins : [],
     optimization: {
       minimizer: isNotDev ? minimizer : []
     },
