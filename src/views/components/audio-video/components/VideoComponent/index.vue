@@ -80,9 +80,6 @@ export default {
 <style scoped lang="scss">
 .video-title {
   margin: 6px 0;
-  a {
-    color: $brandColor;
-  }
 }
 #video-play {
   width: 200px;

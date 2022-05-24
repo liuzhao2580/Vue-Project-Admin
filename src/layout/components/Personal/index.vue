@@ -1,6 +1,19 @@
 <template>
   <div class="Personal-box">
-    <el-dropdown @command="handleCommand">
+    <!-- 切换全局样式 -->
+    <el-switch
+      v-model="switchGlobal"
+      inline-prompt
+      :active-value="switchStyleGlobal.light"
+      :inactive-value="switchStyleGlobal.dark"
+      :active-icon="Sunny"
+      :inactive-icon="Moon"
+      class="Personal-box-switch"
+      active-color="#b2b2b2"
+      inactive-color="#333"
+      @change="switchChange"
+    />
+    <el-dropdown @command="handleCommand" class="Personal-box-dropdown">
       <span style="display: inline-block">
         <el-avatar :src="avatar"></el-avatar>
         <el-icon class="el-icon--right"><ArrowDown /></el-icon>
@@ -23,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Component, computed, shallowRef } from 'vue'
+import { Component, computed, onMounted, ref, shallowRef } from 'vue'
 import { useRouter } from 'vue-router'
 import { removeCookie } from '@/utils/cookies'
 import { resetRouter } from '@/router'
@@ -35,7 +48,9 @@ import {
   Document,
   SwitchButton,
   Guide,
-  ArrowDown
+  ArrowDown,
+  Sunny,
+  Moon
 } from '@element-plus/icons-vue'
 
 const store = useStore()
@@ -47,6 +62,11 @@ interface IRef {
   title: string
   icon: Component
   dividedFlag?: boolean
+}
+
+enum switchStyleGlobal {
+  light = 'light',
+  dark = 'dark'
 }
 
 const dropdownList = shallowRef<IRef[]>([
@@ -78,6 +98,16 @@ const dropdownList = shallowRef<IRef[]>([
   }
 ])
 
+/** 获取 html dom元素 */
+const htmlDom = ref<HTMLHtmlElement>()
+
+/** 全局的样式切换 */
+const switchGlobal = ref<switchStyleGlobal>(switchStyleGlobal.light)
+
+onMounted(()=> {
+  htmlDom.value = document.querySelector('html') as HTMLHtmlElement
+})
+
 const avatar = computed(() => {
   return store.state.user.avatar
 })
@@ -98,6 +128,19 @@ const handleCommand = (command: string) => {
     router.push({ path: command })
   }
 }
+
+type switchStyleGlobalType = switchStyleGlobal | string | number | boolean
+
+/** 全局样式 switch 改变事件 */
+const switchChange = (val: switchStyleGlobalType) => {
+  if(!htmlDom.value) return
+  if(val === switchStyleGlobal.light) {
+    htmlDom.value.removeAttribute('theme')
+  }
+  else if(val === switchStyleGlobal.dark) {
+    htmlDom.value.setAttribute('theme', switchStyleGlobal.dark)
+  }
+}
 </script>
 
 <script lang="ts">
@@ -109,13 +152,18 @@ export default {
 <style lang="scss" scoped>
 .Personal-box {
   margin-right: 10px;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
   :deep(.el-avatar) {
     width: 50px;
     height: 50px;
     img {
       width: 100%;
     }
+  }
+  &-dropdown {
+    margin-left: 10px;
+    cursor: pointer;
   }
 }
 </style>

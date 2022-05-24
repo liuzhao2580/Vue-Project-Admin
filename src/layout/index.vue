@@ -54,7 +54,6 @@ const dynamicWidth = computed(() => {
   return '200px'
 })
 
-
 // 在 mobile 移动端模式下显示隐藏 侧边栏按钮
 const showORhidden = () => {
   store.commit(APP_MUTATIONS_TYPES.MUT_UNFLOD_SIDE)

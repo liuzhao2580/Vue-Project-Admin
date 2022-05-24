@@ -1,73 +1,70 @@
 .Navbar-box {
-    .Navbar-Breadcrumb {
-        display: flex;
-        align-items: center;
-        box-shadow: 0px 1px 1px #e6e6e6;
-        // 侧边栏展开 收缩按钮
-        .side-btn {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            line-height: 50px;
-            font-size: 25px;
+  .Navbar-Breadcrumb {
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 1px 1px #e6e6e6;
+    // 侧边栏展开 收缩按钮
+    .side-btn {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 25px;
+      cursor: pointer;
+      transition: 0.5s;
+
+      &:hover {
+        background-color: #ebe7e7;
+      }
+    }
+
+    // 面包屑
+    .breadcrumb-box {
+      flex: 1;
+    }
+  }
+  // tags
+  .TagsView-box {
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    box-shadow: 0px 2px 2px #ccc;
+    white-space: nowrap;
+    width: 100%;
+    :deep(.TagsView-scrollbar) {
+      .el-scrollbar__wrap {
+        overflow-y: hidden;
+        .el-scrollbar__view {
+          .el-tag {
             cursor: pointer;
-            transition: 0.5s;
-
-            &:hover {
-                background-color: #ebe7e7;
+            height: 28px;
+            line-height: 28px;
+            border-color: #ccc;
+            color: #292626;
+            margin-right: 5px;
+            border-radius: 0;
+            position: relative;
+            background-color: transparent;
+            &.is-active {
+              background-color: $brandColor;
+              color: #fff;
+              padding-left: 18px;
+              &::before {
+                content: '';
+                position: absolute;
+                left: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #fff;
+              }
             }
+          }
         }
-
-        // 面包屑
-        .breadcrumb-box {
-            flex: 1;
-        }
+      }
     }
-    // tags
-    .TagsView-box {
-        padding: 0 20px;
-        height: 40px;
-        line-height: 40px;
-        box-shadow: 0px 2px 2px #ccc;
-        white-space: nowrap;
-        width: 100%;
-        :deep(.TagsView-scrollbar) {
-            .el-scrollbar__wrap {
-                overflow-y: hidden;
-                .el-scrollbar__view {
-                    .el-tag {
-                        cursor: pointer;
-                        height: 28px;
-                        line-height: 28px;
-                        border-color: #ccc;
-                        color: #292626;
-                        margin-right: 5px;
-                        border-radius: 0;
-                        position: relative;
-                        background-color: transparent;
-                        &.is-active {
-                            background-color: $brandColor;
-                            color: #fff;
-                            padding-left: 18px;
-                            &::before {
-                                content: "";
-                                position: absolute;
-                                left: 5px;
-                                top: 50%;
-                                transform: translateY(-50%);
-                                width: 8px;
-                                height: 8px;
-                                border-radius: 50%;
-                                background-color: #fff;
-                            }
-                        }
-                        
-                    }
-                }
-            }
-            
-        }
-    }
-    
+  }
 }

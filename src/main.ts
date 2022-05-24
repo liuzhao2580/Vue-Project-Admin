@@ -6,7 +6,6 @@ import router from './router'
 import { store, key } from './store'
 import mockXHR from '@/mock'
 
-import '@/styles/theme.scss' // 换肤功能
 import '@/permission' // 权限验证
 import '@/styles/index.scss' // 公共的样式
 import './icons' // 导入 icon 字体
@@ -26,5 +25,3 @@ globalDirectives(app)
 for (const componentItme in globalComponent) {
   app.component(componentItme, globalComponent[componentItme])
 }
-
-console.log(process.env.NODE_ENV, 'NODE_ENV')
