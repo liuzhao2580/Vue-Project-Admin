@@ -52,7 +52,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: RouterPath.DASHBOARD,
         component: () =>
           import(
-            /* webpackChunkName: "baseComponet" */ '@/views/dashboard/index.vue'
+            /* webpackChunkName: "dashboardComponet" */ '@/views/dashboard/index.vue'
           ),
         name: RouterName.DASHBOARD,
         meta: { title: '首页', icon: 'index', affix: true, keepAlive: true }
