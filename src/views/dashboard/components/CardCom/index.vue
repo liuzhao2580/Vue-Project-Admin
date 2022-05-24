@@ -42,9 +42,12 @@ export default {
     border-radius: 5px;
     .img {
       width: 30%;
+      padding: 10px;
       img {
+        display: inline-block;
         border-radius: 50%;
         width: 100%;
+        height: 100%;
       }
     }
     .text-title {
