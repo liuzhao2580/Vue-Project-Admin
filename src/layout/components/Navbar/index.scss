@@ -40,16 +40,16 @@
             cursor: pointer;
             height: 28px;
             line-height: 28px;
-            border-color: #ccc;
-            color: #292626;
+            color: var(--lz-text-color);
+            border-color: var(--lz-border-color);
             margin-right: 5px;
             border-radius: 0;
             position: relative;
             background-color: transparent;
             &.is-active {
-              background-color: $brandColor;
-              color: #fff;
+              background-color: $standardColor;
               padding-left: 18px;
+              color: #fff;
               &::before {
                 content: '';
                 position: absolute;
@@ -60,6 +60,7 @@
                 height: 8px;
                 border-radius: 50%;
                 background-color: #fff;
+                color: var(--lz-text-color);
               }
             }
           }

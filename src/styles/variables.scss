@@ -1,9 +1,14 @@
-$brandColor: #409eff;
+$standardColor: #409eff; // 标准的颜色
+
 // 白色主题
 :root {
-  --lz-color-text: pink;
+  --lz-bg-color: #fff;
+  --lz-text-color: #333;
+  --lz-border-color: #ccc;
 }
 // 黑色主题
-:root[theme = 'dark'] {
-  --lz-color-text: #333;
+:root.dark {
+  --lz-bg-color: #333;
+  --lz-text-color: #fff;
+  --lz-border-color: #bbb;
 }

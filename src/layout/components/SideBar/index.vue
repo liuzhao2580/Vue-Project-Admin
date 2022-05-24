@@ -11,9 +11,6 @@
     <el-menu
       :collapse="side_status"
       :default-active="activeMenu"
-      background-color="#304156"
-      text-color="#bfcbd9"
-      active-text-color="#409eff"
       router
       unique-opened
     >
@@ -66,4 +63,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

@@ -135,10 +135,10 @@ type switchStyleGlobalType = switchStyleGlobal | string | number | boolean
 const switchChange = (val: switchStyleGlobalType) => {
   if(!htmlDom.value) return
   if(val === switchStyleGlobal.light) {
-    htmlDom.value.removeAttribute('theme')
+    htmlDom.value.className = ''
   }
   else if(val === switchStyleGlobal.dark) {
-    htmlDom.value.setAttribute('theme', switchStyleGlobal.dark)
+    htmlDom.value.className = switchStyleGlobal.dark
   }
 }
 </script>

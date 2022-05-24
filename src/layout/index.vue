@@ -85,11 +85,6 @@ export default {
 
 <style lang="scss" scoped>
 .app-warpper {
-  .container-box {
-    .sider-box {
-      background-color: #304156;
-    }
-  }
   .mobile {
     .click-icon {
       cursor: pointer;

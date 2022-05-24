@@ -15,6 +15,7 @@
         bottom: 0;
         border-radius: 0;
         transition: width 0.3s;
+        border-right: 1px solid var(--lz-text-color);
         .SideBar-scrollbar {
           height: 100%;
           .el-scrollbar__wrap {
@@ -25,25 +26,24 @@
               white-space: nowrap;
               transition: padding-left 0.3s;
               cursor: pointer;
-
+              display: flex;
+              align-items: center;
               img {
                 width: 40px;
                 height: 40px;
                 border-radius: 50%;
                 vertical-align: bottom;
               }
-
               span {
                 font-size: 20px;
                 margin-left: 10px;
-                color: #fff;
+                color: var(--lz-text-color);
                 transition: display 0.3s;
               }
             }
             .el-menu {
               border: 0;
             }
-
             // 二级侧边栏的背景色
             .SidebarItem-box {
               // 用于解决 出现的侧边栏收起 但是侧边栏文字和右箭头不隐藏的bug
@@ -79,8 +79,6 @@
                   }
                 }
                 .el-menu-item {
-                  background-color: #1f2d3d !important;
-
                   &:hover {
                     background-color: #001528 !important;
                   }
