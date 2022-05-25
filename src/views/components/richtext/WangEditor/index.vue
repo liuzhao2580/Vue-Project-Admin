@@ -1,58 +1,65 @@
 <template>
+  <p>
+    具体配置
+    <a href="https://www.wangeditor.com/" target="block"> 官方文档</a>
+  </p>
   <div class="WangEidtor-box">
-    <p>
-      具体配置
-      <a
-        href="http://www.wangeditor.com/"
-        style="color: #409eff"
-        target="block"
-      >
-        官方文档</a
-      >
-    </p>
-    <div id="WangEidtor"></div>
-    <el-button type="primary" class="WangEidtor-btn">提交</el-button>
+    <div id="toolbar-container"></div>
+    <div id="WangEidtor" style="height: 600px"></div>
   </div>
+  <el-button type="primary" class="WangEidtor-btn" @click="submitClick"
+    >提交</el-button
+  >
 </template>
 
 <script lang="ts" setup>
-import { configMenu, configColors, fontNames } from './config'
-import WE from 'wangeditor'
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import '@wangeditor/editor/dist/css/style.css'
+import {
+  createEditor,
+  createToolbar,
+  IEditorConfig,
+  IToolbarConfig
+} from '@wangeditor/editor'
+import { onBeforeUnmount, onMounted, shallowRef } from 'vue'
 
-const wangEditor = ref()
+const editorConfig: Partial<IEditorConfig> = {}
 
+// 工具栏配置
+const toolbarConfig: Partial<IToolbarConfig> = {
+  excludeKeys: ['fullScreen']
+}
+
+// 创建编辑器
+const editor = shallowRef()
 onMounted(() => {
   initWangEditor()
 })
 
 onBeforeUnmount(() => {
-  if (wangEditor.value) {
-    wangEditor.value.destroy()
-    wangEditor.value = null
+  if (editor.value) {
+    editor.value.destroy()
+    editor.value = null
   }
 })
 const initWangEditor = () => {
-  let editor = new WE('#WangEidtor')
-  console.log(editor, 1111)
-  // 自定义菜单配置
-  editor.config.menus = configMenu
-  // 使用 base64 保存图片
-  editor.config.uploadImgShowBase64 = true
-  // 配置字体颜色、背景色
-  editor.config.colors = configColors
-  editor.config.fontNames = fontNames
-  editor.create()
-  wangEditor.value = editor
+  editorConfig.placeholder = '请输入内容'
+  editor.value = createEditor({
+    selector: '#WangEidtor',
+    config: editorConfig,
+    mode: 'default' // 或 'simple' 参考下文
+  })
 
-  ;(document.querySelector('.WangEidtor-btn') as HTMLElement).addEventListener(
-    'click',
-    function () {
-      // 读取 html
-      console.log(editor.txt.html())
-    },
-    false
-  )
+  createToolbar({
+    editor: editor.value,
+    selector: '#toolbar-container',
+    config: toolbarConfig,
+    mode: 'default' // 或 'simple' 参考下文
+  })
+}
+
+/** 提交按钮 */
+const submitClick = () => {
+  console.log(editor.value?.getHtml())
 }
 </script>
 
@@ -62,4 +69,16 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.WangEidtor-box {
+  margin: 10px 0;
+  border: 1px solid var(--lz-border-color);
+  border-radius: 5px;
+  > :deep(div) {
+    .w-e-bar,.w-e-text-container {
+      background-color: var(--lz-bg-color);
+      color: var(--lz-text-color);
+    }
+  }
+}
+</style>
