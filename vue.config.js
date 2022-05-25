@@ -2,26 +2,15 @@ const { defineConfig } = require('@vue/cli-service')
 const CompressionPlugin = require('compression-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
-const { title, basePrefix } = require('./src/setting.ts')
+const { title, basePrefix, notDevFlag } = require('./src/setting.ts')
 const path = require('path')
-
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
-// 配置 externals
-// const externalsConfig = {
-//   vue: 'Vue',
-//   'vue-router': 'VueRouter',
-//   vuex: 'Vuex',
-//   'element-ui': 'ELEMENT',
-//   echarts: 'echarts',
-//   quill: 'Quill',
-//   wangeditor: 'wangEditor',
-//   axios: 'axios',
-//   mockjs: 'Mock',
-//   'mavon-editor': 'MavonEditor',
-//   '@antv/x6': 'X6'
-// }
+/** 配置 externals */
+const externalsConfig = {
+  wangeditor: 'wangEditor'
+}
 /** 配置生产的 plugin */
 const productionPlugins = [
   // 开启 gzip
@@ -51,8 +40,6 @@ if (process.env.NODE_ENV === 'pages') {
   publicPath = basePrefix
 }
 
-/** 判断是否不是开发环境 */
-const notDevFlag = process.env.NODE_ENV !== 'development'
 module.exports = defineConfig({
   publicPath,
   outputDir: 'dist',
@@ -81,7 +68,7 @@ module.exports = defineConfig({
 
   // webpack 简单配置 如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中。
   configureWebpack: {
-    // externals: process.env.NODE_ENV !== 'development' ? externalsConfig : {},
+    externals: notDevFlag ? externalsConfig : {},
     name,
     resolve: {
       alias: {

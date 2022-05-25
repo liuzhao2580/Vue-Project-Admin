@@ -13,6 +13,7 @@
 </template>
 
 <script lang="ts" setup>
+import { onBeforeUnmount, onMounted, shallowRef } from 'vue'
 import '@wangeditor/editor/dist/css/style.css'
 import {
   createEditor,
@@ -20,8 +21,6 @@ import {
   IEditorConfig,
   IToolbarConfig
 } from '@wangeditor/editor'
-import { onBeforeUnmount, onMounted, shallowRef } from 'vue'
-
 const editorConfig: Partial<IEditorConfig> = {}
 
 // 工具栏配置
@@ -75,7 +74,8 @@ export default {
   border: 1px solid var(--lz-border-color);
   border-radius: 5px;
   > :deep(div) {
-    .w-e-bar,.w-e-text-container {
+    .w-e-bar,
+    .w-e-text-container {
       background-color: var(--lz-bg-color);
       color: var(--lz-text-color);
     }
