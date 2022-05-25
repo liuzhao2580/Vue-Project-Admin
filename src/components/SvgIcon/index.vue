@@ -1,7 +1,9 @@
 <template>
-  <svg class="icon-svg" aria-hidden="true">
-    <use :xlink:href="IconName" />
-  </svg>
+  <i class="icon-svg">
+    <svg class="icon-svg" aria-hidden="true">
+      <use :xlink:href="IconName" />
+    </svg>
+  </i>
 </template>
 
 <script lang="ts" setup>
@@ -11,7 +13,7 @@ interface IProps {
 }
 const props = defineProps<IProps>()
 
-const IconName = computed(()=> {
+const IconName = computed(() => {
   return `#icon-${props.iconClass}`
 })
 </script>
@@ -24,10 +26,13 @@ export default {
 
 <style lang="scss" scoped>
 .icon-svg {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
+  width: 24px;
+  svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+  }
 }
 </style>
