@@ -3,7 +3,7 @@ import { ElMessage } from 'element-plus'
 
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { ResultModel } from '@/typescript/shared/model/'
-import { getCookie, removeCookie } from '@/utils/cookies'
+import { getCookie, removeCookie, CONST_VARIABLE } from '@/utils/cookies'
 import { resetRouter } from '@/router'
 const baseURL = process.env.VUE_APP_BASE_API
 const Axios = axios.create({
@@ -17,7 +17,7 @@ const Axios = axios.create({
 // 添加请求拦截器
 Axios.interceptors.request.use(
   config => {
-    config.headers['Authorization'] = `Bearer ${getCookie('token')}`
+    config.headers['Authorization'] = `Bearer ${getCookie(CONST_VARIABLE.TOKEN)}`
     return config
   },
   error => {
@@ -40,8 +40,8 @@ Axios.interceptors.response.use(
       _Message.error({
         message: 'token 无效'
       })
-      removeCookie('token')
-      removeCookie('user_id')
+      removeCookie(CONST_VARIABLE.TOKEN)
+      removeCookie(CONST_VARIABLE.USER_ID)
       // 重置 路由
       resetRouter()
       return response.data

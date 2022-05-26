@@ -1,10 +1,10 @@
 /** 用来设置权限功能的全局指令 */
-import { getCookie } from '@/utils/cookies'
+import { getCookie, CONST_VARIABLE } from '@/utils/cookies'
 import { DirectiveBinding } from 'vue'
 const permission = {
   beforeMount(el: HTMLElement, binding:DirectiveBinding) {
     const { value: permissionValue } = binding
-    const roleId = getCookie('roleId')?.toString()
+    const roleId = getCookie(CONST_VARIABLE.ROLE_ID)?.toString()
     // 说明用户的 权限id 和 当前功能需要的 权限id 不相同
     if (roleId !== permissionValue.toString()) {
       el.style.color = '#c0c4cc'

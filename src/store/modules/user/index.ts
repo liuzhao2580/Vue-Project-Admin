@@ -2,7 +2,7 @@ import { ElMessage } from 'element-plus'
 import { StoreUserModel } from '@/typescript/store'
 import { USER_MUTATIONS_TYPES, USER_ACTIONS_TYPES } from './types'
 import { userInfoApi } from '@/api/modules/user'
-import { setCookie, getCookie, removeCookie } from '@/utils/cookies'
+import { setCookie, getCookie, removeCookie, CONST_VARIABLE } from '@/utils/cookies'
 import { deepClone } from '@/utils/config'
 import { asyncRoutes, resetRouter, insertRouter } from '@/router'
 import { IUserBaseInfo } from '@/typescript/shared/interface/user-interface'
@@ -18,17 +18,17 @@ const _Message = ElMessage
  */
 // 判断当前的路由是否存在权限 如该用户可以访问该页面就返回true 否则返回false
 const hasPrimission = (
-  route: { meta: { roles: string | any[] } },
-  roleId: any
+  route: RouteRecordRaw,
+  roleId: number
 ) => {
-  return route.meta.roles.includes(roleId)
+  return route.meta?.roles.includes(roleId)
 }
 // 根据roleId 整理成为新的路由
-const creatRouter = (routes: any, roleId: any) => {
-  const routesArr: any[] = []
-  routes.children.forEach((item: { meta: { roles: any }; children: any }) => {
+const creatRouter = (route: RouteRecordRaw, roleId: number) => {
+  const routesArr: RouteRecordRaw[] = []
+  route.children?.forEach(item => {
     // 说明需要根据权限展示页面
-    if (item.meta.roles) {
+    if (item.meta?.roles) {
       // 1. 首先判断该用户是否可以访问该页面
       if (hasPrimission(item, roleId)) {
         // 2. 再判断 该页面是否存在子路由
@@ -77,9 +77,9 @@ const actions = {
   ) {
     return new Promise<void>((resolve, reject) => {
       // 存入 token
-      setCookie('token', data.token as string)
-      setCookie('userId', data.id as string)
-      data.roleId && setCookie('roleId', data.roleId.toString())
+      setCookie(CONST_VARIABLE.TOKEN, data.token!)
+      setCookie(CONST_VARIABLE.USER_ID, data.id as string)
+      data.roleId && setCookie(CONST_VARIABLE.ROLE_ID, data.roleId.toString())
       commit(USER_MUTATIONS_TYPES.MUT_USER_INFO, data)
       try {
         resolve()
@@ -91,22 +91,22 @@ const actions = {
   // 页面刷新 重新获取用户信息, 路由信息
   [USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID]({ commit }: ActionContext<StoreUserModel, any>) {
     return new Promise(async resolve => {
-      const userId = getCookie('userId')
+      const userId = getCookie(CONST_VARIABLE.USER_ID)
       // 获取用户的基本信息
       const result = await userInfoApi(userId)
       if (result.code === ResultCodeEnum.invalidToken) {
         _Message.error({
           message: 'token 无效'
         })
-        removeCookie('token')
-        removeCookie('user_id')
+        removeCookie(CONST_VARIABLE.TOKEN)
+        removeCookie(CONST_VARIABLE.USER_ID)
         // 重置 路由
         resetRouter()
         return
-      } else if (result.code === ResultCodeEnum.success) {
+      } else if (result.code === ResultCodeEnum.success && result.data) {
         commit(USER_MUTATIONS_TYPES.MUT_USER_INFO, result.data)
         // 通过递归获取用户的路由权限，侧边栏数据
-        const getList = creatRouter(asyncRoutes[0], result.data?.roleId)
+        const getList = creatRouter(asyncRoutes[0], result.data.roleId as number)
         // 深拷贝用户的侧边栏数据
         const newRoutesList = deepClone<RouteRecordRaw>(asyncRoutes[0])
         newRoutesList.children = getList

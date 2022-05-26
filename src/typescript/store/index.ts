@@ -13,11 +13,11 @@ export class StoreAppModel {
 export class StoreUserModel {
   /** 动态路由侧边栏的数据 */
   sideBarList: RouteRecordRaw[] = []
-  /** 动态路由侧边栏的数据 */
+  /** 用户头像 */
   avatar = ''
-  /** 动态路由侧边栏的数据 */
+  /** 昵称 */
   nickname = ''
-  /** 动态路由侧边栏的数据 */
+  /** token */
   token = ''
   /** 判断是否刷新页面 false 否 true 是 */
   Need_refresh = true

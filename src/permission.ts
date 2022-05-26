@@ -4,7 +4,7 @@ import { LoadingInstance } from 'element-plus/es/components/loading/src/loading'
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css' // 必须要的样式
 import router from '@/router'
-import { getCookie } from '@/utils/cookies'
+import { getCookie, CONST_VARIABLE } from '@/utils/cookies'
 import setPageTitle from '@/utils/setPageTitle'
 import { store } from '@/store'
 import { USER_ACTIONS_TYPES } from './store/modules/user/types'
@@ -17,7 +17,7 @@ router.beforeEach(
     from: RouteLocationNormalized,
     next: Function
   ) => {
-    const token = getCookie('token')
+    const token = getCookie(CONST_VARIABLE.TOKEN)
     // 用于设置 浏览器的 title 显示
     document.title = setPageTitle(to.meta.title)
     Nprogress.start()

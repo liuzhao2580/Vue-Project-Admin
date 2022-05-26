@@ -38,7 +38,7 @@
 <script lang="ts" setup>
 import { Component, computed, onMounted, ref, shallowRef } from 'vue'
 import { useRouter } from 'vue-router'
-import { removeCookie } from '@/utils/cookies'
+import { removeCookie, CONST_VARIABLE } from '@/utils/cookies'
 import { resetRouter } from '@/router'
 import { useStore } from '@/store'
 import { RouterPath } from '@/router/RouteConst'
@@ -113,8 +113,8 @@ const avatar = computed(() => {
 })
 // 登出
 const login_Out = () => {
-  removeCookie('token')
-  removeCookie('user_id')
+  removeCookie(CONST_VARIABLE.TOKEN)
+  removeCookie(CONST_VARIABLE.USER_ID)
   // 重置 路由
   resetRouter()
   router.push({ path: RouterPath.LOGIN })
