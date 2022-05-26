@@ -10,6 +10,8 @@ export const RouterName = {
   DASHBOARD: 'DashboardPage',
   /** 文档页 */
   DOCUMENTATION: 'DocumentationPage',
+  /** 权限管理页面 */
+  ADMIN: 'AdminPage',
   /** 文章页 */
   ARTICLE: 'ArticlePage',
   /** 文章创建 */
@@ -58,6 +60,8 @@ export const RouterPath = {
   DASHBOARD: '/dashboard',
   /** 文档页 */
   DOCUMENTATION: '/documentation',
+  /** 权限管理页面 */
+  ADMIN: '/admin',
   /** 文章页 */
   ARTICLE: '/article',
   /** 文章创建 */

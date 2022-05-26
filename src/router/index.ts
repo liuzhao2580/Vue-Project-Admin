@@ -6,6 +6,7 @@ import error_page from './modules/error'
 import components from './modules/components'
 import { RouterName, RouterPath } from './RouteConst'
 const { basePrefix } = require('@/setting')
+
 // 公共的页面
 export const constantRoutes: RouteRecordRaw[] = [
   // 登录页面
@@ -22,7 +23,10 @@ export const constantRoutes: RouteRecordRaw[] = [
     meta: {
       hidden: true
     },
-    component: () => import(/* webpackChunkName: "baseComponet" */ '@/views/error_page/404_page.vue')
+    component: () =>
+      import(
+        /* webpackChunkName: "baseComponet" */ '@/views/error_page/404_page.vue'
+      )
   }
 ]
 // 需要权限的页面
@@ -66,6 +70,16 @@ export const asyncRoutes: RouteRecordRaw[] = [
           ),
         name: RouterName.DOCUMENTATION,
         meta: { title: '文档', icon: 'wendang', affix: true, keepAlive: true }
+      },
+      // 权限管理
+      {
+        path: RouterPath.ADMIN,
+        name: RouterName.ADMIN,
+        meta: { title: '权限管理', icon: 'admin' },
+        component: () =>
+          import(
+            /* webpackChunkName: "admminComponent" */ '@/views/admin/index.vue'
+          )
       },
       // 文章页
       {
@@ -137,7 +151,7 @@ const router = createRouter({
 export const resetRouter = () => {
   const newRouter = asyncRoutes
   newRouter.forEach(route => {
-    if(route.name) router.removeRoute(route.name)
+    if (route.name) router.removeRoute(route.name)
   })
 }
 
