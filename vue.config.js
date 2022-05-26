@@ -9,7 +9,9 @@ function resolve(dir) {
 }
 /** 配置 externals */
 const externalsConfig = {
-  wangeditor: 'wangEditor'
+  wangeditor: 'wangEditor',
+  echarts: 'echarts',
+  marked: 'marked'
 }
 /** 配置生产的 plugin */
 const productionPlugins = [
