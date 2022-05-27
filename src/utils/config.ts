@@ -48,3 +48,22 @@ export const createScript = (src: string, responStr?: string) => {
     scriptDom.onerror = () => reject()
   })
 }
+
+/** ts中的枚举字段 转换为枚举中文字段 */
+export function EnumFieldToTransform<T, S>(enumField: T, enumTransform: S, field: any) {
+  console.log(enumField, enumTransform)
+  let getTransform: any
+  for (const fieldKey in enumField) {
+    const fieldValue = enumField[fieldKey]
+    if(Number(field) === Number(fieldValue)) {
+      for (const transformKey in enumTransform) {
+        if(fieldKey as string === transformKey as string) {
+          getTransform = enumTransform[transformKey]
+          break
+        }
+      }
+      break
+    }
+  }
+  return getTransform
+}
