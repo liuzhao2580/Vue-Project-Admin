@@ -58,3 +58,6 @@ import echarts from 'echarts'
         "strictPropertyInitialization": false
     }
     ```
+
+##### 依赖包说明
+- [@antv/g6](https://antv-g6.gitee.io/zh/docs/manual/introduction) 是一个图可视化引擎。它提供了图的绘制、布局、分析、交互、动画等图可视化的基础能力。旨在让关系变得透明，简单。让用户获得关系数据的 Insight
