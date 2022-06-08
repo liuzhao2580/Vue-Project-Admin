@@ -1,8 +1,13 @@
 <template>
   <div class="admin-page">
-    <div>
+    <div class="admin-page-current">
       <span>当前角色权限为:</span>
       <span>{{ roleTransform }}</span>
+    </div>
+    <div class="admin-page-radio">
+      <el-radio-group v-model="currentRole">
+        <el-radio-button v-for="radioItem in roleList" :label="radioItem" :key="radioItem" />
+      </el-radio-group>
     </div>
   </div>
 </template>
@@ -14,7 +19,7 @@ import {
   UserRolesEnum,
   UserRolesTextEnum
 } from '@/typescript/shared/enum/user-enum/user-roles.enum'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 const roleTransform = computed(() =>
   EnumFieldToTransform(
     UserRolesEnum,
@@ -22,6 +27,13 @@ const roleTransform = computed(() =>
     getCookie(CONST_VARIABLE.ROLE_ID)
   )
 )
+
+const roleList = computed(()=> {
+  return Object.values(UserRolesTextEnum)
+})
+
+const currentRole = ref(roleTransform.value)
+
 </script>
 
 <script lang="ts">
@@ -32,4 +44,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.admin-page{
+  &-current {
+    font-weight: 700;
+  }
+  &-radio {
+    margin: 10px 0;
+  }
+}
 </style>

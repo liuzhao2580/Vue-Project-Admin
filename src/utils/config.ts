@@ -48,22 +48,24 @@ export const createScript = (src: string, responStr?: string) => {
     scriptDom.onerror = () => reject()
   })
 }
-
+type keyType = string | number | undefined
 /** ts中的枚举字段 转换为枚举中文字段 */
-export function EnumFieldToTransform<T, S>(enumField: T, enumTransform: S, field: any) {
-  console.log(enumField, enumTransform)
-  let getTransform: any
-  for (const fieldKey in enumField) {
-    const fieldValue = enumField[fieldKey]
-    if(Number(field) === Number(fieldValue)) {
-      for (const transformKey in enumTransform) {
-        if(fieldKey as string === transformKey as string) {
-          getTransform = enumTransform[transformKey]
-          break
-        }
-      }
-      break
-    }
+export function EnumFieldToTransform<T extends object, S extends object>(
+  enumField: T,
+  enumTransform: S,
+  field: keyType
+) {
+  function findKey(value: keyType, compare = (a: keyType, b: keyType) => a === b) {
+    return Object.keys(enumField).find((k) =>
+      validKeyFlag(k, enumField) && compare(enumField[k], value)
+    )
   }
-  return getTransform
+  const getFindKey = findKey(field)
+  if(getFindKey && validKeyFlag(getFindKey, enumTransform)) return enumTransform[getFindKey]
+  else console.warn('错误,未匹配到')
+}
+
+function validKeyFlag(key: keyType, object: object): key is keyof typeof object {
+  if(key) return key in object
+  else return false
 }
