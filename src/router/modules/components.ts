@@ -72,6 +72,15 @@ const components: RouteRecordRaw = {
         )
     },
     {
+      path: RouterPath.EMOJI_INPUT,
+      meta: { title: 'EMOJI', icon: 'EMOJI' },
+      name: RouterName.EMOJI_INPUT,
+      component: () =>
+        import(
+          /* webpackChunkName: "componentsPage" */ '@/views/components/emoji/index.vue'
+        )
+    },
+    {
       path: RouterPath.OTHER_COMPONENTS,
       meta: { title: '其他组件', icon: 'other-components' },
       name: RouterName.OTHER_COMPONENTS,

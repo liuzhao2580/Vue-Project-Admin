@@ -36,6 +36,8 @@ export const RouterName = {
   TOPOLOGY: 'TopologyPage',
   /** 音视频 */
   AUDIO_VIDEO: 'AudioVideoPage',
+  /** EMOJI */
+  EMOJI_INPUT: 'EMojiInputPage',
   /** 其他组件 */
   OTHER_COMPONENTS: 'OtherComponents',
   /** 错误页面 */
@@ -86,6 +88,8 @@ export const RouterPath = {
   TOPOLOGY: '/components/topology',
   /** 音视频 */
   AUDIO_VIDEO: '/components/audio-video',
+  /** EMOJI */
+  EMOJI_INPUT: '/components/EMoji-input',
   /** 其他组件 */
   OTHER_COMPONENTS: '/components/other-components',
   /** 错误页面 */
