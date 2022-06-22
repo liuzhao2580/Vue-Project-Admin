@@ -3,7 +3,7 @@
     <div class="emojiContent">
       <!-- 文本框内容-->
       <div
-        ref="emoji"
+        ref="emojiRef"
         contenteditable="true"
         class="contentBox"
         @click.stop="contentClick"
@@ -12,16 +12,19 @@
         @input="contentClick"
       ></div>
       <div class="expression">
-        <img src="@/assets/images/funny.png" @click.stop="show = !show" />
+        <img
+          src="@/assets/images/funny.png"
+          @click.stop="state.show = !state.show"
+        />
       </div>
       <!-- 表情选择框-->
-      <div v-if="show" class="box" @click.stop>
+      <div v-if="state.show" class="box" @click.stop>
         <div class="left">
           <ul>
             <li
               v-for="(item, index) in emojiList"
               :key="index"
-              :class="['cursor', currentType === index ? 'active' : '']"
+              :class="['cursor', state.currentType === index ? 'active' : '']"
             >
               <div @click="emojiTypeSelect(index)">
                 {{ item.name }}
@@ -31,7 +34,7 @@
         </div>
         <div class="right">
           <button
-            v-for="(emoji, index) in enableSelectEmojiList"
+            v-for="(emoji, index) in state.enableSelectEmojiList"
             :key="index"
             class="emoji"
             @click.stop="emojiSelect(emoji)"
@@ -43,7 +46,9 @@
             />
           </button>
         </div>
-        <span title="关闭" class="emoji_close" @click="show = false">X</span>
+        <span title="关闭" class="emoji_close" @click="state.show = false"
+          >X</span
+        >
       </div>
     </div>
     <span @click="confirm">确认</span>
@@ -62,6 +67,20 @@ interface IProps {
   value: string
 }
 
+interface IEmoji {
+  className: string
+  icon: string
+}
+
+interface IState {
+  lastEditRange: Range
+  content: string
+  show: boolean
+  currentType: number
+  enableSelectEmojiList: IEmoji[]
+  dataSource: IEmoji[]
+}
+
 withDefaults(defineProps<IProps>(), {
   width: '50%',
   height: '200px',
@@ -70,9 +89,12 @@ withDefaults(defineProps<IProps>(), {
 const placeholder = shallowRef(
   'http://tkeasyemoji.oss-cn-shanghai.aliyuncs.com/images/placeholder.png'
 )
-const emojiList = shallowRef(emojiData)
-const state = reactive({
-  lastEditRange: '',
+const emojiList = shallowRef<any>(emojiData)
+
+const emojiRef = ref<HTMLDivElement>()
+
+const state = reactive<IState>({
+  lastEditRange: new Range(),
   content: '',
   show: false,
   currentType: 0,
@@ -87,37 +109,35 @@ onMounted(() => {
 })
 // 失去焦点 内容返回
 const onBlur = () => {
-  const text = this.$refs.emoji.innerHTML
+  const text = emojiRef.value?.innerHTML as string
   console.log(text)
-  // eslint-disable-next-line max-len
-  this.content = text
+  state.content = text
     .replace(/<img style="vertical-align: sub;" class="/g, '')
     .replace(/alt="/g, '')
     .replace(/">/g, '')
     .replace(/bg-.{7}/g, '')
-  this.content = this.content.replaceAll('<br>', '\n')
-  console.log(this.content)
-  this.$emit('contentChange', this.content)
+  state.content = state.content.replaceAll('<br>', '\n')
+  console.log(state.content)
 }
 // 表情title点击事件
-const emojiTypeSelect = index => {
-  this.currentType = index
-  this.enableSelectEmojiList = this.emojiList[index].iconArr
+const emojiTypeSelect = (index: number) => {
+  state.currentType = index
+  state.enableSelectEmojiList = emojiList[index].iconArr
 }
 const contentClick = () => {
   // 记录当前光标对象
-  this.lastEditRange = getSelection().getRangeAt(0)
+  state.lastEditRange = getSelection()!.getRangeAt(0)
 }
 // 表情插入文本框
-const emojiSelect = emoji => {
+const emojiSelect = (emoji: IEmoji) => {
   // 输入框
-  const selection = getSelection()
+  const selection = getSelection() as Selection
   // 输入框无光标，自动聚焦
-  if (this.lastEditRange) {
+  if (state.lastEditRange) {
     selection.removeAllRanges()
-    selection.addRange(this.lastEditRange)
+    selection.addRange(state.lastEditRange)
   } else {
-    this.$refs.emoji.focus()
+    emojiRef.value?.focus()
   }
   // eslint-disable-next-line max-len
   const html = `<img style="vertical-align: sub;" src="http://tkeasyemoji.oss-cn-shanghai.aliyuncs.com/images/placeholder.png" class="${emoji.className}" alt="${emoji.icon}">`
@@ -126,7 +146,7 @@ const emojiSelect = emoji => {
   parentNode.innerHTML = html
   const emojiNode = document.createDocumentFragment()
   // 光标对应的 img 节点
-  const lastNode = emojiNode.appendChild(parentNode.firstChild)
+  const lastNode = emojiNode.appendChild(parentNode.firstChild as ChildNode)
   rangeAt.insertNode(emojiNode || null)
   // const rangeAtClone = rangeAt.cloneRange();
   // 将光标设置在新的emoji之前
@@ -136,14 +156,14 @@ const emojiSelect = emoji => {
   selection.removeAllRanges()
   selection.addRange(rangeAt || null)
   // 记录最后光标对象
-  this.lastEditRange = selection.getRangeAt(0)
+  state.lastEditRange = selection.getRangeAt(0)
 }
 const confirm = () => {
-  console.log(this.content)
+  console.log(state.content)
 }
 </script>
 
-<script>
+<script lang="ts">
 import { RouterName } from '@/router/RouteConst'
 export default {
   name: RouterName.EMOJI_INPUT
