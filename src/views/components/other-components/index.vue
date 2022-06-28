@@ -1,13 +1,11 @@
 <template>
   <div class="other-components">
     <el-row :gutter="10">
-      <!-- 计算器 -->
       <el-col :xs="24" :sm="8">
+        <!-- 计算器 -->
         <Calculator />
-      </el-col>
-      <!-- 计算两者的时间 -->
-      <el-col :xs="24" :sm="8">
-        <BetweenTime />
+        <!-- 计算两者的时间 -->
+        <BetweenTime style="margin-top: 20px;" />
       </el-col>
       <!-- 点击出现水波纹效果 -->
       <el-col :xs="24" :sm="8">
