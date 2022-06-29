@@ -5,11 +5,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-/** Css的样式 */
 import WaterRipple from './components/WaterRipple.vue'
 </script>
 
 <script lang="ts">
+/** Css的样式 */
 export default {
   name: 'CssComponent'
 }
