@@ -8,7 +8,7 @@ const dashboardModules: IMockResponse<any>[] = [
     type: ResultTypeEnum.GET,
     response: () => {
       return {
-        code: ResultCodeEnum.success,
+        code: ResultCodeEnum.SUCCESS,
         data: Mock.mock({
           line: [
             {

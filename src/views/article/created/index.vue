@@ -65,7 +65,7 @@ onMounted(() => {
 /** 获取文章分类 */
 const queryArticleCategory = async () => {
   const result = await queryArticleCategoryAPI({ level: 2 })
-  if (result.code === ResultCodeEnum.success) state.categoryData = result.data
+  if (result.code === ResultCodeEnum.SUCCESS) state.categoryData = result.data
   else ElMessage.error(result.msg)
 }
 /** 初始化 编辑器 */

@@ -51,7 +51,7 @@ const userModules: IMockResponse<any>[] = [
       })
       return is_True
         ? {
-          code: ResultCodeEnum.success,
+          code: ResultCodeEnum.SUCCESS,
           data: {
             id: is_True.id,
             userName: is_True.userName,
@@ -82,7 +82,7 @@ const userModules: IMockResponse<any>[] = [
       })
       return is_True
         ? {
-          code: ResultCodeEnum.success,
+          code: ResultCodeEnum.SUCCESS,
           data: {
             id: is_True.id,
             userName: is_True.userName,

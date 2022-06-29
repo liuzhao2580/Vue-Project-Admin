@@ -32,7 +32,7 @@ Axios.interceptors.response.use(
   response => {
     const data: ResultModel<any> = response.data
     // 说明返回数据成功
-    if (data.code === ResultCodeEnum.success) {
+    if (data.code === ResultCodeEnum.SUCCESS) {
       return response.data
     }
     // 说明 token 无效

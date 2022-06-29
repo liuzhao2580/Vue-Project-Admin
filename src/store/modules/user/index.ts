@@ -103,7 +103,7 @@ const actions = {
         // 重置 路由
         resetRouter()
         return
-      } else if (result.code === ResultCodeEnum.success && result.data) {
+      } else if (result.code === ResultCodeEnum.SUCCESS && result.data) {
         commit(USER_MUTATIONS_TYPES.MUT_USER_INFO, result.data)
         // 通过递归获取用户的路由权限，侧边栏数据
         const getList = creatRouter(asyncRoutes[0], result.data.roleId as number)

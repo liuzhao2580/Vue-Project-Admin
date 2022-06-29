@@ -79,7 +79,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       try {
         const result = await userLogin(params)
         console.log(result, 'data')
-        if (result.code === ResultCodeEnum.success) {
+        if (result.code === ResultCodeEnum.SUCCESS) {
           ElMessage({
             message: '登录成功',
             type: 'success'

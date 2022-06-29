@@ -99,7 +99,7 @@ onMounted(() => {
 const init = async () => {
   tableConfig.loading = true
   const result = await queryArticleListAPI(pageConfig.value)
-  if (result.code === ResultCodeEnum.success) {
+  if (result.code === ResultCodeEnum.SUCCESS) {
     tableData.value = result.data
     pageConfig.value.total = result.totalCount as number
   }

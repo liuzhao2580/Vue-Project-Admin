@@ -12,7 +12,7 @@ const articleModules: IMockResponse<any>[] = [
     response: (options: any): ResultModel<any> => {
       const { level, id } = JSON.parse(options.body)
       return {
-        code: ResultCodeEnum.success,
+        code: ResultCodeEnum.SUCCESS,
         data: articleCategoryData.article_category.filter(
           item => item.level === level || item.id === id
         ),
@@ -33,7 +33,7 @@ const articleModules: IMockResponse<any>[] = [
       )
       const totalCount = articleListData.article_list.length
       return {
-        code: ResultCodeEnum.success,
+        code: ResultCodeEnum.SUCCESS,
         data,
         totalCount,
         msg: '成功'

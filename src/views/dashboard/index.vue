@@ -31,7 +31,7 @@ const init = async () => {
   try {
     const result = await dashboardEchartsApi()
     console.log(result, 'result')
-    if (result.code === ResultCodeEnum.success) {
+    if (result.code === ResultCodeEnum.SUCCESS) {
       echartsData.value = {
         xAxis: {
           type: 'category',
