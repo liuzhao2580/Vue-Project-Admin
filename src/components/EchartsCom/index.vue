@@ -24,10 +24,15 @@ const { EchartsInstances } = EchartMixins()
 
 /** echarts 的id */
 const echartsId = `echarts-${
-  new Date().getTime() + 10000 * Math.floor(Math.random())
+  +new Date().getTime() + (10000 * Math.random()).toFixed(0)
 }`
 
 const EchartsDom = ref<HTMLElement>()
+
+// 暴露出去,通过 ref 获取子组件
+defineExpose({
+  echartsInstances: EchartsInstances
+})
 
 onMounted(() => {
   EchartsDom.value = document.querySelector(`#${echartsId}`) as HTMLElement
