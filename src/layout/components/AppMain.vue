@@ -39,7 +39,7 @@ const init = () => {
     })
   }
   loopRoutes(sideBarList.value)
-  // keepAliveRoutes.value = getKeepAlive
+  keepAliveRoutes.value = getKeepAlive
 }
 </script>
 

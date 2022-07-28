@@ -1,6 +1,6 @@
 <template>
   <div class="dragDialog-box">
-    <el-button type="text" @click="dialogVisible = true"
+    <el-button type="primary" link @click="dialogVisible = true"
       >点击打开 Dialog</el-button
     >
     <el-dialog
@@ -9,7 +9,7 @@
       :close-on-click-modal="false"
       draggable
     >
-      <template #title>这是一段信息</template>
+      <template #header>这是一段信息</template>
       <template #footer>
         <div class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
