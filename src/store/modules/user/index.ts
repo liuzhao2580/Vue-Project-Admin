@@ -9,6 +9,7 @@ import { IUserBaseInfo } from '@/typescript/shared/interface/user-interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { RouteRecordRaw } from 'vue-router'
 import { ActionContext } from 'vuex'
+import { UserRolesEnum } from '@/typescript/shared/enum/user-enum/user-roles.enum'
 // 定义一个接受的参数，避免 在请求拦截的时候出现 Message undefined 报错问题
 const _Message = ElMessage
 /**
@@ -19,12 +20,10 @@ const _Message = ElMessage
 // 判断当前的路由是否存在权限 如该用户可以访问该页面就返回true 否则返回false
 const hasPrimission = (
   route: RouteRecordRaw,
-  roleId: number
-) => {
-  return route.meta?.roles.includes(roleId)
-}
+  roleId: UserRolesEnum
+) => route.meta?.roles?.includes(roleId)
 // 根据roleId 整理成为新的路由
-const creatRouter = (route: RouteRecordRaw, roleId: number) => {
+const creatRouter = (route: RouteRecordRaw, roleId: UserRolesEnum) => {
   const routesArr: RouteRecordRaw[] = []
   route.children?.forEach(item => {
     // 说明需要根据权限展示页面
@@ -106,7 +105,7 @@ const actions = {
       } else if (result.code === ResultCodeEnum.SUCCESS && result.data) {
         commit(USER_MUTATIONS_TYPES.MUT_USER_INFO, result.data)
         // 通过递归获取用户的路由权限，侧边栏数据
-        const getList = creatRouter(asyncRoutes[0], result.data.roleId as number)
+        const getList = creatRouter(asyncRoutes[0], result.data.roleId!)
         // 深拷贝用户的侧边栏数据
         const newRoutesList = deepClone<RouteRecordRaw>(asyncRoutes[0])
         newRoutesList.children = getList

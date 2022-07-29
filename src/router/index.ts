@@ -5,6 +5,8 @@ import PageContent from '@/layout/components/AppMain.vue'
 import error_page from './modules/error'
 import components from './modules/components'
 import { RouterName, RouterPath } from './RouteConst'
+import { UserRolesEnum } from '@/typescript/shared/enum/user-enum/user-roles.enum'
+import { IMetaRouter } from '@/typescript/shared/interface/router-interface'
 const { basePrefix } = require('@/setting')
 
 // 公共的页面
@@ -13,7 +15,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: RouterPath.LOGIN,
     name: RouterName.LOGIN,
-    meta: { hidden: true },
+    meta: { hidden: true, title: '登录' },
     component: () =>
       import(/* webpackChunkName: "loginComponent" */ '@/views/login/index.vue')
   },
@@ -21,7 +23,8 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/:catchAll(.*)*',
     meta: {
-      hidden: true
+      hidden: true,
+      title: '404'
     },
     component: () =>
       import(
@@ -75,7 +78,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
       {
         path: RouterPath.ADMIN,
         name: RouterName.ADMIN,
-        meta: { title: '权限管理', icon: 'admin' },
+        meta: { title: '权限管理', icon: 'admin', roles: [UserRolesEnum.superAdmin] },
         component: () =>
           import(
             /* webpackChunkName: "admminComponent" */ '@/views/admin/index.vue'
@@ -84,7 +87,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
       // 文章页
       {
         path: RouterPath.ARTICLE,
-        meta: { title: '文章页', icon: 'article', roles: [1, 2, 3] },
+        meta: { title: '文章页', icon: 'article' },
         redirect: RouterPath.ARTICLE_CREATE,
         component: PageContent,
         name: RouterName.ARTICLE,
@@ -96,7 +99,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
                 /* webpackChunkName: "article" */ '@/views/article/created/index.vue'
               ),
             name: RouterName.ARTICLE_CREATE,
-            meta: { title: '文章创建', icon: 'created', roles: [1, 2] }
+            meta: { title: '文章创建', icon: 'created', roles: [UserRolesEnum.superAdmin, UserRolesEnum.admin] }
           },
           {
             path: RouterPath.ARTICLE_LIST,
@@ -108,7 +111,6 @@ export const asyncRoutes: RouteRecordRaw[] = [
             meta: {
               title: '文章列表',
               icon: 'list',
-              roles: [1, 2, 3],
               keepAlive: true
             }
           }
@@ -159,6 +161,11 @@ export const resetRouter = () => {
 export const insertRouter = (routes: RouteRecordRaw) => {
   resetRouter()
   router.addRoute(routes)
+}
+
+// https://router.vuejs.org/zh/guide/advanced/meta.html#typescript
+declare module 'vue-router' {
+  interface RouteMeta extends IMetaRouter {}
 }
 
 export default router

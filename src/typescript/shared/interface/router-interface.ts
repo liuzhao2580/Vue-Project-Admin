@@ -1,7 +1,7 @@
 import { UserRolesEnum } from '../enum/user-enum/user-roles.enum'
 
 /** 路由的 meta 接口规定 */
-export interface IMetaRouterInferface {
+export interface IMetaRouter {
   /** 该路由是否在侧边栏显示
    * 默认false 显示
    * true 不显示在侧边栏
@@ -29,5 +29,5 @@ export interface IMetaRouterInferface {
   title: string
 
   /** 路由显示在侧边栏的 图标 */
-  icon: string
+  icon?: string
 }

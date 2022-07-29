@@ -1,9 +1,11 @@
+import { UserRolesEnum } from '../../enum/user-enum/user-roles.enum'
+
 /** 1. 用户基本信息的接口 */
 export interface IUserBaseInfo {
   /** 用户 id */
   id?: string | number
   /** 用户的权限 */
-  roleId?: number
+  roleId?: UserRolesEnum
   /** 当前权限的中文说明 */
   roleName?: string
   /** 用户名 */
