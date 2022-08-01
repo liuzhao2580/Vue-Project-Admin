@@ -1,5 +1,5 @@
 /** 用来设置权限功能的全局指令 */
-import { getCookie, CONST_VARIABLE } from '@/utils/cookies'
+import { getCookie, CONST_VARIABLE } from '@/utils/modules/cookies'
 import { DirectiveBinding } from 'vue'
 const permission = {
   beforeMount(el: HTMLElement, binding:DirectiveBinding) {

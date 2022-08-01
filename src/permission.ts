@@ -4,7 +4,7 @@ import { LoadingInstance } from 'element-plus/es/components/loading/src/loading'
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css' // 必须要的样式
 import router from '@/router'
-import { getCookie, CONST_VARIABLE } from '@/utils/cookies'
+import { getCookie, CONST_VARIABLE } from '@/utils/modules/cookies'
 import setPageTitle from '@/utils/modules/setPageTitle'
 import { store } from '@/store'
 import { USER_ACTIONS_TYPES } from './store/modules/user/types'

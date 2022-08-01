@@ -38,7 +38,7 @@
 <script lang="ts" setup>
 import { Component, computed, onMounted, ref, shallowRef } from 'vue'
 import { useRouter } from 'vue-router'
-import { removeCookie, CONST_VARIABLE } from '@/utils/cookies'
+import { removeCookie, CONST_VARIABLE } from '@/utils/modules/cookies'
 import { resetRouter } from '@/router'
 import { useStore } from '@/store'
 import { RouterPath } from '@/router/RouteConst'

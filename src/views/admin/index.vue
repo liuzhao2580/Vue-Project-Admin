@@ -13,13 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import { getCookie, CONST_VARIABLE } from '@/utils/cookies'
+import { computed, ref } from 'vue'
+import { getCookie, CONST_VARIABLE } from '@/utils/modules/cookies'
 import { EnumFieldToTransform } from '@/utils'
 import {
   UserRolesEnum,
   UserRolesTextEnum
 } from '@/typescript/shared/enum/user-enum/user-roles.enum'
-import { computed, ref } from 'vue'
 const roleTransform = computed(() =>
   EnumFieldToTransform(
     UserRolesEnum,
