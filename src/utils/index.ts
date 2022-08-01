@@ -48,6 +48,8 @@ export const createScript = (src: string, responStr?: string) => {
     scriptDom.onerror = () => reject()
   })
 }
+
+
 type keyType = string | number | undefined
 /** ts中的枚举字段 转换为枚举中文字段 */
 export function EnumFieldToTransform<T extends object, S extends object>(

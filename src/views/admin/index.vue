@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { getCookie, CONST_VARIABLE } from '@/utils/cookies'
-import { EnumFieldToTransform } from '@/utils/config'
+import { EnumFieldToTransform } from '@/utils'
 import {
   UserRolesEnum,
   UserRolesTextEnum

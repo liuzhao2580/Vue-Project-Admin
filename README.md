@@ -4,6 +4,8 @@
 
 -   运行前端代码 `npm run serve`
 
+### 使用`yarn build:pages`进行`GitHub的pages`的打包
+
 ### 项目使用 [MOCK](http://mockjs.com/) 模拟数据
 
 ### `sass node-sass`安装失败可以直接在命令行输入以下命令，相当于从淘宝源下载
