@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= webpackConfig.name %></title>
-    <% if(process.env.NODE_ENV === 'production') { %>
+    <% if(process.env.NODE_ENV !== 'development') { %>
     <!-- 引入组件库 -->
     <!-- echarts -->
     <script src="https://unpkg.com/echarts@5.3.2/dist/echarts.min.js"></script>
