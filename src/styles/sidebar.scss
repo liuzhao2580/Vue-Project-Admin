@@ -43,6 +43,13 @@
             }
             .el-menu {
               border: 0;
+              .el-menu-item {
+                .icon-svg {
+                  margin-right: 10px;
+                  vertical-align: middle;
+                  font-size: 18px;
+                }
+              }
             }
             // 二级侧边栏的背景色
             .SidebarItem-box {
@@ -54,11 +61,6 @@
                     display: none;
                   }
                 }
-              }
-              .icon-svg {
-                margin-right: 10px;
-                vertical-align: middle;
-                font-size: 18px;
               }
 
               .is-opened,
@@ -104,11 +106,6 @@
 }
 // 侧边栏收起的样式
 .el-menu--vertical {
-  .icon-svg {
-    margin-right: 10px;
-    vertical-align: middle;
-    font-size: 18px;
-  }
   .SidebarItem-box {
     .el-submenu {
       &.is-active {
