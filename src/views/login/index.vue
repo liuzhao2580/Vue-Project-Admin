@@ -55,8 +55,8 @@ interface ILoginForm {
 }
 
 const loginForm = reactive<ILoginForm>({
-  userName: 'admin',
-  password: 'admin'
+  userName: 'liuzhao',
+  password: '123456'
 })
 const rules = reactive<FormRules>({
   userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
