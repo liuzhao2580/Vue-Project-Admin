@@ -2,7 +2,7 @@ const { defineConfig } = require('@vue/cli-service')
 const CompressionPlugin = require('compression-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
-const { title, basePrefix, notDevFlag } = require('./src/setting.ts')
+const { title, basePrefix: publicPath, notDevFlag } = require('./src/setting.ts')
 const path = require('path')
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -35,12 +35,6 @@ const minimizer = [
 const name = title
 // 设置项目的端口号
 const port = 9527
-// 设置公共的目录
-let publicPath = '/'
-// 说明是需要打包到 Pages 上进行预览
-if (process.env.NODE_ENV === 'pages') {
-  publicPath = basePrefix
-}
 
 module.exports = defineConfig({
   publicPath,
