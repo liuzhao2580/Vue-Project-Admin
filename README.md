@@ -1,5 +1,7 @@
 ### 前端的`VUE`页面借鉴 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 
+### 使用vite + V3 + TS
+
 ### 目前是`Vue3.x + TypeScript + Element-plus`进行的代码编写, `master`分支保留之前的`Vue2.x + ElementUI`
 
 -   运行前端代码 `npm run serve`
