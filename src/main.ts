@@ -11,6 +11,7 @@ import '@/styles/index.scss' // 公共的样式
 import globalComponent from '@/components/index'
 /** 注册全局的 自定义指令 */
 import globalDirectives from '@/directives'
+import 'virtual:svg-icons-register'
 
 mockXHR() // 导入 mock
 

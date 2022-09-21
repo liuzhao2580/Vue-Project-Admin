@@ -52,7 +52,7 @@ export default defineConfig(({ command, mode }) => {
       vue(),
       // 引入 svg
       createSvgIconsPlugin({
-        iconDirs: [resolve(__dirname, 'src/icons/svg')],
+        iconDirs: [resolve(process.cwd(), 'src/icons/svg')],
         symbolId: 'icon-[name]'
       }),
       ...isBuildPlugins(command)
