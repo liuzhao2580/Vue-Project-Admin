@@ -1,4 +1,4 @@
-const setConfig = require('@/setting')
+import setConfig from '@/setting'
 export default function(pageTitle: string) {
   if (pageTitle) {
     return `${pageTitle} - ${setConfig.title}`

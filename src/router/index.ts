@@ -7,7 +7,7 @@ import components from './modules/components'
 import { RouterName, RouterPath } from './RouteConst'
 import { UserRolesEnum } from '@/typescript/shared/enum/user-enum/user-roles.enum'
 import { IMetaRouter } from '@/typescript/shared/interface/router-interface'
-const { basePrefix } = require('@/setting')
+import setting from '@/setting'
 
 // 公共的页面
 export const constantRoutes: RouteRecordRaw[] = [
@@ -145,7 +145,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
   }
 ]
 const router = createRouter({
-  history: createWebHistory(basePrefix),
+  history: createWebHistory(setting.basePrefix),
   routes: constantRoutes
 })
 

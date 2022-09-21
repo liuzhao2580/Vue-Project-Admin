@@ -1,21 +1,17 @@
 <template>
-  <i class="icon-svg">
-    <svg class="icon-svg" aria-hidden="true">
-      <use :xlink:href="IconName" />
-    </svg>
-  </i>
+  <svg class="icon-svg" aria-hidden="true">
+    <use :href="symbolId" />
+  </svg>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue'
 interface IProps {
-  iconClass: string
+  iconClass: string | undefined
 }
 const props = defineProps<IProps>()
 
-const IconName = computed(() => {
-  return `#icon-${props.iconClass}`
-})
+const symbolId = computed(() => `#icon-${props.iconClass}`)
 </script>
 
 <script lang="ts">
@@ -26,13 +22,10 @@ export default {
 
 <style lang="scss" scoped>
 .icon-svg {
-  width: 24px;
-  svg {
-    width: 1em;
-    height: 1em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
-  }
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>

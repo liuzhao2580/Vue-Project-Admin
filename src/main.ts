@@ -7,7 +7,7 @@ import { store, key } from './store'
 import mockXHR from '@/mock'
 import '@/permission' // 权限验证
 import '@/styles/index.scss' // 公共的样式
-import './icons' // 导入 icon 字体
+// import './icons' // 导入 icon 字体
 import globalComponent from '@/components/index'
 /** 注册全局的 自定义指令 */
 import globalDirectives from '@/directives'

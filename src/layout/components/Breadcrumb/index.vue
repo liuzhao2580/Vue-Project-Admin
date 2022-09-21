@@ -25,7 +25,7 @@
 import { RouterConfig, RouterPath } from '@/router/RouteConst'
 import { computed, ref, watchEffect } from 'vue'
 import { RouteLocationMatched, RouteRecordRaw, useRoute } from 'vue-router'
-const defaultConfig = require('@/setting')
+import defaultConfig from '@/setting'
 
 const route = useRoute()
 const breadcrumbTitle = computed(() => {

@@ -5,7 +5,7 @@ import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { ResultModel } from '@/typescript/shared/model/'
 import { getCookie, removeCookie, CONST_VARIABLE } from '@/utils/modules/cookies'
 import { resetRouter } from '@/router'
-const baseURL = process.env.VUE_APP_BASE_API
+const baseURL = import.meta.env.VITE_APP_BASE_API
 const Axios = axios.create({
   baseURL,
   withCredentials: true,

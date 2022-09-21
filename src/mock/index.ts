@@ -7,7 +7,7 @@ import article from './modules/article'
 const mocks = [...user, ...dashboard, ...article]
 
 export default function mockXHR() {
-  const baseURL = process.env.VUE_APP_BASE_API
+  const baseURL = import.meta.env.VITE_APP_BASE_API
   Mock.setup({
     timeout: 500 // 设置延迟响应，模拟向后端请求数据
   })
