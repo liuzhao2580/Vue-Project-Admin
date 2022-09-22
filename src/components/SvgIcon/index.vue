@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 interface IProps {
-  iconClass: string | undefined
+  iconClass?: string
 }
 const props = defineProps<IProps>()
 
