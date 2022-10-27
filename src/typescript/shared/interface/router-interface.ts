@@ -25,6 +25,9 @@ export interface IMetaRouter {
    */
   roles?: Array<UserRolesEnum>
 
+  /** 路由是否需要保持缓存 */
+  keepAlive?: boolean
+
   /** 路由的名称 */
   title: string
 
