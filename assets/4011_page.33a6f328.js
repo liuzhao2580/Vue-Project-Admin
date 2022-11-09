@@ -1,0 +1,1 @@
+import{R as e,_ as r,o,e as t}from"./index.9362ddba.js";const _={name:e.ERROR_PAGE_4011};function a(c,s,n,p,i,u){return o(),t("div",null,"4011")}const l=r(_,[["render",a],["__file","D:/My-Project/Vue-Project-Admin/src/views/error_page/4011_page.vue"]]);export{l as default};

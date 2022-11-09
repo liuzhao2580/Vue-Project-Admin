@@ -1,0 +1,1 @@
+import{R as o,_ as t,c as r,o as s,e as _,g as a,j as c}from"./index.9362ddba.js";const n={name:o.ERROR_PAGE_401},p=c(" 401 ");function i(u,d,m,l,f,v){const e=r("router-view");return s(),_("div",null,[p,a(e)])}const g=t(n,[["render",i],["__file","D:/My-Project/Vue-Project-Admin/src/views/error_page/401_page.vue"]]);export{g as default};
