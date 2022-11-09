@@ -15,7 +15,6 @@ export const deepClone = <T extends object>(obj: T): T => {
   return result
 }
 
-
 /** 动态创建 script 标签 发送 get 请求 */
 /*
   src 请求的地址
@@ -42,7 +41,6 @@ export const createScript = (src: string, responStr?: string) => {
   })
 }
 
-
 type keyType = string | number | undefined
 /** ts中的枚举字段 转换为枚举中文字段 */
 export function EnumFieldToTransform<T extends object, S extends object>(
@@ -50,17 +48,34 @@ export function EnumFieldToTransform<T extends object, S extends object>(
   enumTransform: S,
   field: keyType
 ) {
-  function findKey(value: keyType, compare = (a: keyType, b: keyType) => a === b) {
-    return Object.keys(enumField).find((k) =>
-      validKeyFlag(k, enumField) && compare(enumField[k], value)
+  function findKey(
+    value: keyType,
+    compare = (a: keyType, b: keyType) => a === b
+  ) {
+    return Object.keys(enumField).find(
+      k => validKeyFlag(k, enumField) && compare(enumField[k], value)
     )
   }
   const getFindKey = findKey(field)
-  if(getFindKey && validKeyFlag(getFindKey, enumTransform)) return enumTransform[getFindKey]
+  if (getFindKey && validKeyFlag(getFindKey, enumTransform))
+    return enumTransform[getFindKey]
   else console.warn('错误,未匹配到')
 }
 
-function validKeyFlag(key: keyType, object: object): key is keyof typeof object {
-  if(key) return key in object
+function validKeyFlag(
+  key: keyType,
+  object: object
+): key is keyof typeof object {
+  if (key) return key in object
   else return false
+}
+
+/** vite的特殊性, 需要处理图片 */
+export const handleViteImages = (imgPath: string) => {
+  try {
+    const handlePath = imgPath.replace('@', '..')
+    return new URL(handlePath, import.meta.url).href
+  } catch (error) {
+    console.warn(error)
+  }
 }

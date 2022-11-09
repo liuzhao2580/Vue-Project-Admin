@@ -8,12 +8,12 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-const src_dz = require('@/assets/images/dz.png')
+import { handleViteImages } from '@/utils'
+const src_dz = handleViteImages('@/assets/images/dz.png')
 /** 点赞后的图片 */
-const src_dzd = require('@/assets/images/dzd.png')
+const src_dzd = handleViteImages('@/assets/images/dzd.png')
 /** 点赞状态, 如果没有点赞 false  点赞之后就是 true */
 const dzd_status = ref<boolean>(false)
-
 const dz_Name = ref('赞')
 const src = ref(src_dz)
 /** 设置 缓缓升起的红心的显示状态 */

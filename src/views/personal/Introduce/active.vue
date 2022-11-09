@@ -45,9 +45,10 @@
 
 <script lang="ts" setup>
 import ClickLike from '@/components/ClickLike/index.vue'
+import { handleViteImages } from '@/utils'
 const content_Item = [
   {
-    src: require('@/assets/images/jinganglang.png'),
+    src: handleViteImages('@/assets/images/jinganglang.png'),
     nickname: '大话西游',
     type: '普通话',
     time: '1994年',
@@ -55,27 +56,27 @@ const content_Item = [
       '曾经有一份真挚的爱情摆在我的面前,我没有珍惜,直到失去的时候才后悔莫及,尘世间最痛苦的事莫过于此.如果上天能再给我一次机会的话,我会对这个女孩说“我爱你”.如果非要在这份爱加上一个期限,我希望是:一万年'
   },
   {
-    src: require('@/assets/images/zhizhuxia.png'),
+    src: handleViteImages('@/assets/images/zhizhuxia.png'),
     nickname: '肖申克的救赎',
     type: '英语',
     time: '1994年9月10日',
     content: '生活可以归结为一种简单的选择：不是忙于生存，就是赶着去死'
   },
   {
-    src: require('@/assets/images/sishi.png'),
+    src: handleViteImages('@/assets/images/sishi.png'),
     nickname: '死侍-我爱我家',
     type: '英语',
     time: '2018年',
     Carousel: true,
     Carousel_pic: [
       {
-        src: require('@/assets/images/sishi.jpeg')
+        src: handleViteImages('@/assets/images/sishi.jpeg')
       },
       {
-        src: require('@/assets/images/sishi1.jpeg')
+        src: handleViteImages('@/assets/images/sishi1.jpeg')
       },
       {
-        src: require('@/assets/images/sishi2.jpeg')
+        src: handleViteImages('@/assets/images/sishi2.jpeg')
       }
     ]
   }
