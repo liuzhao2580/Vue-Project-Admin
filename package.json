@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "lint": "vue-cli-service lint",
+    "lint": "vite lint",
     "preview": "vite preview",
-    "build:pages": "vue-cli-service build --mode pages"
+    "build:pages": "vite build --mode pages"
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
