@@ -26,3 +26,7 @@ globalDirectives(app)
 for (const componentItme in globalComponent) {
   app.component(componentItme, globalComponent[componentItme])
 }
+
+if (import.meta.env.VITE_ENV !== 'development') {
+  console.log = function () {}
+}
