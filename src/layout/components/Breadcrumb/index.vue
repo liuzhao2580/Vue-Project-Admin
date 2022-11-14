@@ -8,7 +8,7 @@
       <transition-group
         name="breadcrumb-transition"
         mode="out-in"
-        v-if="getMatched.length !== 0"
+        v-if="getMatched?.length !== 0"
       >
         <el-breadcrumb-item
           v-for="item in getMatched"

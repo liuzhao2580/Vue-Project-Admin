@@ -7,14 +7,14 @@
         style="width: 100%"
         size="small"
         v-model="state.inputValue"
-        v-if="tableHeaderSearch.searchConfig.type === ESearchType.input"
+        v-if="tableHeaderSearch.searchConfig?.type === ESearchType.input"
         placeholder="请输入"
       />
       <!-- 年月日 -->
       <el-date-picker
         style="width: 100%"
         size="small"
-        v-else-if="tableHeaderSearch.searchConfig.type === ESearchType.date"
+        v-else-if="tableHeaderSearch.searchConfig?.type === ESearchType.date"
         type="date"
         v-model="state.dateValue"
         placeholder="选择日期"
@@ -24,7 +24,7 @@
       <el-date-picker
         style="width: 100%"
         size="small"
-        v-else-if="tableHeaderSearch.searchConfig.type === ESearchType.dateTime"
+        v-else-if="tableHeaderSearch.searchConfig?.type === ESearchType.dateTime"
         type="datetime"
         v-model="state.dateTimeValue"
         placeholder="选择日期时间"

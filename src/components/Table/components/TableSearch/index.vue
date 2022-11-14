@@ -63,7 +63,9 @@ import { IColumnConfig } from '@/typescript/shared/interface/table-interface'
 import { ref } from 'vue'
 interface IProps {
   columnConfig: IColumnConfig[]
-  searchModel: {}
+  searchModel: {
+    [key: string]: any
+  }
 }
 
 const props = defineProps<IProps>()
