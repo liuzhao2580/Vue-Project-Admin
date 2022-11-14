@@ -20,11 +20,10 @@
 <script lang="ts" setup>
 import { computed, onBeforeMount, onUnmounted } from 'vue'
 import { debounce } from 'lodash'
-import { useStore } from '@/store'
 import { AppMain, Sidebar, Navbar } from './components'
-import { APP_MUTATIONS_TYPES } from '@/store/modules/app/types'
+import { useAppStore } from '@/store/app'
 
-const store = useStore()
+const store = useAppStore()
 
 onBeforeMount(() => {
   // 页面进来的时候监听 屏幕的变化  调用方法
@@ -41,11 +40,11 @@ const { body } = document
 const WIDTH = 992
 
 const isMobile = computed(() => {
-  return store.state.app.isMobile
+  return store.state.isMobile
 })
 
 const side_status = computed(()=> {
-  return store.state.app.side_status
+  return store.state.side_status
 })
 
 const dynamicWidth = computed(() => {
@@ -56,13 +55,13 @@ const dynamicWidth = computed(() => {
 
 // 在 mobile 移动端模式下显示隐藏 侧边栏按钮
 const showORhidden = () => {
-  store.commit(APP_MUTATIONS_TYPES.MUT_UNFLOD_SIDE)
+  store.unFlodSide()
 }
 
 const $_isMobile = () => {
   const react = body.getBoundingClientRect()
-  if (react.width < 768) store.commit(APP_MUTATIONS_TYPES.MUT_SET_DEVICE, true)
-  else store.commit(APP_MUTATIONS_TYPES.MUT_SET_DEVICE, false)
+  if (react.width < 768) store.setDevice(true)
+  else store.setDevice(false)
   return react.width - 1 < WIDTH
 }
 
@@ -70,9 +69,9 @@ const $_isMobile = () => {
 const $_ResizeScreen = debounce((): void => {
   const side_flag = $_isMobile()
   if (side_flag) {
-    store.commit(APP_MUTATIONS_TYPES.MUT_FLOD_SIDE)
+    store.flodSide()
   } else if (!side_flag) {
-    store.commit(APP_MUTATIONS_TYPES.MUT_UNFLOD_SIDE)
+    store.unFlodSide()
   }
 }, 500)
 </script>

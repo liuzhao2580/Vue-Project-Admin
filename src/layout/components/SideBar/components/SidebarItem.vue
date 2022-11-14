@@ -26,13 +26,12 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from '@/store'
+import { useAppStore } from '@/store/app'
 import { computed } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 // 引入 path 模块 用于拼接url地址
 
-const store = useStore()
-
+const appStore = useAppStore()
 interface IProps {
   item: RouteRecordRaw
   isMoreChild?: boolean
@@ -43,7 +42,7 @@ withDefaults(defineProps<IProps>(), {
 })
 
 const side_status = computed(() => {
-  return store.state.app.side_status
+  return appStore.state.side_status
 })
 
 /** 判断多级路由 */
