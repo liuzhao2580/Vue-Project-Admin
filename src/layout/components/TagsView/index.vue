@@ -41,10 +41,12 @@ import { computed, onMounted, reactive, watch } from 'vue'
 import { RouteRecordName, useRoute, useRouter } from 'vue-router'
 import { cloneDeep } from 'lodash'
 import { useStore } from '@/store'
-import { TAGS_VIEW_MUTATIONS_TYPES } from '@/store/modules/tagsView/types'
+import { useTagsViewStore } from '@/store/tagsView'
 import { ITagsView } from '@/typescript/shared/interface'
 
 const store = useStore()
+
+const tagsViewStore = useTagsViewStore()
 
 const route = useRoute()
 
@@ -122,7 +124,7 @@ const initTags = () => {
 
 /** 修改 store 中的 tags */
 const changeStoreTags = (tags: ITagsView[]) => {
-  store.commit(TAGS_VIEW_MUTATIONS_TYPES.MUT_INIT_TAGS, tags)
+  tagsViewStore.initTags(tags)
 }
 /** 增加 tags */
 const insertTags = () => {
@@ -131,7 +133,7 @@ const insertTags = () => {
     meta: route.meta,
     name: route.name
   }
-  store.commit(TAGS_VIEW_MUTATIONS_TYPES.MUT_INSERT_TAGS, currentTag)
+  tagsViewStore.insertTags(currentTag)
 }
 /** 用于高亮当前的tags */
 const is_active = (tag: string) => {
