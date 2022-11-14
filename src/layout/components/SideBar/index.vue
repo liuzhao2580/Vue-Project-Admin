@@ -25,17 +25,17 @@
 
 <script lang="ts" setup>
 import SidebarItem from './components/SidebarItem.vue'
-import { useStore } from '@/store'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { RouterPath } from '@/router/RouteConst'
 import { useAppStore } from '@/store/app'
+import { useUserStore } from '@/store/user'
 
 const routeConfig = useRoute()
 
 const router = useRouter()
 
-const store = useStore()
+const userStore = useUserStore()
 const appStore = useAppStore()
 
 /** 获取当前页面的 url 地址 */
@@ -45,13 +45,13 @@ const activeMenu = computed(() => {
 })
 
 const avatar = computed(() => {
-  return store.state.user.avatar
+  return userStore.state.avatar
 })
 const side_status = computed(() => {
   return appStore.state.side_status
 })
 const sideBarList = computed(() => {
-  return store.state.user.sideBarList
+  return userStore.state.sideBarList
 })
 /** logo 点击事件 */
 const sideBarTitleClick = () => {

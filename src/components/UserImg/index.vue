@@ -6,10 +6,10 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { useStore } from '@/store'
-const store = useStore()
+import { useUserStore } from '@/store/user'
+const store = useUserStore()
 const avatar = computed(() => {
-  return store.state.user.avatar
+  return store.state.avatar
 })
 </script>
 

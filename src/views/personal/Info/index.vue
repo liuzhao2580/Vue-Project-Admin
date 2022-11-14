@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from '@/store'
+import { useUserStore } from '@/store/user'
 import UserImg from '@/components/UserImg/index.vue'
 import Progress from '@/components/Progress/index.vue'
 import { computed, ref } from 'vue'
@@ -41,14 +41,10 @@ const tags = ref([
   { name: '篮球', type: 'danger' }
 ])
 
-const store = useStore()
-
-// const avatar = computed(() => {
-//   return store.getters.user.avatar
-// })
+const userStore = useUserStore()
 
 const nickname = computed(() => {
-  return store.state.user.nickname
+  return userStore.state.nickname
 })
 </script>
 

@@ -40,11 +40,11 @@
 import { computed, onMounted, reactive, watch } from 'vue'
 import { RouteRecordName, useRoute, useRouter } from 'vue-router'
 import { cloneDeep } from 'lodash'
-import { useStore } from '@/store'
+import { useUserStore } from '@/store/user'
 import { useTagsViewStore } from '@/store/tagsView'
 import { ITagsView } from '@/typescript/shared/interface'
 
-const store = useStore()
+const userStore = useUserStore()
 
 const tagsViewStore = useTagsViewStore()
 
@@ -95,11 +95,11 @@ const disabledFlag = computed((): boolean => {
 
 /** tags 的数组 */
 const tagsArray = computed(() => {
-  return store.state.tagsView.tagsArray
+  return tagsViewStore.state.tagsArray
 })
 
 const sideBarList = computed(() => {
-  return store.state.user.sideBarList
+  return userStore.state.sideBarList
 })
 
 onMounted(() => {

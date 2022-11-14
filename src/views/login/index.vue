@@ -39,13 +39,12 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
-import { useStore } from '@/store'
+import { useUserStore } from '@/store/user'
 import { userLogin } from '@/api/modules/user'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 // import DDAccountLogin from './components/DDAccountLogin.vue'
-import { USER_ACTIONS_TYPES } from '@/store/modules/user/types'
 
-const store = useStore()
+const userStore = useUserStore()
 
 const router = useRouter()
 
@@ -85,14 +84,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
             type: 'success'
           })
           try {
-            await store.dispatch(
-              USER_ACTIONS_TYPES.ACT_FETCH_USERINFO,
-              result.data
-            )
-            await store.dispatch(
-              USER_ACTIONS_TYPES.ACT_FETCH_FIND_BY_USERID,
-              true
-            )
+            await userStore.saveUserInfo(result.data)
+            await userStore.findUserInfoByID()
             router.push({
               path: RouterPath.DASHBOARD
             })

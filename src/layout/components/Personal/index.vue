@@ -40,7 +40,7 @@ import { Component, computed, onMounted, ref, shallowRef } from 'vue'
 import { useRouter } from 'vue-router'
 import { removeCookie, CONST_VARIABLE } from '@/utils/modules/cookies'
 import { resetRouter } from '@/router'
-import { useStore } from '@/store'
+import { useUserStore } from '@/store/user'
 import { RouterPath } from '@/router/RouteConst'
 import {
   User,
@@ -53,7 +53,7 @@ import {
   Moon
 } from '@element-plus/icons-vue'
 
-const store = useStore()
+const store = useUserStore()
 
 const router = useRouter()
 
@@ -109,7 +109,7 @@ onMounted(()=> {
 })
 
 const avatar = computed(() => {
-  return store.state.user.avatar
+  return store.state.avatar
 })
 // 登出
 const login_Out = () => {

@@ -11,15 +11,15 @@
 <script lang="ts" setup>
 import { RouteRecordRaw } from 'vue-router'
 import { computed, onMounted, ref } from 'vue'
-import { useStore } from '@/store'
+import { useUserStore } from '@/store/user'
 
-const store = useStore()
+const store = useUserStore()
 
 /** 设置缓存路由 */
 const keepAliveRoutes = ref<string[]>([])
 
 const sideBarList = computed((): RouteRecordRaw[] => {
-  return store.state.user.sideBarList
+  return store.state.sideBarList
 })
 
 onMounted(() => {

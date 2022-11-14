@@ -16,11 +16,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from '@/store'
+import { useUserStore } from '@/store/user'
 import { computed, ref } from 'vue'
-const store = useStore()
+const userStore = useUserStore()
 const nickname = computed(() => {
-  return store.state.user.nickname
+  return userStore.state.nickname
 })
 const form_account = ref({
   name: nickname,
