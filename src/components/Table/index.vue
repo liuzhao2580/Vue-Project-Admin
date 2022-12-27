@@ -65,7 +65,7 @@
           <!-- 时间,日期转换 -->
           <span v-if="EColumnTypeFlag(tableItem.type!)"
             >{{
-                handleTranslateTime(scope.row[tableItem.prop], tableItem.type!)
+              handleTranslateTime(scope.row[tableItem.prop], tableItem.type!)
             }}
           </span>
           <span v-else>{{ scope.row[tableItem.prop] }}</span>
@@ -105,90 +105,92 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, withDefaults } from 'vue'
-import moment from 'moment'
-import { TableConfigModel } from '@/typescript/shared/model/tableModel/table-config.model'
-import { PageModel } from '@/typescript/shared/model/tableModel/page-config.model'
-import { EColumnType } from '@/typescript/shared/enum/table-enum'
-import TableSearch from './components/TableSearch/index.vue'
-import { onBeforeRouteLeave } from 'vue-router'
+import { computed, onMounted, ref, withDefaults } from "vue";
+import dayjs from "dayjs";
+import { TableConfigModel } from "@/typescript/shared/model/tableModel/table-config.model";
+import { PageModel } from "@/typescript/shared/model/tableModel/page-config.model";
+import { EColumnType } from "@/typescript/shared/enum/table-enum";
+import TableSearch from "./components/TableSearch/index.vue";
+import { onBeforeRouteLeave } from "vue-router";
 interface IProps {
   /** 表格的数据 */
-  tableData: any[]
+  tableData: any[];
   /** 表格的列配置 */
-  tableConfig: TableConfigModel
+  tableConfig: TableConfigModel;
   /** 表格的分页 */
-  pageConfig: PageModel
+  pageConfig: PageModel;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
   tableData: () => [],
   tableConfig: () => new TableConfigModel(),
   pageConfig: () => new PageModel()
-})
+});
 
-const emits = defineEmits<{ (e: 'pageCurrentChange', current: number): void }>()
+const emits = defineEmits<{
+  (e: "pageCurrentChange", current: number): void;
+}>();
 
 /** 用来处理 表格搜索组件的显示隐藏 */
-const searchShow = ref<boolean>(false)
+const searchShow = ref<boolean>(false);
 /** 表格搜索组件的显示隐藏 */
 const tableSearchShow = computed(() => {
-  let flag = false
-  if (props.tableConfig.searchFlag) flag = false
-  if (searchShow.value) flag = true
-  return flag
-})
+  let flag = false;
+  if (props.tableConfig.searchFlag) flag = false;
+  if (searchShow.value) flag = true;
+  return flag;
+});
 
 /** 表格的样式 */
 const tableHeaderStyle = computed(() => {
-  return { background: '#e0e0e0', color: '#333', fontWeight: 900 }
-})
+  return { background: "#e0e0e0", color: "#333", fontWeight: 900 };
+});
 /** 用来设置 搜索按钮的显示隐藏 */
 const searchIconFlag = computed(() => {
-  let flag = false
+  let flag = false;
   const searchable = props.tableConfig.columnConfig.some(
     columnItem => columnItem.searchable
-  )
-  if (props.tableConfig.searchFlag || searchable) flag = true
-  return flag
-})
+  );
+  if (props.tableConfig.searchFlag || searchable) flag = true;
+  return flag;
+});
 
 /** 用来过滤 表格搜索组件需要的参数 */
-const tableSearchFilterData = computed(()=> {
+const tableSearchFilterData = computed(() => {
   return props.tableConfig.columnConfig.filter(item => {
-    return item.searchable
-  })
-})
+    return item.searchable;
+  });
+});
 
 /** 表格搜索组件中, 用来绑定 model */
-const tableSearchModel = computed(()=> {
+const tableSearchModel = computed(() => {
   let returnObj: {
-    [key: string]: string
-  } = {}
+    [key: string]: string;
+  } = {};
   tableSearchFilterData.value.forEach(item => {
-    returnObj[item.prop] = ''
-  })
-  return returnObj
-})
+    returnObj[item.prop] = "";
+  });
+  return returnObj;
+});
 
 const EColumnTypeFlag = (type: EColumnType) => {
-  return EColumnType[type]
-}
+  return EColumnType[type];
+};
 
 onMounted(() => {
-  window.addEventListener('keydown', listenerEscKey)
-})
+  window.addEventListener("keydown", listenerEscKey);
+});
 
 /** 处理时间 */
 const handleTranslateTime = (time: Date, type: EColumnType) => {
-  let translateTime
+  let translateTime;
   if (type === EColumnType.date) {
-    translateTime = moment(time).format('YYYY-MM-DD')
+    translateTime = dayjs(time).format("YYYY-MM-DD");
   } else if (type === EColumnType.dateTime) {
-    translateTime = moment(time).format('YYYY-MM-DD HH:mm:ss')
+    translateTime = dayjs(time).format("YYYY-MM-DD HH:mm:ss");
   }
-  return translateTime
-}
+  return translateTime;
+};
 /** 表格的操作按钮的样式,可能是直接使用的 elementUI默认的icon ,也可能使用的是iconfont的字体图标 */
 // const operaIcon = (icon: string) => {
 //   if (icon.startsWith('el-icon')) return icon
@@ -196,37 +198,37 @@ const handleTranslateTime = (time: Date, type: EColumnType) => {
 // }
 /** 表格的打印 */
 const tablePrint = () => {
-  window.print()
-}
+  window.print();
+};
 /** 展开关闭 表格的搜索 */
 const tableSearch = () => {
   // 用来显示隐藏搜索栏
-  searchShow.value = !searchShow.value
-}
+  searchShow.value = !searchShow.value;
+};
 
 /** 表格的页码改变事件 */
 const currentChange = (current: number) => {
-  emits('pageCurrentChange', current)
-}
+  emits("pageCurrentChange", current);
+};
 
 /** 监听 esc 按钮按下 */
 const listenerEscKey = (e: KeyboardEvent) => {
-  if (e.key === 'Escape') {
-    if (searchShow.value) searchShow.value = false
+  if (e.key === "Escape") {
+    if (searchShow.value) searchShow.value = false;
   }
-}
+};
 
 onBeforeRouteLeave(() => {
-  window.removeEventListener('keydown', listenerEscKey)
-})
+  window.removeEventListener("keydown", listenerEscKey);
+});
 </script>
 
 <script lang="ts">
 export default {
-  name: 'TableComponent'
-}
+  name: "TableComponent"
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>
