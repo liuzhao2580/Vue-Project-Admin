@@ -38,8 +38,14 @@
           </template>
           <!-- 年月日 范围 YYYY-MM-DD~YYYY-MM-DD -->
           <!-- 年月日 时分秒 YYYY-MM-DD HH:mm:ss -->
-          <template v-else-if="column.searchConfig?.type === ESearchType.dateTime">
-            <el-date-picker v-model="modelObj[column.prop]" type="datetime" value-format="YYYY-MM-DD HH:mm:ss" />
+          <template
+            v-else-if="column.searchConfig?.type === ESearchType.dateTime"
+          >
+            <el-date-picker
+              v-model="modelObj[column.prop]"
+              type="datetime"
+              value-format="YYYY-MM-DD HH:mm:ss"
+            />
           </template>
           <!-- 年月日 时分秒范围 YYYY-MM-DD HH:mm:ss ~ YYYY-MM-DD HH:mm:ss -->
           <!-- 步进器 -->
@@ -57,43 +63,43 @@
 </template>
 
 <script setup lang="ts">
-import { cloneDeep } from 'lodash'
-import { ESearchType } from '@/typescript/shared/enum/table-enum'
-import { IColumnConfig } from '@/typescript/shared/interface/table-interface'
-import { ref } from 'vue'
+import { cloneDeep } from "lodash";
+import { ESearchType } from "@/typescript/shared/enum/table-enum";
+import { IColumnConfig } from "@/typescript/shared/interface/table-interface";
+import { ref } from "vue";
 interface IProps {
-  columnConfig: IColumnConfig[]
+  columnConfig: IColumnConfig[];
   searchModel: {
-    [key: string]: any
-  }
+    [key: string]: any;
+  };
 }
 
-const props = defineProps<IProps>()
+const props = defineProps<IProps>();
 
-const emits = defineEmits<{ (e: 'maskClick'): void }>()
+const emits = defineEmits<{ (e: "maskClick"): void }>();
 
-const modelObj = ref(cloneDeep(props.searchModel))
+const modelObj = ref(cloneDeep(props.searchModel));
 
 /** 搜索按钮点击事件 */
 const searchClick = () => {
-  console.log(modelObj.value)
-}
+  console.log(modelObj.value);
+};
 
 /** 取消按钮点击 */
 const searchCancel = () => {
-  maskClick()
-}
+  maskClick();
+};
 
 /** 遮罩层点击事件 */
 const maskClick = () => {
-  emits('maskClick')
-}
+  emits("maskClick");
+};
 </script>
 
 <script lang="ts">
 export default {
-  name: 'TableSearch'
-}
+  name: "TableSearch"
+};
 </script>
 
 <style scoped lang="scss">

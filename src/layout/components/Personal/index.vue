@@ -36,12 +36,12 @@
 </template>
 
 <script lang="ts" setup>
-import { Component, computed, onMounted, ref, shallowRef } from 'vue'
-import { useRouter } from 'vue-router'
-import { removeCookie, CONST_VARIABLE } from '@/utils/modules/cookies'
-import { resetRouter } from '@/router'
-import { useUserStore } from '@/store/user'
-import { RouterPath } from '@/router/RouteConst'
+import { Component, computed, onMounted, ref, shallowRef } from "vue";
+import { useRouter } from "vue-router";
+import { removeCookie, CONST_VARIABLE } from "@/utils/modules/cookies";
+import { resetRouter } from "@/router";
+import { useUserStore } from "@/store/user";
+import { RouterPath } from "@/router/RouteConst";
 import {
   User,
   HomeFilled,
@@ -51,102 +51,101 @@ import {
   ArrowDown,
   Sunny,
   Moon
-} from '@element-plus/icons-vue'
+} from "@element-plus/icons-vue";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const router = useRouter()
+const router = useRouter();
 
 interface IRef {
-  command: string
-  title: string
-  icon: Component
-  dividedFlag?: boolean
+  command: string;
+  title: string;
+  icon: Component;
+  dividedFlag?: boolean;
 }
 
 enum switchStyleGlobal {
-  light = 'light',
-  dark = 'dark'
+  light = "light",
+  dark = "dark"
 }
 
 const dropdownList = shallowRef<IRef[]>([
   {
     command: RouterPath.PERSONAL,
-    title: '个人中心',
+    title: "个人中心",
     icon: User
   },
   {
     command: RouterPath.DASHBOARD,
-    title: '首页',
+    title: "首页",
     icon: HomeFilled
   },
   {
     command: RouterPath.DOCUMENTATION,
-    title: '文档',
+    title: "文档",
     icon: Document
   },
   {
-    command: 'https://github.com/liuzhao2580/Vue_project',
-    title: 'GitHub',
+    command: "https://github.com/liuzhao2580/Vue_project",
+    title: "GitHub",
     icon: Guide
   },
   {
     command: RouterPath.LOGIN,
-    title: '退出登录',
+    title: "退出登录",
     icon: SwitchButton,
     dividedFlag: true
   }
-])
+]);
 
 /** 获取 html dom元素 */
-const htmlDom = ref<HTMLHtmlElement>()
+const htmlDom = ref<HTMLHtmlElement>();
 
 /** 全局的样式切换 */
-const switchGlobal = ref<switchStyleGlobal>(switchStyleGlobal.light)
+const switchGlobal = ref<switchStyleGlobal>(switchStyleGlobal.light);
 
-onMounted(()=> {
-  htmlDom.value = document.querySelector('html') as HTMLHtmlElement
-})
+onMounted(() => {
+  htmlDom.value = document.querySelector("html") as HTMLHtmlElement;
+});
 
 const avatar = computed(() => {
-  return store.state.avatar
-})
+  return store.state.avatar;
+});
 // 登出
 const login_Out = () => {
-  removeCookie(CONST_VARIABLE.TOKEN)
-  removeCookie(CONST_VARIABLE.USER_ID)
+  removeCookie(CONST_VARIABLE.TOKEN);
+  removeCookie(CONST_VARIABLE.USER_ID);
   // 重置 路由
-  resetRouter()
-  router.push({ path: RouterPath.LOGIN })
-}
+  resetRouter();
+  router.push({ path: RouterPath.LOGIN });
+};
 const handleCommand = (command: string) => {
   if (command === RouterPath.LOGIN) {
-    login_Out()
+    login_Out();
   } else if (/http(s?):/.test(command)) {
-    window.open(command)
+    window.open(command);
   } else {
-    router.push({ path: command })
+    router.push({ path: command });
   }
-}
+};
 
-type switchStyleGlobalType = switchStyleGlobal | string | number | boolean
+type switchStyleGlobalType = switchStyleGlobal | string | number | boolean;
 
 /** 全局样式 switch 改变事件 */
 const switchChange = (val: switchStyleGlobalType) => {
-  if(!htmlDom.value) return
-  if(val === switchStyleGlobal.light) {
-    htmlDom.value.className = ''
+  if (!htmlDom.value) return;
+  if (val === switchStyleGlobal.light) {
+    htmlDom.value.className = "";
+  } else if (val === switchStyleGlobal.dark) {
+    htmlDom.value.className = switchStyleGlobal.dark;
   }
-  else if(val === switchStyleGlobal.dark) {
-    htmlDom.value.className = switchStyleGlobal.dark
-  }
-}
+};
 </script>
 
 <script lang="ts">
 export default {
-  name: 'PersonalCom'
-}
+  name: "PersonalCom"
+};
 </script>
 
 <style lang="scss" scoped>

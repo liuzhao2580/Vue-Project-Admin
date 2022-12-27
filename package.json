@@ -7,7 +7,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "lint": "vite lint",
     "preview": "vite preview",
-    "build:pages": "vite build --mode pages"
+    "build:pages": "vue-tsc --noEmit && vite build --mode pages"
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",

@@ -18,68 +18,68 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onBeforeMount, onUnmounted } from 'vue'
-import { debounce } from 'lodash'
-import { AppMain, Sidebar, Navbar } from './components'
-import { useAppStore } from '@/store/app'
+import { computed, onBeforeMount, onUnmounted } from "vue";
+import { debounce } from "lodash";
+import { AppMain, Sidebar, Navbar } from "./components";
+import { useAppStore } from "@/store/app";
 
-const store = useAppStore()
+const store = useAppStore();
 
 onBeforeMount(() => {
   // 页面进来的时候监听 屏幕的变化  调用方法
-  window.addEventListener('resize', $_ResizeScreen)
-})
+  window.addEventListener("resize", $_ResizeScreen);
+});
 
 onUnmounted(() => {
   // 页面销毁的时候移除监听 屏幕的变化  调用方法
-  window.removeEventListener('resize', $_ResizeScreen)
-})
+  window.removeEventListener("resize", $_ResizeScreen);
+});
 
-const { body } = document
+const { body } = document;
 // 设置一个宽度的大小, 用来判断当前的侧边栏展开折叠
-const WIDTH = 992
+const WIDTH = 992;
 
 const isMobile = computed(() => {
-  return store.state.isMobile
-})
+  return store.state.isMobile;
+});
 
-const side_status = computed(()=> {
-  return store.state.side_status
-})
+const side_status = computed(() => {
+  return store.state.side_status;
+});
 
 const dynamicWidth = computed(() => {
-  if (isMobile.value) return '0'
-  if (side_status.value) return '64px'
-  return '200px'
-})
+  if (isMobile.value) return "0";
+  if (side_status.value) return "64px";
+  return "200px";
+});
 
 // 在 mobile 移动端模式下显示隐藏 侧边栏按钮
 const showORhidden = () => {
-  store.unFlodSide()
-}
+  store.unFlodSide();
+};
 
 const $_isMobile = () => {
-  const react = body.getBoundingClientRect()
-  if (react.width < 768) store.setDevice(true)
-  else store.setDevice(false)
-  return react.width - 1 < WIDTH
-}
+  const react = body.getBoundingClientRect();
+  if (react.width < 768) store.setDevice(true);
+  else store.setDevice(false);
+  return react.width - 1 < WIDTH;
+};
 
 /** 监听页面大小变化 */
 const $_ResizeScreen = debounce((): void => {
-  const side_flag = $_isMobile()
+  const side_flag = $_isMobile();
   if (side_flag) {
-    store.flodSide()
+    store.flodSide();
   } else if (!side_flag) {
-    store.unFlodSide()
+    store.unFlodSide();
   }
-}, 500)
+}, 500);
 </script>
 
 <script lang="ts">
 export default {
-  name: 'LayoutIndex'
-}
+  name: "LayoutIndex"
+};
 </script>
 
 <style lang="scss" scoped>

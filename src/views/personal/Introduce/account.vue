@@ -16,22 +16,22 @@
 </template>
 
 <script lang="ts" setup>
-import { useUserStore } from '@/store/user'
-import { computed, ref } from 'vue'
-const userStore = useUserStore()
+import { useUserStore } from "@/store/user";
+import { computed, ref } from "vue";
+const userStore = useUserStore();
 const nickname = computed(() => {
-  return userStore.state.nickname
-})
+  return userStore.state.nickname;
+});
 const form_account = ref({
   name: nickname,
-  Email: 'liuzhao2580'
-})
+  Email: "liuzhao2580"
+});
 </script>
 
 <script lang="ts">
 export default {
-  name: 'UserAccount'
-}
+  name: "UserAccount"
+};
 </script>
 
 <style lang="scss" scoped></style>

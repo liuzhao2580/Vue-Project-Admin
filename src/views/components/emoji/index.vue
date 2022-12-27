@@ -1,13 +1,12 @@
 <template>
-  <div>
-  </div>
+  <div></div>
 </template>
 
 <script lang="ts">
-import { RouterName } from '@/router/RouteConst'
+import { RouterName } from "@/router/RouteConst";
 export default {
   name: RouterName.EMOJI_INPUT
-}
+};
 </script>
 
 <style type="text/css">
@@ -21,7 +20,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import 'emoji_sorites.css';
+@import "emoji_sorites.css";
 .emoji_close {
   font-size: 18px;
   position: absolute;

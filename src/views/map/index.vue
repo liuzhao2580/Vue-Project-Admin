@@ -11,18 +11,18 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue'
-import MapUtils from './utils'
+import { onMounted } from "vue";
+import MapUtils from "./utils";
 onMounted(() => {
-  MapUtils.init()
-})
+  MapUtils.init();
+});
 </script>
 
 <script lang="ts">
-import { RouterName } from '@/router/RouteConst'
+import { RouterName } from "@/router/RouteConst";
 export default {
   name: RouterName.AMAP
-}
+};
 </script>
 
 <style lang="scss" scoped>

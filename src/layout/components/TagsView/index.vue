@@ -37,35 +37,35 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, reactive, watch } from 'vue'
-import { RouteRecordName, useRoute, useRouter } from 'vue-router'
-import { cloneDeep } from 'lodash'
-import { useUserStore } from '@/store/user'
-import { useTagsViewStore } from '@/store/tagsView'
-import { ITagsView } from '@/typescript/shared/interface'
+import { computed, onMounted, reactive, watch } from "vue";
+import { RouteRecordName, useRoute, useRouter } from "vue-router";
+import { cloneDeep } from "lodash";
+import { useUserStore } from "@/store/user";
+import { useTagsViewStore } from "@/store/tagsView";
+import { ITagsView } from "@/typescript/shared/interface";
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 
-const tagsViewStore = useTagsViewStore()
+const tagsViewStore = useTagsViewStore();
 
-const route = useRoute()
+const route = useRoute();
 
-const router = useRouter()
+const router = useRouter();
 
 interface IState {
-  affixTags: ITagsView[]
+  affixTags: ITagsView[];
   /** tag 操作菜单的显示隐藏 */
-  operaTagFlag: boolean
+  operaTagFlag: boolean;
   /** tag 操作菜单的样式 */
   hideTagBox: {
-    left: number | string
-    top: number | string
-  }
+    left: number | string;
+    top: number | string;
+  };
   /** 记录当前右键的是哪个 tag */
   saveCurrentTag: {
-    currentIndex: number
-    currentTag: any
-  }
+    currentIndex: number;
+    currentTag: any;
+  };
 }
 
 const state = reactive<IState>({
@@ -80,166 +80,166 @@ const state = reactive<IState>({
     currentIndex: -1,
     currentTag: null
   }
-})
+});
 
 /** 当前的 tag 是否可以操作 */
 const disabledFlag = computed((): boolean => {
-  let flag = false
+  let flag = false;
   if (
     state.saveCurrentTag.currentIndex === 0 ||
     state.saveCurrentTag.currentIndex === 1
   )
-    flag = true
-  return flag
-})
+    flag = true;
+  return flag;
+});
 
 /** tags 的数组 */
 const tagsArray = computed(() => {
-  return tagsViewStore.state.tagsArray
-})
+  return tagsViewStore.state.tagsArray;
+});
 
 const sideBarList = computed(() => {
-  return userStore.state.sideBarList
-})
+  return userStore.state.sideBarList;
+});
 
 onMounted(() => {
-  initTags()
-  insertTags()
-})
+  initTags();
+  insertTags();
+});
 /** 初始化 tags */
 const initTags = () => {
-  const routes = sideBarList.value
-  const affixTags: ITagsView[] = []
+  const routes = sideBarList.value;
+  const affixTags: ITagsView[] = [];
   routes.forEach(item => {
     if (item.meta?.affix) {
       affixTags.push({
         fullPath: item.path,
         meta: item.meta,
         name: item.name
-      })
+      });
     }
-  })
-  changeStoreTags(affixTags)
-}
+  });
+  changeStoreTags(affixTags);
+};
 
 /** 修改 store 中的 tags */
 const changeStoreTags = (tags: ITagsView[]) => {
-  tagsViewStore.initTags(tags)
-}
+  tagsViewStore.initTags(tags);
+};
 /** 增加 tags */
 const insertTags = () => {
   const currentTag = {
     fullPath: route.fullPath,
     meta: route.meta,
     name: route.name
-  }
-  tagsViewStore.insertTags(currentTag)
-}
+  };
+  tagsViewStore.insertTags(currentTag);
+};
 /** 用于高亮当前的tags */
 const is_active = (tag: string) => {
-  return tag === route.meta.title
-}
+  return tag === route.meta.title;
+};
 /** 用于设置 不显示关闭按钮 affix 存在 说明不能被关闭 */
 const is_closable = (tag: ITagsView) => {
-  if (tag.meta?.affix) return false
-  return true
-}
+  if (tag.meta?.affix) return false;
+  return true;
+};
 /** 点击关闭按钮 路由会跳转到上一个 tagView 页面 */
 const handleClose = (tag: ITagsView) => {
-  const getIndex = tagsArray.value.indexOf(tag)
-  const getCloneTags = cloneDeep(tagsArray.value)
+  const getIndex = tagsArray.value.indexOf(tag);
+  const getCloneTags = cloneDeep(tagsArray.value);
   if (route.fullPath === tag.fullPath) {
-    handleClick(tagsArray.value[getIndex - 1])
+    handleClick(tagsArray.value[getIndex - 1]);
   }
-  getCloneTags.splice(getIndex, 1)
-  changeStoreTags(getCloneTags)
-}
+  getCloneTags.splice(getIndex, 1);
+  changeStoreTags(getCloneTags);
+};
 /** 点击 tags 跳转 */
 const handleClick = (tag: ITagsView) => {
   router.push({
     name: tag.name as RouteRecordName
-  })
-}
+  });
+};
 /** 鼠标右键菜单 */
 const tagContextmenu = (e: Event, tag: ITagsView, index: number) => {
   // 1.获取 tag-container-box html元素
   const getTagBoxDom = document.querySelector(
-    '.tag-container-box'
-  ) as HTMLElement
+    ".tag-container-box"
+  ) as HTMLElement;
   // 2.将伪数组变成真实的数组
-  const getRealArr = Array.prototype.slice.call(getTagBoxDom.children)
+  const getRealArr = Array.prototype.slice.call(getTagBoxDom.children);
   // 3.tag 的操作菜单需要left的 总长度
-  let getAllWidth = 0
+  let getAllWidth = 0;
   getRealArr.forEach((item, Iindex) => {
     // 4.如果当前鼠标右键的元素索引小于其他元素，说明右边的元素长度不考虑
-    if (Iindex >= index) return
+    if (Iindex >= index) return;
     // 5.计算每个元素的 宽度 并且 + margin-right的5个像素点
-    getAllWidth += item.offsetWidth + 5
-  })
-  state.hideTagBox.left = 20 + getAllWidth + 'px'
-  state.hideTagBox.top = 40 + 'px'
-  state.operaTagFlag = true
-  state.saveCurrentTag.currentIndex = index
-  state.saveCurrentTag.currentTag = tag
-}
+    getAllWidth += item.offsetWidth + 5;
+  });
+  state.hideTagBox.left = 20 + getAllWidth + "px";
+  state.hideTagBox.top = 40 + "px";
+  state.operaTagFlag = true;
+  state.saveCurrentTag.currentIndex = index;
+  state.saveCurrentTag.currentTag = tag;
+};
 /** 关闭当前 */
 const closeNow = () => {
-  const { currentIndex, currentTag } = state.saveCurrentTag
-  if (currentIndex === 0 || currentIndex === 1) return
-  handleClose(currentTag)
-}
+  const { currentIndex, currentTag } = state.saveCurrentTag;
+  if (currentIndex === 0 || currentIndex === 1) return;
+  handleClose(currentTag);
+};
 /** 关闭其他 */
 const closeOther = () => {
-  const { currentIndex, currentTag } = state.saveCurrentTag
-  const getCloneTags = cloneDeep(tagsArray.value)
+  const { currentIndex, currentTag } = state.saveCurrentTag;
+  const getCloneTags = cloneDeep(tagsArray.value);
   for (let index = getCloneTags.length - 1; index >= 0; index--) {
     if (index !== 0 && index !== 1 && index !== currentIndex) {
-      getCloneTags.splice(index, 1)
+      getCloneTags.splice(index, 1);
     }
   }
-  changeStoreTags(getCloneTags)
+  changeStoreTags(getCloneTags);
   // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
-  if (!is_active(currentTag.meta.title)) handleClick(currentTag)
-}
+  if (!is_active(currentTag.meta.title)) handleClick(currentTag);
+};
 /** 关闭右侧 */
 const closeRight = () => {
-  const { currentIndex, currentTag } = state.saveCurrentTag
+  const { currentIndex, currentTag } = state.saveCurrentTag;
   tagsArray.value.forEach((item, index) => {
-    if (index > currentIndex) tagsArray.value.splice(index, 1)
-  })
+    if (index > currentIndex) tagsArray.value.splice(index, 1);
+  });
   // 说明 当前右键选中的 tag 不是当前路由所在，关闭其他之后，路由要跳转到当前位置
-  if (!is_active(currentTag.meta.title)) handleClick(currentTag)
-}
+  if (!is_active(currentTag.meta.title)) handleClick(currentTag);
+};
 /** 全部关闭 */
 const closeAll = () => {
-  tagsArray.value.splice(2)
-  router.push('/')
-}
+  tagsArray.value.splice(2);
+  router.push("/");
+};
 /** 关闭 可以 tag 的操作菜单 */
 const closeTagOperation = () => {
-  state.operaTagFlag = false
-}
+  state.operaTagFlag = false;
+};
 
 watch(
   () => route.path,
   () => {
-    insertTags()
+    insertTags();
   }
-)
+);
 watch(
   () => state.operaTagFlag,
   flag => {
     // 每次只要 开启 就全局监听 click 事件，用来关闭
-    if (flag) document.body.addEventListener('click', closeTagOperation)
-    else document.body.removeEventListener('click', closeTagOperation)
+    if (flag) document.body.addEventListener("click", closeTagOperation);
+    else document.body.removeEventListener("click", closeTagOperation);
   }
-)
+);
 </script>
 
 <script lang="ts">
 export default {
-  name: 'TagsView'
-}
+  name: "TagsView"
+};
 </script>
 
 <style lang="scss" scoped>

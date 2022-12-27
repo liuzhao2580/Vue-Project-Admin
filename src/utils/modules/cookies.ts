@@ -1,26 +1,25 @@
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 export const CONST_VARIABLE = {
-  TOKEN: 'token',
-  USER_ID: 'userId',
-  ROLE_ID: 'roleId'
-}
+  TOKEN: "token",
+  USER_ID: "userId",
+  ROLE_ID: "roleId"
+};
 
 /** 设置 cookies */
 export const setCookie = (name: string, value: string, days = 1) => {
-  return Cookies.set(name, value, { expires: days })
-}
+  return Cookies.set(name, value, { expires: days });
+};
 
 /** 获取cookies */
 export const getCookie = (name: string) => {
-  return Cookies.get(name)
-}
+  return Cookies.get(name);
+};
 
 /** 删除指定cookies */
 export const removeCookie = (name: string) => {
-  return Cookies.remove(name)
-}
-
+  return Cookies.remove(name);
+};
 
 // /** 存储 token */
 // export const userSetCookie = (token: string)=> {

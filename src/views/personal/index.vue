@@ -14,16 +14,15 @@
 </template>
 
 <script lang="ts" setup>
-import Info from './Info/index.vue'
-import Introduce from './Introduce/index.vue'
-
+import Info from "./Info/index.vue";
+import Introduce from "./Introduce/index.vue";
 </script>
 
 <script lang="ts">
-import { RouterName } from '@/router/RouteConst'
+import { RouterName } from "@/router/RouteConst";
 export default {
   name: RouterName.PERSONAL
-}
+};
 </script>
 
 <style lang="scss" scoped>

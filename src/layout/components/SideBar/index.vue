@@ -24,45 +24,45 @@
 </template>
 
 <script lang="ts" setup>
-import SidebarItem from './components/SidebarItem.vue'
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { RouterPath } from '@/router/RouteConst'
-import { useAppStore } from '@/store/app'
-import { useUserStore } from '@/store/user'
+import SidebarItem from "./components/SidebarItem.vue";
+import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { RouterPath } from "@/router/RouteConst";
+import { useAppStore } from "@/store/app";
+import { useUserStore } from "@/store/user";
 
-const routeConfig = useRoute()
+const routeConfig = useRoute();
 
-const router = useRouter()
+const router = useRouter();
 
-const userStore = useUserStore()
-const appStore = useAppStore()
+const userStore = useUserStore();
+const appStore = useAppStore();
 
 /** 获取当前页面的 url 地址 */
 const activeMenu = computed(() => {
-  const { path } = routeConfig
-  return path
-})
+  const { path } = routeConfig;
+  return path;
+});
 
 const avatar = computed(() => {
-  return userStore.state.avatar
-})
+  return userStore.state.avatar;
+});
 const side_status = computed(() => {
-  return appStore.state.side_status
-})
+  return appStore.state.side_status;
+});
 const sideBarList = computed(() => {
-  return userStore.state.sideBarList
-})
+  return userStore.state.sideBarList;
+});
 /** logo 点击事件 */
 const sideBarTitleClick = () => {
-  router.push(RouterPath.DASHBOARD)
-}
+  router.push(RouterPath.DASHBOARD);
+};
 </script>
 
 <script lang="ts">
 export default {
-  name: 'SideBar'
-}
+  name: "SideBar"
+};
 </script>
 
 <style lang="scss" scoped></style>

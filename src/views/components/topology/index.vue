@@ -12,22 +12,22 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted } from 'vue'
-import G6Utils from './G6utils'
+import { onMounted, onUnmounted } from "vue";
+import G6Utils from "./G6utils";
 onMounted(() => {
-  G6Utils.init()
-})
+  G6Utils.init();
+});
 
-onUnmounted(()=> {
-  G6Utils.graphDestory()
-})
+onUnmounted(() => {
+  G6Utils.graphDestory();
+});
 </script>
 
 <script lang="ts">
-import { RouterName } from '@/router/RouteConst'
+import { RouterName } from "@/router/RouteConst";
 export default {
   name: RouterName.TOPOLOGY
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -26,39 +26,39 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppStore } from '@/store/app'
-import { computed } from 'vue'
-import { RouteRecordRaw } from 'vue-router'
+import { useAppStore } from "@/store/app";
+import { computed } from "vue";
+import { RouteRecordRaw } from "vue-router";
 // 引入 path 模块 用于拼接url地址
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 interface IProps {
-  item: RouteRecordRaw
-  isMoreChild?: boolean
+  item: RouteRecordRaw;
+  isMoreChild?: boolean;
 }
 
 withDefaults(defineProps<IProps>(), {
   isMoreChild: false
-})
+});
 
 const side_status = computed(() => {
-  return appStore.state.side_status
-})
+  return appStore.state.side_status;
+});
 
 /** 判断多级路由 */
 const checkMoreRouter = (route: RouteRecordRaw) => {
   // 判断 是否含有多级路由
   // 当 children 存在时, 说明还存在子路由
-  if (route.children) return false
+  if (route.children) return false;
   // 说明当前路由不存在子路由
-  else return true
-}
+  else return true;
+};
 </script>
 
 <script lang="ts">
 export default {
-  name: 'SidebarItem'
-}
+  name: "SidebarItem"
+};
 </script>
 
 <style lang="scss" scoped>

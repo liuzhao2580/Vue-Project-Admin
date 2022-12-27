@@ -30,33 +30,33 @@
 
 <script lang="ts" setup>
 interface ICard {
-  iconClass: string
-  titleText: string
-  srcURL: string
+  iconClass: string;
+  titleText: string;
+  srcURL: string;
 }
 const cardList: ICard[] = [
   {
-    iconClass: 'vue',
-    titleText: 'Vue3',
-    srcURL: 'https://v3.cn.vuejs.org/'
+    iconClass: "vue",
+    titleText: "Vue3",
+    srcURL: "https://v3.cn.vuejs.org/"
   },
   {
-    iconClass: 'element-plus',
-    titleText: 'element-plus',
-    srcURL: 'https://element-plus.gitee.io/zh-CN/'
+    iconClass: "element-plus",
+    titleText: "element-plus",
+    srcURL: "https://element-plus.gitee.io/zh-CN/"
   }
-]
+];
 // 跳转页面
 const jumpURL = (URL: string) => {
-  window.open(URL)
-}
+  window.open(URL);
+};
 </script>
 
 <script lang="ts">
-import { RouterName } from '@/router/RouteConst'
+import { RouterName } from "@/router/RouteConst";
 export default {
   name: RouterName.DOCUMENTATION
-}
+};
 </script>
 
 <style lang="scss" scoped>

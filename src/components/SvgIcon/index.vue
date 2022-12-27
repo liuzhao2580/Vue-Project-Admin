@@ -5,19 +5,19 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed } from "vue";
 interface IProps {
-  iconClass?: string
+  iconClass?: string;
 }
-const props = defineProps<IProps>()
+const props = defineProps<IProps>();
 
-const symbolId = computed(() => `#icon-${props.iconClass}`)
+const symbolId = computed(() => `#icon-${props.iconClass}`);
 </script>
 
 <script lang="ts">
 export default {
-  name: 'SvgIcon'
-}
+  name: "SvgIcon"
+};
 </script>
 
 <style lang="scss" scoped>

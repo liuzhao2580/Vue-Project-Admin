@@ -18,32 +18,31 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive } from 'vue'
+import { computed, reactive } from "vue";
 /** 大屏幕 下的 标题 */
 interface IState {
   /** 文章标题 */
-  titleValue: string
+  titleValue: string;
 }
 const state = reactive<IState>({
-  titleValue: ''
-})
+  titleValue: ""
+});
 
 const emit = defineEmits<{
-  (e: 'releaseClick', title: string): void
-}>()
+  (e: "releaseClick", title: string): void;
+}>();
 
 /** 预览按钮禁用 */
 const disabled = computed(() => {
-  let flag = false
-  if (!state.titleValue) flag = true
-  return flag
-})
+  let flag = false;
+  if (!state.titleValue) flag = true;
+  return flag;
+});
 
 /** 预览按钮 */
-const releaseClick = ()=> {
-  emit('releaseClick', state.titleValue)
-}
-
+const releaseClick = () => {
+  emit("releaseClick", state.titleValue);
+};
 </script>
 
 <style lang="scss" scoped>

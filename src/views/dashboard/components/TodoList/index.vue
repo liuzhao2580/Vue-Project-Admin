@@ -50,104 +50,104 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive } from 'vue'
+import { computed, reactive } from "vue";
 
 interface IListArr {
-  title: string
-    flag: boolean
+  title: string;
+  flag: boolean;
 }
 
 interface IState {
-  insertInput: string
-  checkAll: boolean
-  isIndeterminate: boolean
-  status: string
-  listArr: IListArr[]
-  colse_isActive: number
+  insertInput: string;
+  checkAll: boolean;
+  isIndeterminate: boolean;
+  status: string;
+  listArr: IListArr[];
+  colse_isActive: number;
 }
 
 const state = reactive<IState>({
   // 新增 todolist
-  insertInput: '',
+  insertInput: "",
   // 全选状态  false 不全选  true 全选
   checkAll: false,
   // 用以表示 checkbox 的不确定状态 只负责样式控制 false
   isIndeterminate: true,
   // all 完成  active未完成  component已完成
-  status: 'all',
+  status: "all",
   listArr: [
     {
-      title: '吃饭',
+      title: "吃饭",
       flag: false
     },
     {
-      title: '睡觉',
+      title: "睡觉",
       flag: false
     },
     {
-      title: '打豆豆',
+      title: "打豆豆",
       flag: true
     }
   ],
   // 关闭按钮的显示
   colse_isActive: -1
-})
+});
 
 const checkedList = computed(() => {
-  let getAllListArr:IListArr[] = []
+  let getAllListArr: IListArr[] = [];
   switch (state.status) {
     // 全部
-    case 'all':
-      getAllListArr = state.listArr
-      break
+    case "all":
+      getAllListArr = state.listArr;
+      break;
     // 未完成
-    case 'active':
+    case "active":
       getAllListArr = state.listArr.filter(item => {
-        if (!item.flag) return item
-      })
-      break
+        if (!item.flag) return item;
+      });
+      break;
     // 已完成
-    case 'component':
+    case "component":
       getAllListArr = state.listArr.filter(item => {
-        if (item.flag) return item
-      })
-      break
+        if (item.flag) return item;
+      });
+      break;
   }
-  return getAllListArr
-})
+  return getAllListArr;
+});
 /** 输入框的回车新增事件 */
 const handleInsertInput = () => {
-  if (!state.insertInput) return
+  if (!state.insertInput) return;
   const setList = {
     title: state.insertInput,
     flag: true
-  }
-  state.listArr.push(setList)
-  state.insertInput = ''
-}
+  };
+  state.listArr.push(setList);
+  state.insertInput = "";
+};
 
 /** 列表点击事件 */
 const handleItemClick = (index: number) => {
-  state.listArr[index].flag = !state.listArr[index].flag
-}
+  state.listArr[index].flag = !state.listArr[index].flag;
+};
 // 鼠标移入
 const handleMouseEnter = (index: number) => {
-  state.colse_isActive = index
-}
+  state.colse_isActive = index;
+};
 // 鼠标移除
 const handleMouseLeave = () => {
-  state.colse_isActive = -1
-}
+  state.colse_isActive = -1;
+};
 // 移除 指定的list
 const removeList = (index: number) => {
-  state.listArr.splice(index, 1)
-}
+  state.listArr.splice(index, 1);
+};
 </script>
 
 <script lang="ts">
 export default {
-  name: 'TodoList'
-}
+  name: "TodoList"
+};
 </script>
 
 <style lang="scss" scoped>

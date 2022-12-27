@@ -15,15 +15,15 @@
 </template>
 
 <script lang="ts" setup>
-import active from './active.vue'
-import timeline from './timeline.vue'
-import account from './account.vue'
+import active from "./active.vue";
+import timeline from "./timeline.vue";
+import account from "./account.vue";
 </script>
 
 <script lang="ts">
 export default {
-  name: 'PersonalIndex'
-}
+  name: "PersonalIndex"
+};
 </script>
 
 <style lang="scss" scoped></style>

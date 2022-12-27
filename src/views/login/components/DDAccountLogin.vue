@@ -9,19 +9,19 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue'
-const appid = 'dingoapbicykzzeqxpelxy'
-const url = encodeURIComponent('http://127.0.0.1:9527/login')
+import { computed, onMounted } from "vue";
+const appid = "dingoapbicykzzeqxpelxy";
+const url = encodeURIComponent("http://127.0.0.1:9527/login");
 
 const iframeSrc = computed((): string => {
-  return `https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid=${appid}&response_type=code&scope=snsapi_login&state=STATE&redirect_uri=${url}`
-})
+  return `https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid=${appid}&response_type=code&scope=snsapi_login&state=STATE&redirect_uri=${url}`;
+});
 
 // const emit = defineEmits<{ (e: 'loginSuccess', flag: boolean):void }>()
 
 onMounted(() => {
-  ddLoginInit()
-})
+  ddLoginInit();
+});
 
 // 钉钉登录方法
 const ddLoginInit = () => {
@@ -43,7 +43,7 @@ const ddLoginInit = () => {
   //     that.$emit('update:loginLoading', false)
   //   }
   // }
-}
+};
 </script>
 
 <style lang="scss" scoped>

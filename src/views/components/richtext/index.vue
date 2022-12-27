@@ -5,13 +5,13 @@
 </template>
 
 <script lang="ts" setup>
-import WangEditor from './WangEditor/index.vue'
+import WangEditor from "./WangEditor/index.vue";
 </script>
 
 <script lang="ts">
 export default {
-  name: 'RichText'
-}
+  name: "RichText"
+};
 </script>
 
 <style lang="scss" scoped></style>

@@ -1,13 +1,13 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Layout from '@/layout/index.vue'
-import PageContent from '@/layout/components/AppMain.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import Layout from "@/layout/index.vue";
+import PageContent from "@/layout/components/AppMain.vue";
 // 使用 modules 引入嵌套过多的路由
-import error_page from './modules/error'
-import components from './modules/components'
-import { RouterName, RouterPath } from './RouteConst'
-import { UserRolesEnum } from '@/typescript/shared/enum/user-enum/user-roles.enum'
-import { IMetaRouter } from '@/typescript/shared/interface/router-interface'
-import setting from '@/setting'
+import error_page from "./modules/error";
+import components from "./modules/components";
+import { RouterName, RouterPath } from "./RouteConst";
+import { UserRolesEnum } from "@/typescript/shared/enum/user-enum/user-roles.enum";
+import { IMetaRouter } from "@/typescript/shared/interface/router-interface";
+import setting from "@/setting";
 
 // 公共的页面
 export const constantRoutes: RouteRecordRaw[] = [
@@ -15,23 +15,23 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: RouterPath.LOGIN,
     name: RouterName.LOGIN,
-    meta: { hidden: true, title: '登录' },
+    meta: { hidden: true, title: "登录" },
     component: () =>
-      import(/* webpackChunkName: "loginComponent" */ '@/views/login/index.vue')
+      import(/* webpackChunkName: "loginComponent" */ "@/views/login/index.vue")
   },
   // 404
   {
-    path: '/:catchAll(.*)*',
+    path: "/:catchAll(.*)*",
     meta: {
       hidden: true,
-      title: '404'
+      title: "404"
     },
     component: () =>
       import(
-        /* webpackChunkName: "baseComponet" */ '@/views/error_page/404_page.vue'
+        /* webpackChunkName: "baseComponet" */ "@/views/error_page/404_page.vue"
       )
   }
-]
+];
 // 需要权限的页面
 /**
  * @param {roles} 数组 用来存放路由的权限信息
@@ -59,35 +59,39 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: RouterPath.DASHBOARD,
         component: () =>
           import(
-            /* webpackChunkName: "dashboardComponet" */ '@/views/dashboard/index.vue'
+            /* webpackChunkName: "dashboardComponet" */ "@/views/dashboard/index.vue"
           ),
         name: RouterName.DASHBOARD,
-        meta: { title: '首页', icon: 'index', affix: true, keepAlive: true }
+        meta: { title: "首页", icon: "index", affix: true, keepAlive: true }
       },
       // 文档页
       {
         path: RouterPath.DOCUMENTATION,
         component: () =>
           import(
-            /* webpackChunkName: "baseComponet" */ '@/views/documentation/index.vue'
+            /* webpackChunkName: "baseComponet" */ "@/views/documentation/index.vue"
           ),
         name: RouterName.DOCUMENTATION,
-        meta: { title: '文档', icon: 'wendang', affix: true, keepAlive: true }
+        meta: { title: "文档", icon: "wendang", affix: true, keepAlive: true }
       },
       // 权限管理
       {
         path: RouterPath.ADMIN,
         name: RouterName.ADMIN,
-        meta: { title: '权限管理', icon: 'admin', roles: [UserRolesEnum.superAdmin] },
+        meta: {
+          title: "权限管理",
+          icon: "admin",
+          roles: [UserRolesEnum.superAdmin]
+        },
         component: () =>
           import(
-            /* webpackChunkName: "admminComponent" */ '@/views/admin/index.vue'
+            /* webpackChunkName: "admminComponent" */ "@/views/admin/index.vue"
           )
       },
       // 文章页
       {
         path: RouterPath.ARTICLE,
-        meta: { title: '文章页', icon: 'article' },
+        meta: { title: "文章页", icon: "article" },
         redirect: RouterPath.ARTICLE_CREATE,
         component: PageContent,
         name: RouterName.ARTICLE,
@@ -96,21 +100,25 @@ export const asyncRoutes: RouteRecordRaw[] = [
             path: RouterPath.ARTICLE_CREATE,
             component: () =>
               import(
-                /* webpackChunkName: "article" */ '@/views/article/created/index.vue'
+                /* webpackChunkName: "article" */ "@/views/article/created/index.vue"
               ),
             name: RouterName.ARTICLE_CREATE,
-            meta: { title: '文章创建', icon: 'created', roles: [UserRolesEnum.superAdmin, UserRolesEnum.admin] }
+            meta: {
+              title: "文章创建",
+              icon: "created",
+              roles: [UserRolesEnum.superAdmin, UserRolesEnum.admin]
+            }
           },
           {
             path: RouterPath.ARTICLE_LIST,
             component: () =>
               import(
-                /* webpackChunkName: "article" */ '@/views/article/list/index.vue'
+                /* webpackChunkName: "article" */ "@/views/article/list/index.vue"
               ),
             name: RouterName.ARTICLE_LIST,
             meta: {
-              title: '文章列表',
-              icon: 'list',
+              title: "文章列表",
+              icon: "list",
               keepAlive: true
             }
           }
@@ -121,9 +129,9 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: RouterPath.AMAP,
         component: () =>
           import(
-            /* webpackChunkName: "baseComponet" */ '@/views/map/index.vue'
+            /* webpackChunkName: "baseComponet" */ "@/views/map/index.vue"
           ),
-        meta: { title: '地图', icon: 'map', keepAlive: true },
+        meta: { title: "地图", icon: "map", keepAlive: true },
         name: RouterName.AMAP
       },
       // 组件
@@ -135,37 +143,37 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: RouterPath.PERSONAL,
         component: () =>
           import(
-            /* webpackChunkName: "baseComponet" */ '@/views/personal/index.vue'
+            /* webpackChunkName: "baseComponet" */ "@/views/personal/index.vue"
           ),
 
-        meta: { title: '个人中心', icon: 'personal', hidden: true },
+        meta: { title: "个人中心", icon: "personal", hidden: true },
         name: RouterName.PERSONAL
       }
     ]
   }
-]
+];
 const router = createRouter({
   history: createWebHistory(setting.basePrefix),
   routes: constantRoutes
-})
+});
 
 /** 重置路由 只有登录和404页面 */
 export const resetRouter = () => {
-  const newRouter = asyncRoutes
+  const newRouter = asyncRoutes;
   newRouter.forEach(route => {
-    if (route.name) router.removeRoute(route.name)
-  })
-}
+    if (route.name) router.removeRoute(route.name);
+  });
+};
 
 /** 添加路由作为新的路由 */
 export const insertRouter = (routes: RouteRecordRaw) => {
-  resetRouter()
-  router.addRoute(routes)
-}
+  resetRouter();
+  router.addRoute(routes);
+};
 
 // https://router.vuejs.org/zh/guide/advanced/meta.html#typescript
-declare module 'vue-router' {
+declare module "vue-router" {
   interface RouteMeta extends IMetaRouter {}
 }
 
-export default router
+export default router;

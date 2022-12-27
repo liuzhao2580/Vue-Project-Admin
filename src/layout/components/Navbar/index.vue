@@ -12,25 +12,25 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppStore } from '@/store/app'
-import Breadcrumb from '../Breadcrumb/index.vue'
-import TagsView from '../TagsView/index.vue'
-import Personal from '../Personal/index.vue'
-import { Operation } from '@element-plus/icons-vue'
+import { useAppStore } from "@/store/app";
+import Breadcrumb from "../Breadcrumb/index.vue";
+import TagsView from "../TagsView/index.vue";
+import Personal from "../Personal/index.vue";
+import { Operation } from "@element-plus/icons-vue";
 
-const store = useAppStore()
+const store = useAppStore();
 // 侧边栏按钮点击事件
 const sideBtn = () => {
-  store.changeSideStatus()
-}
+  store.changeSideStatus();
+};
 </script>
 
 <script lang="ts">
 export default {
-  name: 'NavBar'
-}
+  name: "NavBar"
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

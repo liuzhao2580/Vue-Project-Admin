@@ -44,71 +44,71 @@
 </template>
 
 <script lang="ts" setup>
-import { IArticleCategory } from '@/typescript/views/article/interface/article-config.interface'
-import { ElMessage } from 'element-plus'
-import { computed, reactive, watch } from 'vue'
+import { IArticleCategory } from "@/typescript/views/article/interface/article-config.interface";
+import { ElMessage } from "element-plus";
+import { computed, reactive, watch } from "vue";
 
 interface IProps {
   /** 弹出框的 visible */
-  visible: boolean
+  visible: boolean;
   /** 文章标题 */
-  title: string
+  title: string;
   /** 文章内容 */
-  articleContainer: string
+  articleContainer: string;
   /** 分类的数据 */
-  categoryData: IArticleCategory[]
+  categoryData: IArticleCategory[];
 }
 
-const props = defineProps<IProps>()
+const props = defineProps<IProps>();
 
 const emit = defineEmits<{
-  (e: 'update:visible', value: boolean): void
-}>()
+  (e: "update:visible", value: boolean): void;
+}>();
 /** 关闭 弹出框 */
-const closeDialog = () => emit('update:visible', false)
+const closeDialog = () => emit("update:visible", false);
 
 interface IState {
   /** 文章分类 选中项 id */
-  categoryValue: string
+  categoryValue: string;
   /** 弹框 */
-  visibleFlag: boolean
+  visibleFlag: boolean;
 }
 
 const state = reactive<IState>({
-  categoryValue: '',
+  categoryValue: "",
   visibleFlag: false
-})
+});
 
 /** 发布按钮的禁用 */
 const releaseDisabled = computed(() => {
-  let flag = false
-  if (!state.categoryValue) flag = true
-  return flag
-})
+  let flag = false;
+  if (!state.categoryValue) flag = true;
+  return flag;
+});
 
 /** 选择分类的改变事件 */
 const categoryChange = (value: string | number | boolean) => {
-  const getFind = props.categoryData.find(item => item.id === value)
-  console.log(getFind, 'getFind')
-}
+  const getFind = props.categoryData.find(item => item.id === value);
+  console.log(getFind, "getFind");
+};
 /** 发布按钮 */
 const releaseArticle = (): void => {
-  ElMessage.success('只做测试哟~~~~~')
-  closeDialog()
-}
+  ElMessage.success("只做测试哟~~~~~");
+  closeDialog();
+};
 /** 监听 visible 变化 */
 watch(
   () => props.visible,
   () => {
-    state.visibleFlag = props.visible
+    state.visibleFlag = props.visible;
   }
-)
+);
 </script>
 
 <script lang="ts">
 export default {
-  name: 'ReleaseContainer'
-}
+  name: "ReleaseContainer"
+};
 </script>
 
 <style lang="scss" scoped>

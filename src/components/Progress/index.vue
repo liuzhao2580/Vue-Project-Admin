@@ -12,17 +12,17 @@
 
 <script lang="ts" setup>
 const progressItems = [
-  { label: 'Vue', percentage: 80, color: '#5cb87a' },
-  { label: 'JavaScript', percentage: 70, color: '#e6a23c' },
-  { label: 'CSS', percentage: 50, color: '#f56c6c' },
-  { label: 'HTML', percentage: 60, color: '#6f7ad3' }
-]
+  { label: "Vue", percentage: 80, color: "#5cb87a" },
+  { label: "JavaScript", percentage: 70, color: "#e6a23c" },
+  { label: "CSS", percentage: 50, color: "#f56c6c" },
+  { label: "HTML", percentage: 60, color: "#6f7ad3" }
+];
 </script>
 
 <script lang="ts">
 export default {
-  name: 'ProgressCom'
-}
+  name: "ProgressCom"
+};
 </script>
 
 <style lang="scss" scoped>

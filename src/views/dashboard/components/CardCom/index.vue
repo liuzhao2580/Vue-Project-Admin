@@ -20,13 +20,12 @@
   </el-row>
 </template>
 
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>
 
 <script lang="ts">
 export default {
-  name: 'CardCom'
-}
+  name: "CardCom"
+};
 </script>
 
 <style lang="scss" scoped>

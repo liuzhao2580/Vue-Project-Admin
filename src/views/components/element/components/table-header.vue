@@ -109,64 +109,64 @@
 </template>
 
 <script lang="ts" setup>
-import { shallowRef } from 'vue'
+import { shallowRef } from "vue";
 const headerData = shallowRef([
   {
-    label: '日期',
-    prop: 'date',
+    label: "日期",
+    prop: "date",
     dateSelect: true,
-    dateValue: ''
+    dateValue: ""
   },
   {
-    label: '名称',
-    prop: 'name',
+    label: "名称",
+    prop: "name",
     inputSelect: true,
-    inputValue: ''
+    inputValue: ""
   },
   {
-    label: '类型',
-    prop: 'type',
+    label: "类型",
+    prop: "type",
     select: true,
-    selectValue: '',
+    selectValue: "",
     selectOptions: [
       {
-        value: 'Vue',
-        label: 'Vue'
+        value: "Vue",
+        label: "Vue"
       },
       {
-        value: 'React',
-        label: 'React'
+        value: "React",
+        label: "React"
       },
       {
-        value: 'Angular',
-        label: 'Angular'
+        value: "Angular",
+        label: "Angular"
       }
     ]
   }
-])
+]);
 const tableData = shallowRef([
   {
-    date: '2016-05-02',
-    name: '王小虎',
-    type: 'Vue'
+    date: "2016-05-02",
+    name: "王小虎",
+    type: "Vue"
   },
   {
-    date: '2016-05-04',
-    name: '王小虎',
-    type: 'React'
+    date: "2016-05-04",
+    name: "王小虎",
+    type: "React"
   },
   {
-    date: '2016-05-01',
-    name: '王小虎',
-    type: 'Angular'
+    date: "2016-05-01",
+    name: "王小虎",
+    type: "Angular"
   }
-])
+]);
 </script>
 
 <script lang="ts">
 export default {
-  name: 'TableHeaderCom'
-}
+  name: "TableHeaderCom"
+};
 </script>
 
 <style lang="scss" scoped>

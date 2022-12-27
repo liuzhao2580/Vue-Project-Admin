@@ -24,7 +24,9 @@
       <el-date-picker
         style="width: 100%"
         size="small"
-        v-else-if="tableHeaderSearch.searchConfig?.type === ESearchType.dateTime"
+        v-else-if="
+          tableHeaderSearch.searchConfig?.type === ESearchType.dateTime
+        "
         type="datetime"
         v-model="state.dateTimeValue"
         placeholder="选择日期时间"
@@ -35,42 +37,40 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
-import { SearchModelValue } from '../shared/model/serach-model-value'
-import { IColumnConfig } from '@/typescript/shared/interface/table-interface'
-import { ESearchType } from '@/typescript/shared/enum/table-enum'
+import { reactive } from "vue";
+import { SearchModelValue } from "../shared/model/serach-model-value";
+import { IColumnConfig } from "@/typescript/shared/interface/table-interface";
+import { ESearchType } from "@/typescript/shared/enum/table-enum";
 
 interface IProps {
   /** 表格的搜索配置 */
-  tableHeaderSearch: IColumnConfig
+  tableHeaderSearch: IColumnConfig;
   /** 给每个 model 赋值 */
-  searchParamsValue: SearchModelValue
+  searchParamsValue: SearchModelValue;
 }
 
-defineProps<IProps>()
-
+defineProps<IProps>();
 
 interface IState {
   /** 输入框 */
-  inputValue: string
+  inputValue: string;
   /** 年月日 */
-  dateValue: string
+  dateValue: string;
   /** 年月日时分秒 */
-  dateTimeValue: string
+  dateTimeValue: string;
 }
 
 const state = reactive<IState>({
-  inputValue: '',
-  dateValue: '',
-  dateTimeValue: ''
-})
-
+  inputValue: "",
+  dateValue: "",
+  dateTimeValue: ""
+});
 </script>
 
 <script lang="ts">
 export default {
-  name: 'TableHeaderSearch'
-}
+  name: "TableHeaderSearch"
+};
 </script>
 
 <style lang="scss" scoped></style>

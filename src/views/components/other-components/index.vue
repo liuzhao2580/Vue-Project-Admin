@@ -5,7 +5,7 @@
         <!-- 计算器 -->
         <Calculator />
         <!-- 计算两者的时间 -->
-        <BetweenTime style="margin-top: 20px;" />
+        <BetweenTime style="margin-top: 20px" />
       </el-col>
       <!-- 点击出现水波纹效果 -->
       <el-col :xs="24" :sm="8">
@@ -16,16 +16,16 @@
 </template>
 
 <script lang="ts" setup>
-import BetweenTime from './components/Between-time.vue'
-import CssComponent from './components/CssComponent/index.vue'
-import Calculator from './components/Calculator.vue'
+import BetweenTime from "./components/Between-time.vue";
+import CssComponent from "./components/CssComponent/index.vue";
+import Calculator from "./components/Calculator.vue";
 </script>
 
 <script lang="ts">
-import { RouterName } from '@/router/RouteConst'
+import { RouterName } from "@/router/RouteConst";
 export default {
   name: RouterName.OTHER_COMPONENTS
-}
+};
 </script>
 
 <style lang="scss" scoped>

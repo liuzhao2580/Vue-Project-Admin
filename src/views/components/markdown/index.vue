@@ -8,21 +8,21 @@
 </template>
 
 <script lang="ts" setup>
-import { marked } from 'marked'
-import { shallowRef } from 'vue'
-import 'highlight.js/styles/monokai-sublime.css'
+import { marked } from "marked";
+import { shallowRef } from "vue";
+import "highlight.js/styles/monokai-sublime.css";
 marked.setOptions({
   renderer: new marked.Renderer(),
   highlight: function (code, lang) {
-    const hljs = require('highlight.js')
-    const language = hljs.getLanguage(lang) ? lang : 'plaintext'
-    return hljs.highlight(code, { language }).value
+    const hljs = require("highlight.js");
+    const language = hljs.getLanguage(lang) ? lang : "plaintext";
+    return hljs.highlight(code, { language }).value;
   },
-  langPrefix: 'hljs language-',
+  langPrefix: "hljs language-",
   breaks: false,
   gfm: true,
   headerIds: true,
-  headerPrefix: '',
+  headerPrefix: "",
   mangle: true,
   pedantic: false,
   sanitize: false,
@@ -30,21 +30,21 @@ marked.setOptions({
   smartLists: false,
   smartypants: false,
   xhtml: false
-})
-const compileHtml = shallowRef()
+});
+const compileHtml = shallowRef();
 
 /** 输入框改变事件 */
 const writeChange = (e: Event) => {
-  const getTextArea = e.target as HTMLTextAreaElement
-  compileHtml.value = marked.parse(getTextArea.value)
-}
+  const getTextArea = e.target as HTMLTextAreaElement;
+  compileHtml.value = marked.parse(getTextArea.value);
+};
 </script>
 
 <script lang="ts">
-import { RouterName } from '@/router/RouteConst'
+import { RouterName } from "@/router/RouteConst";
 export default {
   name: RouterName.MARKDOWN
-}
+};
 </script>
 
 <style lang="scss" scoped>

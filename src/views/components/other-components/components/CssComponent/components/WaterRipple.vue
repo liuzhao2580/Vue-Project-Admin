@@ -13,19 +13,19 @@
 </template>
 <script lang="ts" setup>
 /** 水波纹 */
-import { ref } from 'vue'
+import { ref } from "vue";
 /** 判断是否已经点击了 */
-const clickFlag = ref<boolean>(false)
+const clickFlag = ref<boolean>(false);
 /** 点击事件 */
 const cricleClick = () => {
-  clickFlag.value = !clickFlag.value
-}
+  clickFlag.value = !clickFlag.value;
+};
 </script>
 
 <script lang="ts">
 export default {
-  name: 'WaterRipple'
-}
+  name: "WaterRipple"
+};
 </script>
 
 <style lang="scss" scoped>
