@@ -1,7 +1,8 @@
-/** 实例 */
-let graph: any = null;
+import { EnumFieldToTransform } from "@/utils";
+import G6, { Graph, IGroup, ModelConfig, NodeConfig } from "@antv/g6";
 
-const G6 = window.G6;
+/** 实例 */
+let graph: Graph;
 
 enum CustomTypeEnum {
   /** 圆形 */
@@ -9,28 +10,51 @@ enum CustomTypeEnum {
   /** 菱形 */
   diamondType = "diamond-type"
 }
-
-interface INodesLabel {
-  id: string;
-  type: CustomTypeEnum;
-  panels: {
-    title: string;
-    label: string;
-  };
+/** 当前的数据状态 */
+enum NodeStatusEnum {
+  /** 通过 */
+  success = "success",
+  /** 跳过 */
+  jump = "jump",
+  /** 退回 */
+  refuse = "refuse",
+  /** 完成 */
+  done = "done"
 }
 
-const nodesLabel: INodesLabel[] = [
+/** 当前数据不同状态的颜色 */
+enum NodeStatusColorEnum {
+  success = "#aae2ff",
+  jump = "#67c23a",
+  refuse = "#f56c6c",
+  done = "#e6a23c"
+}
+
+interface IPanel {
+  title: string;
+  label: string;
+}
+
+interface INodesData extends NodeConfig {
+  type: CustomTypeEnum;
+  status: NodeStatusEnum;
+  panels: IPanel;
+}
+
+const nodesData: INodesData[] = [
   {
     id: "1",
     type: CustomTypeEnum.circleType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "发起",
-      label: "小火车况且况且"
+      label: "小火车况且况且123123123"
     }
   },
   {
     id: "2",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "费用承担人",
       label: "小火车"
@@ -39,6 +63,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "3",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "一级主管审核",
       label: "小汽车"
@@ -47,6 +72,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "4",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "二级主管审核",
       label: "小飞机"
@@ -55,6 +81,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "5",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.jump,
     panels: {
       title: "三级主管审核",
       label: "小轮船"
@@ -63,6 +90,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "6",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "法务审批",
       label: "小火箭"
@@ -71,6 +99,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "7",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "会计审核",
       label: "小卡车"
@@ -79,6 +108,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "8",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "财务经理",
       label: "小拖车"
@@ -87,6 +117,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "9",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "财务总监",
       label: "小火车"
@@ -95,6 +126,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "10",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "CFO",
       label: "CFO"
@@ -103,6 +135,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "11",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "提交纸质单据",
       label: "财务扫描枪"
@@ -111,6 +144,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "12",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "待付款",
       label: "总账审批"
@@ -119,6 +153,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "13",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "付款",
       label: "财务付款-自动"
@@ -127,6 +162,7 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "14",
     type: CustomTypeEnum.diamondType,
+    status: NodeStatusEnum.success,
     panels: {
       title: "出纳核销",
       label: "出纳核销归档"
@@ -135,21 +171,23 @@ const nodesLabel: INodesLabel[] = [
   {
     id: "15",
     type: CustomTypeEnum.circleType,
+    status: NodeStatusEnum.done,
     panels: {
       title: "归档",
       label: "归档"
     }
   }
 ];
-function loopNodes(loopList: INodesLabel[]): any {
+function loopNodes(loopList: INodesData[]): NodeConfig[] {
   let loopX = 1;
   /** 一行有多少个数据 */
   const lineNumber = 6;
   return loopList.map((itemLabel, index) => {
-    const nodesMap = {
+    const nodesMap: INodesData = {
       label: itemLabel.panels.label,
       x: 0,
       y: 0,
+      size: 50,
       ...itemLabel
     };
     if (index % lineNumber > 0) {
@@ -173,7 +211,7 @@ function loopNodes(loopList: INodesLabel[]): any {
 }
 const data = {
   // 点集
-  nodes: loopNodes(nodesLabel),
+  nodes: loopNodes(nodesData),
   edges: [
     {
       type: "polyline",
@@ -195,18 +233,18 @@ const data = {
 G6.registerEdge(
   "line-arrow",
   {
-    draw(cfg: any, group: any) {
+    draw(cfg?: ModelConfig, group?: IGroup) {
       console.log(cfg);
-      const startPoint = cfg.startPoint;
-      const endPoint = cfg.endPoint;
-      return group.addShape("path", {
+      const startPoint = cfg?.startPoint;
+      const endPoint = cfg?.endPoint;
+      return (group as IGroup).addShape("path", {
         attrs: {
           stroke: "red",
           path: [
-            ["M", startPoint.x, startPoint.y],
-            ["L", startPoint.x, endPoint.y / 2],
-            ["L", endPoint.x, endPoint.y / 2],
-            ["L", endPoint.x, endPoint.y]
+            ["M", startPoint?.x, startPoint?.y],
+            ["L", startPoint?.x, (endPoint?.y as number) / 2],
+            ["L", endPoint?.x, (endPoint?.y as number) / 2],
+            ["L", endPoint?.x, endPoint?.y]
           ]
         },
         name: "path-shape"
@@ -218,23 +256,67 @@ G6.registerEdge(
 
 // 自定义 node 元素 圆形
 G6.registerNode(CustomTypeEnum.circleType, {
-  drawShape
+  draw: (cfg?: ModelConfig, group?: IGroup) => {
+    console.log(cfg, "cfg");
+    let fill = EnumFieldToTransform(
+      NodeStatusEnum,
+      NodeStatusColorEnum,
+      cfg?.status as string
+    );
+    const setGroup = group as IGroup;
+    const panels = cfg?.panels as IPanel;
+    const circleRadius = 50; // 圆的半径
+    const circleX = circleRadius / 2,
+      circleY = circleRadius / 2; // 圆的X和Y轴
+    const shape = setGroup.addShape("circle", {
+      attrs: {
+        x: circleX,
+        y: circleY,
+        r: circleRadius,
+        fill,
+        cursor: "pointer"
+      }
+    });
+
+    // label text
+    setGroup.addShape("dom", {
+      attrs: {
+        width: circleRadius * 2,
+        height: 40,
+        x: -circleX,
+        textAlign: "start",
+        html: `
+          <div id=${+new Date()} style="width: 100%">
+            <div style="color: #000;font-size:12px;text-align:center;white-space: nowrap;margin-bottom: 10px;">${panels.title}</div>
+            <div style="color: #000;width: 100%;height:auto;font-size:12px;text-align:center;overflow: hidden;white-space: nowrap;">${panels.label}</div>
+          </div>
+        `
+      }
+    });
+    return shape;
+  }
 });
 
-function drawShape(cfg: any, group: any) {
-  console.log(cfg, "cfg");
-  // const { panels } = cfg
-  const shape = group.addShape("circle", {
-    attrs: {
-      x: 0,
-      y: 0,
-      r: 20,
-      fill: "blue",
-      cursor: "pointer"
-    }
-  });
-  return shape;
-}
+// 自定义 node 元素 菱形
+G6.registerNode(CustomTypeEnum.diamondType, {
+  draw: (cfg?: ModelConfig, group?: IGroup) => {
+    console.log(cfg, "cfg");
+    // const { panels } = cfg
+    const shape = (group as IGroup).addShape("polygon", {
+      attrs: {
+        points: [
+          [30, 0],
+          [60, 30],
+          [30, 60],
+          [0, 30]
+        ],
+        fill: "#aae2ff"
+      }
+    });
+    return shape;
+  }
+});
+
 export default {
   init: () => {
     const container = document.getElementById("container") as HTMLDivElement;
@@ -244,6 +326,7 @@ export default {
       container: "container",
       width,
       height,
+      renderer: "svg",
       fitCenter: true,
       defaultEdge: {
         style: {

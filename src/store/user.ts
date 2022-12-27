@@ -21,8 +21,6 @@ const _Message = ElMessage;
 
 /**
  * 将后台传递的路由格式和本地的路由对比
- * @param {asyncRoutes} asyncRoutes  本地路由需要权限的数据
- * @param {dataRouter} dataRouter  从后台获取的路由数据
  */
 // 判断当前的路由是否存在权限 如该用户可以访问该页面就返回true 否则返回false
 const hasPrimission = (route: RouteRecordRaw, roleId: UserRolesEnum) =>
