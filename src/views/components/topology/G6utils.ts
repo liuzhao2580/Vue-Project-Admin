@@ -1,12 +1,11 @@
 import { EnumFieldToTransform } from "@/utils";
 import G6, { Graph, IGroup, ModelConfig, NodeConfig } from "@antv/g6";
 
-
 enum CustomTypeEnum {
   /** 圆形 */
   circleType = "circle-type",
   /** 菱形 */
-  diamondType = "diamond-type"
+  diamondType = "diamond"
 }
 /** 当前的数据状态 */
 enum NodeStatusEnum {
@@ -46,7 +45,7 @@ const nodesData: INodesData[] = [
     status: NodeStatusEnum.success,
     panels: {
       title: "发起",
-      label: "小火车况且况且123123123"
+      label: "小火车况且况且"
     }
   },
   {
@@ -176,6 +175,21 @@ const nodesData: INodesData[] = [
     }
   }
 ];
+
+// 每个节点的高度
+const nodeHeight = 150;
+// 每个节点的宽度
+const nodeWidth = 150;
+/** 自定义圆的属性 */
+/** 圆的半径 */
+const customCircleRadius = 50;
+/** 圆的半径的一半 */
+const customCircleHalf = customCircleRadius / 2;
+/** 圆的x轴 */
+const customCircleX = customCircleHalf;
+/** 圆的Y轴 */
+const customCircleY = customCircleHalf;
+
 function loopNodes(loopList: INodesData[]): NodeConfig[] {
   let loopX = 1;
   /** 一行有多少个数据 */
@@ -197,13 +211,13 @@ function loopNodes(loopList: INodesData[]): NodeConfig[] {
 
     // 说明是偶数,顺序是从左往右
     if (getFloor % 2 === 0) {
-      nodesMap.x = 150 * loopX;
+      nodesMap.x = nodeWidth * loopX;
     }
     // 说明是奇数, 顺序是从右往左
     else {
-      nodesMap.x = 150 * (lineNumber - loopX + 1);
+      nodesMap.x = nodeWidth * (lineNumber - loopX + 1);
     }
-    nodesMap.y = 80 * (getFloor + 1);
+    nodesMap.y = nodeHeight * (getFloor + 1);
     return nodesMap;
   });
 }
@@ -263,14 +277,11 @@ G6.registerNode(CustomTypeEnum.circleType, {
     );
     const setGroup = group as IGroup;
     const panels = cfg?.panels as IPanel;
-    const circleRadius = 50; // 圆的半径
-    const circleX = circleRadius / 2,
-      circleY = circleRadius / 2; // 圆的X和Y轴
     const shape = setGroup.addShape("circle", {
       attrs: {
-        x: circleX,
-        y: circleY,
-        r: circleRadius,
+        x: customCircleX,
+        y: customCircleY,
+        r: customCircleRadius,
         fill,
         cursor: "pointer"
       }
@@ -279,9 +290,9 @@ G6.registerNode(CustomTypeEnum.circleType, {
     // label text
     setGroup.addShape("dom", {
       attrs: {
-        width: circleRadius * 2,
+        width: customCircleRadius * 2,
         height: 40,
-        x: -circleX,
+        x: -customCircleX,
         textAlign: "start",
         html: `
           <div id=${+new Date()} style="width: 100%">
@@ -299,16 +310,35 @@ G6.registerNode(CustomTypeEnum.circleType, {
 G6.registerNode(CustomTypeEnum.diamondType, {
   draw: (cfg?: ModelConfig, group?: IGroup) => {
     console.log(cfg, "cfg");
+    const setGroup = group as IGroup;
+    const panels = cfg?.panels as IPanel;
+    const polygonWidth = customCircleHalf;
+    const polygonHeigth = customCircleHalf * 3;
     // const { panels } = cfg
-    const shape = (group as IGroup).addShape("polygon", {
+    const shape = setGroup.addShape("polygon", {
       attrs: {
         points: [
-          [30, 0],
-          [60, 30],
-          [30, 60],
-          [0, 30]
+          [polygonWidth, -polygonWidth],
+          [polygonHeigth, polygonWidth],
+          [polygonWidth, polygonHeigth],
+          [-polygonWidth, polygonWidth]
         ],
         fill: "#aae2ff"
+      }
+    });
+    // label text
+    setGroup.addShape("dom", {
+      attrs: {
+        width: customCircleRadius * 2,
+        height: customCircleRadius,
+        x: -polygonWidth,
+        y: polygonWidth / 2,
+        html: `
+          <div style="width: 100%">
+            <div style="color: #000;font-size:12px;text-align:center;white-space: nowrap;margin-bottom: 5px;">${panels.title}</div>
+            <div style="color: #000;width: 100%;height:auto;font-size:12px;text-align:center;overflow: hidden;white-space: nowrap;">${panels.label}</div>
+          </div>
+        `
       }
     });
     return shape;
@@ -319,10 +349,10 @@ export default class G6Utils {
   #container: HTMLDivElement;
   /** 实例 */
   #graph: Graph;
-  get graph() {
+  get graph(): Graph {
     return this.#graph;
   }
-  set graph (_: Graph) {
+  set graph(_: Graph) {
     this.#graph = _;
   }
   constructor() {
@@ -346,7 +376,6 @@ export default class G6Utils {
         }
       }
     });
-
     this.graph.data(data);
     this.graph.render();
 
@@ -370,9 +399,15 @@ export default class G6Utils {
   /** 跟随屏幕缩放 */
   graphResize() {
     if (!this.graph || this.graph.get("destroyed")) return;
-    if (!this.#container || !this.#container.scrollWidth || !this.#container.scrollHeight) return;
-    this.graph.changeSize(this.#container.scrollWidth, this.#container.scrollHeight - 100);
+    if (
+      !this.#container ||
+      !this.#container.scrollWidth ||
+      !this.#container.scrollHeight
+    )
+      return;
+    this.graph.changeSize(
+      this.#container.scrollWidth,
+      this.#container.scrollHeight - 100
+    );
   }
 }
-
-
