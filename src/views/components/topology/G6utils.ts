@@ -1,8 +1,6 @@
 import { EnumFieldToTransform } from "@/utils";
 import G6, { Graph, IGroup, ModelConfig, NodeConfig } from "@antv/g6";
 
-/** 实例 */
-let graph: Graph;
 
 enum CustomTypeEnum {
   /** 圆形 */
@@ -317,12 +315,25 @@ G6.registerNode(CustomTypeEnum.diamondType, {
   }
 });
 
-export default {
-  init: () => {
-    const container = document.getElementById("container") as HTMLDivElement;
-    const width = container.scrollWidth;
-    const height = container.scrollHeight || 500;
-    graph = new G6.Graph({
+export default class G6Utils {
+  #container: HTMLDivElement;
+  /** 实例 */
+  #graph: Graph;
+  get graph() {
+    return this.#graph;
+  }
+  set graph (_: Graph) {
+    this.#graph = _;
+  }
+  constructor() {
+    this.#init();
+  }
+
+  #init() {
+    this.#container = document.getElementById("container") as HTMLDivElement;
+    const width = this.#container.scrollWidth;
+    const height = this.#container.scrollHeight || 500;
+    this.graph = new G6.Graph({
       container: "container",
       width,
       height,
@@ -336,24 +347,32 @@ export default {
       }
     });
 
-    graph.data(data);
-    graph.render();
+    this.graph.data(data);
+    this.graph.render();
 
-    graph.on("node:mouseenter", (e: any) => {
-      graph.setItemState(e.item, "active", true);
+    this.graph.on("node:mouseenter", (e: any) => {
+      this.graph.setItemState(e.item, "active", true);
     });
-    graph.on("node:mouseleave", (e: any) => {
-      graph.setItemState(e.item, "active", false);
+    this.graph.on("node:mouseleave", (e: any) => {
+      this.graph.setItemState(e.item, "active", false);
     });
-    graph.on("edge:mouseenter", (e: any) => {
-      graph.setItemState(e.item, "active", true);
+    this.graph.on("edge:mouseenter", (e: any) => {
+      this.graph.setItemState(e.item, "active", true);
     });
-    graph.on("edge:mouseleave", (e: any) => {
-      graph.setItemState(e.item, "active", false);
+    this.graph.on("edge:mouseleave", (e: any) => {
+      this.graph.setItemState(e.item, "active", false);
     });
-  },
+  }
   /** 销毁 */
   graphDestory() {
-    graph.destroy();
+    this.graph.destroy();
   }
-};
+  /** 跟随屏幕缩放 */
+  graphResize() {
+    if (!this.graph || this.graph.get("destroyed")) return;
+    if (!this.#container || !this.#container.scrollWidth || !this.#container.scrollHeight) return;
+    this.graph.changeSize(this.#container.scrollWidth, this.#container.scrollHeight - 100);
+  }
+}
+
+

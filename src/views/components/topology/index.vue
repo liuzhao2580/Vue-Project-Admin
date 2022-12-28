@@ -12,14 +12,23 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, shallowRef } from "vue";
 import G6Utils from "./G6utils";
+
+const graph = shallowRef<G6Utils>();
+
 onMounted(() => {
-  G6Utils.init();
+  graph.value = new G6Utils();
+  window.addEventListener("resize", resizeFunc);
 });
 
+function resizeFunc() {
+  graph.value?.graphResize();
+};
+
 onUnmounted(() => {
-  G6Utils.graphDestory();
+  graph.value?.graphDestory();
+  window.removeEventListener("resize", resizeFunc);
 });
 </script>
 
