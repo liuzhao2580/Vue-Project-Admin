@@ -63,6 +63,15 @@ const components: RouteRecordRaw = {
         )
     },
     {
+      path: RouterPath.BPMN,
+      meta: { title: "Bpmn", icon: "bpmn" },
+      name: RouterName.BPMN,
+      component: () =>
+        import(
+          /* webpackChunkName: "componentsPage" */ "@/views/components/bpmn/index.vue"
+        )
+    },
+    {
       path: RouterPath.AUDIO_VIDEO,
       meta: { title: "音视频", icon: "audio-video" },
       name: RouterName.AUDIO_VIDEO,

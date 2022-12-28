@@ -1,42 +1,6 @@
 import { EnumFieldToTransform } from "@/utils";
-import G6, { Graph, IGroup, ModelConfig, NodeConfig } from "@antv/g6";
-
-enum CustomTypeEnum {
-  /** 圆形 */
-  circleType = "circle-type",
-  /** 菱形 */
-  diamondType = "diamond"
-}
-/** 当前的数据状态 */
-enum NodeStatusEnum {
-  /** 通过 */
-  success = "success",
-  /** 跳过 */
-  jump = "jump",
-  /** 退回 */
-  refuse = "refuse",
-  /** 完成 */
-  done = "done"
-}
-
-/** 当前数据不同状态的颜色 */
-enum NodeStatusColorEnum {
-  success = "#aae2ff",
-  jump = "#67c23a",
-  refuse = "#f56c6c",
-  done = "#e6a23c"
-}
-
-interface IPanel {
-  title: string;
-  label: string;
-}
-
-interface INodesData extends NodeConfig {
-  type: CustomTypeEnum;
-  status: NodeStatusEnum;
-  panels: IPanel;
-}
+import G6, { Graph, GraphData, IGroup, ModelConfig, NodeConfig } from "@antv/g6";
+import { CustomTypeEnum, INodesData, IPanel, NodeStatusColorEnum, NodeStatusEnum } from "./type";
 
 const nodesData: INodesData[] = [
   {
@@ -221,12 +185,12 @@ function loopNodes(loopList: INodesData[]): NodeConfig[] {
     return nodesMap;
   });
 }
-const data = {
+const data: GraphData = {
   // 点集
   nodes: loopNodes(nodesData),
   edges: [
     {
-      type: "polyline",
+      type: CustomTypeEnum.PAHT_LINE,
       source: "1", // 起始点 id
       target: "2", // 结束点 id
       style: {
@@ -236,40 +200,22 @@ const data = {
     {
       source: "1", // 起始点 id
       target: "3", // 结束点 id
-      type: "line-arrow",
+      type: CustomTypeEnum.PAHT_LINE,
+      style: {}
+    },
+    {
+      source: "1", // 起始点 id
+      target: "5", // 结束点 id
+      type: CustomTypeEnum.PAHT_LINE,
       style: {}
     }
   ]
 };
-// 自定义边界线条
-G6.registerEdge(
-  "line-arrow",
-  {
-    draw(cfg?: ModelConfig, group?: IGroup) {
-      console.log(cfg);
-      const startPoint = cfg?.startPoint;
-      const endPoint = cfg?.endPoint;
-      return (group as IGroup).addShape("path", {
-        attrs: {
-          stroke: "red",
-          path: [
-            ["M", startPoint?.x, startPoint?.y],
-            ["L", startPoint?.x, (endPoint?.y as number) / 2],
-            ["L", endPoint?.x, (endPoint?.y as number) / 2],
-            ["L", endPoint?.x, endPoint?.y]
-          ]
-        },
-        name: "path-shape"
-      });
-    }
-  },
-  "line"
-);
+
 
 // 自定义 node 元素 圆形
 G6.registerNode(CustomTypeEnum.circleType, {
   draw: (cfg?: ModelConfig, group?: IGroup) => {
-    console.log(cfg, "cfg");
     let fill = EnumFieldToTransform(
       NodeStatusEnum,
       NodeStatusColorEnum,
@@ -309,7 +255,6 @@ G6.registerNode(CustomTypeEnum.circleType, {
 // 自定义 node 元素 菱形
 G6.registerNode(CustomTypeEnum.diamondType, {
   draw: (cfg?: ModelConfig, group?: IGroup) => {
-    console.log(cfg, "cfg");
     const setGroup = group as IGroup;
     const panels = cfg?.panels as IPanel;
     const polygonWidth = customCircleHalf;
