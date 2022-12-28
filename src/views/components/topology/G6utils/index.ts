@@ -1,5 +1,6 @@
 import { EnumFieldToTransform } from "@/utils";
 import G6, { Graph, GraphData, IGroup, ModelConfig, NodeConfig } from "@antv/g6";
+import G6RegisterEdge from "./G6RegisterEdge";
 import { CustomTypeEnum, INodesData, IPanel, NodeStatusColorEnum, NodeStatusEnum } from "./type";
 
 const nodesData: INodesData[] = [
@@ -153,6 +154,8 @@ const customCircleHalf = customCircleRadius / 2;
 const customCircleX = customCircleHalf;
 /** 圆的Y轴 */
 const customCircleY = customCircleHalf;
+
+G6RegisterEdge(customCircleRadius);
 
 function loopNodes(loopList: INodesData[]): NodeConfig[] {
   let loopX = 1;
