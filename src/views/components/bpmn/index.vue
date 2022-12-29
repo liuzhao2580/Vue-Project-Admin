@@ -4,17 +4,16 @@
 
 <script setup lang="ts">
 import { onMounted, shallowRef } from "vue";
-// @ts-ignore
-import BpmnModeler from "bpmn-js/lib/Modeler";
+import BpmnUtils from "./package";
 // 以下为bpmn工作流绘图工具的样式
 import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css";
+
+
 const bpmnViewer = shallowRef();
 onMounted(() => {
-  bpmnViewer.value = new BpmnModeler({
-    container: "#canvas"
-  });
+  bpmnViewer.value = new BpmnUtils("#canvas").bpmnViewer;
 });
 </script>
 
