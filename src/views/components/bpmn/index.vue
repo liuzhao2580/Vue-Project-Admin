@@ -1,5 +1,19 @@
 <template>
-  <div id="canvas" class="bpmn-box"></div>
+  <div class="content with-diagram" id="js-drop-zone">
+    <div class="message error">
+      <div class="note">
+        <p>Ooops, 出问题啦.</p>
+
+        <div class="details">
+          <span>Import Error Details</span>
+          <pre></pre>
+        </div>
+      </div>
+    </div>
+
+    <div id="js-canvas" class="canvas"></div>
+    <div class="properties-panel-parent" id="js-properties-panel"></div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -7,13 +21,13 @@ import { onMounted, shallowRef } from "vue";
 import BpmnUtils from "./package";
 // 以下为bpmn工作流绘图工具的样式
 import "bpmn-js/dist/assets/diagram-js.css";
+import "bpmn-js/dist/assets/bpmn-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css";
 
-
-const bpmnViewer = shallowRef();
+const bpmnModeler = shallowRef();
 onMounted(() => {
-  bpmnViewer.value = new BpmnUtils("#canvas").bpmnViewer;
+  bpmnModeler.value = new BpmnUtils("js-canvas").bpmnModeler;
 });
 </script>
 
@@ -26,10 +40,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.bpmn-box {
-  height: 100%;
-  width: 100%;
-}
+@import "./index.scss";
 </style>
 
 <style>
