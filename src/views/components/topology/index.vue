@@ -24,7 +24,7 @@ onMounted(() => {
 
 function resizeFunc() {
   graph.value?.graphResize();
-};
+}
 
 onUnmounted(() => {
   graph.value?.graphDestory();
@@ -46,6 +46,14 @@ export default {
   }
   #container {
     height: 600px;
+  }
+  ::v-deep(.g6-minimap) {
+    .g6-minimap-container {
+      border: 1px solid #e2e2e2;
+    }
+    .g6-minimap-viewport {
+      border: 2px solid rgb(25, 128, 255);
+    }
   }
 }
 </style>

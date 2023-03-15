@@ -311,6 +311,9 @@ export default class G6Utils {
     this.#container = document.getElementById("container") as HTMLDivElement;
     const width = this.#container.scrollWidth;
     const height = this.#container.scrollHeight || 500;
+    const minimap = new G6.Minimap({
+      size: [150, 150]
+    });
     this.graph = new G6.Graph({
       container: "container",
       width,
@@ -322,10 +325,12 @@ export default class G6Utils {
           lineAppendWidth: 3,
           endArrow: true
         }
-      }
+      },
+      plugins: [minimap]
     });
     this.graph.data(data);
     this.graph.render();
+    this.graph.fitCenter();
 
     this.graph.on("node:mouseenter", (e: any) => {
       this.graph.setItemState(e.item, "active", true);
@@ -357,5 +362,6 @@ export default class G6Utils {
       this.#container.scrollWidth,
       this.#container.scrollHeight - 100
     );
+    this.graph.fitCenter();
   }
 }
