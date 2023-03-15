@@ -14,7 +14,7 @@ const userInfo: IUserBaseInfo[] = [
     nickName: "小火车况且况且",
     token: "admin-token",
     avatar:
-      "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-50f2e90e-f860-4396-bbc7-b912e93fa987/97babdaa-f2ef-4615-bb72-f2d0924d9457.jpg"
+      "https://mp-59459393-e8b3-4748-81f4-a9150958c7dc.cdn.bspapp.com/cloudstorage/eafa8a43-f2b0-48c7-85b6-b536ae060e96.png"
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const userInfo: IUserBaseInfo[] = [
     nickName: "小飞机呼哧呼哧",
     token: "admin-token",
     avatar:
-      "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-50f2e90e-f860-4396-bbc7-b912e93fa987/3fc59cec-c378-492e-a96e-8488c267c527.jpg"
+      "https://mp-59459393-e8b3-4748-81f4-a9150958c7dc.cdn.bspapp.com/cloudstorage/eafa8a43-f2b0-48c7-85b6-b536ae060e96.png"
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const userInfo: IUserBaseInfo[] = [
     nickName: "小话痨吧啦吧啦",
     token: "user-token",
     avatar:
-      "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-pgfxdvln08wfa8a9f6/2fb96590-4cab-11eb-8a36-ebb87efcf8c0.png"
+      "https://mp-59459393-e8b3-4748-81f4-a9150958c7dc.cdn.bspapp.com/cloudstorage/eafa8a43-f2b0-48c7-85b6-b536ae060e96.png"
   }
 ];
 
