@@ -1,7 +1,19 @@
 import { EnumFieldToTransform } from "@/utils";
-import G6, { Graph, GraphData, IGroup, ModelConfig, NodeConfig } from "@antv/g6";
+import G6, {
+  Graph,
+  GraphData,
+  IGroup,
+  ModelConfig,
+  NodeConfig
+} from "@antv/g6";
 import G6RegisterEdge from "./G6RegisterEdge";
-import { CustomTypeEnum, INodesData, IPanel, NodeStatusColorEnum, NodeStatusEnum } from "./type";
+import {
+  CustomTypeEnum,
+  INodesData,
+  IPanel,
+  NodeStatusColorEnum,
+  NodeStatusEnum
+} from "./type";
 
 const nodesData: INodesData[] = [
   {
@@ -215,7 +227,6 @@ const data: GraphData = {
   ]
 };
 
-
 // 自定义 node 元素 圆形
 G6.registerNode(CustomTypeEnum.circleType, {
   draw: (cfg?: ModelConfig, group?: IGroup) => {
@@ -245,8 +256,10 @@ G6.registerNode(CustomTypeEnum.circleType, {
         textAlign: "start",
         html: `
           <div id=${+new Date()} style="width: 100%">
-            <div style="color: #000;font-size:12px;text-align:center;white-space: nowrap;margin-bottom: 10px;">${panels.title}</div>
-            <div style="color: #000;width: 100%;height:auto;font-size:12px;text-align:center;overflow: hidden;white-space: nowrap;">${panels.label}</div>
+            <div style="color: #000;font-size:12px;text-align:center;white-space: nowrap;margin-bottom: 10px;">
+            ${panels.title}</div>
+            <div style="color: #000;width: 100%;height:auto;font-size:12px;text-align:center;overflow: hidden;white-space: nowrap;">
+            ${panels.label}</div>
           </div>
         `
       }
@@ -310,10 +323,11 @@ export default class G6Utils {
   #init() {
     this.#container = document.getElementById("container") as HTMLDivElement;
     const width = this.#container.scrollWidth;
-    const height = this.#container.scrollHeight || 500;
+    const height = (this.#container.scrollHeight || 500) - 150;
     const minimap = new G6.Minimap({
       size: [150, 150]
     });
+    const grid = new G6.Grid();
     this.graph = new G6.Graph({
       container: "container",
       width,
@@ -326,7 +340,10 @@ export default class G6Utils {
           endArrow: true
         }
       },
-      plugins: [minimap]
+      modes: {
+        default: ["drag-canvas", "zoom-canvas"]
+      },
+      plugins: [grid, minimap]
     });
     this.graph.data(data);
     this.graph.render();
@@ -360,7 +377,7 @@ export default class G6Utils {
       return;
     this.graph.changeSize(
       this.#container.scrollWidth,
-      this.#container.scrollHeight - 100
+      this.#container.scrollHeight - 160
     );
     this.graph.fitCenter();
   }
