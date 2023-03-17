@@ -42,8 +42,6 @@ import { ElMessage } from "element-plus";
 import { useUserStore } from "@/store/user";
 import { userLogin } from "@/api/modules/user";
 import { ResultCodeEnum } from "@/typescript/shared/enum";
-// import DDAccountLogin from './components/DDAccountLogin.vue'
-
 const userStore = useUserStore();
 
 const router = useRouter();
@@ -128,6 +126,14 @@ export default {
     transform: translateX(-50%);
     width: 500px;
     max-width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgba($color: #333, $alpha: 0.1);
+    // backdrop-filter CSS 属性可以让你为一个元素后面区域添加图形效果（如模糊或颜色偏移）
+    // https://developer.mozilla.org/zh-CN/docs/Web/CSS/backdrop-filter 添加毛玻璃样式
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($color: #333, $alpha: 0.1);
+    box-shadow: 0px 0px 20px rgba($color: #333, $alpha: 0.1);
     .login-title {
       text-align: center;
       height: 60px;
