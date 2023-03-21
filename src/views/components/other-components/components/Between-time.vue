@@ -45,7 +45,7 @@
       end-placeholder="结束日期"
       v-model="state.datePickerValue"
       :type="state.radioValue"
-      @change="(value: Event | Date[]) => datePickerChange(value, state.radioValue)"
+      @change="(value: Date[]) => datePickerChange(value, state.radioValue)"
     >
     </el-date-picker>
     <!-- 年份选择器 -->
@@ -56,7 +56,7 @@
       <el-date-picker
         v-model="state.startYear"
         type="year"
-        :disabled-date="(time:Date) =>{
+        :disabled-date="(time: Date) =>{
             if (state.endYear) return time.toString() > state.endYear
           }"
         placeholder="选择年"
@@ -148,7 +148,7 @@ const endTimeChange = (value: string | null) => {
   if (value) state.selectedTimeData = getBetweenTime(state.startTime, value);
 };
 /** 日期选择器 改变事件 */
-const datePickerChange = (value: Event | Date[], type: BetweenTimeType) => {
+const datePickerChange = (value: Date[], type: BetweenTimeType) => {
   if (!value || !Array.isArray(value)) return;
   // 日期
   if (type === BetweenTimeTypeEnum.date)
@@ -175,6 +175,9 @@ const endYearChange = (value: Event) => {
   // radio 选择器
   .radio-box {
     margin-bottom: 10px;
+  }
+  ::v-deep(.el-date-editor.el-input__wrapper) {
+    width: auto;
   }
   // 时间 年份 选择器
   .time-select-box {

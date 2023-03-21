@@ -89,6 +89,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.Calculator-box {
+  display: grid;
+  grid-template-columns: repeat(2 ,1fr);
+  column-gap: 20px;
+}
 .Calculator-input {
   display: flex;
   align-items: center;

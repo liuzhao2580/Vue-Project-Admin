@@ -1,16 +1,23 @@
 <template>
   <div class="other-components">
-    <el-row :gutter="10">
-      <el-col :xs="24" :sm="8">
-        <!-- 计算器 -->
-        <Calculator />
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="12">
         <!-- 计算两者的时间 -->
         <BetweenTime style="margin-top: 20px" />
       </el-col>
       <!-- 点击出现水波纹效果 -->
-      <el-col :xs="24" :sm="8">
+      <el-col :xs="24" :sm="12">
         <CssComponent />
       </el-col>
+    </el-row>
+    <el-row :gutter="10">
+      <el-col :xs="24" :sm="24">
+        <!-- 计算器 -->
+        <Calculator />
+      </el-col>
+    </el-row>
+    <el-row>
+      <LoopList />
     </el-row>
   </div>
 </template>
@@ -19,6 +26,7 @@
 import BetweenTime from "./components/Between-time.vue";
 import CssComponent from "./components/CssComponent/index.vue";
 import Calculator from "./components/Calculator.vue";
+import LoopList from "./components/LoopList/index.vue";
 </script>
 
 <script lang="ts">
