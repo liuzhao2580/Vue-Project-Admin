@@ -4,48 +4,96 @@
     <el-collapse>
       <el-collapse-item title="任务" name="1">
         <!--  可以简化。。。 -->
-        <div class="custom-btn" @click="createElement($event, 'Task')" @mousedown="createElement($event, 'Task')">
+        <div
+          class="custom-btn"
+          @click="createElement($event, 'Task')"
+          @mousedown="createElement($event, 'Task')"
+        >
           任务
         </div>
-        <div class="custom-btn" @click="createElement($event, 'UserTask')" @mousedown="createElement($event, 'UserTask')">
+        <div
+          class="custom-btn"
+          @click="createElement($event, 'UserTask')"
+          @mousedown="createElement($event, 'UserTask')"
+        >
           用户任务
         </div>
-        <div class="custom-btn" @click="createElement($event, 'SendTask')" @mousedown="createElement($event, 'SendTask')">
+        <div
+          class="custom-btn"
+          @click="createElement($event, 'SendTask')"
+          @mousedown="createElement($event, 'SendTask')"
+        >
           发送任务
         </div>
-        <div class="custom-btn" @click="createElement($event, 'ReceiveTask')" @mousedown="createElement($event, 'ReceiveTask')">
+        <div
+          class="custom-btn"
+          @click="createElement($event, 'ReceiveTask')"
+          @mousedown="createElement($event, 'ReceiveTask')"
+        >
           接收任务
         </div>
-        <div class="custom-btn" @click="createElement($event, 'ScriptTask')" @mousedown="createElement($event, 'ScriptTask')">
+        <div
+          class="custom-btn"
+          @click="createElement($event, 'ScriptTask')"
+          @mousedown="createElement($event, 'ScriptTask')"
+        >
           脚本任务
         </div>
-        <div class="custom-btn" @click="createElement($event, 'ServiceTask')" @mousedown="createElement($event, 'ServiceTask')">
+        <div
+          class="custom-btn"
+          @click="createElement($event, 'ServiceTask')"
+          @mousedown="createElement($event, 'ServiceTask')"
+        >
           服务任务
         </div>
       </el-collapse-item>
       <el-collapse-item title="网关" name="2">
-        <div class="custom-btn" @click="createElement($event, 'Gateway')" @mousedown="createElement($event, 'Gateway')">
+        <div
+          class="custom-btn"
+          @click="createElement($event, 'Gateway')"
+          @mousedown="createElement($event, 'Gateway')"
+        >
           网关
         </div>
       </el-collapse-item>
       <el-collapse-item title="开始" name="3">
-        <div class="custom-btn" @click="createElement($event, 'StartEvent')" @mousedown="createElement($event, 'StartEvent')">
+        <div
+          class="custom-btn"
+          @click="createElement($event, 'StartEvent')"
+          @mousedown="createElement($event, 'StartEvent')"
+        >
           开始
         </div>
       </el-collapse-item>
       <el-collapse-item title="结束" name="4">
-        <div class="custom-btn" @click="createElement($event, 'EndEvent')" @mousedown="createElement($event, 'EndEvent')">
+        <div
+          class="custom-btn"
+          @click="createElement($event, 'EndEvent')"
+          @mousedown="createElement($event, 'EndEvent')"
+        >
           结束
         </div>
       </el-collapse-item>
       <el-collapse-item title="工具" name="5">
-        <div class="custom-btn" @click="startTool($event, 'handTool')" @mousedown="startTool($event, 'handTool')">
+        <div
+          class="custom-btn"
+          @click="startTool($event, 'handTool')"
+          @mousedown="startTool($event, 'handTool')"
+        >
           手型工具
         </div>
-        <div class="custom-btn" @click="startTool($event, 'lassoTool')" @mousedown="startTool($event, 'lassoTool')">
+        <div
+          class="custom-btn"
+          @click="startTool($event, 'lassoTool')"
+          @mousedown="startTool($event, 'lassoTool')"
+        >
           框选工具
         </div>
-        <div class="custom-btn" @click="startTool($event, 'connectTool')" @mousedown="startTool($event, 'connectTool')">
+        <div
+          class="custom-btn"
+          @click="startTool($event, 'connectTool')"
+          @mousedown="startTool($event, 'connectTool')"
+        >
           连线工具
         </div>
       </el-collapse-item>
@@ -66,7 +114,9 @@ export default {
     createElement(event, type, options = {}) {
       const ElementFactory = window.bpmnInstances.elementFactory;
       const create = window.bpmnInstances.modeler.get("create");
-      const shape = ElementFactory.createShape(assign({ type: `bpmn:${type}` }, options));
+      const shape = ElementFactory.createShape(
+        assign({ type: `bpmn:${type}` }, options)
+      );
       if (options) {
         shape.businessObject.di.isExpanded = options.isExpanded;
       }

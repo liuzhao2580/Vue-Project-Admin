@@ -47,7 +47,7 @@ export default function ContextPadProvider(
     this._autoPlace = injector.get("autoPlace", false);
   }
 
-  eventBus.on("create.end", 250, function(event) {
+  eventBus.on("create.end", 250, function (event) {
     let context = event.context,
       shape = context.shape;
 
@@ -79,7 +79,7 @@ ContextPadProvider.$inject = [
   "elementRegistry"
 ];
 
-ContextPadProvider.prototype.getContextPadEntries = function(element) {
+ContextPadProvider.prototype.getContextPadEntries = function (element) {
   let contextPad = this._contextPad,
     modeling = this._modeling,
     elementFactory = this._elementFactory,
@@ -151,8 +151,10 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     }
 
     let append = autoPlace
-      ? function(event, element) {
-        let shape = elementFactory.createShape(assign({ type: type }, options));
+      ? function (event, element) {
+        let shape = elementFactory.createShape(
+          assign({ type: type }, options)
+        );
 
         autoPlace.append(element, shape);
       }
@@ -170,7 +172,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
   }
 
   function splitLaneHandler(count) {
-    return function(event, element) {
+    return function (event, element) {
       // actual split
       modeling.splitLane(element, count);
 
@@ -180,7 +182,10 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     };
   }
 
-  if (isAny(businessObject, ["bpmn:Lane", "bpmn:Participant"]) && isExpanded(businessObject)) {
+  if (
+    isAny(businessObject, ["bpmn:Lane", "bpmn:Participant"]) &&
+    isExpanded(businessObject)
+  ) {
     let childLanes = getChildLanes(element);
 
     assign(actions, {
@@ -189,7 +194,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
         className: "bpmn-icon-lane-insert-above",
         title: translate("Add Lane above"),
         action: {
-          click: function(event, element) {
+          click: function (event, element) {
             modeling.addLane(element, "top");
           }
         }
@@ -230,7 +235,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
         className: "bpmn-icon-lane-insert-below",
         title: translate("Add Lane below"),
         action: {
-          click: function(event, element) {
+          click: function (event, element) {
             modeling.addLane(element, "bottom");
           }
         }
@@ -241,7 +246,11 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
   if (is(businessObject, "bpmn:FlowNode")) {
     if (is(businessObject, "bpmn:EventBasedGateway")) {
       assign(actions, {
-        "append.receive-task": appendAction("bpmn:ReceiveTask", "bpmn-icon-receive-task", translate("Append ReceiveTask")),
+        "append.receive-task": appendAction(
+          "bpmn:ReceiveTask",
+          "bpmn-icon-receive-task",
+          translate("Append ReceiveTask")
+        ),
         "append.message-intermediate-event": appendAction(
           "bpmn:IntermediateCatchEvent",
           "bpmn-icon-intermediate-event-catch-message",
@@ -267,22 +276,49 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
           { eventDefinitionType: "bpmn:SignalEventDefinition" }
         )
       });
-    } else if (isEventType(businessObject, "bpmn:BoundaryEvent", "bpmn:CompensateEventDefinition")) {
+    } else if (
+      isEventType(
+        businessObject,
+        "bpmn:BoundaryEvent",
+        "bpmn:CompensateEventDefinition"
+      )
+    ) {
       assign(actions, {
-        "append.compensation-activity": appendAction("bpmn:Task", "bpmn-icon-task", translate("Append compensation activity"), {
-          isForCompensation: true
-        })
+        "append.compensation-activity": appendAction(
+          "bpmn:Task",
+          "bpmn-icon-task",
+          translate("Append compensation activity"),
+          {
+            isForCompensation: true
+          }
+        )
       });
     } else if (
       !is(businessObject, "bpmn:EndEvent") &&
       !businessObject.isForCompensation &&
-      !isEventType(businessObject, "bpmn:IntermediateThrowEvent", "bpmn:LinkEventDefinition") &&
+      !isEventType(
+        businessObject,
+        "bpmn:IntermediateThrowEvent",
+        "bpmn:LinkEventDefinition"
+      ) &&
       !isEventSubProcess(businessObject)
     ) {
       assign(actions, {
-        "append.end-event": appendAction("bpmn:EndEvent", "bpmn-icon-end-event-none", translate("Append EndEvent")),
-        "append.gateway": appendAction("bpmn:ExclusiveGateway", "bpmn-icon-gateway-none", translate("Append Gateway")),
-        "append.append-task": appendAction("bpmn:UserTask", "bpmn-icon-user-task", translate("Append Task")),
+        "append.end-event": appendAction(
+          "bpmn:EndEvent",
+          "bpmn-icon-end-event-none",
+          translate("Append EndEvent")
+        ),
+        "append.gateway": appendAction(
+          "bpmn:ExclusiveGateway",
+          "bpmn-icon-gateway-none",
+          translate("Append Gateway")
+        ),
+        "append.append-task": appendAction(
+          "bpmn:UserTask",
+          "bpmn-icon-user-task",
+          translate("Append Task")
+        ),
         "append.intermediate-event": appendAction(
           "bpmn:IntermediateThrowEvent",
           "bpmn-icon-intermediate-event-none",
@@ -300,7 +336,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
         className: "bpmn-icon-screw-wrench",
         title: translate("Change type"),
         action: {
-          click: function(event, element) {
+          click: function (event, element) {
             let position = assign(getReplaceMenuPosition(element), {
               cursor: { x: event.x, y: event.y }
             });
@@ -312,14 +348,30 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     });
   }
 
-  if (isAny(businessObject, ["bpmn:FlowNode", "bpmn:InteractionNode", "bpmn:DataObjectReference", "bpmn:DataStoreReference"])) {
+  if (
+    isAny(businessObject, [
+      "bpmn:FlowNode",
+      "bpmn:InteractionNode",
+      "bpmn:DataObjectReference",
+      "bpmn:DataStoreReference"
+    ])
+  ) {
     assign(actions, {
-      "append.text-annotation": appendAction("bpmn:TextAnnotation", "bpmn-icon-text-annotation"),
+      "append.text-annotation": appendAction(
+        "bpmn:TextAnnotation",
+        "bpmn-icon-text-annotation"
+      ),
 
       connect: {
         group: "connect",
         className: "bpmn-icon-connection-multi",
-        title: translate("Connect using " + (businessObject.isForCompensation ? "" : "Sequence/MessageFlow or ") + "Association"),
+        title: translate(
+          "Connect using " +
+            (businessObject.isForCompensation
+              ? ""
+              : "Sequence/MessageFlow or ") +
+            "Association"
+        ),
         action: {
           click: startConnect,
           dragstart: startConnect
@@ -328,7 +380,12 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     });
   }
 
-  if (isAny(businessObject, ["bpmn:DataObjectReference", "bpmn:DataStoreReference"])) {
+  if (
+    isAny(businessObject, [
+      "bpmn:DataObjectReference",
+      "bpmn:DataStoreReference"
+    ])
+  ) {
     assign(actions, {
       connect: {
         group: "connect",
@@ -344,7 +401,10 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
   if (is(businessObject, "bpmn:Group")) {
     assign(actions, {
-      "append.text-annotation": appendAction("bpmn:TextAnnotation", "bpmn-icon-text-annotation")
+      "append.text-annotation": appendAction(
+        "bpmn:TextAnnotation",
+        "bpmn-icon-text-annotation"
+      )
     });
   }
 
@@ -379,7 +439,7 @@ function isEventType(eventBo, type, definition) {
   let isDefinition = false;
 
   let definitions = eventBo.eventDefinitions || [];
-  forEach(definitions, function(def) {
+  forEach(definitions, function (def) {
     if (def.$type === definition) {
       isDefinition = true;
     }

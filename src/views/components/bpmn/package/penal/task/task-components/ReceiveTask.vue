@@ -1,15 +1,45 @@
 <template>
   <div style="margin-top: 16px">
     <el-form-item label="消息实例">
-      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: nowrap;
+        "
+      >
         <el-select v-model="bindMessageId" @change="updateTaskMessage">
-          <el-option v-for="id in Object.keys(messageMap)" :value="id" :label="messageMap[id]" :key="id" />
+          <el-option
+            v-for="key in Object.keys(messageMap)"
+            :value="key"
+            :label="messageMap[key]"
+            :key="key"
+          />
         </el-select>
-        <el-button size="mini" type="primary" icon="el-icon-plus" style="margin-left: 8px" @click="openMessageModel" />
+        <el-button
+          size="mini"
+          type="primary"
+          icon="el-icon-plus"
+          style="margin-left: 8px"
+          @click="openMessageModel"
+        />
       </div>
     </el-form-item>
-    <el-dialog :visible.sync="messageModelVisible" :close-on-click-modal="false" title="创建新消息" width="400px" append-to-body destroy-on-close>
-      <el-form :model="newMessageForm" size="mini" label-width="90px" @submit.native.prevent>
+    <el-dialog
+      v-model:visible="messageModelVisible"
+      :close-on-click-modal="false"
+      title="创建新消息"
+      width="400px"
+      append-to-body
+      destroy-on-close
+    >
+      <el-form
+        :model="newMessageForm"
+        size="mini"
+        label-width="90px"
+        @submit.prevent
+      >
         <el-form-item label="消息ID">
           <el-input v-model="newMessageForm.id" clearable />
         </el-form-item>
@@ -17,8 +47,10 @@
           <el-input v-model="newMessageForm.name" clearable />
         </el-form-item>
       </el-form>
-      <template slot="footer">
-        <el-button size="mini" type="primary" @click="createNewMessage">确 认</el-button>
+      <template v-slot:footer>
+        <el-button size="mini" type="primary" @click="createNewMessage"
+          >确 认</el-button
+        >
       </template>
     </el-dialog>
   </div>
@@ -49,7 +81,8 @@ export default {
   },
   created() {
     this.bpmnMessageRefsMap = Object.create(null);
-    this.bpmnRootElements = window.bpmnInstances.modeler.getDefinitions().rootElements;
+    this.bpmnRootElements =
+      window.bpmnInstances.modeler.getDefinitions().rootElements;
     this.bpmnRootElements
       .filter(el => el.$type === "bpmn:Message")
       .forEach(m => {
@@ -61,7 +94,8 @@ export default {
   methods: {
     getBindMessage() {
       this.bpmnElement = window.bpmnInstances.bpmnElement;
-      this.bindMessageId = this.bpmnElement.businessObject?.messageRef?.id || "-1";
+      this.bindMessageId =
+        this.bpmnElement.businessObject?.messageRef?.id || "-1";
     },
     openMessageModel() {
       this.messageModelVisible = true;
@@ -72,9 +106,16 @@ export default {
         this.$message.error("该消息已存在，请修改id后重新保存");
         return;
       }
-      const newMessage = window.bpmnInstances.moddle.create("bpmn:Message", this.newMessageForm);
+      const newMessage = window.bpmnInstances.moddle.create(
+        "bpmn:Message",
+        this.newMessageForm
+      );
       this.bpmnRootElements.push(newMessage);
-      this.$set(this.messageMap, this.newMessageForm.id, this.newMessageForm.name);
+      this.$set(
+        this.messageMap,
+        this.newMessageForm.id,
+        this.newMessageForm.name
+      );
       this.bpmnMessageRefsMap[this.newMessageForm.id] = newMessage;
       this.messageModelVisible = false;
     },
@@ -90,7 +131,7 @@ export default {
       }
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.bpmnElement = null;
   }
 };

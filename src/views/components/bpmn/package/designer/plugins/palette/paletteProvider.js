@@ -19,7 +19,7 @@ export default function PaletteProvider(palette, create, elementFactory, spaceTo
 PaletteProvider.$inject = ["palette", "create", "elementFactory", "spaceTool", "lassoTool", "handTool", "globalConnect", "translate"];
 
 PaletteProvider.prototype.getPaletteEntries = function() {
-  var actions = {},
+  let actions = {},
     create = this._create,
     elementFactory = this._elementFactory,
     spaceTool = this._spaceTool,
@@ -30,7 +30,7 @@ PaletteProvider.prototype.getPaletteEntries = function() {
 
   function createAction(type, group, className, title, options) {
     function createListener(event) {
-      var shape = elementFactory.createShape(assign({ type: type }, options));
+      let shape = elementFactory.createShape(assign({ type: type }, options));
 
       if (options) {
         shape.businessObject.di.isExpanded = options.isExpanded;
@@ -39,7 +39,7 @@ PaletteProvider.prototype.getPaletteEntries = function() {
       create.start(event, shape);
     }
 
-    var shortType = type.replace(/^bpmn:/, "");
+    let shortType = type.replace(/^bpmn:/, "");
 
     return {
       group: group,
@@ -53,14 +53,14 @@ PaletteProvider.prototype.getPaletteEntries = function() {
   }
 
   function createSubprocess(event) {
-    var subProcess = elementFactory.createShape({
+    let subProcess = elementFactory.createShape({
       type: "bpmn:SubProcess",
       x: 0,
       y: 0,
       isExpanded: true
     });
 
-    var startEvent = elementFactory.createShape({
+    let startEvent = elementFactory.createShape({
       type: "bpmn:StartEvent",
       x: 40,
       y: 82,

@@ -1,13 +1,29 @@
 <template>
   <div class="panel-tab__content">
-    <el-form size="mini" label-width="90px" @submit.native.prevent>
+    <el-form size="mini" label-width="90px" @submit.prevent>
       <el-form-item label="异步延续">
-        <el-checkbox v-model="taskConfigForm.asyncBefore" label="异步前" @change="changeTaskAsync" />
-        <el-checkbox v-model="taskConfigForm.asyncAfter" label="异步后" @change="changeTaskAsync" />
-        <el-checkbox v-model="taskConfigForm.exclusive" v-if="taskConfigForm.asyncAfter || taskConfigForm.asyncBefore" label="排除" @change="changeTaskAsync" />
+        <el-checkbox
+          v-model="taskConfigForm.asyncBefore"
+          label="异步前"
+          @change="changeTaskAsync"
+        />
+        <el-checkbox
+          v-model="taskConfigForm.asyncAfter"
+          label="异步后"
+          @change="changeTaskAsync"
+        />
+        <el-checkbox
+          v-model="taskConfigForm.exclusive"
+          v-if="taskConfigForm.asyncAfter || taskConfigForm.asyncBefore"
+          label="排除"
+          @change="changeTaskAsync"
+        />
       </el-form-item>
       <el-form-item label="流程任务分类">
-        <el-select v-model="taskConfigForm['flowable:category']" @change="changeTaskAsync">
+        <el-select
+          v-model="taskConfigForm['flowable:category']"
+          @change="changeTaskAsync"
+        >
           <el-option
             v-for="dict in dict.type.process_task_category"
             :key="dict.value"
@@ -28,7 +44,7 @@ import ReceiveTask from "./task-components/ReceiveTask";
 
 export default {
   name: "ElementTaskConfig",
-  dicts: ['process_task_category'],
+  dicts: ["process_task_category"],
   components: { UserTask, ScriptTask, ReceiveTask },
   props: {
     id: String,
@@ -40,7 +56,7 @@ export default {
         asyncAfter: false,
         asyncBefore: false,
         exclusive: false,
-        'flowable:category': ''
+        "flowable:category": ""
       },
       witchTaskComponent: "",
       installedComponent: {
@@ -58,10 +74,14 @@ export default {
       immediate: true,
       handler() {
         this.bpmnElement = window.bpmnInstances.bpmnElement;
-        this.taskConfigForm.asyncBefore = this.bpmnElement?.businessObject?.asyncBefore;
-        this.taskConfigForm.asyncAfter = this.bpmnElement?.businessObject?.asyncAfter;
-        this.taskConfigForm.exclusive = this.bpmnElement?.businessObject?.exclusive;
-        this.taskConfigForm['flowable:category'] = this.bpmnElement?.businessObject?.$attrs['flowable:category'];
+        this.taskConfigForm.asyncBefore =
+          this.bpmnElement?.businessObject?.asyncBefore;
+        this.taskConfigForm.asyncAfter =
+          this.bpmnElement?.businessObject?.asyncAfter;
+        this.taskConfigForm.exclusive =
+          this.bpmnElement?.businessObject?.exclusive;
+        this.taskConfigForm["flowable:category"] =
+          this.bpmnElement?.businessObject?.$attrs["flowable:category"];
       }
     },
     type: {
@@ -76,9 +96,12 @@ export default {
       if (!this.taskConfigForm.asyncBefore && !this.taskConfigForm.asyncAfter) {
         this.taskConfigForm.exclusive = false;
       }
-      window.bpmnInstances.modeling.updateProperties(window.bpmnInstances.bpmnElement, {
-        ...this.taskConfigForm
-      });
+      window.bpmnInstances.modeling.updateProperties(
+        window.bpmnInstances.bpmnElement,
+        {
+          ...this.taskConfigForm
+        }
+      );
     }
   }
 };

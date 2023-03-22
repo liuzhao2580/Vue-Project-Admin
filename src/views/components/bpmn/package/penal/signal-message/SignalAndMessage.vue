@@ -19,8 +19,8 @@
       <el-table-column label="信号名称" prop="name" max-width="300px" show-overflow-tooltip />
     </el-table>
 
-    <el-dialog :visible.sync="modelVisible" :title="modelConfig.title" :close-on-click-modal="false" width="400px" append-to-body destroy-on-close>
-      <el-form :model="modelObjectForm" size="mini" label-width="90px" @submit.native.prevent>
+    <el-dialog v-model:visible="modelVisible" :title="modelConfig.title" :close-on-click-modal="false" width="400px" append-to-body destroy-on-close>
+      <el-form :model="modelObjectForm" size="mini" label-width="90px" @submit.prevent>
         <el-form-item :label="modelConfig.idLabel">
           <el-input v-model="modelObjectForm.id" clearable />
         </el-form-item>
@@ -28,7 +28,7 @@
           <el-input v-model="modelObjectForm.name" clearable />
         </el-form-item>
       </el-form>
-      <template slot="footer">
+      <template v-slot:footer>
         <el-button size="mini" @click="modelVisible = false">取 消</el-button>
         <el-button size="mini" type="primary" @click="addNewObject">保 存</el-button>
       </template>

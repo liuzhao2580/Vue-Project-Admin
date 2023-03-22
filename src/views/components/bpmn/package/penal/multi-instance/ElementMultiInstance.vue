@@ -1,6 +1,6 @@
 <template>
   <div class="panel-tab__content">
-    <el-form size="mini" label-width="90px" @submit.native.prevent>
+    <el-form size="mini" label-width="90px" @submit.prevent>
       <el-form-item label="回路特性">
         <el-select v-model="loopCharacteristics" @change="changeLoopCharacteristicsType">
           <!--bpmn:MultiInstanceLoopCharacteristics-->
@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       loopCharacteristics: "",
-      //默认配置，用来覆盖原始不存在的选项，避免报错
+      // 默认配置，用来覆盖原始不存在的选项，避免报错
       defaultLoopInstanceForm: {
         completionCondition: "",
         loopCardinality: "",
@@ -192,7 +192,7 @@ export default {
       window.bpmnInstances.modeling.updateModdleProperties(this.bpmnElement, this.multiLoopInstance, asyncAttr);
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.multiLoopInstance = null;
     this.bpmnElement = null;
   }

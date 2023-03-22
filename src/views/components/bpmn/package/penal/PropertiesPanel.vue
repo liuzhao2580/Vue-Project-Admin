@@ -1,44 +1,119 @@
 <template>
-  <div class="process-panel__container" :style="{ width: `${this.width}px` }">
+  <div class="process-panel__container" :style="{ width: `${width}px` }">
     <el-collapse v-model="activeTab">
       <el-collapse-item name="base">
-        <div slot="title" class="panel-tab__title"><i class="el-icon-info"></i>常规</div>
-        <element-base-info :processCategory="processCategory" @changeSleCat="(val)=>{$emit('changeSleCatgy', val)}" :id-edit-disabled="idEditDisabled" :business-object="elementBusinessObject" :type="elementType" />
+        <template #title>
+          <div class="panel-tab__title"><i class="el-icon-info"></i>常规</div>
+        </template>
+        <element-base-info
+          :processCategory="processCategory"
+          @changeSleCat="
+            val => {
+              $emit('changeSleCatgy', val);
+            }
+          "
+          :id-edit-disabled="idEditDisabled"
+          :business-object="elementBusinessObject"
+          :type="elementType"
+        />
       </el-collapse-item>
-      <el-collapse-item name="condition" v-if="elementType === 'Process'" key="message">
-        <div slot="title" class="panel-tab__title"><i class="el-icon-s-comment"></i>消息与信号</div>
+      <el-collapse-item
+        name="condition"
+        v-if="elementType === 'Process'"
+        key="message"
+      >
+        <template #title>
+          <div class="panel-tab__title">
+            <i class="el-icon-s-comment"></i>消息与信号
+          </div>
+        </template>
+
         <signal-and-massage />
       </el-collapse-item>
-      <el-collapse-item name="condition" v-if="conditionFormVisible" key="condition">
-        <div slot="title" class="panel-tab__title"><i class="el-icon-s-promotion"></i>流转条件</div>
-        <flow-condition :business-object="elementBusinessObject" :type="elementType" />
+      <el-collapse-item
+        name="condition"
+        v-if="conditionFormVisible"
+        key="condition"
+      >
+        <template #title>
+          <div class="panel-tab__title">
+            <i class="el-icon-s-promotion"></i>流转条件
+          </div>
+        </template>
+        <flow-condition
+          :business-object="elementBusinessObject"
+          :type="elementType"
+        />
       </el-collapse-item>
       <el-collapse-item name="condition" v-if="formVisible" key="form">
-        <div slot="title" class="panel-tab__title"><i class="el-icon-s-order"></i>表单</div>
+        <template #title>
+          <div class="panel-tab__title">
+            <i class="el-icon-s-order"></i>表单
+          </div>
+        </template>
         <element-form :id="elementId" :type="elementType" />
       </el-collapse-item>
-      <el-collapse-item name="task" v-if="elementType.indexOf('Task') !== -1" key="task">
-        <div slot="title" class="panel-tab__title"><i class="el-icon-s-claim"></i>任务</div>
+      <el-collapse-item
+        name="task"
+        v-if="elementType.indexOf('Task') !== -1"
+        key="task"
+      >
+        <template #title>
+          <div class="panel-tab__title">
+            <i class="el-icon-s-claim"></i>任务
+          </div>
+        </template>
         <element-task :id="elementId" :type="elementType" />
       </el-collapse-item>
-      <el-collapse-item name="multiInstance" v-if="elementType.indexOf('Task') !== -1" key="multiInstance">
-        <div slot="title" class="panel-tab__title"><i class="el-icon-s-help"></i>多实例</div>
-        <element-multi-instance :business-object="elementBusinessObject" :type="elementType" />
+      <el-collapse-item
+        name="multiInstance"
+        v-if="elementType.indexOf('Task') !== -1"
+        key="multiInstance"
+      >
+        <template #title>
+          <div class="panel-tab__title">
+            <i class="el-icon-s-help"></i>多实例
+          </div>
+        </template>
+        <element-multi-instance
+          :business-object="elementBusinessObject"
+          :type="elementType"
+        />
       </el-collapse-item>
       <el-collapse-item name="listeners" key="listeners">
-        <div slot="title" class="panel-tab__title"><i class="el-icon-message-solid"></i>执行监听器</div>
+        <template #title>
+          <div class="panel-tab__title">
+            <i class="el-icon-message-solid"></i>执行监听器
+          </div>
+        </template>
         <element-listeners :id="elementId" :type="elementType" />
       </el-collapse-item>
-      <el-collapse-item name="taskListeners" v-if="elementType === 'UserTask'" key="taskListeners">
-        <div slot="title" class="panel-tab__title"><i class="el-icon-message-solid"></i>任务监听器</div>
+      <el-collapse-item
+        name="taskListeners"
+        v-if="elementType === 'UserTask'"
+        key="taskListeners"
+      >
+        <template #title>
+          <div class="panel-tab__title">
+            <i class="el-icon-message-solid"></i>任务监听器
+          </div>
+        </template>
         <user-task-listeners :id="elementId" :type="elementType" />
       </el-collapse-item>
       <el-collapse-item name="extensions" key="extensions">
-        <div slot="title" class="panel-tab__title"><i class="el-icon-circle-plus"></i>扩展属性</div>
+        <template #title>
+          <div class="panel-tab__title">
+            <i class="el-icon-circle-plus"></i>扩展属性
+          </div>
+        </template>
         <element-properties :id="elementId" :type="elementType" />
       </el-collapse-item>
       <el-collapse-item name="other" key="other">
-        <div slot="title" class="panel-tab__title"><i class="el-icon-s-promotion"></i>其他</div>
+        <template #title>
+          <div class="panel-tab__title">
+            <i class="el-icon-s-promotion"></i>其他
+          </div>
+        </template>
         <element-other-config :id="elementId" />
       </el-collapse-item>
     </el-collapse>
@@ -147,7 +222,7 @@ export default {
     getActiveElement() {
       // 初始第一个选中元素 bpmn:Process
       this.initFormOnChanged(null);
-      this.bpmnModeler.on("import.done", e => {
+      this.bpmnModeler.on("import.done", () => {
         this.initFormOnChanged(null);
       });
       // 监听选择事件，修改当前激活的元素以及表单
@@ -166,11 +241,17 @@ export default {
       let activatedElement = element;
       if (!activatedElement) {
         activatedElement =
-          window.bpmnInstances.elementRegistry.find(el => el.type === "bpmn:Process") ??
-          window.bpmnInstances.elementRegistry.find(el => el.type === "bpmn:Collaboration");
+          window.bpmnInstances.elementRegistry.find(
+            el => el.type === "bpmn:Process"
+          ) ??
+          window.bpmnInstances.elementRegistry.find(
+            el => el.type === "bpmn:Collaboration"
+          );
       }
       if (!activatedElement) return;
-      Log.printBack(`select element changed: id: ${activatedElement.id} , type: ${activatedElement.businessObject.$type}`);
+      Log.printBack(
+        `select element changed: id: ${activatedElement.id} , type: ${activatedElement.businessObject.$type}`
+      );
       Log.prettyInfo("businessObject", activatedElement.businessObject);
       window.bpmnInstances.bpmnElement = activatedElement;
       this.bpmnElement = activatedElement;
@@ -178,13 +259,16 @@ export default {
       this.elementType = activatedElement.type.split(":")[1] || "";
       // bpmn自定义属性值在$attr下
       // activatedElement.businessObject.processCategory = activatedElement.businessObject?.$attrs?.processCategory
-      this.elementBusinessObject = JSON.parse(JSON.stringify(activatedElement.businessObject));
+      this.elementBusinessObject = JSON.parse(
+        JSON.stringify(activatedElement.businessObject)
+      );
       this.conditionFormVisible = !!(
         this.elementType === "SequenceFlow" &&
         activatedElement.source &&
         activatedElement.source.type.indexOf("StartEvent") === -1
       );
-      this.formVisible = this.elementType === "UserTask" || this.elementType === "StartEvent";
+      this.formVisible =
+        this.elementType === "UserTask" || this.elementType === "StartEvent";
     },
     beforeDestroy() {
       window.bpmnInstances = null;

@@ -6,7 +6,7 @@
       <el-table-column label="事件id" min-width="80px" prop="id" show-overflow-tooltip />
       <el-table-column label="监听器类型" min-width="80px" show-overflow-tooltip :formatter="row => listenerTypeObject[row.listenerType]" />
       <el-table-column label="操作" width="90px">
-        <template slot-scope="{ row, $index }">
+        <template v-slot="{ row, $index }">
           <el-button size="mini" type="text" @click="openListenerForm(row, $index)">编辑</el-button>
           <el-divider direction="vertical" />
           <el-button size="mini" type="text" style="color: #ff4d4f" @click="removeListener(row, $index)">移除</el-button>
@@ -18,8 +18,8 @@
     </div>
 
     <!-- 监听器 编辑/创建 部分 -->
-    <el-drawer :visible.sync="listenerFormModelVisible" title="任务监听器" :size="`${width}px`" append-to-body destroy-on-close>
-      <el-form size="mini" :model="listenerForm" label-width="96px" ref="listenerFormRef" @submit.native.prevent>
+    <el-drawer v-model:visible="listenerFormModelVisible" title="任务监听器" :size="`${width}px`" append-to-body destroy-on-close>
+      <el-form size="mini" :model="listenerForm" label-width="96px" ref="listenerFormRef" @submit.prevent>
         <el-form-item label="事件类型" prop="event" :rules="{ required: true, trigger: ['blur', 'change'] }">
           <el-select v-model="listenerForm.event">
             <el-option v-for="i in Object.keys(listenerEventTypeObject)" :key="i" :label="listenerEventTypeObject[i]" :value="i" />
@@ -132,7 +132,7 @@
         <el-table-column label="字段类型" min-width="80px" show-overflow-tooltip :formatter="row => fieldTypeObject[row.fieldType]" />
         <el-table-column label="字段值/表达式" min-width="100px" show-overflow-tooltip :formatter="row => row.string || row.expression" />
         <el-table-column label="操作" width="100px">
-          <template slot-scope="{ row, $index }">
+          <template v-slot="{ row, $index }">
             <el-button size="mini" type="text" @click="openListenerFieldForm(row, $index)">编辑</el-button>
             <el-divider direction="vertical" />
             <el-button size="mini" type="text" style="color: #ff4d4f" @click="removeListenerField(row, $index)">移除</el-button>
@@ -147,8 +147,8 @@
     </el-drawer>
 
     <!-- 注入西段 编辑/创建 部分 -->
-    <el-dialog title="字段配置" :visible.sync="listenerFieldFormModelVisible" width="600px" append-to-body destroy-on-close>
-      <el-form :model="listenerFieldForm" size="mini" label-width="96px" ref="listenerFieldFormRef" style="height: 136px" @submit.native.prevent>
+    <el-dialog title="字段配置" v-model:visible="listenerFieldFormModelVisible" width="600px" append-to-body destroy-on-close>
+      <el-form :model="listenerFieldForm" size="mini" label-width="96px" ref="listenerFieldFormRef" style="height: 136px" @submit.prevent>
         <el-form-item label="字段名称：" prop="name" :rules="{ required: true, trigger: ['blur', 'change'] }">
           <el-input v-model="listenerFieldForm.name" clearable />
         </el-form-item>
@@ -176,7 +176,7 @@
           <el-input v-model="listenerFieldForm.expression" clearable />
         </el-form-item>
       </el-form>
-      <template slot="footer">
+      <template v-slot:footer>
         <el-button size="mini" @click="listenerFieldFormModelVisible = false">取 消</el-button>
         <el-button size="mini" type="primary" @click="saveListenerFiled">确 定</el-button>
       </template>
