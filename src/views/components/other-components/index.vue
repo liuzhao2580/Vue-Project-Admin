@@ -11,13 +11,18 @@
       </el-col>
     </el-row>
     <el-row :gutter="10">
-      <el-col :xs="24" :sm="24">
+      <el-col>
         <!-- 计算器 -->
         <Calculator />
       </el-col>
     </el-row>
-    <el-row>
-      <LoopList />
+    <el-row :gutter="10">
+      <el-col :xs="24" :sm="6">
+        <LoopListMouseScroll />
+      </el-col>
+      <el-col :xs="24" :sm="6">
+        <LoopList />
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -26,6 +31,7 @@
 import BetweenTime from "./components/Between-time.vue";
 import CssComponent from "./components/CssComponent/index.vue";
 import Calculator from "./components/Calculator.vue";
+import LoopListMouseScroll from "./components/LoopList-MouseScroll/index.vue";
 import LoopList from "./components/LoopList/index.vue";
 </script>
 

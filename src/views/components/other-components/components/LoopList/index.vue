@@ -1,97 +1,146 @@
 <template>
-  <div class="loop-list-box">
-    <ul class="list-box">
-      <li class="item" v-for="index in data.listLength" :key="index">
-        {{ "小火车的车厢" + index }}
+  <span class="title">无限自动滚动</span>
+  <div :class="['loop-list-box', data.loopListBoxClass]" @mouseenter="loopListBoxMouseEnter" @mouseleave="loopListBoxMouseLeave">
+    <ul :class="['list-box', data.listBoxClass]">
+      <li class="item" v-for="item in list" :key="item.id">
+        {{ "小火车的车厢" + item.id }}
       </li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, shallowReactive, onUnmounted } from "vue";
+import { onMounted, shallowReactive, onUnmounted, ref } from "vue";
 
 interface IData {
+  /** loop-list-box 的自定义 类名 */
+  loopListBoxClass: string;
+  /** list-box 的自定义 类名 */
+  listBoxClass: string;
   loopListBox: HTMLDivElement | null;
   listBox: HTMLDivElement | null;
   item: HTMLDivElement | null;
   intervalId: undefined | NodeJS.Timer;
-  listLength: number;
 }
 
 const data = shallowReactive<IData>({
+  loopListBoxClass:
+    "loop-list-box-" + (+new Date() + Math.floor(Math.random() * 1000)),
+  listBoxClass: "list-box-" + (+new Date() + Math.floor(Math.random() * 1000)),
   loopListBox: null,
   listBox: null,
   item: null,
-  intervalId: undefined,
-  listLength: 50
+  intervalId: undefined
 });
 
-let getListBoxHight = 0;
-let getLoopListBoxHeight = 0;
-let timeoutId: undefined | NodeJS.Timer = undefined;
+const list = ref([
+  {
+    id: 1,
+    name: "list"
+  },
+  {
+    id: 2,
+    name: "list"
+  },
+  {
+    id: 3,
+    name: "list"
+  },
+  {
+    id: 4,
+    name: "list"
+  },
+  {
+    id: 5,
+    name: "list"
+  },
+  {
+    id: 6,
+    name: "list"
+  },
+  {
+    id: 7,
+    name: "list"
+  },
+  {
+    id: 8,
+    name: "list"
+  },
+  {
+    id: 9,
+    name: "list"
+  },
+  {
+    id: 10,
+    name: "list"
+  },
+  {
+    id: 11,
+    name: "list"
+  }
+]);
+let loopScroll = 1;
+let itemHeight = 0;
+let intervalTime = 10;
+
 onMounted(() => {
   setTimeout(() => {
     init();
-    getListBoxHight = data.listBox?.scrollHeight as number;
-    getLoopListBoxHeight = data.loopListBox?.offsetHeight as number;
   }, 1000);
 });
 
 const init = () => {
-  data.loopListBox = document.querySelector(".loop-list-box");
-  data.listBox = document.querySelector(".list-box");
-  data.item = document.querySelector(".item");
-  data.intervalId = setInterval(intervalEvent, 20);
+  data.loopListBox = document.querySelector(`.${data.loopListBoxClass}`);
+  data.listBox = document.querySelector(`.${data.listBoxClass}`);
+  data.intervalId = setInterval(intervalEvent, intervalTime);
+  itemHeight = data.listBox?.firstElementChild?.clientHeight as number;
 };
 
 function intervalEvent() {
-  if (data.loopListBox && data.listBox) {
-    if (data.loopListBox.scrollTop + getLoopListBoxHeight >= getListBoxHight) {
-      data.loopListBox?.addEventListener("scroll", loopListScrollEvent);
-      clearInterval(data.intervalId);
-      data.intervalId = undefined;
-    } else {
-      data.loopListBox.scrollTop++;
+  if (data.loopListBox) {
+    data.loopListBox.scrollTop++;
+    loopScroll++;
+    if (loopScroll === itemHeight) {
+      const getItem = list.value.splice(0, 1);
+      list.value.push(...getItem);
+      loopScroll = 0;
     }
   }
-}
-function loopListScrollEvent() {
-  if(data.intervalId) {
-    clearTimeout(timeoutId);
-    return;
-  }
-  if (timeoutId) {
-    clearTimeout(timeoutId);
-    timeoutId = undefined;
-  }
-  timeoutId = setTimeout(() => {
-    timeoutId = undefined;
-    data.intervalId = setInterval(intervalEvent, 20);
-  }, 500);
 }
 onUnmounted(() => {
   clearInterval(data.intervalId);
   data.intervalId = undefined;
-  data.loopListBox?.removeEventListener("scroll", loopListScrollEvent);
 });
+
+function loopListBoxMouseEnter() {
+  clearInterval(data.intervalId);
+  data.intervalId = undefined;
+}
+
+function loopListBoxMouseLeave() {
+  data.intervalId = setInterval(intervalEvent, intervalTime);
+}
 </script>
 
 <script lang="ts">
 export default {
-  name: "LoopList",
-  desc$: "滚动的路线图"
+  name: "LoopList"
 };
 </script>
 
 <style scoped lang="scss">
+.title {
+  display: inline-block;
+  margin-bottom: 20px;
+}
 .loop-list-box {
   height: 400px;
-  overflow: auto;
-  transition: all 1s;
+  overflow: hidden;
+  border: 1px solid #ccc;
   .list-box {
-    padding: 0 20px;
+    padding: 20px;
     .item {
+      height: 80px;
       text-align: center;
       padding-bottom: 10px;
     }
