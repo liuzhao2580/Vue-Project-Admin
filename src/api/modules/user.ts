@@ -16,5 +16,5 @@ export const userInfoApi = (
 
 /** 获取所有用户信息 */
 export const userInfoListAPI = (): Promise<ResultModel<IUserBaseInfo[]>> => {
-  return axios.get(`/user`);
+  return axios.get(`/user/list`);
 };
