@@ -8,7 +8,7 @@
   <el-sub-menu
     v-else
     :index="item.path"
-    :class="{ MenuitemClass: side_status && !isMoreChild }"
+    :class="[{MenuitemClass: side_status && !isMoreChild}]"
   >
     <template #title>
       <SvgIcon :iconClass="item.meta?.icon" />
