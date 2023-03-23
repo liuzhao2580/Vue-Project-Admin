@@ -12,6 +12,10 @@ export const RouterName = {
   DOCUMENTATION: "DocumentationPage",
   /** 权限管理页面 */
   ADMIN: "AdminPage",
+  /** 权限切换页面 */
+  ADMIN_CHANGE: "AdminChangePage",
+  /** 权限测试页面 */
+  ADMIN_TEST: "AdminTestPage",
   /** 文章页 */
   ARTICLE: "ArticlePage",
   /** 文章创建 */
@@ -66,6 +70,10 @@ export const RouterPath = {
   DOCUMENTATION: "/documentation",
   /** 权限管理页面 */
   ADMIN: "/admin",
+  /** 权限切换页面 */
+  ADMIN_CHANGE: "/admin-change",
+  /** 权限测试页面 */
+  ADMIN_TEST: "/admin-test",
   /** 文章页 */
   ARTICLE: "/article",
   /** 文章创建 */

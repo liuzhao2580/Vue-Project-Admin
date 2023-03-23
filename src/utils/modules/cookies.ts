@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 
+/** 常量 */
 export const CONST_VARIABLE = {
   TOKEN: "token",
   USER_ID: "userId",

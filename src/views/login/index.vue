@@ -30,18 +30,29 @@
       </el-form>
       <!-- <DDScanLogin/> -->
       <!-- <DDAccountLogin /> -->
+      <!-- 提示 -->
+      <div class="login-tip">
+        <ul>
+          <li class="user-item" v-for="user in userList" :key="user.id">
+            <span>用户名: <CopyContent :copy-text="user.userName" /></span>
+            <span>密码: {{ user.password }}</span>
+            <span>权限: {{ user.roleName }}</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import type { FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
 import { useUserStore } from "@/store/user";
-import { userLogin } from "@/api/modules/user";
+import { userLogin, userInfoListAPI } from "@/api/modules/user";
 import { ResultCodeEnum } from "@/typescript/shared/enum";
+import CopyContent from "@/components/CopyContent/index.vue";
 const userStore = useUserStore();
 
 const router = useRouter();
@@ -62,7 +73,24 @@ const rules = reactive<FormRules>({
 /** 登录的加载按钮样式 */
 const loginLoading = ref(false);
 
+/** 用户列表 */
+const userList = ref<IUserBaseInfo[]>();
+
 const formRef = ref<FormInstance>();
+
+onMounted(() => {
+  init();
+});
+
+const init = () => {
+  userInfoList();
+};
+
+/** 获取所有用户信息 */
+const userInfoList = async () => {
+  const data = await userInfoListAPI();
+  userList.value = data.data;
+};
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
@@ -109,6 +137,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 
 <script lang="ts">
 import { RouterName, RouterPath } from "@/router/RouteConst";
+import { IUserBaseInfo } from "@/typescript/shared/interface/user-interface";
 export default {
   name: RouterName.LOGIN
 };
@@ -143,6 +172,13 @@ export default {
     }
     .loginBtn {
       width: 100%;
+    }
+    .login-tip {
+      .user-item {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 10px;
+      }
     }
   }
 }

@@ -42,6 +42,7 @@ const userInfo: IUserBaseInfo[] = [
 
 const userModules: IMockResponse<any>[] = [
   {
+    // 用户登录
     type: ResultTypeEnum.POST,
     url: "/user/login",
     response: (options: any) => {
@@ -71,6 +72,7 @@ const userModules: IMockResponse<any>[] = [
     }
   },
   {
+    // 获取单个用户信息
     type: ResultTypeEnum.GET,
     url: "/user/info/.*",
     response(options) {
@@ -99,6 +101,18 @@ const userModules: IMockResponse<any>[] = [
           data: {},
           msg: "登录失败,请检查用户名和密码是否正确"
         };
+    }
+  },
+  {
+    // 获取用户列表
+    type: ResultTypeEnum.GET,
+    url: "/user/list",
+    response() {
+      return {
+        code: ResultCodeEnum.SUCCESS,
+        data: userInfo,
+        msg: "成功"
+      };
     }
   }
 ];

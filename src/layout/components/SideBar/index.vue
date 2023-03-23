@@ -13,10 +13,11 @@
       :default-active="activeMenu"
       router
       unique-opened
+      class="sidebar-el-menu-box"
     >
       <SidebarItem
-        v-for="(route, index) in sideBarList"
-        :key="index"
+        v-for="route in sideBarList"
+        :key="route.path"
         :item="route"
       />
     </el-menu>
@@ -65,4 +66,16 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.sidebar-el-menu-box {
+  ::v-deep(.el-menu-item) {
+    .menu-title {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 120px;
+    }
+  }
+}
+</style>

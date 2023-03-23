@@ -80,13 +80,30 @@ export const asyncRoutes: RouteRecordRaw[] = [
         name: RouterName.ADMIN,
         meta: {
           title: "权限管理",
-          icon: "admin",
-          roles: [UserRolesEnum.superAdmin]
+          icon: "admin"
         },
-        component: () =>
-          import(
-            /* webpackChunkName: "admminComponent" */ "@/views/admin/index.vue"
-          )
+        component: PageContent,
+        children: [
+          {
+            path: RouterPath.ADMIN_CHANGE,
+            name: RouterName.ADMIN_CHANGE,
+            meta: {
+              title: "权限管理切换",
+              icon: "admin"
+            },
+            component: () => import("@/views/admin/index.vue")
+          },
+          {
+            path: RouterPath.ADMIN_TEST,
+            name: RouterName.ADMIN_TEST,
+            meta: {
+              title: "超级管理员可见",
+              icon: "admin",
+              roles: [UserRolesEnum.superAdmin]
+            },
+            component: () => import("@/views/admin/admin-test/index.vue")
+          }
+        ]
       },
       // 文章页
       {
