@@ -26,7 +26,6 @@ export default class BpmnUtils {
       "js-drop-zone"
     ) as HTMLDivElement;
     const container = document.getElementById(containerId) as HTMLDivElement;
-    console.log(container);
     this.bpmnModeler = new BpmnModeler({
       container,
       propertiesPanel: {

@@ -3,14 +3,12 @@
     <div class="message error">
       <div class="note">
         <p>Ooops, 出问题啦.</p>
-
         <div class="details">
           <span>Import Error Details</span>
           <pre></pre>
         </div>
       </div>
     </div>
-
     <div id="js-canvas" class="canvas"></div>
     <div class="properties-panel-parent" id="js-properties-panel"></div>
   </div>
