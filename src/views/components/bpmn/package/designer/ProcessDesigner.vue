@@ -12,28 +12,30 @@
             >打开文件</el-button
           >
           <el-tooltip effect="light">
-            <div slot="content">
-              <el-button
-                :size="headerButtonSize"
-                type="text"
-                @click="downloadProcessAsXml()"
-                >下载为XML文件</el-button
-              >
-              <br />
-              <el-button
-                :size="headerButtonSize"
-                type="text"
-                @click="downloadProcessAsSvg()"
-                >下载为SVG文件</el-button
-              >
-              <br />
-              <el-button
-                :size="headerButtonSize"
-                type="text"
-                @click="downloadProcessAsBpmn()"
-                >下载为BPMN文件</el-button
-              >
-            </div>
+            <template #content>
+              <div>
+                <el-button
+                  :size="headerButtonSize"
+                  type="text"
+                  @click="downloadProcessAsXml()"
+                  >下载为XML文件</el-button
+                >
+                <br />
+                <el-button
+                  :size="headerButtonSize"
+                  type="text"
+                  @click="downloadProcessAsSvg()"
+                  >下载为SVG文件</el-button
+                >
+                <br />
+                <el-button
+                  :size="headerButtonSize"
+                  type="text"
+                  @click="downloadProcessAsBpmn()"
+                  >下载为BPMN文件</el-button
+                >
+              </div>
+            </template>
             <el-button
               :size="headerButtonSize"
               :type="headerButtonType"
@@ -42,21 +44,23 @@
             >
           </el-tooltip>
           <el-tooltip effect="light">
-            <div slot="content">
-              <el-button
-                :size="headerButtonSize"
-                type="text"
-                @click="previewProcessXML"
-                >预览XML</el-button
-              >
-              <br />
-              <el-button
-                :size="headerButtonSize"
-                type="text"
-                @click="previewProcessJson"
-                >预览JSON</el-button
-              >
-            </div>
+            <template #content>
+              <div>
+                <el-button
+                  :size="headerButtonSize"
+                  type="text"
+                  @click="previewProcessXML"
+                  >预览XML</el-button
+                >
+                <br />
+                <el-button
+                  :size="headerButtonSize"
+                  type="text"
+                  @click="previewProcessJson"
+                  >预览JSON</el-button
+                >
+              </div>
+            </template>
             <el-button
               :size="headerButtonSize"
               :type="headerButtonType"
@@ -210,9 +214,8 @@
       append-to-body
       destroy-on-close
     >
-<!--      <highlightjs :language="previewType" :code="previewResult" />-->
+      <!--      <highlightjs :language="previewType" :code="previewResult" />-->
       <pre><code class="hljs" v-html="highlightedCode(previewResult, previewType)"></code></pre>
-
     </el-dialog>
   </div>
 </template>
@@ -243,7 +246,10 @@ hljs.registerLanguage("java", require("highlight.js/lib/languages/java"));
 hljs.registerLanguage("xml", require("highlight.js/lib/languages/xml"));
 hljs.registerLanguage("html", require("highlight.js/lib/languages/xml"));
 hljs.registerLanguage("vue", require("highlight.js/lib/languages/xml"));
-hljs.registerLanguage("javascript", require("highlight.js/lib/languages/javascript"));
+hljs.registerLanguage(
+  "javascript",
+  require("highlight.js/lib/languages/javascript")
+);
 hljs.registerLanguage("sql", require("highlight.js/lib/languages/sql"));
 hljs.registerLanguage("json", require("highlight.js/lib/languages/json"));
 
@@ -401,11 +407,6 @@ export default {
     this.getModel();
     this.initBpmnModeler();
     this.createNewDiagram(this.value);
-    this.$once("hook:beforeDestroy", () => {
-      if (this.bpmnModeler) this.bpmnModeler.destroy();
-      this.$emit("destroy", this.bpmnModeler);
-      this.bpmnModeler = null;
-    });
   },
   methods: {
     /** 高亮显示 */
@@ -480,7 +481,7 @@ export default {
       const that = this;
       // 注册需要的监听事件, 将. 替换为 - , 避免解析异常
       this.events.forEach(event => {
-        EventBus.on(event, function(eventObj) {
+        EventBus.on(event, function (eventObj) {
           let eventName = event.replace(/\./g, "-");
           let element = eventObj ? eventObj.element : null;
           that.$emit(eventName, element, eventObj);
@@ -585,7 +586,7 @@ export default {
       const file = this.$refs.refFile.files[0];
       const reader = new FileReader();
       reader.readAsText(file);
-      reader.onload = function() {
+      reader.onload = function () {
         let xmlStr = this.result;
         that.createNewDiagram(xmlStr);
       };
@@ -690,6 +691,11 @@ export default {
         this.previewModelVisible = true;
       });
     }
+  },
+  onUnmounted() {
+    if (this.bpmnModeler) this.bpmnModeler.destroy();
+    this.$emit("destroy", this.bpmnModeler);
+    this.bpmnModeler = null;
   }
 };
 </script>

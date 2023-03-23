@@ -119,7 +119,6 @@
 </template>
 
 <script>
-import { userList, treeselect, deptList } from "./api";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 export default {
@@ -237,27 +236,18 @@ export default {
           this.options = [];
           this.showTree = false;
           this.isVar = false;
-          userList().then(res => {
-            this.options = res.rows;
-          });
           break;
         case "$role":
           this.form.personName = "";
           this.options = [];
           this.showTree = false;
           this.isVar = false;
-          deptList().then(res => {
-            this.options = res.rows;
-          });
           break;
         case "$dept":
           this.form.personName = "";
           this.options = [];
           this.form.personName = undefined;
           this.showTree = true;
-          treeselect().then(res => {
-            this.options = res.data;
-          });
           break;
         case "$var":
           this.form.personName = "";
