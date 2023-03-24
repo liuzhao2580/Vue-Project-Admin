@@ -14,7 +14,7 @@
     "indent": ["warn", 2, { "SwitchCase": 1 }],
     "eqeqeq": "warn",
     "@typescript-eslint/no-unused-vars": "error",
-    "semi": ["error", "always"],
+    "semi": ["error", "never"],
     "quotes": ["error", "double", { "allowTemplateLiterals": true }],
     "no-unreachable": "off",
     "no-var": "error",
