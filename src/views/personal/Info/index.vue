@@ -73,12 +73,6 @@ nextTick(() => {
       break
   }
 })
-// watch(
-//   userStore.state,
-//   () => {
-//
-//   }
-// )
 </script>
 
 <script lang="ts">

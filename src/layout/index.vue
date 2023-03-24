@@ -13,6 +13,7 @@
         class="click-icon el-icon-s-operation"
         @click="showORhidden"
       ></div>
+      <SettingCom />
     </el-container>
   </div>
 </template>
@@ -20,7 +21,7 @@
 <script lang="ts" setup>
 import { computed, onBeforeMount, onUnmounted } from "vue"
 import { debounce } from "lodash"
-import { AppMain, Sidebar, Navbar } from "./components"
+import { AppMain, Sidebar, Navbar, SettingCom } from "./components"
 import { useAppStore } from "@/store/app"
 
 const store = useAppStore()

@@ -2,9 +2,9 @@
   font-family: "iconfont"; /* Project id 1464219 */
   /* Color fonts */
   src: 
-       url('//at.alicdn.com/t/c/font_1464219_g3t3zqk0udf.woff2?t=1679638441776') format('woff2'),
-       url('//at.alicdn.com/t/c/font_1464219_g3t3zqk0udf.woff?t=1679638441776') format('woff'),
-       url('//at.alicdn.com/t/c/font_1464219_g3t3zqk0udf.ttf?t=1679638441776') format('truetype');
+       url('//at.alicdn.com/t/c/font_1464219_l77kl03y3w.woff2?t=1679649090253') format('woff2'),
+       url('//at.alicdn.com/t/c/font_1464219_l77kl03y3w.woff?t=1679649090253') format('woff'),
+       url('//at.alicdn.com/t/c/font_1464219_l77kl03y3w.ttf?t=1679649090253') format('truetype');
 }
 
 .iconfont {
@@ -13,6 +13,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-setting:before {
+  content: "\e60a";
 }
 
 .icon-user:before {
