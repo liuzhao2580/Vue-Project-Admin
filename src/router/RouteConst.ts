@@ -56,7 +56,7 @@ export const RouterName = {
   ERROR_PAGE_404: "ErrorPage404",
   /** 我的 */
   PERSONAL: "PersonalPage"
-};
+}
 
 /** 路由 path */
 export const RouterPath = {
@@ -114,10 +114,10 @@ export const RouterPath = {
   ERROR_PAGE_404: "/errorPage/404",
   /** 我的 */
   PERSONAL: "/personal"
-};
+}
 
 /** 路由的其他设置 */
 export const RouterConfig = {
   /** 表示不用重定向 */
   NoRedirect: "noRedirect"
-};
+}

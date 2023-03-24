@@ -6,12 +6,12 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessage } from "element-plus";
+import { ElMessage } from "element-plus"
 interface IProps {
   copyText: string;
 }
 
-const props = defineProps<IProps>();
+const props = defineProps<IProps>()
 
 function copyClick() {
   navigator.clipboard.writeText(props.copyText).then(
@@ -21,19 +21,19 @@ function copyClick() {
         type: "success",
         center: true,
         duration: 1000
-      });
+      })
     },
     error => {
-      console.log(error);
+      console.log(error)
     }
-  );
+  )
 }
 </script>
 
 <script lang="ts">
 export default {
   name: "CopyContent"
-};
+}
 </script>
 
 <style scoped lang="scss">

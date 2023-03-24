@@ -52,30 +52,30 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, shallowRef } from "vue";
-import gsap from "gsap";
-const count = shallowRef<number>(500);
-const rocketFlag = shallowRef<boolean>(false);
-const tooltipContent = shallowRef<string>("你也想起飞吗");
+import { nextTick, shallowRef } from "vue"
+import gsap from "gsap"
+const count = shallowRef<number>(500)
+const rocketFlag = shallowRef<boolean>(false)
+const tooltipContent = shallowRef<string>("你也想起飞吗")
 
 /** 回到顶部点击事件 */
 const backtopClick = () => {
-  rocketFlag.value = true;
+  rocketFlag.value = true
   nextTick(() => {
-    const tl = gsap.timeline();
+    const tl = gsap.timeline()
     tl.to("#rocket-svg", 2, { y: 100 })
       .to("#rocket-svg", 2, { y: 0 })
       .to("#rocket-svg", 1, { y: 150 })
-      .to("#rocket-svg", 2, { y: 0 });
-  });
-};
+      .to("#rocket-svg", 2, { y: 0 })
+  })
+}
 </script>
 
 <script lang="ts">
-import { RouterName } from "@/router/RouteConst";
+import { RouterName } from "@/router/RouteConst"
 export default {
   name: RouterName.BACK_TO_TOP
-};
+}
 </script>
 
 <style lang="scss" scoped>

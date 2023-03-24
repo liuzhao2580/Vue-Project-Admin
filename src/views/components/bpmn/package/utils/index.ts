@@ -1,13 +1,13 @@
-import { BpmnTargetNamespaceTypeEnum } from "../../type";
+import { BpmnTargetNamespaceTypeEnum } from "../../type"
 
 export const defaultEmptyXML = (key: any, name: any, type: BpmnTargetNamespaceTypeEnum) => {
-  if (!type) type = BpmnTargetNamespaceTypeEnum.camunda;
+  if (!type) type = BpmnTargetNamespaceTypeEnum.camunda
   const TYPE_TARGET = {
     activiti: "http://activiti.org/bpmn",
     camunda: "http://bpmn.io/schema/bpmn",
     flowable: "http://flowable.org/bpmn"
-  };
-  const targetNamespace = TYPE_TARGET[type];
+  }
+  const targetNamespace = TYPE_TARGET[type]
   return `<?xml version="1.0" encoding="UTF-8"?>
     <bpmn2:definitions 
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -23,5 +23,5 @@ export const defaultEmptyXML = (key: any, name: any, type: BpmnTargetNamespaceTy
         <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="${key}">
         </bpmndi:BPMNPlane>
       </bpmndi:BPMNDiagram>
-    </bpmn2:definitions>`;
-};
+    </bpmn2:definitions>`
+}

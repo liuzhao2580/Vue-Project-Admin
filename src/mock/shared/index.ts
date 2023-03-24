@@ -1,5 +1,5 @@
-import { ResultTypeEnum } from "@/typescript/shared/enum";
-import { ResultModel } from "@/typescript/shared/model";
+import { ResultTypeEnum } from "@/typescript/shared/enum"
+import { ResultModel } from "@/typescript/shared/model"
 // import { ResultModel } from '@/typescript/shared/model'
 
 export interface IMockResponse<T> {

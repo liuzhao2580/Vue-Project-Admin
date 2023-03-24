@@ -28,18 +28,18 @@
 </template>
 
 <script lang="ts" setup>
-import BetweenTime from "./components/Between-time.vue";
-import CssComponent from "./components/CssComponent/index.vue";
-import Calculator from "./components/Calculator.vue";
-import LoopListMouseScroll from "./components/LoopList-MouseScroll/index.vue";
-import LoopList from "./components/LoopList/index.vue";
+import BetweenTime from "./components/Between-time.vue"
+import CssComponent from "./components/CssComponent/index.vue"
+import Calculator from "./components/Calculator.vue"
+import LoopListMouseScroll from "./components/LoopList-MouseScroll/index.vue"
+import LoopList from "./components/LoopList/index.vue"
 </script>
 
 <script lang="ts">
-import { RouterName } from "@/router/RouteConst";
+import { RouterName } from "@/router/RouteConst"
 export default {
   name: RouterName.OTHER_COMPONENTS
-};
+}
 </script>
 
 <style lang="scss" scoped>

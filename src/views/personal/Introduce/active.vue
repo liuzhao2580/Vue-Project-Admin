@@ -44,8 +44,8 @@
 </template>
 
 <script lang="ts" setup>
-import ClickLike from "@/components/ClickLike/index.vue";
-import { handleViteImages } from "@/utils";
+import ClickLike from "@/components/ClickLike/index.vue"
+import { handleViteImages } from "@/utils"
 const content_Item = [
   {
     src: handleViteImages("@/assets/images/jinganglang.png"),
@@ -80,13 +80,13 @@ const content_Item = [
       }
     ]
   }
-];
+]
 </script>
 
 <script lang="ts">
 export default {
   name: "ActiveIndex"
-};
+}
 </script>
 
 <style lang="scss" scoped>

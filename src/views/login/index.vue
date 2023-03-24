@@ -45,17 +45,17 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import type { FormInstance, FormRules } from "element-plus";
-import { ElMessage } from "element-plus";
-import { useUserStore } from "@/store/user";
-import { userLogin, userInfoListAPI } from "@/api/modules/user";
-import { ResultCodeEnum } from "@/typescript/shared/enum";
-import CopyContent from "@/components/CopyContent/index.vue";
-const userStore = useUserStore();
+import { reactive, ref, onMounted } from "vue"
+import { useRouter } from "vue-router"
+import type { FormInstance, FormRules } from "element-plus"
+import { ElMessage } from "element-plus"
+import { useUserStore } from "@/store/user"
+import { userLogin, userInfoListAPI } from "@/api/modules/user"
+import { ResultCodeEnum } from "@/typescript/shared/enum"
+import CopyContent from "@/components/CopyContent/index.vue"
+const userStore = useUserStore()
 
-const router = useRouter();
+const router = useRouter()
 
 interface ILoginForm {
   userName: string;
@@ -65,82 +65,82 @@ interface ILoginForm {
 const loginForm = reactive<ILoginForm>({
   userName: "liuzhao",
   password: "123456"
-});
+})
 const rules = reactive<FormRules>({
   userName: [{ required: true, message: "请输入用户名", trigger: "blur" }],
   password: [{ required: true, message: "请输入密码", trigger: "blur" }]
-});
+})
 /** 登录的加载按钮样式 */
-const loginLoading = ref(false);
+const loginLoading = ref(false)
 
 /** 用户列表 */
-const userList = ref<IUserBaseInfo[]>();
+const userList = ref<IUserBaseInfo[]>()
 
-const formRef = ref<FormInstance>();
+const formRef = ref<FormInstance>()
 
 onMounted(() => {
-  init();
-});
+  init()
+})
 
 const init = () => {
-  userInfoList();
-};
+  userInfoList()
+}
 
 /** 获取所有用户信息 */
 const userInfoList = async () => {
-  const data = await userInfoListAPI();
-  userList.value = data.data;
-};
+  const data = await userInfoListAPI()
+  userList.value = data.data
+}
 
 const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
+  if (!formEl) return
   await formEl.validate(async (valid: boolean) => {
     if (valid) {
-      loginLoading.value = true;
+      loginLoading.value = true
       const params = {
         userName: loginForm.userName,
         password: loginForm.password
-      };
+      }
       try {
-        const result = await userLogin(params);
-        console.log(result, "data");
+        const result = await userLogin(params)
+        console.log(result, "data")
         if (result.code === ResultCodeEnum.SUCCESS) {
           ElMessage({
             message: "登录成功",
             type: "success"
-          });
+          })
           try {
-            await userStore.saveUserInfo(result.data);
-            await userStore.findUserInfoByID();
+            await userStore.saveUserInfo(result.data)
+            await userStore.findUserInfoByID()
             router.push({
               path: RouterPath.DASHBOARD
-            });
+            })
           } catch (error) {
-            console.log(error, 111);
+            console.log(error, 111)
           }
         } else {
           ElMessage({
             message: result.msg,
             type: "error"
-          });
+          })
         }
-        loginLoading.value = false;
+        loginLoading.value = false
       } catch (err) {
-        loginLoading.value = false;
+        loginLoading.value = false
       }
     } else {
-      return false;
+      return false
     }
-  });
-};
+  })
+}
 </script>
 
 <script lang="ts">
-import { RouterName, RouterPath } from "@/router/RouteConst";
-import { IUserBaseInfo } from "@/typescript/shared/interface/user-interface";
+import { RouterName, RouterPath } from "@/router/RouteConst"
+import { IUserBaseInfo } from "@/typescript/shared/interface/user-interface"
 export default {
   name: RouterName.LOGIN
-};
+}
 </script>
 
 <style lang="scss" scoped>

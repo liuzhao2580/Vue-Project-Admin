@@ -45,18 +45,18 @@ const cardList: ICard[] = [
     titleText: "element-plus",
     srcURL: "https://element-plus.gitee.io/zh-CN/"
   }
-];
+]
 // 跳转页面
 const jumpURL = (URL: string) => {
-  window.open(URL);
-};
+  window.open(URL)
+}
 </script>
 
 <script lang="ts">
-import { RouterName } from "@/router/RouteConst";
+import { RouterName } from "@/router/RouteConst"
 export default {
   name: RouterName.DOCUMENTATION
-};
+}
 </script>
 
 <style lang="scss" scoped>

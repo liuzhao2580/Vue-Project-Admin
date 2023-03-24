@@ -10,23 +10,23 @@ export function getBetweenTime(
 ): Array<string> {
   // 校验时间格式
   if (typeof startTime === "string" && typeof endTime === "string") {
-    const reg = /^(0?[1-9]|([1-2][0-4])):(([0-5][0-9])(:([0-9][0-9]))?)$/;
-    if (!reg.test(startTime)) throw `开始时间：${startTime} 时间格式错误`;
-    if (!reg.test(endTime)) throw `结束时间：${endTime} 时间格式错误`;
-  } else throw `${startTime} 或者 ${endTime} 时间格式错误`;
-  let start: number = +startTime.split(":")[0];
-  const end: number = +endTime.split(":")[0];
-  const resultTime: string[] = [];
+    const reg = /^(0?[1-9]|([1-2][0-4])):(([0-5][0-9])(:([0-9][0-9]))?)$/
+    if (!reg.test(startTime)) throw `开始时间：${startTime} 时间格式错误`
+    if (!reg.test(endTime)) throw `结束时间：${endTime} 时间格式错误`
+  } else throw `${startTime} 或者 ${endTime} 时间格式错误`
+  let start: number = +startTime.split(":")[0]
+  const end: number = +endTime.split(":")[0]
+  const resultTime: string[] = []
   // 当 开始时间小于结束时间的时候进入循环
   while (start <= end) {
     // 拼接时间格式 自动给 小于10的时间前面补0
-    const setTime = start >= 10 ? `${start}:00` : `0${start}:00`;
+    const setTime = start >= 10 ? `${start}:00` : `0${start}:00`
 
-    resultTime.push(setTime);
+    resultTime.push(setTime)
     // 重新设置开始时间
-    start += 1;
+    start += 1
   }
-  return resultTime;
+  return resultTime
 }
 
 /** 获取两个日期之间的间隔日期
@@ -39,22 +39,22 @@ export function getBetweenDate(
 ): Array<string> {
   // 校验时间格式
   if (typeof startTime === "string") {
-    const reg = /^\d{4}-(0?[1-9]|1[0-2])-((0?[1-9])|((1|2)[0-9])|30|31)$/g;
-    if (!reg.test(startTime)) throw `开始时间：${startTime}时间格式错误`;
+    const reg = /^\d{4}-(0?[1-9]|1[0-2])-((0?[1-9])|((1|2)[0-9])|30|31)$/g
+    if (!reg.test(startTime)) throw `开始时间：${startTime}时间格式错误`
   }
   if (typeof endTime === "string") {
-    const reg = /^\d{4}-(0?[1-9]|1[0-2])-((0?[1-9])|((1|2)[0-9])|30|31)$/g;
-    if (!reg.test(endTime)) throw `结束时间：${endTime}时间格式错误`;
+    const reg = /^\d{4}-(0?[1-9]|1[0-2])-((0?[1-9])|((1|2)[0-9])|30|31)$/g
+    if (!reg.test(endTime)) throw `结束时间：${endTime}时间格式错误`
   }
-  let start: Date = new Date(startTime);
-  const end: Date = new Date(endTime);
-  const resultTime: string[] = [];
+  let start: Date = new Date(startTime)
+  const end: Date = new Date(endTime)
+  const resultTime: string[] = []
   // 当 开始时间小于结束时间的时候进入循环
   while (start <= end) {
-    const getDay = start.getDate();
+    const getDay = start.getDate()
     // 月份需要加 1
-    const getMonth = start.getMonth() + 1;
-    const getYear = start.getFullYear();
+    const getMonth = start.getMonth() + 1
+    const getYear = start.getFullYear()
     /**
      * 拼接时间格式
      * (getMonth >= 10 ? `${getMonth}` : `0${getMonth}`) 自动给 小于10的时间前面补0
@@ -63,18 +63,18 @@ export function getBetweenDate(
       `${getYear}-` +
       (getMonth >= 10 ? `${getMonth}` : `0${getMonth}`) +
       "-" +
-      (getDay >= 10 ? `${getDay}` : `0${getDay}`);
+      (getDay >= 10 ? `${getDay}` : `0${getDay}`)
 
-    resultTime.push(setTime);
+    resultTime.push(setTime)
     /**
      * 重新设置开始时间
      * 使用 setFullYear() 方法会自动将时间累加，返回的是时间戳格式
      * 使用 new Date() 将时间重新设置为标准时间
      * getMonth - 1 将月份时间重新还原
      */
-    start = new Date(start.setFullYear(getYear, getMonth - 1, getDay + 1));
+    start = new Date(start.setFullYear(getYear, getMonth - 1, getDay + 1))
   }
-  return resultTime;
+  return resultTime
 }
 
 /**
@@ -88,37 +88,37 @@ export function getBetweenMonth(
 ): Array<string> {
   // 校验时间格式
   if (typeof startTime === "string") {
-    const reg = /^\d{4}-(0?[1-9]|1[0-2])$/g;
-    if (!reg.test(startTime)) throw `开始时间：${startTime}时间格式错误`;
+    const reg = /^\d{4}-(0?[1-9]|1[0-2])$/g
+    if (!reg.test(startTime)) throw `开始时间：${startTime}时间格式错误`
   }
   if (typeof endTime === "string") {
-    const reg = /^\d{4}-(0?[1-9]|1[0-2])$/g;
-    if (!reg.test(endTime)) throw `结束时间：${endTime}时间格式错误`;
+    const reg = /^\d{4}-(0?[1-9]|1[0-2])$/g
+    if (!reg.test(endTime)) throw `结束时间：${endTime}时间格式错误`
   }
-  let start: Date = new Date(startTime);
-  const end: Date = new Date(endTime);
-  const resultTime: string[] = [];
+  let start: Date = new Date(startTime)
+  const end: Date = new Date(endTime)
+  const resultTime: string[] = []
   // 当 开始时间小于结束时间的时候进入循环
   while (start <= end) {
     // 月份需要加 1
-    const getMonth = start.getMonth() + 1;
-    const getYear = start.getFullYear();
+    const getMonth = start.getMonth() + 1
+    const getYear = start.getFullYear()
     /**
      * 拼接时间格式
      * (getMonth >= 10 ? `${getMonth}` : `0${getMonth}`) 自动给 小于10的时间前面补0
      */
     const setTime =
-      `${getYear}-` + (getMonth >= 10 ? `${getMonth}` : `0${getMonth}`);
+      `${getYear}-` + (getMonth >= 10 ? `${getMonth}` : `0${getMonth}`)
 
-    resultTime.push(setTime);
+    resultTime.push(setTime)
     /**
      * 重新设置开始时间
      * 使用 setFullYear() 方法会自动将时间累加，返回的是时间戳格式
      * 使用 new Date() 将时间重新设置为标准时间
      */
-    start = new Date(start.setFullYear(getYear, getMonth));
+    start = new Date(start.setFullYear(getYear, getMonth))
   }
-  return resultTime;
+  return resultTime
 }
 
 /** 获取两个年份时间点 之间的间隔年份
@@ -131,29 +131,29 @@ export function getBetweenYear(
 ): Array<string> {
   // 校验时间格式
   if (typeof startTime === "string") {
-    const reg = /^\d{4}$/g;
-    if (!reg.test(startTime)) throw `开始时间：${startTime}时间格式错误`;
+    const reg = /^\d{4}$/g
+    if (!reg.test(startTime)) throw `开始时间：${startTime}时间格式错误`
   }
   if (typeof endTime === "string") {
-    const reg = /^\d{4}$/g;
-    if (!reg.test(endTime)) new Error(`结束时间：${endTime}时间格式错误`);
+    const reg = /^\d{4}$/g
+    if (!reg.test(endTime)) new Error(`结束时间：${endTime}时间格式错误`)
   }
-  let start: Date = new Date(startTime);
-  const end: Date = new Date(endTime);
-  const resultTime: string[] = [];
+  let start: Date = new Date(startTime)
+  const end: Date = new Date(endTime)
+  const resultTime: string[] = []
   // 当 开始时间小于结束时间的时候进入循环
   while (start <= end) {
-    const getYear = start.getFullYear();
+    const getYear = start.getFullYear()
     // 拼接时间格式
-    const setTime = `${getYear}`;
+    const setTime = `${getYear}`
 
-    resultTime.push(setTime);
+    resultTime.push(setTime)
     /**
      * 重新设置开始时间
      * 使用 setFullYear() 方法会自动将时间累加，返回的是时间戳格式
      * 使用 new Date() 将时间重新设置为标准时间
      */
-    start = new Date(start.setFullYear(getYear + 1));
+    start = new Date(start.setFullYear(getYear + 1))
   }
-  return resultTime;
+  return resultTime
 }

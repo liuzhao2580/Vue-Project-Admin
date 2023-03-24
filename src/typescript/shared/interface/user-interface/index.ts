@@ -1,4 +1,4 @@
-import { UserRolesEnum } from '../../enum/user-enum/user-roles.enum'
+import { UserRolesEnum } from "../../enum/user-enum/user-roles.enum"
 
 /** 1. 用户基本信息的接口 */
 export interface IUserBaseInfo {

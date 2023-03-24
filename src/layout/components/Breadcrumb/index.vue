@@ -22,46 +22,46 @@
 </template>
 
 <script lang="ts" setup>
-import { RouterConfig, RouterPath } from "@/router/RouteConst";
-import { computed, ref, watchEffect } from "vue";
-import { RouteLocationMatched, RouteRecordRaw, useRoute } from "vue-router";
-import defaultConfig from "@/setting";
+import { RouterConfig, RouterPath } from "@/router/RouteConst"
+import { computed, ref, watchEffect } from "vue"
+import { RouteLocationMatched, RouteRecordRaw, useRoute } from "vue-router"
+import defaultConfig from "@/setting"
 
-const route = useRoute();
+const route = useRoute()
 const breadcrumbTitle = computed(() => {
-  return defaultConfig.title;
-});
-const getMatched = ref<RouteLocationMatched[]>();
+  return defaultConfig.title
+})
+const getMatched = ref<RouteLocationMatched[]>()
 const init = () => {
-  const nowRoute = route.matched;
+  const nowRoute = route.matched
   getMatched.value = nowRoute.filter(item => {
     // 说明存在多级路由
     if (item.meta && item.meta.title) {
       // 用于判断 当前页面是否在首页
-      if (item.path === "/dashboard") return false;
+      if (item.path === "/dashboard") return false
       // 用于判断当前的路由是否显示在面包屑中
-      else if (item.meta.breadcrumb === false) return false;
-      return true;
+      else if (item.meta.breadcrumb === false) return false
+      return true
     }
-  });
-};
+  })
+}
 // 面包屑点击
 const handleClick = (item: RouteRecordRaw) => {
   // 用于判断当前的面包屑是否可以点击跳转
   if (item.redirect !== RouterConfig.NoRedirect) {
     return {
       path: item.path
-    };
+    }
   }
-};
+}
 
-watchEffect(() => init());
+watchEffect(() => init())
 </script>
 
 <script lang="ts">
 export default {
   name: "BreadcrumbCom"
-};
+}
 </script>
 
 <style lang="scss" scoped>

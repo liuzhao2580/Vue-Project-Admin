@@ -1,4 +1,4 @@
-import { UserRolesEnum } from '../enum/user-enum/user-roles.enum'
+import { UserRolesEnum } from "../enum/user-enum/user-roles.enum"
 
 /** 路由的 meta 接口规定 */
 export interface IMetaRouter {

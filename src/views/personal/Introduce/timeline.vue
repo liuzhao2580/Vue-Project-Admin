@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref } from "vue"
 interface IActive {
   project_name: string;
   timestamp: string;
@@ -29,7 +29,7 @@ interface IActive {
   project_outline: string;
   project_personal: string;
 }
-const activities = ref<IActive[]>();
+const activities = ref<IActive[]>()
 activities.value = [
   {
     project_name: "多赢普惠官网",
@@ -65,13 +65,13 @@ activities.value = [
     project_personal:
       "个人职责:  整个项目基本上是自己独立完成, 在任务比较繁重的时候, 后台的工作人员会帮忙完善一些功能代码."
   }
-];
+]
 </script>
 
 <script lang="ts">
 export default {
   name: "TimeLine"
-};
+}
 </script>
 
 <style lang="scss" scoped>

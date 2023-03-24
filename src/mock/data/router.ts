@@ -17,5 +17,5 @@ const routerList = [
       }
     ]
   }
-];
-export default routerList;
+]
+export default routerList

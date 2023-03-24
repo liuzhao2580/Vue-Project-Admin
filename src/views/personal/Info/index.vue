@@ -27,29 +27,29 @@
 </template>
 
 <script lang="ts" setup>
-import { useUserStore } from "@/store/user";
-import UserImg from "@/components/UserImg/index.vue";
-import Progress from "@/components/Progress/index.vue";
-import { computed, ref } from "vue";
+import { useUserStore } from "@/store/user"
+import UserImg from "@/components/UserImg/index.vue"
+import Progress from "@/components/Progress/index.vue"
+import { computed, ref } from "vue"
 
 const tags = ref([
   { name: "唱", type: "success" },
   { name: "跳", type: "info" },
   { name: "Rap", type: "warning" },
   { name: "篮球", type: "danger" }
-]);
+])
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 
 const nickname = computed(() => {
-  return userStore.state.nickname;
-});
+  return userStore.state.nickname
+})
 </script>
 
 <script lang="ts">
 export default {
   name: "InfoIndex"
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

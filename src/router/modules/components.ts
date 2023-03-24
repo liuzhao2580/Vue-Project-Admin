@@ -1,6 +1,6 @@
-import { RouteRecordRaw } from "vue-router";
-import PageContent from "@/layout/components/AppMain.vue";
-import { RouterName, RouterPath } from "../RouteConst";
+import { RouteRecordRaw } from "vue-router"
+import PageContent from "@/layout/components/AppMain.vue"
+import { RouterName, RouterPath } from "../RouteConst"
 const components: RouteRecordRaw = {
   path: RouterPath.COMPONENTS,
   meta: { title: "组件", icon: "components" },
@@ -99,6 +99,6 @@ const components: RouteRecordRaw = {
         )
     }
   ]
-};
+}
 
-export default components;
+export default components

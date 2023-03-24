@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, shallowReactive, onUnmounted, ref } from "vue";
+import { onMounted, shallowReactive, onUnmounted, ref } from "vue"
 
 interface IData {
   /** loop-list-box 的自定义 类名 */
@@ -31,7 +31,7 @@ const data = shallowReactive<IData>({
   listBox: null,
   item: null,
   intervalId: undefined
-});
+})
 
 const list = ref([
   {
@@ -78,54 +78,54 @@ const list = ref([
     id: 11,
     name: "list"
   }
-]);
-let loopScroll = 1;
-let itemHeight = 0;
-let intervalTime = 10;
+])
+let loopScroll = 1
+let itemHeight = 0
+let intervalTime = 10
 
 onMounted(() => {
   setTimeout(() => {
-    init();
-  }, 1000);
-});
+    init()
+  }, 1000)
+})
 
 const init = () => {
-  data.loopListBox = document.querySelector(`.${data.loopListBoxClass}`);
-  data.listBox = document.querySelector(`.${data.listBoxClass}`);
-  data.intervalId = setInterval(intervalEvent, intervalTime);
-  itemHeight = data.listBox?.firstElementChild?.clientHeight as number;
-};
+  data.loopListBox = document.querySelector(`.${data.loopListBoxClass}`)
+  data.listBox = document.querySelector(`.${data.listBoxClass}`)
+  data.intervalId = setInterval(intervalEvent, intervalTime)
+  itemHeight = data.listBox?.firstElementChild?.clientHeight as number
+}
 
 function intervalEvent() {
   if (data.loopListBox) {
-    data.loopListBox.scrollTop++;
-    loopScroll++;
+    data.loopListBox.scrollTop++
+    loopScroll++
     if (loopScroll === itemHeight) {
-      const getItem = list.value.splice(0, 1);
-      list.value.push(...getItem);
-      loopScroll = 0;
+      const getItem = list.value.splice(0, 1)
+      list.value.push(...getItem)
+      loopScroll = 0
     }
   }
 }
 onUnmounted(() => {
-  clearInterval(data.intervalId);
-  data.intervalId = undefined;
-});
+  clearInterval(data.intervalId)
+  data.intervalId = undefined
+})
 
 function loopListBoxMouseEnter() {
-  clearInterval(data.intervalId);
-  data.intervalId = undefined;
+  clearInterval(data.intervalId)
+  data.intervalId = undefined
 }
 
 function loopListBoxMouseLeave() {
-  data.intervalId = setInterval(intervalEvent, intervalTime);
+  data.intervalId = setInterval(intervalEvent, intervalTime)
 }
 </script>
 
 <script lang="ts">
 export default {
   name: "LoopList"
-};
+}
 </script>
 
 <style scoped lang="scss">

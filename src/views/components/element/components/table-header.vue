@@ -109,7 +109,7 @@
 </template>
 
 <script lang="ts" setup>
-import { shallowRef } from "vue";
+import { shallowRef } from "vue"
 const headerData = shallowRef([
   {
     label: "日期",
@@ -143,7 +143,7 @@ const headerData = shallowRef([
       }
     ]
   }
-]);
+])
 const tableData = shallowRef([
   {
     date: "2016-05-02",
@@ -160,13 +160,13 @@ const tableData = shallowRef([
     name: "王小虎",
     type: "Angular"
   }
-]);
+])
 </script>
 
 <script lang="ts">
 export default {
   name: "TableHeaderCom"
-};
+}
 </script>
 
 <style lang="scss" scoped>

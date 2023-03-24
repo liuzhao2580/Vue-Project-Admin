@@ -7,10 +7,10 @@
 </script>
 
 <script lang="ts">
-import { RouterName } from "@/router/RouteConst";
+import { RouterName } from "@/router/RouteConst"
 export default {
   name: RouterName.ADMIN_TEST
-};
+}
 </script>
 
 

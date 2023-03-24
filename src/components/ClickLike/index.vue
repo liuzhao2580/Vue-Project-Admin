@@ -7,44 +7,44 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
-import { handleViteImages } from "@/utils";
-const src_dz = handleViteImages("@/assets/images/dz.png");
+import { ref, watch } from "vue"
+import { handleViteImages } from "@/utils"
+const src_dz = handleViteImages("@/assets/images/dz.png")
 /** 点赞后的图片 */
-const src_dzd = handleViteImages("@/assets/images/dzd.png");
+const src_dzd = handleViteImages("@/assets/images/dzd.png")
 /** 点赞状态, 如果没有点赞 false  点赞之后就是 true */
-const dzd_status = ref<boolean>(false);
-const dz_Name = ref("赞");
-const src = ref(src_dz);
+const dzd_status = ref<boolean>(false)
+const dz_Name = ref("赞")
+const src = ref(src_dz)
 /** 设置 缓缓升起的红心的显示状态 */
-const ClickLike_Status = ref<boolean>(false);
+const ClickLike_Status = ref<boolean>(false)
 const ClickLike = () => {
   // 说明已经点赞了, 如果再次点击 就是取消点赞
   if (dzd_status.value) {
-    dz_Name.value = "赞";
-    src.value = src_dz;
-    dzd_status.value = false;
-    return;
+    dz_Name.value = "赞"
+    src.value = src_dz
+    dzd_status.value = false
+    return
   }
-  ClickLike_Status.value = true;
+  ClickLike_Status.value = true
   setTimeout(() => {
-    ClickLike_Status.value = false;
-    src.value = src_dzd;
-    dzd_status.value = true;
-  }, 1000);
-};
+    ClickLike_Status.value = false
+    src.value = src_dzd
+    dzd_status.value = true
+  }, 1000)
+}
 
 watch(dzd_status, val => {
   if (val) {
-    dz_Name.value = "取消";
+    dz_Name.value = "取消"
   }
-});
+})
 </script>
 
 <script lang="ts">
 export default {
   name: "ClickLike"
-};
+}
 </script>
 
 <style lang="scss" scoped>

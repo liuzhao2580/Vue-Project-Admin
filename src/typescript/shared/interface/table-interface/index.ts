@@ -1,6 +1,6 @@
-import { Component } from 'vue'
-import { EColumnType, EOperationType, ESearchType, ESelectType } from '../../enum/table-enum'
-import { FilterConditionModel } from '../../model/tableModel/filter-condition.model'
+import { Component } from "vue"
+import { EColumnType, EOperationType, ESearchType, ESelectType } from "../../enum/table-enum"
+import { FilterConditionModel } from "../../model/tableModel/filter-condition.model"
 
 /** 表格配置 */
 export interface ITableConfigModel {

@@ -12,31 +12,31 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, shallowRef } from "vue";
-import G6Utils from "./G6utils";
+import { onMounted, onUnmounted, shallowRef } from "vue"
+import G6Utils from "./G6utils"
 
-const graph = shallowRef<G6Utils>();
+const graph = shallowRef<G6Utils>()
 
 onMounted(() => {
-  graph.value = new G6Utils();
-  window.addEventListener("resize", resizeFunc);
-});
+  graph.value = new G6Utils()
+  window.addEventListener("resize", resizeFunc)
+})
 
 function resizeFunc() {
-  graph.value?.graphResize();
+  graph.value?.graphResize()
 }
 
 onUnmounted(() => {
-  graph.value?.graphDestory();
-  window.removeEventListener("resize", resizeFunc);
-});
+  graph.value?.graphDestory()
+  window.removeEventListener("resize", resizeFunc)
+})
 </script>
 
 <script lang="ts">
-import { RouterName } from "@/router/RouteConst";
+import { RouterName } from "@/router/RouteConst"
 export default {
   name: RouterName.TOPOLOGY
-};
+}
 </script>
 
 <style lang="scss" scoped>

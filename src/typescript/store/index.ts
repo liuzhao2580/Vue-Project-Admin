@@ -1,5 +1,5 @@
-import { RouteRecordRaw } from 'vue-router'
-import { ITagsView } from '../shared/interface'
+import { RouteRecordRaw } from "vue-router"
+import { ITagsView } from "../shared/interface"
 
 /** 系统 app 的 store */
 export class StoreAppModel {
@@ -14,11 +14,11 @@ export class StoreUserModel {
   /** 动态路由侧边栏的数据 */
   sideBarList: RouteRecordRaw[] = []
   /** 用户头像 */
-  avatar = ''
+  avatar = ""
   /** 昵称 */
-  nickname = ''
+  nickname = ""
   /** token */
-  token = ''
+  token = ""
   /** 判断是否刷新页面 false 否 true 是 */
   Need_refresh = true
 }

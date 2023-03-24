@@ -36,12 +36,12 @@
 </template>
 
 <script lang="ts" setup>
-import { Component, computed, onMounted, ref, shallowRef } from "vue";
-import { useRouter } from "vue-router";
-import { removeCookie, CONST_VARIABLE } from "@/utils/modules/cookies";
-import { resetRouter } from "@/router";
-import { useUserStore } from "@/store/user";
-import { RouterPath } from "@/router/RouteConst";
+import { Component, computed, onMounted, ref, shallowRef } from "vue"
+import { useRouter } from "vue-router"
+import { removeCookie, CONST_VARIABLE } from "@/utils/modules/cookies"
+import { resetRouter } from "@/router"
+import { useUserStore } from "@/store/user"
+import { RouterPath } from "@/router/RouteConst"
 import {
   User,
   HomeFilled,
@@ -51,11 +51,11 @@ import {
   ArrowDown,
   Sunny,
   Moon
-} from "@element-plus/icons-vue";
+} from "@element-plus/icons-vue"
 
-const store = useUserStore();
+const store = useUserStore()
 
-const router = useRouter();
+const router = useRouter()
 
 interface IRef {
   command: string;
@@ -96,56 +96,56 @@ const dropdownList = shallowRef<IRef[]>([
     icon: SwitchButton,
     dividedFlag: true
   }
-]);
+])
 
 /** 获取 html dom元素 */
-const htmlDom = ref<HTMLHtmlElement>();
+const htmlDom = ref<HTMLHtmlElement>()
 
 /** 全局的样式切换 */
-const switchGlobal = ref<switchStyleGlobal>(switchStyleGlobal.light);
+const switchGlobal = ref<switchStyleGlobal>(switchStyleGlobal.light)
 
 onMounted(() => {
-  htmlDom.value = document.querySelector("html") as HTMLHtmlElement;
-});
+  htmlDom.value = document.querySelector("html") as HTMLHtmlElement
+})
 
 const avatar = computed(() => {
-  return store.state.avatar;
-});
+  return store.state.avatar
+})
 // 登出
 const login_Out = () => {
-  removeCookie(CONST_VARIABLE.TOKEN);
-  removeCookie(CONST_VARIABLE.USER_ID);
+  removeCookie(CONST_VARIABLE.TOKEN)
+  removeCookie(CONST_VARIABLE.USER_ID)
   // 重置 路由
-  resetRouter();
-  router.push({ path: RouterPath.LOGIN });
-};
+  resetRouter()
+  router.push({ path: RouterPath.LOGIN })
+}
 const handleCommand = (command: string) => {
   if (command === RouterPath.LOGIN) {
-    login_Out();
+    login_Out()
   } else if (/http(s?):/.test(command)) {
-    window.open(command);
+    window.open(command)
   } else {
-    router.push({ path: command });
+    router.push({ path: command })
   }
-};
+}
 
 type switchStyleGlobalType = switchStyleGlobal | string | number | boolean;
 
 /** 全局样式 switch 改变事件 */
 const switchChange = (val: switchStyleGlobalType) => {
-  if (!htmlDom.value) return;
+  if (!htmlDom.value) return
   if (val === switchStyleGlobal.light) {
-    htmlDom.value.className = "";
+    htmlDom.value.className = ""
   } else if (val === switchStyleGlobal.dark) {
-    htmlDom.value.className = switchStyleGlobal.dark;
+    htmlDom.value.className = switchStyleGlobal.dark
   }
-};
+}
 </script>
 
 <script lang="ts">
 export default {
   name: "PersonalCom"
-};
+}
 </script>
 
 <style lang="scss" scoped>

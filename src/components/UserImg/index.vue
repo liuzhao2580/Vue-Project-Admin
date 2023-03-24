@@ -5,18 +5,18 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { useUserStore } from "@/store/user";
-const store = useUserStore();
+import { computed } from "vue"
+import { useUserStore } from "@/store/user"
+const store = useUserStore()
 const avatar = computed(() => {
-  return store.state.avatar;
-});
+  return store.state.avatar
+})
 </script>
 
 <script lang="ts">
 export default {
   name: "UserImg"
-};
+}
 </script>
 
 <style lang="scss" scoped>

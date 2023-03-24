@@ -3591,5 +3591,5 @@ const emojiData = [
       }
     ]
   }
-];
-export { emojiData };
+]
+export { emojiData }

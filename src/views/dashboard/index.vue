@@ -16,38 +16,38 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onMounted, ref, shallowRef, onBeforeUnmount } from "vue";
-import type { ECharts } from "echarts";
-import { dashboardEchartsApi } from "@/api/modules/dashboard";
-import EchartsCom from "@/components/EchartsCom/index.vue";
-import CardCom from "./components/CardCom/index.vue";
-import TodoList from "./components/TodoList/index.vue";
-import { ResultCodeEnum } from "@/typescript/shared/enum";
+import { nextTick, onMounted, ref, shallowRef, onBeforeUnmount } from "vue"
+import type { ECharts } from "echarts"
+import { dashboardEchartsApi } from "@/api/modules/dashboard"
+import EchartsCom from "@/components/EchartsCom/index.vue"
+import CardCom from "./components/CardCom/index.vue"
+import TodoList from "./components/TodoList/index.vue"
+import { ResultCodeEnum } from "@/typescript/shared/enum"
 import {
   AutoPlayBarEchartsUtils,
   clearEchartsInterval
-} from "@/utils/modules/echarts.utils";
+} from "@/utils/modules/echarts.utils"
 
-const echartsData = ref();
+const echartsData = ref()
 // 获取自动播放的 柱形图的 ref
 const echartRef = ref<{
   echartsInstances: ECharts;
-}>();
+}>()
 
-const autoPlayBarEchartsData = shallowRef();
+const autoPlayBarEchartsData = shallowRef()
 onMounted(() => {
-  init();
+  init()
   nextTick(() => {
     autoPlayBarEchartsData.value = AutoPlayBarEchartsUtils(
       echartRef.value?.echartsInstances as ECharts
-    );
-  });
-});
+    )
+  })
+})
 
 // 初始化
 const init = async () => {
   try {
-    const result = await dashboardEchartsApi();
+    const result = await dashboardEchartsApi()
     if (result.code === ResultCodeEnum.SUCCESS) {
       echartsData.value = {
         xAxis: {
@@ -64,23 +64,23 @@ const init = async () => {
             smooth: true
           }
         ]
-      };
+      }
     }
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
 
 onBeforeUnmount(() => {
-  clearEchartsInterval();
-});
+  clearEchartsInterval()
+})
 </script>
 
 <script lang="ts">
-import { RouterName } from "@/router/RouteConst";
+import { RouterName } from "@/router/RouteConst"
 export default {
   name: RouterName.DASHBOARD
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

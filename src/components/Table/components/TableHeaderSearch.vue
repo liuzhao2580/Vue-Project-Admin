@@ -37,10 +37,10 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
-import { SearchModelValue } from "../shared/model/serach-model-value";
-import { IColumnConfig } from "@/typescript/shared/interface/table-interface";
-import { ESearchType } from "@/typescript/shared/enum/table-enum";
+import { reactive } from "vue"
+import { SearchModelValue } from "../shared/model/serach-model-value"
+import { IColumnConfig } from "@/typescript/shared/interface/table-interface"
+import { ESearchType } from "@/typescript/shared/enum/table-enum"
 
 interface IProps {
   /** 表格的搜索配置 */
@@ -49,7 +49,7 @@ interface IProps {
   searchParamsValue: SearchModelValue;
 }
 
-defineProps<IProps>();
+defineProps<IProps>()
 
 interface IState {
   /** 输入框 */
@@ -64,13 +64,13 @@ const state = reactive<IState>({
   inputValue: "",
   dateValue: "",
   dateTimeValue: ""
-});
+})
 </script>
 
 <script lang="ts">
 export default {
   name: "TableHeaderSearch"
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

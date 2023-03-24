@@ -9,44 +9,44 @@
 </template>
 
 <script lang="ts" setup>
-import { RouteRecordRaw } from "vue-router";
-import { computed, onMounted, ref } from "vue";
-import { useUserStore } from "@/store/user";
+import { RouteRecordRaw } from "vue-router"
+import { computed, onMounted, ref } from "vue"
+import { useUserStore } from "@/store/user"
 
-const store = useUserStore();
+const store = useUserStore()
 
 /** 设置缓存路由 */
-const keepAliveRoutes = ref<string[]>([]);
+const keepAliveRoutes = ref<string[]>([])
 
 const sideBarList = computed((): RouteRecordRaw[] => {
-  return store.state.sideBarList;
-});
+  return store.state.sideBarList
+})
 
 onMounted(() => {
-  init();
-});
+  init()
+})
 
 /** 获取 路由中的 数据 判断meta中 keepAlive 是否为true */
 const init = () => {
-  const getKeepAlive: string[] = [];
+  const getKeepAlive: string[] = []
   function loopRoutes(listArr: RouteRecordRaw[]) {
     listArr.forEach(item => {
       if (item.meta && item.meta.keepAlive) {
-        getKeepAlive.push(item.name as string);
+        getKeepAlive.push(item.name as string)
       } else if (item.children) {
-        loopRoutes(item.children);
+        loopRoutes(item.children)
       }
-    });
+    })
   }
-  loopRoutes(sideBarList.value);
-  keepAliveRoutes.value = getKeepAlive;
-};
+  loopRoutes(sideBarList.value)
+  keepAliveRoutes.value = getKeepAlive
+}
 </script>
 
 <script lang="ts">
 export default {
   name: "AppMain"
-};
+}
 </script>
 
 <style lang="scss" scoped>

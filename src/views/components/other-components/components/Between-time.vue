@@ -89,14 +89,14 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
-import { BetweenTimeTypeEnum } from "../shared/enum/other-components.enum";
+import { reactive } from "vue"
+import { BetweenTimeTypeEnum } from "../shared/enum/other-components.enum"
 import {
   getBetweenDate,
   getBetweenMonth,
   getBetweenYear,
   getBetweenTime
-} from "../shared/utils/between-time";
+} from "../shared/utils/between-time"
 
 type BetweenTimeType = BetweenTimeTypeEnum | string | number | boolean;
 
@@ -132,40 +132,40 @@ const state = reactive<IState>({
   datePickerValue: "date",
   /** 时间选择器选中的数据 */
   selectedTimeData: []
-});
+})
 
 /** 单选框绑定值 发生变化 改变事件 */
 const radioChange = (value: BetweenTimeType) => {
-  state.radioValue = value;
-  state.selectedTimeData = [];
-};
+  state.radioValue = value
+  state.selectedTimeData = []
+}
 /** 时间选择器 开始时间选择器 */
 const startTimeChange = (value: string | null) => {
-  if (!value) state.endTime = "";
-};
+  if (!value) state.endTime = ""
+}
 /** 时间选择器 结束时间选择器 */
 const endTimeChange = (value: string | null) => {
-  if (value) state.selectedTimeData = getBetweenTime(state.startTime, value);
-};
+  if (value) state.selectedTimeData = getBetweenTime(state.startTime, value)
+}
 /** 日期选择器 改变事件 */
 const datePickerChange = (value: Date[], type: BetweenTimeType) => {
-  if (!value || !Array.isArray(value)) return;
+  if (!value || !Array.isArray(value)) return
   // 日期
   if (type === BetweenTimeTypeEnum.date)
-    state.selectedTimeData = getBetweenDate(value[0], value[1]);
+    state.selectedTimeData = getBetweenDate(value[0], value[1])
   // 月份
   else if (type === BetweenTimeTypeEnum.month)
-    state.selectedTimeData = getBetweenMonth(value[0], value[1]);
-};
+    state.selectedTimeData = getBetweenMonth(value[0], value[1])
+}
 /** 年份选择器 改变事件 开始年份 */
 const startYearChange = (value: Event) => {
-  if (!value) state.endYear = "";
-};
+  if (!value) state.endYear = ""
+}
 /** 年份选择器 改变事件 结束年份 */
 const endYearChange = (value: Event) => {
   if (value)
-    state.selectedTimeData = getBetweenYear(state.startYear, value.toString());
-};
+    state.selectedTimeData = getBetweenYear(state.startYear, value.toString())
+}
 </script>
 
 <style lang="scss" scoped>

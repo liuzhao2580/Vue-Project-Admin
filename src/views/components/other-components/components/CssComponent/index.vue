@@ -5,14 +5,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-import WaterRipple from "./components/WaterRipple.vue";
+import WaterRipple from "./components/WaterRipple.vue"
 </script>
 
 <script lang="ts">
 /** Css的样式 */
 export default {
   name: "CssComponent"
-};
+}
 </script>
 
 <style lang="scss" scoped>

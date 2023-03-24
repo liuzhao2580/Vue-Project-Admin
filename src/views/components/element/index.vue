@@ -14,15 +14,15 @@
 </template>
 
 <script lang="ts" setup>
-import tableCheckout from "./components/table-checkout.vue";
-import tableHeader from "./components/table-header.vue";
+import tableCheckout from "./components/table-checkout.vue"
+import tableHeader from "./components/table-header.vue"
 </script>
 
 <script lang="ts">
-import { RouterName } from "@/router/RouteConst";
+import { RouterName } from "@/router/RouteConst"
 export default {
   name: RouterName.ELEMENT
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

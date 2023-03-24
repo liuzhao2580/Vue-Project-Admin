@@ -1,4 +1,4 @@
-import { NodeConfig } from "@antv/g6";
+import { NodeConfig } from "@antv/g6"
 
 /** 自定义的形状 */
 export enum CustomTypeEnum {

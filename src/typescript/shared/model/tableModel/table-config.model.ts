@@ -3,7 +3,7 @@ import {
   IColumnConfig,
   IOperation,
   ITableConfigModel
-} from '../../interface/table-interface'
+} from "../../interface/table-interface"
 
 /** 表格配置 */
 export class TableConfigModel implements ITableConfigModel {

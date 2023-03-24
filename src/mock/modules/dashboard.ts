@@ -1,6 +1,6 @@
-import { ResultCodeEnum, ResultTypeEnum } from "@/typescript/shared/enum";
-import { IMockResponse } from "../shared";
-import Mock from "mockjs";
+import { ResultCodeEnum, ResultTypeEnum } from "@/typescript/shared/enum"
+import { IMockResponse } from "../shared"
+import Mock from "mockjs"
 
 const dashboardModules: IMockResponse<any>[] = [
   {
@@ -51,9 +51,9 @@ const dashboardModules: IMockResponse<any>[] = [
           ]
         }),
         msg: ""
-      };
+      }
     }
   }
-];
+]
 
-export default dashboardModules;
+export default dashboardModules

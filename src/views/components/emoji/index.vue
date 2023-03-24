@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts">
-import { RouterName } from "@/router/RouteConst";
+import { RouterName } from "@/router/RouteConst"
 export default {
   name: RouterName.EMOJI_INPUT
-};
+}
 </script>
 
 <style type="text/css">

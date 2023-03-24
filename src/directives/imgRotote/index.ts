@@ -2,11 +2,11 @@
 export default {
   beforeMount(el: HTMLElement) {
     el.onmouseover = () => {
-      el.style.transform = "rotate(-360deg)";
-      el.style.transition = "all 0.5s";
-    };
+      el.style.transform = "rotate(-360deg)"
+      el.style.transition = "all 0.5s"
+    }
     el.onmouseleave = () => {
-      el.style.transform = "rotate(0)";
-    };
+      el.style.transform = "rotate(0)"
+    }
   }
-};
+}

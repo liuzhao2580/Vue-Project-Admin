@@ -15,26 +15,26 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, shallowRef } from "vue";
-import BpmnUtils from "./package";
+import { onMounted, shallowRef } from "vue"
+import BpmnUtils from "./package"
 // 以下为bpmn工作流绘图工具的样式
-import "bpmn-js/dist/assets/diagram-js.css";
-import "bpmn-js/dist/assets/bpmn-js.css";
-import "bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
-import "bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css";
+import "bpmn-js/dist/assets/diagram-js.css"
+import "bpmn-js/dist/assets/bpmn-js.css"
+import "bpmn-js/dist/assets/bpmn-font/css/bpmn.css"
+import "bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css"
 
-const bpmnModeler = shallowRef();
+const bpmnModeler = shallowRef()
 onMounted(() => {
-  bpmnModeler.value = new BpmnUtils("js-canvas").bpmnModeler;
-});
+  bpmnModeler.value = new BpmnUtils("js-canvas").bpmnModeler
+})
 </script>
 
 <script lang="ts">
 /** 使用 bpmn 开发的流程图 */
-import { RouterName } from "@/router/RouteConst";
+import { RouterName } from "@/router/RouteConst"
 export default {
   name: RouterName.BPMN
-};
+}
 </script>
 
 <style scoped lang="scss">

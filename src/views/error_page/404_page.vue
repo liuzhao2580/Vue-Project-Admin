@@ -36,21 +36,21 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref } from "vue"
+import { useRouter } from "vue-router"
 
-const router = useRouter();
-const message = ref<string>("网站管理员说你不能进入这个页面…");
+const router = useRouter()
+const message = ref<string>("网站管理员说你不能进入这个页面…")
 const backBtn = () => {
-  router.go(-1);
-};
+  router.go(-1)
+}
 </script>
 
 <script lang="ts">
-import { RouterName } from "@/router/RouteConst";
+import { RouterName } from "@/router/RouteConst"
 export default {
   name: RouterName.ERROR_PAGE_404
-};
+}
 </script>
 
 <style lang="scss" scoped>

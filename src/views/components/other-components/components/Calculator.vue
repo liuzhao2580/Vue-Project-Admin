@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed, ref } from "vue"
 const CalculatorData = ref([
   {
     name: "早餐",
@@ -41,7 +41,7 @@ const CalculatorData = ref([
     name: "晚餐",
     value: ""
   }
-]);
+])
 
 const nameDate = ref([
   {
@@ -52,40 +52,40 @@ const nameDate = ref([
     name: "名",
     value: ""
   }
-]);
+])
 
 const total = computed(() => {
-  let getTotal = 0;
+  let getTotal = 0
   CalculatorData.value.forEach(item => {
-    getTotal += Number(item.value);
-  });
-  return getTotal;
-});
+    getTotal += Number(item.value)
+  })
+  return getTotal
+})
 
 const fullName = computed({
   get() {
-    let getFullName = "";
+    let getFullName = ""
     nameDate.value.forEach(item => {
-      getFullName += item.value;
-    });
-    return getFullName;
+      getFullName += item.value
+    })
+    return getFullName
   },
   set() {
     nameDate.value.forEach(item => {
-      item.value = "";
-    });
+      item.value = ""
+    })
   }
-});
+})
 
 const clear = () => {
-  fullName.value = "";
-};
+  fullName.value = ""
+}
 </script>
 
 <script lang="ts">
 export default {
   name: "CalculatorCom"
-};
+}
 </script>
 
 <style lang="scss" scoped>

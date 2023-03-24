@@ -1,19 +1,19 @@
-import { EnumFieldToTransform } from "@/utils";
+import { EnumFieldToTransform } from "@/utils"
 import G6, {
   Graph,
   GraphData,
   IGroup,
   ModelConfig,
   NodeConfig
-} from "@antv/g6";
-import G6RegisterEdge from "./G6RegisterEdge";
+} from "@antv/g6"
+import G6RegisterEdge from "./G6RegisterEdge"
 import {
   CustomTypeEnum,
   INodesData,
   IPanel,
   NodeStatusColorEnum,
   NodeStatusEnum
-} from "./type";
+} from "./type"
 
 const nodesData: INodesData[] = [
   {
@@ -151,28 +151,28 @@ const nodesData: INodesData[] = [
       label: "归档"
     }
   }
-];
+]
 
 // 每个节点的高度
-const nodeHeight = 150;
+const nodeHeight = 150
 // 每个节点的宽度
-const nodeWidth = 150;
+const nodeWidth = 150
 /** 自定义圆的属性 */
 /** 圆的半径 */
-const customCircleRadius = 50;
+const customCircleRadius = 50
 /** 圆的半径的一半 */
-const customCircleHalf = customCircleRadius / 2;
+const customCircleHalf = customCircleRadius / 2
 /** 圆的x轴 */
-const customCircleX = customCircleHalf;
+const customCircleX = customCircleHalf
 /** 圆的Y轴 */
-const customCircleY = customCircleHalf;
+const customCircleY = customCircleHalf
 
-G6RegisterEdge(customCircleRadius);
+G6RegisterEdge(customCircleRadius)
 
 function loopNodes(loopList: INodesData[]): NodeConfig[] {
-  let loopX = 1;
+  let loopX = 1
   /** 一行有多少个数据 */
-  const lineNumber = 6;
+  const lineNumber = 6
   return loopList.map((itemLabel, index) => {
     const nodesMap: INodesData = {
       label: itemLabel.panels.label,
@@ -180,25 +180,25 @@ function loopNodes(loopList: INodesData[]): NodeConfig[] {
       y: 0,
       size: 50,
       ...itemLabel
-    };
-    if (index % lineNumber > 0) {
-      loopX++;
-    } else {
-      loopX = 1;
     }
-    const getFloor = Math.floor(index / lineNumber);
+    if (index % lineNumber > 0) {
+      loopX++
+    } else {
+      loopX = 1
+    }
+    const getFloor = Math.floor(index / lineNumber)
 
     // 说明是偶数,顺序是从左往右
     if (getFloor % 2 === 0) {
-      nodesMap.x = nodeWidth * loopX;
+      nodesMap.x = nodeWidth * loopX
     }
     // 说明是奇数, 顺序是从右往左
     else {
-      nodesMap.x = nodeWidth * (lineNumber - loopX + 1);
+      nodesMap.x = nodeWidth * (lineNumber - loopX + 1)
     }
-    nodesMap.y = nodeHeight * (getFloor + 1);
-    return nodesMap;
-  });
+    nodesMap.y = nodeHeight * (getFloor + 1)
+    return nodesMap
+  })
 }
 const data: GraphData = {
   // 点集
@@ -225,7 +225,7 @@ const data: GraphData = {
       style: {}
     }
   ]
-};
+}
 
 // 自定义 node 元素 圆形
 G6.registerNode(CustomTypeEnum.circleType, {
@@ -234,9 +234,9 @@ G6.registerNode(CustomTypeEnum.circleType, {
       NodeStatusEnum,
       NodeStatusColorEnum,
       cfg?.status as string
-    );
-    const setGroup = group as IGroup;
-    const panels = cfg?.panels as IPanel;
+    )
+    const setGroup = group as IGroup
+    const panels = cfg?.panels as IPanel
     const shape = setGroup.addShape("circle", {
       attrs: {
         x: customCircleX,
@@ -245,7 +245,7 @@ G6.registerNode(CustomTypeEnum.circleType, {
         fill,
         cursor: "pointer"
       }
-    });
+    })
 
     // label text
     setGroup.addShape("dom", {
@@ -263,18 +263,18 @@ G6.registerNode(CustomTypeEnum.circleType, {
           </div>
         `
       }
-    });
-    return shape;
+    })
+    return shape
   }
-});
+})
 
 // 自定义 node 元素 菱形
 G6.registerNode(CustomTypeEnum.diamondType, {
   draw: (cfg?: ModelConfig, group?: IGroup) => {
-    const setGroup = group as IGroup;
-    const panels = cfg?.panels as IPanel;
-    const polygonWidth = customCircleHalf;
-    const polygonHeigth = customCircleHalf * 3;
+    const setGroup = group as IGroup
+    const panels = cfg?.panels as IPanel
+    const polygonWidth = customCircleHalf
+    const polygonHeigth = customCircleHalf * 3
     // const { panels } = cfg
     const shape = setGroup.addShape("polygon", {
       attrs: {
@@ -286,7 +286,7 @@ G6.registerNode(CustomTypeEnum.diamondType, {
         ],
         fill: "#aae2ff"
       }
-    });
+    })
     // label text
     setGroup.addShape("dom", {
       attrs: {
@@ -301,33 +301,33 @@ G6.registerNode(CustomTypeEnum.diamondType, {
           </div>
         `
       }
-    });
-    return shape;
+    })
+    return shape
   }
-});
+})
 
 export default class G6Utils {
-  #container: HTMLDivElement;
+  #container: HTMLDivElement
   /** 实例 */
-  #graph: Graph;
+  #graph: Graph
   get graph(): Graph {
-    return this.#graph;
+    return this.#graph
   }
   set graph(_: Graph) {
-    this.#graph = _;
+    this.#graph = _
   }
   constructor() {
-    this.#init();
+    this.#init()
   }
 
   #init() {
-    this.#container = document.getElementById("container") as HTMLDivElement;
-    const width = this.#container.scrollWidth;
-    const height = (this.#container.scrollHeight || 500) - 150;
+    this.#container = document.getElementById("container") as HTMLDivElement
+    const width = this.#container.scrollWidth
+    const height = (this.#container.scrollHeight || 500) - 150
     const minimap = new G6.Minimap({
       size: [150, 150]
-    });
-    const grid = new G6.Grid();
+    })
+    const grid = new G6.Grid()
     this.graph = new G6.Graph({
       container: "container",
       width,
@@ -344,41 +344,41 @@ export default class G6Utils {
         default: ["drag-canvas", "zoom-canvas"]
       },
       plugins: [grid, minimap]
-    });
-    this.graph.data(data);
-    this.graph.render();
-    this.graph.fitCenter();
+    })
+    this.graph.data(data)
+    this.graph.render()
+    this.graph.fitCenter()
 
     this.graph.on("node:mouseenter", (e: any) => {
-      this.graph.setItemState(e.item, "active", true);
-    });
+      this.graph.setItemState(e.item, "active", true)
+    })
     this.graph.on("node:mouseleave", (e: any) => {
-      this.graph.setItemState(e.item, "active", false);
-    });
+      this.graph.setItemState(e.item, "active", false)
+    })
     this.graph.on("edge:mouseenter", (e: any) => {
-      this.graph.setItemState(e.item, "active", true);
-    });
+      this.graph.setItemState(e.item, "active", true)
+    })
     this.graph.on("edge:mouseleave", (e: any) => {
-      this.graph.setItemState(e.item, "active", false);
-    });
+      this.graph.setItemState(e.item, "active", false)
+    })
   }
   /** 销毁 */
   graphDestory() {
-    this.graph.destroy();
+    this.graph.destroy()
   }
   /** 跟随屏幕缩放 */
   graphResize() {
-    if (!this.graph || this.graph.get("destroyed")) return;
+    if (!this.graph || this.graph.get("destroyed")) return
     if (
       !this.#container ||
       !this.#container.scrollWidth ||
       !this.#container.scrollHeight
     )
-      return;
+      return
     this.graph.changeSize(
       this.#container.scrollWidth,
       this.#container.scrollHeight - 160
-    );
-    this.graph.fitCenter();
+    )
+    this.graph.fitCenter()
   }
 }

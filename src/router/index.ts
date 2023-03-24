@@ -1,13 +1,13 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Layout from "@/layout/index.vue";
-import PageContent from "@/layout/components/AppMain.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
+import Layout from "@/layout/index.vue"
+import PageContent from "@/layout/components/AppMain.vue"
 // 使用 modules 引入嵌套过多的路由
-import error_page from "./modules/error";
-import components from "./modules/components";
-import { RouterName, RouterPath } from "./RouteConst";
-import { UserRolesEnum } from "@/typescript/shared/enum/user-enum/user-roles.enum";
-import { IMetaRouter } from "@/typescript/shared/interface/router-interface";
-import setting from "@/setting";
+import error_page from "./modules/error"
+import components from "./modules/components"
+import { RouterName, RouterPath } from "./RouteConst"
+import { UserRolesEnum } from "@/typescript/shared/enum/user-enum/user-roles.enum"
+import { IMetaRouter } from "@/typescript/shared/interface/router-interface"
+import setting from "@/setting"
 
 // 公共的页面
 export const constantRoutes: RouteRecordRaw[] = [
@@ -31,7 +31,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         /* webpackChunkName: "baseComponet" */ "@/views/error_page/404_page.vue"
       )
   }
-];
+]
 // 需要权限的页面
 /**
  * @param {roles} 数组 用来存放路由的权限信息
@@ -168,29 +168,29 @@ export const asyncRoutes: RouteRecordRaw[] = [
       }
     ]
   }
-];
+]
 const router = createRouter({
   history: createWebHistory(setting.basePrefix),
   routes: constantRoutes
-});
+})
 
 /** 重置路由 只有登录和404页面 */
 export const resetRouter = () => {
-  const newRouter = asyncRoutes;
+  const newRouter = asyncRoutes
   newRouter.forEach(route => {
-    if (route.name) router.removeRoute(route.name);
-  });
-};
+    if (route.name) router.removeRoute(route.name)
+  })
+}
 
 /** 添加路由作为新的路由 */
 export const insertRouter = (routes: RouteRecordRaw) => {
-  resetRouter();
-  router.addRoute(routes);
-};
+  resetRouter()
+  router.addRoute(routes)
+}
 
 // https://router.vuejs.org/zh/guide/advanced/meta.html#typescript
 declare module "vue-router" {
   interface RouteMeta extends IMetaRouter {}
 }
 
-export default router;
+export default router

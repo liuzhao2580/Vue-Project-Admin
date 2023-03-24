@@ -1,6 +1,6 @@
-import { RouteRecordRaw } from "vue-router";
-import PageContent from "@/layout/components/AppMain.vue";
-import { RouterName, RouterPath } from "../RouteConst";
+import { RouteRecordRaw } from "vue-router"
+import PageContent from "@/layout/components/AppMain.vue"
+import { RouterName, RouterPath } from "../RouteConst"
 const error_page: RouteRecordRaw = {
   path: RouterPath.ERROR_PAGE,
   meta: { title: "Error", icon: "error" },
@@ -36,5 +36,5 @@ const error_page: RouteRecordRaw = {
       meta: { title: "404", icon: "404" }
     }
   ]
-};
-export default error_page;
+}
+export default error_page

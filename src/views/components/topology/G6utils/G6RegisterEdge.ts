@@ -1,6 +1,6 @@
 
-import G6, { IGroup, ModelConfig } from "@antv/g6";
-import { CustomTypeEnum } from "./type";
+import G6, { IGroup, ModelConfig } from "@antv/g6"
+import { CustomTypeEnum } from "./type"
 /** 自定义线条的方法 */
 export default (customCircleRadius: number)=> {
   /** 计算是第几次使用同一个线条 */
@@ -10,17 +10,17 @@ export default (customCircleRadius: number)=> {
     CustomTypeEnum.PAHT_LINE,
     {
       draw(cfg?: ModelConfig, group?: IGroup) {
-        console.log(cfg);
-        const setGroup = group as IGroup;
+        console.log(cfg)
+        const setGroup = group as IGroup
         // const panels = cfg?.panels as IPanel;
         const startPoint = cfg?.startPoint as {
           x: number,
           y: number
-        };
+        }
         const endPoint = cfg?.endPoint as {
           x: number,
           y: number
-        };
+        }
         return setGroup.addShape("path", {
           attrs: {
             stroke: "red",
@@ -32,9 +32,9 @@ export default (customCircleRadius: number)=> {
             ]
           },
           name: "path-shape"
-        });
+        })
       }
     },
     "line"
-  );
-};
+  )
+}

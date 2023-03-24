@@ -235,4 +235,4 @@ export default {
   "Tasklist Configuration": "Tasklist配置",
   Startable: "启动",
   "Specify more than one group as a comma separated list.": "指定多个组作为逗号分隔的列表。"
-};
+}

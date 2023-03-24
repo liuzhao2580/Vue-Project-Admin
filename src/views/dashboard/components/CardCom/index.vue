@@ -25,7 +25,7 @@
 <script lang="ts">
 export default {
   name: "CardCom"
-};
+}
 </script>
 
 <style lang="scss" scoped>

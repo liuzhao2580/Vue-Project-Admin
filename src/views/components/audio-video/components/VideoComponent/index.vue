@@ -8,12 +8,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
-import XGplayer from "xgplayer";
+import { onMounted } from "vue"
+import XGplayer from "xgplayer"
 
 onMounted(() => {
-  init();
-});
+  init()
+})
 
 const init = () => {
   let player = new XGplayer({
@@ -55,7 +55,7 @@ const init = () => {
       }
     },
     whitelist: [""]
-  });
+  })
   player.emit("resourceReady", [
     {
       name: "超清",
@@ -69,14 +69,14 @@ const init = () => {
       name: "标清",
       url: "//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-360p.mp4"
     }
-  ]);
-};
+  ])
+}
 </script>
 
 <script lang="ts">
 export default {
   name: "VideoComponent"
-};
+}
 </script>
 
 <style scoped lang="scss">
