@@ -68,6 +68,7 @@ export const useUserStore = defineStore("user", () => {
     state.nickName = userInfo.nickName as string
     state.token = userInfo.token as string
     state.roleName = userInfo.roleName
+    state.roleId = userInfo.roleId
   }
 
   /** 用户登陆 获取用户信息 路由信息 */
@@ -102,7 +103,6 @@ export const useUserStore = defineStore("user", () => {
         resetRouter()
         return
       } else if (result.code === ResultCodeEnum.SUCCESS && result.data) {
-        console.log(result.data)
         setUserInfo(result.data)
         // 通过递归获取用户的路由权限，侧边栏数据
         const getList = creatRouter(asyncRoutes[0], result.data.roleId!)
