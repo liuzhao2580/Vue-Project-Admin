@@ -19,11 +19,11 @@
 import { useUserStore } from "@/store/user"
 import { computed, ref } from "vue"
 const userStore = useUserStore()
-const nickname = computed(() => {
-  return userStore.state.nickname
+const nickName = computed(() => {
+  return userStore.state.nickName
 })
 const form_account = ref({
-  name: nickname,
+  name: nickName,
   Email: "liuzhao2580"
 })
 </script>

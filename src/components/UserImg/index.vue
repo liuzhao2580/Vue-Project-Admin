@@ -36,7 +36,7 @@ export default {
     border-radius: 50%;
     background-size: cover;
     background-position: 50%;
-    transition: all 0.6s;
+    transition: all 1s;
   }
 }
 </style>

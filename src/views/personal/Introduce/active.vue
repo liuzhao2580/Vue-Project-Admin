@@ -3,12 +3,12 @@
     <div
       class="active-content"
       v-for="item in content_Item"
-      :key="item.nickname"
+      :key="item.nickName"
     >
       <div class="portrait">
         <img :src="item.src" />
         <div class="user-info">
-          <p class="nickname">{{ item.nickname }}</p>
+          <p class="nickName">{{ item.nickName }}</p>
           <p class="type-time">{{ item.type }} - {{ item.time }}</p>
         </div>
       </div>
@@ -49,7 +49,7 @@ import { handleViteImages } from "@/utils"
 const content_Item = [
   {
     src: handleViteImages("@/assets/images/jinganglang.png"),
-    nickname: "大话西游",
+    nickName: "大话西游",
     type: "普通话",
     time: "1994年",
     content:
@@ -57,14 +57,14 @@ const content_Item = [
   },
   {
     src: handleViteImages("@/assets/images/zhizhuxia.png"),
-    nickname: "肖申克的救赎",
+    nickName: "肖申克的救赎",
     type: "英语",
     time: "1994年9月10日",
     content: "生活可以归结为一种简单的选择：不是忙于生存，就是赶着去死"
   },
   {
     src: handleViteImages("@/assets/images/sishi.png"),
-    nickname: "死侍-我爱我家",
+    nickName: "死侍-我爱我家",
     type: "英语",
     time: "2018年",
     Carousel: true,
@@ -98,7 +98,7 @@ export default {
       display: flex;
       .user-info {
         padding-top: 10px;
-        .nickname {
+        .nickName {
           margin-bottom: 5px;
           font-weight: 600;
         }

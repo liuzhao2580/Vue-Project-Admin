@@ -7,10 +7,22 @@
     </template>
     <div class="img-box">
       <UserImg />
-      <p>{{ nickname }}</p>
+      <p>
+        <span class="info-title">用户名</span>
+        <span class="info-data">
+          {{ userInfo.nickName }}
+        </span>
+      </p>
+      <p>
+        <span class="info-title">角色</span>
+        <span class="info-data">
+          {{ userInfo.roleName }}
+        </span>
+      </p>
     </div>
     <div class="experience">
       <div class="Education">
+        <el-divider></el-divider>
         <i class="el-icon-star-on"></i>
         爱好
         <el-divider></el-divider>
@@ -41,8 +53,8 @@ const tags = ref([
 
 const userStore = useUserStore()
 
-const nickname = computed(() => {
-  return userStore.state.nickname
+const userInfo = computed(() => {
+  return userStore.state
 })
 </script>
 

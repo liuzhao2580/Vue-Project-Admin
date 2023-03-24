@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from "vue-router"
+import { UserRolesEnum } from "../shared/enum/user-enum/user-roles.enum"
 import { ITagsView } from "../shared/interface"
 
 /** 系统 app 的 store */
@@ -16,11 +17,19 @@ export class StoreUserModel {
   /** 用户头像 */
   avatar = ""
   /** 昵称 */
-  nickname = ""
+  nickName = ""
   /** token */
   token = ""
   /** 判断是否刷新页面 false 否 true 是 */
   Need_refresh = true
+  /** 用户 id */
+  id?: string | number
+  /** 用户的权限 */
+  roleId?: UserRolesEnum
+  /** 当前权限的中文说明 */
+  roleName?: string
+  /** 用户名 */
+  userName: string
 }
 
 /** tagsView */

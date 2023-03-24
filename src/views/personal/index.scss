@@ -3,13 +3,22 @@
   :deep(.personal-info) {
     margin-bottom: 20px;
     .img-box {
+      margin: 10px 0 20px;
       text-align: center;
       p {
         margin-top: 10px;
+        display: grid;
+        grid-template-columns: 60px auto;
+        align-items: center;
+        .info-title {
+          font-size: 12px;
+        }
+        .info-data {
+          font-weight: 700;
+        }
       }
     }
     .experience {
-      padding: 0 10px;
       .el-divider {
         margin: 10px 0;
       }

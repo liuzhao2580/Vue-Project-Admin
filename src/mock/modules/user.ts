@@ -60,7 +60,8 @@ const userModules: IMockResponse<any>[] = [
             roleId: is_True.roleId,
             nickName: is_True.nickName,
             token: is_True.token,
-            avatar: is_True.avatar
+            avatar: is_True.avatar,
+            roleName: is_True.roleName
           },
           msg: "成功"
         }
@@ -92,7 +93,8 @@ const userModules: IMockResponse<any>[] = [
             roleId: is_True.roleId,
             nickName: is_True.nickName,
             token: is_True.token,
-            avatar: is_True.avatar
+            avatar: is_True.avatar,
+            roleName: is_True.roleName
           },
           msg: "成功"
         }
