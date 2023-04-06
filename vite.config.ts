@@ -1,25 +1,25 @@
-import { defineConfig, loadEnv } from "vite";
-import vue from "@vitejs/plugin-vue";
-import viteCompression from "vite-plugin-compression";
-import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
-import { resolve } from "path";
+import { defineConfig, loadEnv } from "vite"
+import vue from "@vitejs/plugin-vue"
+import viteCompression from "vite-plugin-compression"
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
+import { resolve } from "path"
 
 /** 生产环境需要的配置 plugins */
 const isBuildPlugins = (command: "build" | "serve") => {
-  const flag = command === "build";
+  const flag = command === "build"
   if (flag)
     return [
       viteCompression({
         ext: ".gz",
         deleteOriginFile: false
       })
-    ];
-  else return [];
-};
+    ]
+  else return []
+}
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd());
+  const env = loadEnv(mode, process.cwd())
   return {
     server: {
       host: "0.0.0.0",
@@ -57,5 +57,5 @@ export default defineConfig(({ command, mode }) => {
       }),
       ...isBuildPlugins(command)
     ]
-  };
-});
+  }
+})
