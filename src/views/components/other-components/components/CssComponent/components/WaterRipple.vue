@@ -9,17 +9,24 @@
         <p class="cricle-bg"></p>
       </div>
     </div>
+    <p>
+      <span>爷爷组件注入的响应式 inject </span>
+      <span>{{ injectValue }}</span>
+    </p>
   </div>
 </template>
 <script lang="ts" setup>
 /** 水波纹 */
-import { ref } from "vue"
+import { ref, inject } from "vue"
+
 /** 判断是否已经点击了 */
 const clickFlag = ref<boolean>(false)
 /** 点击事件 */
 const cricleClick = () => {
   clickFlag.value = !clickFlag.value
 }
+
+const injectValue = inject("numberValue")
 </script>
 
 <script lang="ts">

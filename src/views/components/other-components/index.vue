@@ -7,6 +7,9 @@
       </el-col>
       <!-- 点击出现水波纹效果 -->
       <el-col :xs="24" :sm="12">
+        <span style="cursor: pointer" @click="() => num++"
+          >爷爷组件的值{{ num }} provide修改</span
+        >
         <CssComponent />
       </el-col>
     </el-row>
@@ -28,11 +31,19 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, provide, ref } from "vue"
 import BetweenTime from "./components/Between-time.vue"
 import CssComponent from "./components/CssComponent/index.vue"
 import Calculator from "./components/Calculator.vue"
 import LoopListMouseScroll from "./components/LoopList-MouseScroll/index.vue"
 import LoopList from "./components/LoopList/index.vue"
+
+const num = ref(0)
+
+provide(
+  "numberValue",
+  computed(() => num.value)
+)
 </script>
 
 <script lang="ts">
