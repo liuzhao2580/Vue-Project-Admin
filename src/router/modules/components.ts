@@ -90,6 +90,15 @@ const components: RouteRecordRaw = {
         )
     },
     {
+      path: RouterPath.FILE_HTML,
+      meta: { title: "文件转化", icon: "EMOJI" },
+      name: RouterName.FILE_HTML,
+      component: () =>
+        import(
+          /* webpackChunkName: "componentsPage" */ "@/views/components/file-html/index.vue"
+        )
+    },
+    {
       path: RouterPath.OTHER_COMPONENTS,
       meta: { title: "其他组件", icon: "other-components" },
       name: RouterName.OTHER_COMPONENTS,

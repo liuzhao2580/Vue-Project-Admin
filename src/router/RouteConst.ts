@@ -44,6 +44,8 @@ export const RouterName = {
   AUDIO_VIDEO: "AudioVideoPage",
   /** EMOJI */
   EMOJI_INPUT: "EMojiInputPage",
+  /** 转html预览 */
+  FILE_HTML: "FileHtmlPage",
   /** 其他组件 */
   OTHER_COMPONENTS: "OtherComponents",
   /** 错误页面 */
@@ -102,6 +104,8 @@ export const RouterPath = {
   AUDIO_VIDEO: "/components/audio-video",
   /** EMOJI */
   EMOJI_INPUT: "/components/EMoji-input",
+  /** 转html预览 */
+  FILE_HTML: "/components/file-html",
   /** 其他组件 */
   OTHER_COMPONENTS: "/components/other-components",
   /** 错误页面 */
