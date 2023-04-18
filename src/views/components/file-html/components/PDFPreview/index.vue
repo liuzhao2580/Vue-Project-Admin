@@ -49,10 +49,6 @@ const tableData = ref<ITable[]>([
     name: "线上-资源",
     sources:
       "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf"
-  },
-  {
-    name: "Tom",
-    sources: ""
   }
 ])
 
