@@ -11,30 +11,19 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <el-dialog
-      v-model="dialogVisible"
-      :close-on-click-modal="false"
-      width="80%"
-      title="预览"
-    >
+    <Dialog>
       <PDFIframe :url="url" />
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button type="primary" @click="dialogVisible = false">
-            关闭
-          </el-button>
-        </span>
-      </template>
-    </el-dialog>
+    </Dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { provide, ref } from "vue"
 // @ts-expect-error
 import staticPdf from "./demo.pdf"
 import PDFIframe from "./PDFIframe.vue"
+import Dialog from "../Dialog/index.vue"
+
 interface ITable {
   name: string
   sources: any
@@ -60,6 +49,8 @@ const preview = async ({ row }: { row: ITable }) => {
   url.value = sources
   dialogVisible.value = true
 }
+
+provide("dialogVisible", dialogVisible)
 </script>
 
 <script lang="ts">

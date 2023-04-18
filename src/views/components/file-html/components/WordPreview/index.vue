@@ -1,10 +1,8 @@
 <template>
-  WordPreview
+  <h2>WordPreview</h2>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <script lang="ts">
 export default {
@@ -12,6 +10,4 @@ export default {
 }
 </script>
 
-
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

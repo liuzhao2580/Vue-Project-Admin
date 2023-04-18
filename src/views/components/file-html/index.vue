@@ -3,14 +3,12 @@
   <div>
     <WordPreview />
     <PDFPreview />
-
   </div>
 </template>
 
 <script setup lang="ts">
 import WordPreview from "./components/WordPreview/index.vue"
 import PDFPreview from "./components/PDFPreview/index.vue"
-
 </script>
 
 <script lang="ts">
