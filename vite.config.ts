@@ -41,6 +41,9 @@ export default defineConfig(({ command, mode }) => {
         "@": resolve(__dirname, "src")
       }
     },
+    assetsInclude: [
+      "./src/views/components/file-html/components/WordPreview/demo.docx"
+    ],
     css: {
       preprocessorOptions: {
         scss: {
