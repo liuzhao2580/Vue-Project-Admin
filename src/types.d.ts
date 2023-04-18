@@ -1,3 +1,3 @@
 interface Window {
-  DDLogin(object: { id; goto; style; width; height }): void;
+  DDLogin(object: { id; goto; style; width; height }): void
 }
