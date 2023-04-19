@@ -42,7 +42,8 @@ export default defineConfig(({ command, mode }) => {
       }
     },
     assetsInclude: [
-      "./src/views/components/file-html/components/WordPreview/demo.docx"
+      "./src/views/components/file-html/static/demo.docx",
+      "./src/views/components/file-html/static/demo.xlsx"
     ],
     css: {
       preprocessorOptions: {
