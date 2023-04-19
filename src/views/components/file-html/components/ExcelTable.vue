@@ -2,7 +2,7 @@
   <el-table
     :data="tableData"
     stripe
-    style="width: 100%;height: 100%;"
+    style="width: 100%; height: 100%"
     :max-height="maxHeight"
   >
     <el-table-column
@@ -22,11 +22,13 @@ interface IProp {
   dialogVisible: boolean
 }
 const props = defineProps<IProp>()
-const maxHeight = ref("200px")
+const maxHeight = ref(0)
 const getBody = shallowRef<HTMLBodyElement | null>()
 onMounted(() => {
   getBody.value = document.querySelector("body") as HTMLBodyElement
-  maxHeight.value = `${(getBody.value?.offsetHeight as number) - 150}px`
+  nextTick(() => {
+    maxHeight.value = (getBody.value?.offsetHeight as number) - 150
+  })
 })
 
 // 获取表格的表头
@@ -38,9 +40,7 @@ watch(
   flag => {
     if (flag) {
       // 通过当前body的高度,减去header和footer的高度, 从而动态设置 table的高度
-      nextTick(()=> {
-        maxHeight.value = `${(getBody.value?.offsetHeight as number) - 150}px`
-      })
+      maxHeight.value = (getBody.value?.offsetHeight as number) - 150
     }
   }
 )
