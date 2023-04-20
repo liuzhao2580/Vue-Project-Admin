@@ -46,6 +46,8 @@ export const RouterName = {
   EMOJI_INPUT: "EMojiInputPage",
   /** 转html预览 */
   FILE_HTML: "FileHtmlPage",
+  /** 字母索引 */
+  WORD_INDEX_SEARCH: "WordIndexSearchPage",
   /** 其他组件 */
   OTHER_COMPONENTS: "OtherComponents",
   /** 错误页面 */
@@ -106,6 +108,8 @@ export const RouterPath = {
   EMOJI_INPUT: "/components/EMoji-input",
   /** 转html预览 */
   FILE_HTML: "/components/file-html",
+  /** 字母索引 */
+  WORD_INDEX_SEARCH: "/components/word-index-search",
   /** 其他组件 */
   OTHER_COMPONENTS: "/components/other-components",
   /** 错误页面 */

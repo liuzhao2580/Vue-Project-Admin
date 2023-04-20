@@ -1,3 +1,4 @@
+import py from "pinyin"
 /** 深拷贝 */
 export const deepClone = <T extends object>(obj: T): T => {
   const result: any =
@@ -79,4 +80,10 @@ export const handleViteImages = (imgPath: string) => {
   } catch (error) {
     console.warn(error)
   }
+}
+
+/** 获取汉字首字母 */
+export const getFirstWord = (word: string)=> {
+  const getFirst = py(word)[0]
+  return getFirst[0][0].toUpperCase()
 }

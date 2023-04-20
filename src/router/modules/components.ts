@@ -99,6 +99,15 @@ const components: RouteRecordRaw = {
         )
     },
     {
+      path: RouterPath.WORD_INDEX_SEARCH,
+      meta: { title: "字母索引", icon: "iconfont icon-wenjian" },
+      name: RouterName.WORD_INDEX_SEARCH,
+      component: () =>
+        import(
+          /* webpackChunkName: "componentsPage" */ "@/views/components/word-index-search/index.vue"
+        )
+    },
+    {
       path: RouterPath.OTHER_COMPONENTS,
       meta: { title: "其他组件", icon: "other-components" },
       name: RouterName.OTHER_COMPONENTS,
