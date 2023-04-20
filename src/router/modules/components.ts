@@ -91,7 +91,7 @@ const components: RouteRecordRaw = {
     },
     {
       path: RouterPath.FILE_HTML,
-      meta: { title: "file-html", icon: "EMOJI" },
+      meta: { title: "file-html", icon: "iconfont icon-wenjian" },
       name: RouterName.FILE_HTML,
       component: () =>
         import(

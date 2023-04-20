@@ -31,6 +31,8 @@ export interface IMetaRouter {
   /** 路由的名称 */
   title: string
 
-  /** 路由显示在侧边栏的 图标 */
+  /** 路由显示在侧边栏的 图标
+   * 如果需要使用 iconfont 的图标, 格式为 "iconfont xxxx" 例如 "iconfont icon-home", 但是使用了 iconfont的字体图标,修改颜色就会失效
+   */
   icon?: string
 }

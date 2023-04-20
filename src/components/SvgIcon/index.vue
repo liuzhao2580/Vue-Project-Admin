@@ -1,5 +1,7 @@
 <template>
-  <svg class="icon-svg" aria-hidden="true">
+  <span v-if="showType === EType.iconfont" :class="iconClass">
+  </span>
+  <svg v-else class="icon-svg" aria-hidden="true">
     <use :href="symbolId" />
   </svg>
 </template>
@@ -9,7 +11,19 @@ import { computed } from "vue"
 interface IProps {
   iconClass?: string;
 }
+enum EType {
+  iconfont = "iconfont",
+  svg = "svg"
+}
 const props = defineProps<IProps>()
+
+const showType = computed(()=> {
+  let type: EType = EType.svg
+  if(props.iconClass && /iconfont/.test(props.iconClass)) {
+    type = EType.iconfont
+  }
+  return type
+})
 
 const symbolId = computed(() => `#icon-${props.iconClass}`)
 </script>
