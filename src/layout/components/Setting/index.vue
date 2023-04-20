@@ -39,6 +39,7 @@ export default {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     cursor: pointer;
+    z-index: $maxZIndex;
   }
 }
 </style>

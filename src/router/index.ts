@@ -171,7 +171,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
 ]
 const router = createRouter({
   history: createWebHistory(setting.basePrefix),
-  routes: constantRoutes.concat(asyncRoutes)
+  routes: constantRoutes
 })
 
 /** 重置路由 只有登录和404页面 */

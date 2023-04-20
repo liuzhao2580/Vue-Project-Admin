@@ -1,4 +1,5 @@
 <template>
+  <h1>注意: 如果使用mock模拟了数据,则会导致文件上传/下载失败,以下功能基本失效</h1>
   <h2>导入 word pdf excel 进行预览功能</h2>
   <h2>PDF 预览-依赖pdfjs.dist模块</h2>
   <h2>
