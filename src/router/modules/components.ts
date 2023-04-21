@@ -100,7 +100,7 @@ const components: RouteRecordRaw = {
     },
     {
       path: RouterPath.WORD_INDEX_SEARCH,
-      meta: { title: "字母索引", icon: "iconfont icon-wenjian" },
+      meta: { title: "字母索引", icon: "iconfont icon-suoyin" },
       name: RouterName.WORD_INDEX_SEARCH,
       component: () =>
         import(
