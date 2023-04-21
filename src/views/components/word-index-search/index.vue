@@ -2,12 +2,25 @@
   <div>
     <div class="word-index-search-box">
       <div class="left">
-        <div class="left-item"></div>
+        <div class="left-item" v-for="(lItem, index) in leftList" :key="index">
+          <div :class="['index-anchor', `index-anchor-${index}`]">
+            {{ index }}
+          </div>
+          <div class="left-container">
+            <span
+              class="container-item"
+              v-for="nItem in lItem"
+              :key="nItem.name"
+            >
+              {{ nItem.name }}
+            </span>
+          </div>
+        </div>
       </div>
       <ul class="right">
         <li
-          class="right-item"
-          :data-index="rItem"
+          :class="['right-item', rightActive === rItem && 'right-active']"
+          :data-rindex="rItem"
           v-for="rItem in rightList"
           :key="rItem"
           @click="rightItemClick(rItem, $event)"
@@ -22,67 +35,26 @@
 <script setup lang="ts">
 import { getFirstWord } from "@/utils"
 import { RouterName } from "@/router/RouteConst"
-import { ref } from "vue"
-
+import { ref, onMounted } from "vue"
+import responseJson from "./response.json"
 interface IList {
   name: string
 }
-const responseList: IList[] = [
-  {
-    name: "华为"
-  },
-  {
-    name: "小米"
-  },
-  {
-    name: "苹果"
-  },
-  {
-    name: "vivo"
-  },
-  {
-    name: "三星"
-  },
-  {
-    name: "oppo"
-  },
-  {
-    name: "真我"
-  },
-  {
-    name: "IQOO"
-  },
-  {
-    name: "魅族"
-  },
-  {
-    name: "联发科"
-  },
-  {
-    name: "英伟达"
-  },
-  {
-    name: "AMD"
-  },
-  {
-    name: "比亚迪"
-  },
-  {
-    name: "传奇"
-  },
-  {
-    name: "红旗"
-  },
-  {
-    name: "因特尔"
-  }
-]
 
-const rightList = ref<string[]>([])
-// const leftList = ref<string[]>([])
 interface IWord {
   [key: string]: IList[]
 }
+const responseList: IList[] = responseJson
+
+const rightList = ref<string[]>([])
+const rightActive = ref()
+const leftList = ref<IWord>({})
+const leftDom = ref<HTMLDivElement>()
+
+onMounted(() => {
+  leftDom.value = document.querySelector(".left") as HTMLDivElement
+})
+
 // 首先将数据处理为需要的格式
 ;(function () {
   let firstWordMap: IWord = {}
@@ -99,13 +71,23 @@ interface IWord {
     else if (a < b) return -1
     return 0
   })
-  console.log(firstWordMap)
+  rightList.value.forEach(item => {
+    leftList.value[item] = firstWordMap[item]
+  })
 })()
 
 // 右侧字母索引的点击事件
 function rightItemClick(item: string, event: MouseEvent) {
-  // @ts-ignore
-  console.log(event.target?.dataset)
+  rightActive.value = item
+  // @ts-ignore 获取绑定的index
+  const getRIndex = event.target?.dataset.rindex
+  const getLeftAnchor = `index-anchor-${getRIndex}`
+  const getAnchorEle = document.querySelector(
+    `.${getLeftAnchor}`
+  ) as HTMLDivElement
+  if (leftDom.value) {
+    leftDom.value.scrollTop = getAnchorEle.offsetTop
+  }
 }
 </script>
 
@@ -124,6 +106,29 @@ export default {
   justify-content: space-between;
   .left {
     flex: 1;
+    padding: 16px;
+    overflow: auto;
+    position: relative;
+    scroll-behavior: smooth;
+    .left-item {
+      margin-bottom: 12px;
+      .index-anchor {
+        width: 100%;
+        font-weight: 700;
+        font-size: 18px;
+        background-color: #ccc;
+        border-radius: 6px;
+        padding: 6px;
+        margin-bottom: 10px;
+      }
+      .left-container {
+        .container-item {
+          margin-right: 10px;
+          vertical-align: super;
+          cursor: pointer;
+        }
+      }
+    }
   }
   .right {
     border-left: 1px solid #333;
@@ -138,7 +143,10 @@ export default {
       cursor: pointer;
       padding: 3px 0;
       &:hover {
-        background-color: pink;
+        background-color: $standardColor;
+      }
+      &.right-active {
+        background-color: $standardColor;
       }
     }
   }
