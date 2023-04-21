@@ -2,12 +2,18 @@
   <div>
     <div class="word-index-search-box">
       <div class="left">
-        <div class="left-item">
-
-        </div>
+        <div class="left-item"></div>
       </div>
       <ul class="right">
-        <li class="right-item" v-for="rItem in rightList" :key="rItem">{{ rItem }}</li>
+        <li
+          class="right-item"
+          :data-index="rItem"
+          v-for="rItem in rightList"
+          :key="rItem"
+          @click="rightItemClick(rItem, $event)"
+        >
+          {{ rItem }}
+        </li>
       </ul>
     </div>
   </div>
@@ -76,7 +82,8 @@ const rightList = ref<string[]>([])
 // const leftList = ref<string[]>([])
 interface IWord {
   [key: string]: IList[]
-} // 首先将数据处理为需要的格式
+}
+// 首先将数据处理为需要的格式
 ;(function () {
   let firstWordMap: IWord = {}
   responseList.forEach(item => {
@@ -94,6 +101,12 @@ interface IWord {
   })
   console.log(firstWordMap)
 })()
+
+// 右侧字母索引的点击事件
+function rightItemClick(item: string, event: MouseEvent) {
+  // @ts-ignore
+  console.log(event.target?.dataset)
+}
 </script>
 
 <script lang="ts">
