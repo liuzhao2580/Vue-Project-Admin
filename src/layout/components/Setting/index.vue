@@ -1,10 +1,11 @@
 <template>
   <div class="setting-com-box">
-    <div class="setting-icon" @click="setClick">
-      <span class="iconfont icon-setting"></span>
+    <div ref="settingIcon" class="setting-icon" @click="setClick">
+      <span
+        :class="['iconfont', !visible ? 'icon-setting' : 'icon-guanbi']"
+      ></span>
     </div>
-    <el-drawer v-model="visible">
-      <div>Hi, there!</div>
+    <el-drawer size="300px" title="主题配置" v-model="visible">
       <ThemeColorSelect></ThemeColorSelect>
     </el-drawer>
   </div>
@@ -15,9 +16,19 @@ import { ref } from "vue"
 import ThemeColorSelect from "./components/ThemeColorSelect/index.vue"
 
 const visible = ref(false)
+const settingIcon = ref<HTMLDivElement>()
 
-const setClick = ()=> {
-  visible.value = true
+/** 设置按钮的点击事件 */
+const setClick = () => {
+  visible.value = !visible.value
+
+  console.log()
+  if (visible.value) {
+    settingIcon.value &&
+      (settingIcon.value.style.transform = "translateX(-300px)")
+  } else {
+    settingIcon.value && (settingIcon.value.style.transform = "translateX(0)")
+  }
 }
 </script>
 
@@ -40,6 +51,19 @@ export default {
     border-bottom-left-radius: 6px;
     cursor: pointer;
     z-index: $maxZIndex;
+    transition: all 0.5s;
+  }
+  ::v-deep(.set-item) {
+    display: flex;
+    justify-content: space-between;
+  }
+  @keyframes openAnimate {
+    0% {
+      transform: translateX(0px);
+    }
+    100% {
+      transform: translateX(-300px);
+    }
   }
 }
 </style>
