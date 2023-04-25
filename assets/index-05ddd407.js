@@ -1,0 +1,1 @@
+import{R as e,_,o as t,c}from"./index-f2385b80.js";const n={name:e.EMOJI_INPUT};function o(s,a,d,r,p,i){return t(),c("div")}const l=_(n,[["render",o],["__scopeId","data-v-58be3cc9"]]);export{l as default};
