@@ -1,0 +1,12 @@
+// 白色主题
+:root {
+  --lz-bg-color: #fff;
+  --lz-text-color: #333;
+  --lz-border-color: #ccc;
+}
+// 黑色主题
+:root.dark {
+  --lz-bg-color: #333;
+  --lz-text-color: #fff;
+  --lz-border-color: #bbb;
+}
