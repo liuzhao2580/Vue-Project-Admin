@@ -9,11 +9,11 @@
       <span v-show="!side_status">欢迎访问</span>
     </div>
     <el-menu
+      class="sidebar-el-menu-box"
       :collapse="side_status"
       :default-active="activeMenu"
       router
       unique-opened
-      class="sidebar-el-menu-box"
     >
       <SidebarItem
         v-for="route in sideBarList"

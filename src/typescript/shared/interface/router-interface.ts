@@ -35,4 +35,15 @@ export interface IMetaRouter {
    * 如果需要使用 iconfont 的图标, 格式为 "iconfont xxxx" 例如 "iconfont icon-home", 但是使用了 iconfont的字体图标,修改颜色就会失效
    */
   icon?: string
+
+  /**
+   * 是不是使用iframe 嵌套
+   * 默认都是false
+   */
+  iframeFlag?: boolean
+
+  /**
+   * 如果是iframe 嵌套, 就必须要填写链接
+   */
+  iframeUrl?: string
 }

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
 import Layout from "@/layout/index.vue"
 import PageContent from "@/layout/components/AppMain.vue"
+import IframePage from "@/views/iframe-page/index.vue"
 // 使用 modules 引入嵌套过多的路由
 import error_page from "./modules/error"
 import components from "./modules/components"
@@ -67,12 +68,53 @@ export const asyncRoutes: RouteRecordRaw[] = [
       // 文档页
       {
         path: RouterPath.DOCUMENTATION,
-        component: () =>
-          import(
-            /* webpackChunkName: "baseComponet" */ "@/views/documentation/index.vue"
-          ),
+        component: PageContent,
         name: RouterName.DOCUMENTATION,
-        meta: { title: "文档", icon: "wendang", affix: true, keepAlive: true }
+        meta: { title: "文档", icon: "wendang" },
+        children: [
+          {
+            path: RouterPath.DOCUMENTATION_LIST,
+            name: RouterPath.DOCUMENTATION_LIST,
+            meta: { title: "文档列表", icon: "", affix: true, keepAlive: true },
+            component: () =>
+              import(
+                /* webpackChunkName: "documentComponet" */ "@/views/documentation/index.vue"
+              )
+          },
+          {
+            path: RouterPath.DOCUMENTATION_VUE,
+            name: RouterPath.DOCUMENTATION_VUE,
+            meta: {
+              title: "Vue文档",
+              icon: "https://cn.vuejs.org/logo.svg",
+              iframeFlag: true,
+              iframeUrl: "https://cn.vuejs.org/guide/introduction.html"
+            },
+            component: IframePage
+          },
+          {
+            path: RouterPath.DOCUMENTATION_ELEMENT,
+            name: RouterPath.DOCUMENTATION_ELEMENT,
+            meta: {
+              title: "Element-Plus文档",
+              icon: "https://element-plus.gitee.io/images/element-plus-logo.svg",
+              iframeFlag: true,
+              iframeUrl: "https://element-plus.gitee.io/zh-CN/component/button.html"
+            },
+            component: IframePage
+          },
+          {
+            path: RouterPath.DOCUMENTATION_PINIA,
+            name: RouterPath.DOCUMENTATION_PINIA,
+            meta: {
+              title: "Pinia文档",
+              icon: "https://pinia.vuejs.org/logo.svg",
+              iframeFlag: true,
+              iframeUrl: "https://pinia.vuejs.org/zh/"
+            },
+            component: IframePage
+          }
+        ]
       },
       // 权限管理
       {

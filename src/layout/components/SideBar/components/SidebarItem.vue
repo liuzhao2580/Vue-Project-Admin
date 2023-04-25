@@ -1,7 +1,10 @@
 <template v-if="!item.meta.hidden">
   <!-- 首先判断 当级路由下不存在多级路由 -->
-  <el-menu-item v-if="checkMoreRouter(item)" :index="item.path">
-    <SvgIcon :iconClass="item.meta?.icon" />
+  <el-menu-item
+    v-if="checkMoreRouter(item)"
+    :index="item.path"
+  >
+    <SvgIcon :icon="item.meta?.icon" />
     <template #title>
       <span class="menu-title">{{ item.meta?.title }}</span>
     </template>
@@ -13,7 +16,7 @@
     :class="[{ MenuitemClass: side_status && !isMoreChild }]"
   >
     <template #title>
-      <SvgIcon :iconClass="item.meta?.icon" />
+      <SvgIcon :icon="item.meta?.icon" />
       <span class="menu-title">{{ item.meta?.title }}</span>
     </template>
     <template v-if="item.children">
@@ -55,6 +58,7 @@ const checkMoreRouter = (route: RouteRecordRaw) => {
   // 说明当前路由不存在子路由
   else return true
 }
+
 </script>
 
 <script lang="ts">

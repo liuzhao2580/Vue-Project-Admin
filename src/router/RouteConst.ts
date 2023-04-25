@@ -10,6 +10,14 @@ export const RouterName = {
   DASHBOARD: "DashboardPage",
   /** 文档页 */
   DOCUMENTATION: "DocumentationPage",
+  /** 文档列表 */
+  DOCUMENTATION_LIST: "DocumentationListPage",
+  /** Vue */
+  DOCUMENTATION_VUE: "DocumentationVuePage",
+  /** Element-Plus */
+  DOCUMENTATION_ELEMENT: "DocumentationElementPlusPage",
+  /** Pinia */
+  DOCUMENTATION_PINIA: "DocumentationPiniaPage",
   /** 权限管理页面 */
   ADMIN: "AdminPage",
   /** 权限切换页面 */
@@ -72,6 +80,14 @@ export const RouterPath = {
   DASHBOARD: "/dashboard",
   /** 文档页 */
   DOCUMENTATION: "/documentation",
+  /** 文档列表 */
+  DOCUMENTATION_LIST: "/documentation/index",
+  /** Vue */
+  DOCUMENTATION_VUE: "/documentation/vue",
+  /** Element-Plus */
+  DOCUMENTATION_ELEMENT: "/documentation/element-plus",
+  /** Pinia */
+  DOCUMENTATION_PINIA: "/documentation/pinia",
   /** 权限管理页面 */
   ADMIN: "/admin",
   /** 权限切换页面 */

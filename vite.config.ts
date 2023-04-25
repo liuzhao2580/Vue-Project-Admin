@@ -54,17 +54,6 @@ export default defineConfig(({ command, mode }) => {
     },
     plugins: [
       vue(),
-      // Components({
-      //   // allow auto load markdown components under `./src/components/`
-      //   extensions: ["vue", "md"],
-      //   // allow auto import and register components used in markdown
-      //   include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      //   resolvers: [
-      //     ElementPlusResolver({
-      //       importStyle: "sass"
-      //     })
-      //   ]
-      // }),
       // 引入 svg
       createSvgIconsPlugin({
         iconDirs: [resolve(process.cwd(), "src/icons/svg")],
