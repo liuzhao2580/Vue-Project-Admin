@@ -12,8 +12,8 @@
       class="sidebar-el-menu-box"
       :collapse="side_status"
       :default-active="activeMenu"
-      router
       unique-opened
+      router
     >
       <SidebarItem
         v-for="route in sideBarList"

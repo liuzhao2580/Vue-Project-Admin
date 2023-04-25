@@ -56,7 +56,6 @@ export default {
 <style lang="scss">
 .icon-svg {
   vertical-align: middle;
-  margin-right: 5px;
   text-align: center;
   font-size: 18px;
   svg {

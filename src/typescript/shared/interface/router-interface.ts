@@ -46,4 +46,10 @@ export interface IMetaRouter {
    * 如果是iframe 嵌套, 就必须要填写链接
    */
   iframeUrl?: string
+
+  /**
+   * 外链地址
+   * 点击之后开启新窗口跳转
+   */
+  outsideUrl?: string
 }

@@ -75,7 +75,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
           {
             path: RouterPath.DOCUMENTATION_LIST,
             name: RouterPath.DOCUMENTATION_LIST,
-            meta: { title: "文档列表", icon: "", affix: true, keepAlive: true },
+            meta: { title: "文档列表", icon: "document-list", affix: true, keepAlive: true },
             component: () =>
               import(
                 /* webpackChunkName: "documentComponet" */ "@/views/documentation/index.vue"
@@ -111,6 +111,16 @@ export const asyncRoutes: RouteRecordRaw[] = [
               icon: "https://pinia.vuejs.org/logo.svg",
               iframeFlag: true,
               iframeUrl: "https://pinia.vuejs.org/zh/"
+            },
+            component: IframePage
+          },
+          {
+            path: RouterPath.DOCUMENTATION_VITE,
+            name: RouterPath.DOCUMENTATION_VITE,
+            meta: {
+              title: "Vite文档(外链)",
+              icon: "https://cn.vitejs.dev/logo.svg",
+              outsideUrl: "https://cn.vitejs.dev/"
             },
             component: IframePage
           }

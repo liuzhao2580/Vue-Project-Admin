@@ -18,7 +18,7 @@
           <div class="icon-box">
             <svg-icon
               :style="cardItem.iconClass === 'element' ? 'color: #409eff' : ''"
-              :iconClass="cardItem.iconClass"
+              :icon="cardItem.iconClass"
             />
           </div>
           <div class="title-text">{{ cardItem.titleText }}</div>

@@ -128,6 +128,8 @@ const changeStoreTags = (tags: ITagsView[]) => {
 }
 /** 增加 tags */
 const insertTags = () => {
+  // 说明存在外链,不存放到 tags 中
+  if(route.meta.outsideUrl) return
   const currentTag = {
     fullPath: route.fullPath,
     meta: route.meta,

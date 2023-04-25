@@ -18,6 +18,8 @@ export const RouterName = {
   DOCUMENTATION_ELEMENT: "DocumentationElementPlusPage",
   /** Pinia */
   DOCUMENTATION_PINIA: "DocumentationPiniaPage",
+  /** Vite */
+  DOCUMENTATION_VITE: "DocumentationVitePage",
   /** 权限管理页面 */
   ADMIN: "AdminPage",
   /** 权限切换页面 */
@@ -88,6 +90,8 @@ export const RouterPath = {
   DOCUMENTATION_ELEMENT: "/documentation/element-plus",
   /** Pinia */
   DOCUMENTATION_PINIA: "/documentation/pinia",
+  /** Vite */
+  DOCUMENTATION_VITE: "/documentation/vite",
   /** 权限管理页面 */
   ADMIN: "/admin",
   /** 权限切换页面 */

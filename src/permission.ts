@@ -43,6 +43,12 @@ router.beforeEach(
           console.log(error)
         }
       } else {
+        // 外链路由, 从新标签打开，返回上一个路由
+        if (to.meta.outsideUrl) {
+          window.open(to.meta.outsideUrl)
+          next({ path: from.fullPath, replace: true, query: from.query })
+          return
+        }
         next()
       }
     } else {

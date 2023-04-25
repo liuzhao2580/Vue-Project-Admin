@@ -9,7 +9,6 @@ import { useRoute } from "vue-router"
 const route = useRoute()
 const iframeUrl = ref<string>()
 iframeUrl.value = route.meta.iframeUrl
-console.log(iframeUrl.value)
 watch(
   () => route.meta.iframeUrl,
   () => {
