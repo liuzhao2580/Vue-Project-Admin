@@ -5,14 +5,19 @@
         :class="['iconfont', !visible ? 'icon-setting' : 'icon-guanbi']"
       ></span>
     </div>
-    <el-drawer size="300px" title="主题配置" v-model="visible">
+    <el-drawer
+      @close="visible = false"
+      size="300px"
+      title="主题配置"
+      v-model="visible"
+    >
       <ThemeColorSelect></ThemeColorSelect>
     </el-drawer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, watch } from "vue"
 import ThemeColorSelect from "./components/ThemeColorSelect/index.vue"
 
 const visible = ref(false)
@@ -21,13 +26,19 @@ const settingIcon = ref<HTMLDivElement>()
 /** 设置按钮的点击事件 */
 const setClick = () => {
   visible.value = !visible.value
-  if (visible.value) {
-    settingIcon.value &&
-      (settingIcon.value.style.transform = "translateX(-300px)")
-  } else {
-    settingIcon.value && (settingIcon.value.style.transform = "translateX(0)")
-  }
 }
+
+watch(
+  () => visible.value,
+  (flag) => {
+    if (flag) {
+      settingIcon.value &&
+        (settingIcon.value.style.transform = "translateX(-300px)")
+    } else {
+      settingIcon.value && (settingIcon.value.style.transform = "translateX(0)")
+    }
+  }
+)
 </script>
 
 <script lang="ts">

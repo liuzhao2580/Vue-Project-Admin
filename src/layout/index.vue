@@ -85,6 +85,9 @@ export default {
 
 <style lang="scss" scoped>
 .app-warpper {
+  .container-box {
+    height: 100vh;
+  }
   .mobile {
     .click-icon {
       cursor: pointer;

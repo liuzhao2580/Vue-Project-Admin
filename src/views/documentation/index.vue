@@ -30,9 +30,9 @@
 
 <script lang="ts" setup>
 interface ICard {
-  iconClass: string;
-  titleText: string;
-  srcURL: string;
+  iconClass: string
+  titleText: string
+  srcURL: string
 }
 const cardList: ICard[] = [
   {
@@ -70,9 +70,11 @@ export default {
     }
   }
   .icon-box {
-    font-size: 64px;
     margin-bottom: 10px;
     transition: all 0.3s;
+    .icon-svg {
+      font-size: 64px;
+    }
   }
   .title-text {
     font-size: 24px;

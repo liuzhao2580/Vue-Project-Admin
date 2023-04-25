@@ -90,14 +90,5 @@ export default {
 }
 .sidebar-el-menu-box {
   border: 0;
-  :deep(.el-menu-item) {
-    .menu-title {
-      display: inline-block;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      max-width: 120px;
-    }
-  }
 }
 </style>

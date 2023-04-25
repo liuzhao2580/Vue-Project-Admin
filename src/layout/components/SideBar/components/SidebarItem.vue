@@ -63,8 +63,18 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .menu-title {
   margin-left: 10px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+.icon-svg {
+  svg {
+    fill: var(--lz-text-color);
+  }
 }
 </style>

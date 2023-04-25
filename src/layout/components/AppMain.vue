@@ -1,5 +1,5 @@
 <template>
-  <div class="AppMain-box">
+  <div class="app-main-box">
     <router-view v-slot="{ Component }">
       <keep-alive :include="keepAliveRoutes">
         <component :is="Component" />
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.AppMain-box {
+.app-main-box {
   position: relative;
   width: 100%;
   > div {
