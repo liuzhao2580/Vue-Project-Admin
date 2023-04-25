@@ -1,7 +1,7 @@
 <template>
-  <el-scrollbar class="SideBar-scrollbar">
+  <el-scrollbar>
     <div
-      class="SideBar-title"
+      class="sidebar-title"
       :style="{ paddingLeft: !side_status ? '20px' : '10px' }"
       @click="sideBarTitleClick"
     >
@@ -67,8 +67,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// 标题
+.sidebar-title {
+  padding-top: 5px;
+  white-space: nowrap;
+  transition: padding-left 0.3s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    vertical-align: bottom;
+  }
+  span {
+    font-size: 20px;
+    margin-left: 10px;
+    color: var(--lz-text-color);
+    transition: display 0.3s;
+  }
+}
 .sidebar-el-menu-box {
-  ::v-deep(.el-menu-item) {
+  border: 0;
+  :deep(.el-menu-item) {
     .menu-title {
       display: inline-block;
       overflow: hidden;

@@ -21,8 +21,6 @@ const settingIcon = ref<HTMLDivElement>()
 /** 设置按钮的点击事件 */
 const setClick = () => {
   visible.value = !visible.value
-
-  console.log()
   if (visible.value) {
     settingIcon.value &&
       (settingIcon.value.style.transform = "translateX(-300px)")

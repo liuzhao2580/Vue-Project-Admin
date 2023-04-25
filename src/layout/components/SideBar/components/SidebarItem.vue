@@ -2,13 +2,15 @@
   <!-- 首先判断 当级路由下不存在多级路由 -->
   <el-menu-item v-if="checkMoreRouter(item)" :index="item.path">
     <SvgIcon :iconClass="item.meta?.icon" />
-    <span class="menu-title">{{ item.meta?.title }}</span>
+    <template #title>
+      <span class="menu-title">{{ item.meta?.title }}</span>
+    </template>
   </el-menu-item>
   <!-- 当级路由下存在多级路由 -->
   <el-sub-menu
     v-else
     :index="item.path"
-    :class="[{MenuitemClass: side_status && !isMoreChild}]"
+    :class="[{ MenuitemClass: side_status && !isMoreChild }]"
   >
     <template #title>
       <SvgIcon :iconClass="item.meta?.icon" />
@@ -33,8 +35,8 @@ import { RouteRecordRaw } from "vue-router"
 
 const appStore = useAppStore()
 interface IProps {
-  item: RouteRecordRaw;
-  isMoreChild?: boolean;
+  item: RouteRecordRaw
+  isMoreChild?: boolean
 }
 
 withDefaults(defineProps<IProps>(), {

@@ -102,9 +102,22 @@ export default {
       border-bottom-right-radius: 5px;
     }
   }
+  .sider-box {
+    padding: 0;
+    margin-bottom: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    border-radius: 0;
+    transition: width 0.3s;
+    border-right: 1px solid var(--lz-border-color);
+  }
   .main-box {
     display: flex;
     flex-direction: column;
+    transition: margin-left 0.3s;
+    padding: 0;
+    overflow-x: hidden;
     :deep(.app-main) {
       position: relative;
       flex: 1;
@@ -112,6 +125,7 @@ export default {
       padding: 12px;
       > div {
         height: 100%;
+        width: 100%;
       }
     }
   }
