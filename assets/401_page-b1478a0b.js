@@ -1,0 +1,1 @@
+import{R as o,_ as t,h as r,o as s,c as a,i as n,l as c}from"./index-a164c9b5.js";const _={name:o.ERROR_PAGE_401},p=c(" 401 ");function i(d,l,m,u,f,R){const e=r("router-view");return s(),a("div",null,[p,n(e)])}const x=t(_,[["render",i]]);export{x as default};
