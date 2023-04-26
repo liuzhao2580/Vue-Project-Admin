@@ -13,9 +13,9 @@
 
 <script lang="ts" setup>
 import { useAppStore } from "@/store/app"
-import Breadcrumb from "../Breadcrumb/index.vue"
-import TagsView from "../TagsView/index.vue"
-import Personal from "../Personal/index.vue"
+import Breadcrumb from "./components/Breadcrumb/index.vue"
+import TagsView from "./components/TagsView/index.vue"
+import Personal from "./components/Personal/index.vue"
 import { Operation } from "@element-plus/icons-vue"
 
 const store = useAppStore()

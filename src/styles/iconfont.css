@@ -2,9 +2,9 @@
   font-family: "iconfont"; /* Project id 1464219 */
   /* Color fonts */
   src: 
-       url('//at.alicdn.com/t/c/font_1464219_1kvw0g42dg2.woff2?t=1682303901224') format('woff2'),
-       url('//at.alicdn.com/t/c/font_1464219_1kvw0g42dg2.woff?t=1682303901224') format('woff'),
-       url('//at.alicdn.com/t/c/font_1464219_1kvw0g42dg2.ttf?t=1682303901224') format('truetype');
+       url('//at.alicdn.com/t/c/font_1464219_1s94nrh50iw.woff2?t=1682475087250') format('woff2'),
+       url('//at.alicdn.com/t/c/font_1464219_1s94nrh50iw.woff?t=1682475087250') format('woff'),
+       url('//at.alicdn.com/t/c/font_1464219_1s94nrh50iw.ttf?t=1682475087250') format('truetype');
 }
 
 .iconfont {
@@ -13,6 +13,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-moon:before {
+  content: "\e60f";
+}
+
+.icon-bell:before {
+  content: "\e60d";
+}
+
+.icon-sun:before {
+  content: "\e60e";
 }
 
 .icon-guanbi:before {
@@ -105,18 +117,6 @@
 
 .icon-Markdown:before {
   content: "\e65c";
-}
-
-.icon-sishi:before {
-  content: "\e615";
-}
-
-.icon-jinganglang:before {
-  content: "\e616";
-}
-
-.icon-zhizhuxia:before {
-  content: "\e617";
 }
 
 .icon-group:before {

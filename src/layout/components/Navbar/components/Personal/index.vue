@@ -1,18 +1,13 @@
 <template>
   <div class="Personal-box">
     <!-- 切换全局样式 -->
-    <el-switch
-      v-model="switchGlobal"
-      inline-prompt
-      :active-value="switchStyleGlobal.light"
-      :inactive-value="switchStyleGlobal.dark"
-      :active-icon="Sunny"
-      :inactive-icon="Moon"
-      class="Personal-box-switch"
-      active-color="#b2b2b2"
-      inactive-color="#333"
-      @change="switchChange"
-    />
+    <span class="icon-item" @click="themeChange">
+      <Sunny v-show="themeValue === themeType.light" />
+      <Moon v-show="themeValue === themeType.dark" />
+    </span>
+    <!-- 消息提示框 -->
+    <MessageTip />
+    <!-- 个人头像下拉选 -->
     <el-dropdown @command="handleCommand" class="Personal-box-dropdown">
       <span style="display: inline-block">
         <el-avatar :src="avatar"></el-avatar>
@@ -52,19 +47,20 @@ import {
   Sunny,
   Moon
 } from "@element-plus/icons-vue"
+import MessageTip from "./components/MessageTip/index.vue"
 
 const store = useUserStore()
 
 const router = useRouter()
 
 interface IRef {
-  command: string;
-  title: string;
-  icon: Component;
-  dividedFlag?: boolean;
+  command: string
+  title: string
+  icon: Component
+  dividedFlag?: boolean
 }
 
-enum switchStyleGlobal {
+enum themeType {
   light = "light",
   dark = "dark"
 }
@@ -102,7 +98,7 @@ const dropdownList = shallowRef<IRef[]>([
 const htmlDom = ref<HTMLHtmlElement>()
 
 /** 全局的样式切换 */
-const switchGlobal = ref<switchStyleGlobal>(switchStyleGlobal.light)
+const themeValue = ref<themeType>(themeType.light)
 
 onMounted(() => {
   htmlDom.value = document.querySelector("html") as HTMLHtmlElement
@@ -129,15 +125,16 @@ const handleCommand = (command: string) => {
   }
 }
 
-type switchStyleGlobalType = switchStyleGlobal | string | number | boolean;
-
-/** 全局样式 switch 改变事件 */
-const switchChange = (val: switchStyleGlobalType) => {
+/** 全局样式 改变事件 */
+const themeChange = () => {
+  console.log(themeValue.value)
   if (!htmlDom.value) return
-  if (val === switchStyleGlobal.light) {
+  if (themeValue.value === themeType.light) {
+    htmlDom.value.className = themeType.dark
+    themeValue.value = themeType.dark
+  } else if (themeValue.value === themeType.dark) {
     htmlDom.value.className = ""
-  } else if (val === switchStyleGlobal.dark) {
-    htmlDom.value.className = switchStyleGlobal.dark
+    themeValue.value = themeType.light
   }
 }
 </script>
@@ -153,6 +150,12 @@ export default {
   margin-right: 10px;
   display: flex;
   align-items: center;
+  .icon-item {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0 6px;
+  }
   :deep(.el-avatar) {
     width: 50px;
     height: 50px;
