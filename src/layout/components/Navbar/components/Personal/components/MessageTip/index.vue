@@ -9,7 +9,7 @@
       <span class="message-tip">
         <span class="tip-box">
           <span class="iconbell"><Bell /></span>
-          <span class="message-num">{{ 3 }}</span>
+          <span class="message-num">{{ msgTotal }}</span>
         </span>
       </span>
     </template>
@@ -17,7 +17,7 @@
       <el-tabs stretch v-model="activeName" class="demo-tabs">
         <el-tab-pane :name="tab.name" v-for="tab in tabData" :key="tab.key">
           <template #label>
-            <el-badge :value="0" :max="99" class="item">
+            <el-badge :value="tab.list.filter(item => !item.readFlag).length" :max="99" class="item">
               <span class="label-title">{{ tab.name }}</span>
             </el-badge>
           </template>
@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 // 消息
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import { Bell } from "@element-plus/icons-vue"
 import MessageList from "./MessageListCom.vue"
 
@@ -40,6 +40,7 @@ interface IList {
   icon: string
   title: string
   date: string
+  readFlag: boolean
 }
 const tabData = ref([
   {
@@ -52,32 +53,37 @@ const tabData = ref([
         id: 1,
         icon: "ri:message-3-line",
         title: "你收到了5条新消息",
-        date: "2022-06-17"
+        date: "2022-06-17",
+        readFlag: false
       },
       {
         id: 4,
         icon: "ri:message-3-line",
         title: "Soybean Admin 1.0.0 版本正在筹备中",
-        date: "2022-06-17"
+        date: "2022-06-17",
+        readFlag: false
       },
       {
         id: 2,
         icon: "ri:message-3-line",
         title: "Soybean Admin 0.9.6 版本发布了",
-        date: "2022-06-16"
+        date: "2022-06-16",
+        readFlag: false
       },
       {
         id: 3,
         icon: "ri:message-3-line",
         title: "Soybean Admin 0.9.5 版本发布了",
-        date: "2022-06-07"
+        date: "2022-06-07",
+        readFlag: false
       },
       {
         id: 5,
         icon: "ri:message-3-line",
         title:
           "测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题",
-        date: "2022-06-17"
+        date: "2022-06-17",
+        readFlag: false
       }
     ]
   },
@@ -91,45 +97,59 @@ const tabData = ref([
         id: 1,
         icon: "ri:calendar-todo-line",
         title: "缓存主题配置",
-        date: "2022-06-17"
+        date: "2022-06-17",
+        readFlag: false
       },
       {
         id: 2,
         icon: "ri:calendar-todo-line",
         title: "添加锁屏组件、全局Iframe组件",
-        date: "2022-06-17"
+        date: "2022-06-17",
+        readFlag: false
       },
       {
         id: 3,
         icon: "ri:calendar-todo-line",
         title: "示例页面完善",
-        date: "2022-06-17"
+        date: "2022-06-17",
+        readFlag: false
       },
       {
         id: 4,
         icon: "ri:calendar-todo-line",
         title: "表单、表格示例",
-        date: "2022-06-17"
+        date: "2022-06-17",
+        readFlag: false
       },
       {
         id: 5,
         icon: "ri:calendar-todo-line",
         title: "性能优化(优化递归函数)",
-        date: "2022-06-17"
+        date: "2022-06-17",
+        readFlag: false
       },
       {
         id: 6,
         icon: "ri:calendar-todo-line",
         title: "精简版(新分支thin)",
-        date: "2022-06-17"
+        date: "2022-06-17",
+        readFlag: false
       }
     ]
   }
 ])
 
+const msgTotal = computed(()=> {
+  let total = 0
+  tabData.value.forEach(item => {
+    total += item.list.length
+  })
+  return total
+})
+
 /** messageList 组件方法 */
 function messageReaded(list: IList) {
-  console.log(list)
+  list.readFlag = true
 }
 </script>
 

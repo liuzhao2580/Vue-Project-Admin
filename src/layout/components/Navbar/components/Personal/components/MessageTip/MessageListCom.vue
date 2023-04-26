@@ -5,6 +5,7 @@
       v-for="item in list"
       :key="item.id"
       @click="listItemClick(item)"
+      :style="{ opacity: item.readFlag ? '0.3' : '1' }"
     >
       <div class="left"><ChatLineSquare /></div>
       <div class="right">
@@ -33,6 +34,7 @@ interface IList {
   icon: string
   title: string
   date: string
+  readFlag: boolean
 }
 
 interface IProps {
@@ -42,7 +44,7 @@ interface IProps {
 defineProps<IProps>()
 
 const emits = defineEmits<{
-  (e: "readed", item: IList): void;
+  (e: "readed", item: IList): void
 }>()
 
 const listBoxRef = ref<HTMLUListElement>()
