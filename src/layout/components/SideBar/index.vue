@@ -90,5 +90,12 @@ export default {
 }
 .sidebar-el-menu-box {
   border: 0;
+  :deep(.el-sub-menu) {
+    &.is-active {
+      .el-sub-menu__title {
+        color: var(--el-menu-active-color);
+      }
+    }
+  }
 }
 </style>
