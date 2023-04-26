@@ -142,7 +142,7 @@ export default {
 
 <style scoped lang="scss">
 .file-dialog-box {
-  ::v-deep(.el-dialog) {
+  :deep(.el-dialog) {
     position: relative;
     margin-top: 0;
     margin-bottom: 0;

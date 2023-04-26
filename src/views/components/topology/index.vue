@@ -47,7 +47,7 @@ export default {
   #container {
     height: 700px;
   }
-  ::v-deep(.g6-minimap) {
+  :deep(.g6-minimap) {
     .g6-minimap-container {
       border: 1px solid #e2e2e2;
     }

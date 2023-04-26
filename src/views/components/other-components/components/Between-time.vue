@@ -176,7 +176,7 @@ const endYearChange = (value: Event) => {
   .radio-box {
     margin-bottom: 10px;
   }
-  ::v-deep(.el-date-editor.el-input__wrapper) {
+  :deep(.el-date-editor.el-input__wrapper) {
     width: auto;
   }
   // 时间 年份 选择器

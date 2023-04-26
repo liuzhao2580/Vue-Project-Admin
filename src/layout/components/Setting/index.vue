@@ -62,7 +62,7 @@ export default {
     z-index: $maxZIndex;
     transition: all 0.5s;
   }
-  ::v-deep(.set-item) {
+  :deep(.set-item) {
     display: flex;
     justify-content: space-between;
   }
