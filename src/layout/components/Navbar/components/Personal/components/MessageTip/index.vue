@@ -1,23 +1,136 @@
 <template>
   <el-popover
-    :width="300"
-    popper-style="box-shadow: rgb(14 18 22 / 35%) 0px 10px 38px -10px, rgb(14 18 22 / 20%) 0px 10px 20px -15px; padding: 20px;"
+    :width="240"
     trigger="click"
+    placement="bottom-start"
+    popper-style="padding-bottom: 0px"
   >
     <template #reference>
       <span class="message-tip">
+        <span class="tip-box">
           <span class="iconbell"><Bell /></span>
           <span class="message-num">{{ 3 }}</span>
         </span>
+      </span>
     </template>
     <template #default>
-      <div class="demo-rich-conent">123</div>
+      <el-tabs stretch v-model="activeName" class="demo-tabs">
+        <el-tab-pane :name="tab.name" v-for="tab in tabData" :key="tab.key">
+          <template #label>
+            <el-badge :value="0" :max="99" class="item">
+              <span class="label-title">{{ tab.name }}</span>
+            </el-badge>
+          </template>
+          <MessageList :list="tab.list" @readed="messageReaded"></MessageList>
+        </el-tab-pane>
+      </el-tabs>
     </template>
   </el-popover>
 </template>
 
 <script setup lang="ts">
+// 消息
+import { ref } from "vue"
 import { Bell } from "@element-plus/icons-vue"
+import MessageList from "./MessageListCom.vue"
+
+const activeName = ref("notice")
+interface IList {
+  id: number
+  icon: string
+  title: string
+  date: string
+}
+const tabData = ref([
+  {
+    key: 1,
+    label: "通知",
+    name: "notice",
+    badgeProps: { type: "warning" },
+    list: [
+      {
+        id: 1,
+        icon: "ri:message-3-line",
+        title: "你收到了5条新消息",
+        date: "2022-06-17"
+      },
+      {
+        id: 4,
+        icon: "ri:message-3-line",
+        title: "Soybean Admin 1.0.0 版本正在筹备中",
+        date: "2022-06-17"
+      },
+      {
+        id: 2,
+        icon: "ri:message-3-line",
+        title: "Soybean Admin 0.9.6 版本发布了",
+        date: "2022-06-16"
+      },
+      {
+        id: 3,
+        icon: "ri:message-3-line",
+        title: "Soybean Admin 0.9.5 版本发布了",
+        date: "2022-06-07"
+      },
+      {
+        id: 5,
+        icon: "ri:message-3-line",
+        title:
+          "测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题",
+        date: "2022-06-17"
+      }
+    ]
+  },
+  {
+    key: 2,
+    label: "待办",
+    name: "todo",
+    badgeProps: { type: "info" },
+    list: [
+      {
+        id: 1,
+        icon: "ri:calendar-todo-line",
+        title: "缓存主题配置",
+        date: "2022-06-17"
+      },
+      {
+        id: 2,
+        icon: "ri:calendar-todo-line",
+        title: "添加锁屏组件、全局Iframe组件",
+        date: "2022-06-17"
+      },
+      {
+        id: 3,
+        icon: "ri:calendar-todo-line",
+        title: "示例页面完善",
+        date: "2022-06-17"
+      },
+      {
+        id: 4,
+        icon: "ri:calendar-todo-line",
+        title: "表单、表格示例",
+        date: "2022-06-17"
+      },
+      {
+        id: 5,
+        icon: "ri:calendar-todo-line",
+        title: "性能优化(优化递归函数)",
+        date: "2022-06-17"
+      },
+      {
+        id: 6,
+        icon: "ri:calendar-todo-line",
+        title: "精简版(新分支thin)",
+        date: "2022-06-17"
+      }
+    ]
+  }
+])
+
+/** messageList 组件方法 */
+function messageReaded(list: IList) {
+  console.log(list)
+}
 </script>
 
 <script lang="ts">
@@ -28,28 +141,33 @@ export default {
 
 <style scoped lang="scss">
 .message-tip {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  margin: 0 6px;
-  .iconbell {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    animation: bellAnimation 1s infinite;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  .tip-box {
+    position: relative;
+    .iconbell {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      animation: bellAnimation 1s infinite;
+    }
+    .message-num {
+      position: absolute;
+      top: 0%;
+      right: 5px;
+      background-color: red;
+      font-size: 12px;
+      padding: 0 5px;
+      border-radius: 8px;
+      color: #fff;
+      transform: translateY(-50%) translate(100%);
+    }
   }
-  .message-num {
-    position: absolute;
-    top: 0;
-    right: 5px;
-    background-color: red;
-    font-size: 12px;
-    padding: 0 5px;
-    border-radius: 8px;
-    color: #fff;
-    transform: translateY(-50%) translate(100%);
-  }
+}
+.label-title {
+  padding: 0 10px;
 }
 
 @keyframes bellAnimation {

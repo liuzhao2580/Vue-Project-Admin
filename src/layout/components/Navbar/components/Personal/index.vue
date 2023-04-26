@@ -1,12 +1,16 @@
 <template>
   <div class="Personal-box">
     <!-- 切换全局样式 -->
-    <span class="icon-item" @click="themeChange">
-      <Sunny v-show="themeValue === themeType.light" />
-      <Moon v-show="themeValue === themeType.dark" />
-    </span>
+    <el-tooltip content="主题样式" placement="bottom" effect="light">
+      <ThemeChange class="icon-item" />
+    </el-tooltip>
     <!-- 消息提示框 -->
-    <MessageTip />
+    <el-tooltip content="消息提醒" placement="bottom" effect="light">
+      <span class="icon-item">
+        <MessageTip />
+      </span>
+    </el-tooltip>
+
     <!-- 个人头像下拉选 -->
     <el-dropdown @command="handleCommand" class="Personal-box-dropdown">
       <span style="display: inline-block">
@@ -31,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Component, computed, onMounted, ref, shallowRef } from "vue"
+import { Component, computed, shallowRef } from "vue"
 import { useRouter } from "vue-router"
 import { removeCookie, CONST_VARIABLE } from "@/utils/modules/cookies"
 import { resetRouter } from "@/router"
@@ -43,11 +47,10 @@ import {
   Document,
   SwitchButton,
   Guide,
-  ArrowDown,
-  Sunny,
-  Moon
+  ArrowDown
 } from "@element-plus/icons-vue"
 import MessageTip from "./components/MessageTip/index.vue"
+import ThemeChange from "./components/ThemeChange/index.vue"
 
 const store = useUserStore()
 
@@ -58,11 +61,6 @@ interface IRef {
   title: string
   icon: Component
   dividedFlag?: boolean
-}
-
-enum themeType {
-  light = "light",
-  dark = "dark"
 }
 
 const dropdownList = shallowRef<IRef[]>([
@@ -94,16 +92,6 @@ const dropdownList = shallowRef<IRef[]>([
   }
 ])
 
-/** 获取 html dom元素 */
-const htmlDom = ref<HTMLHtmlElement>()
-
-/** 全局的样式切换 */
-const themeValue = ref<themeType>(themeType.light)
-
-onMounted(() => {
-  htmlDom.value = document.querySelector("html") as HTMLHtmlElement
-})
-
 const avatar = computed(() => {
   return store.state.avatar
 })
@@ -124,19 +112,6 @@ const handleCommand = (command: string) => {
     router.push({ path: command })
   }
 }
-
-/** 全局样式 改变事件 */
-const themeChange = () => {
-  console.log(themeValue.value)
-  if (!htmlDom.value) return
-  if (themeValue.value === themeType.light) {
-    htmlDom.value.className = themeType.dark
-    themeValue.value = themeType.dark
-  } else if (themeValue.value === themeType.dark) {
-    htmlDom.value.className = ""
-    themeValue.value = themeType.light
-  }
-}
 </script>
 
 <script lang="ts">
@@ -149,12 +124,16 @@ export default {
 .Personal-box {
   margin-right: 10px;
   display: flex;
-  align-items: center;
   .icon-item {
+    display: flex;
+    align-items: center;
     width: 20px;
-    height: 20px;
     cursor: pointer;
-    margin: 0 6px;
+    box-sizing: content-box;
+    padding: 0 8px;
+    &:hover {
+      background-color: #f6f6f6;
+    }
   }
   :deep(.el-avatar) {
     width: 50px;
