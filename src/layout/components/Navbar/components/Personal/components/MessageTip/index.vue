@@ -8,18 +8,23 @@
     <template #reference>
       <span class="message-tip">
         <span class="tip-box">
-          <span class="iconbell"><Bell /></span>
+          <span :class="['iconbell', msgTotal === 0 && 'no-message']"><Bell /></span>
           <span class="message-num">{{ msgTotal }}</span>
         </span>
       </span>
     </template>
     <template #default>
-      <el-tabs stretch v-model="activeName" class="demo-tabs">
+      <el-tabs stretch v-model="activeName">
         <el-tab-pane :name="tab.name" v-for="tab in tabData" :key="tab.key">
           <template #label>
-            <el-badge :value="tab.list.filter(item => !item.readFlag).length" :max="99" class="item">
-              <span class="label-title">{{ tab.name }}</span>
+            <div class="label-box">
+              <el-badge
+              :value="tab.list.filter(item => !item.readFlag).length"
+              :max="99"
+            >
+              <span class="label-title">{{ tab.label }}</span>
             </el-badge>
+            </div>
           </template>
           <MessageList :list="tab.list" @readed="messageReaded"></MessageList>
         </el-tab-pane>
@@ -59,21 +64,21 @@ const tabData = ref([
       {
         id: 4,
         icon: "ri:message-3-line",
-        title: "Soybean Admin 1.0.0 版本正在筹备中",
+        title: "天青色等烟雨而我在等你",
         date: "2022-06-17",
         readFlag: false
       },
       {
         id: 2,
         icon: "ri:message-3-line",
-        title: "Soybean Admin 0.9.6 版本发布了",
+        title: "雨下整夜我的爱溢出就像雨水",
         date: "2022-06-16",
         readFlag: false
       },
       {
         id: 3,
         icon: "ri:message-3-line",
-        title: "Soybean Admin 0.9.5 版本发布了",
+        title: "刮风这天我试过握着你手",
         date: "2022-06-07",
         readFlag: false
       },
@@ -81,7 +86,7 @@ const tabData = ref([
         id: 5,
         icon: "ri:message-3-line",
         title:
-          "测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题测试超长标题",
+          "你说把爱渐渐 放下会走更远 或许命运的签 只让我们遇见 只让我们相恋 这一季的秋天 飘落后才发现 这幸福的碎片要我怎么捡",
         date: "2022-06-17",
         readFlag: false
       }
@@ -96,42 +101,42 @@ const tabData = ref([
       {
         id: 1,
         icon: "ri:calendar-todo-line",
-        title: "缓存主题配置",
+        title: "早上吃早餐",
         date: "2022-06-17",
         readFlag: false
       },
       {
         id: 2,
         icon: "ri:calendar-todo-line",
-        title: "添加锁屏组件、全局Iframe组件",
+        title: "中午吃中餐",
         date: "2022-06-17",
         readFlag: false
       },
       {
         id: 3,
         icon: "ri:calendar-todo-line",
-        title: "示例页面完善",
+        title: "晚上吃晚餐",
         date: "2022-06-17",
         readFlag: false
       },
       {
         id: 4,
-        icon: "ri:calendar-todo-line",
-        title: "表单、表格示例",
+        icon: "icon-read",
+        title: "多读书",
         date: "2022-06-17",
         readFlag: false
       },
       {
         id: 5,
-        icon: "ri:calendar-todo-line",
-        title: "性能优化(优化递归函数)",
+        icon: "icon-read",
+        title: "多看报",
         date: "2022-06-17",
         readFlag: false
       },
       {
         id: 6,
         icon: "ri:calendar-todo-line",
-        title: "精简版(新分支thin)",
+        title: "少看手机,多睡觉,打工人对自己好点,快快乐乐开开心心才是福",
         date: "2022-06-17",
         readFlag: false
       }
@@ -139,10 +144,12 @@ const tabData = ref([
   }
 ])
 
-const msgTotal = computed(()=> {
+const msgTotal = computed(() => {
   let total = 0
   tabData.value.forEach(item => {
-    total += item.list.length
+    item.list.forEach(listItem => {
+      total += Number(!listItem.readFlag)
+    })
   })
   return total
 })
@@ -172,6 +179,9 @@ export default {
       height: 18px;
       vertical-align: middle;
       animation: bellAnimation 1s infinite;
+      &.no-message {
+        animation: none;
+      }
     }
     .message-num {
       position: absolute;
@@ -186,8 +196,13 @@ export default {
     }
   }
 }
-.label-title {
-  padding: 0 10px;
+.label-box {
+  .label-title {
+    padding: 0 8px;
+  }
+  :deep(.el-badge__content.is-fixed) {
+    top: 10px;
+  }
 }
 
 @keyframes bellAnimation {

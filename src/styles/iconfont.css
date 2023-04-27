@@ -2,9 +2,9 @@
   font-family: "iconfont"; /* Project id 1464219 */
   /* Color fonts */
   src: 
-       url('//at.alicdn.com/t/c/font_1464219_1s94nrh50iw.woff2?t=1682475087250') format('woff2'),
-       url('//at.alicdn.com/t/c/font_1464219_1s94nrh50iw.woff?t=1682475087250') format('woff'),
-       url('//at.alicdn.com/t/c/font_1464219_1s94nrh50iw.ttf?t=1682475087250') format('truetype');
+       url('//at.alicdn.com/t/c/font_1464219_8bzb9437awf.woff2?t=1682566725074') format('woff2'),
+       url('//at.alicdn.com/t/c/font_1464219_8bzb9437awf.woff?t=1682566725074') format('woff'),
+       url('//at.alicdn.com/t/c/font_1464219_8bzb9437awf.ttf?t=1682566725074') format('truetype');
 }
 
 .iconfont {
@@ -13,6 +13,22 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-read:before {
+  content: "\e672";
+}
+
+.icon-eat:before {
+  content: "\e610";
+}
+
+.icon-sleep:before {
+  content: "\e611";
+}
+
+.icon-happy:before {
+  content: "\e61f";
 }
 
 .icon-moon:before {

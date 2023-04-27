@@ -10,10 +10,10 @@
       <div class="left"><ChatLineSquare /></div>
       <div class="right">
         <div class="title lineEllipsisOne">
-          这些都是测试的数据哟,大阿达哒哒哒!!!
+          {{ item.title }}
         </div>
         <div class="time">
-          {{ dayjs(new Date()).format("YYYY-MM-DD hh:ss:mm") }}
+          {{ item.date }}
         </div>
       </div>
     </li>
@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import dayjs from "dayjs"
 import { ChatLineSquare } from "@element-plus/icons-vue"
 
 interface IList {
