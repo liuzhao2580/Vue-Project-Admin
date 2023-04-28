@@ -54,13 +54,14 @@ export default {
     position: fixed;
     right: 0;
     top: 50%;
-    background-color: pink;
+    background-color: var(--el-color-primary);
     padding: 16px;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     cursor: pointer;
     z-index: $maxZIndex;
     transition: all 0.5s;
+    color: var(--lz-text-color);
   }
   :deep(.set-item) {
     display: flex;
