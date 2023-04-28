@@ -33,7 +33,7 @@
       </el-tabs>
       <footer class="list-footer">
         <span @click="allRead">全部已读</span>
-        <span>清空</span>
+        <span @click="clearMsg">清空</span>
       </footer>
     </template>
   </el-popover>
@@ -170,6 +170,14 @@ function allRead() {
   tabData.value.filter(item=> {
     if(item.name === activeName.value) {
       item.list.forEach(Iitem=> Iitem.readFlag = true)
+    }
+  })
+}
+/** 清空 */
+function clearMsg() {
+  tabData.value.filter(item=> {
+    if(item.name === activeName.value) {
+      item.list = []
     }
   })
 }

@@ -1,5 +1,5 @@
 <template>
-  <ul class="list-box" ref="listBoxRef">
+  <ul v-show="list.length" class="list-box" ref="listBoxRef">
     <li
       class="list-item"
       v-for="item in list"
@@ -20,6 +20,7 @@
       </div>
     </li>
   </ul>
+  <el-empty v-show="list.length === 0" />
 </template>
 
 <script setup lang="ts">
