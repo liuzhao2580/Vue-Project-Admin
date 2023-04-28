@@ -7,7 +7,9 @@
       @click="listItemClick(item)"
       :style="{ opacity: item.readFlag ? '0.3' : '1' }"
     >
-      <div class="left"><ChatLineSquare /></div>
+      <div class="left">
+        <span :class="['iconfont', item.icon]"></span>
+      </div>
       <div class="right">
         <div class="title lineEllipsisOne">
           {{ item.title }}
@@ -18,15 +20,10 @@
       </div>
     </li>
   </ul>
-  <footer class="list-footer">
-    <span>全部已读</span>
-    <span>清空</span>
-  </footer>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { ChatLineSquare } from "@element-plus/icons-vue"
 
 interface IList {
   id: number
@@ -48,9 +45,11 @@ const emits = defineEmits<{
 
 const listBoxRef = ref<HTMLUListElement>()
 
+/** 每个列表项的点击 */
 function listItemClick(item: IList) {
   emits("readed", item)
 }
+
 </script>
 
 <script lang="ts">
@@ -75,6 +74,9 @@ export default {
     .left {
       width: 15%;
       height: 100%;
+      .iconfont {
+        font-size: 30px;
+      }
     }
     .right {
       width: 82%;
@@ -85,21 +87,6 @@ export default {
       .time {
         font-size: 12px;
       }
-    }
-  }
-}
-.list-footer {
-  display: flex;
-  align-items: center;
-  box-shadow: 0 0 20px #eee;
-  margin-top: 10px;
-  > span {
-    width: 50%;
-    text-align: center;
-    padding: 8px 0;
-    cursor: pointer;
-    &:first-of-type {
-      border-right: 1px solid #eee;
     }
   }
 }

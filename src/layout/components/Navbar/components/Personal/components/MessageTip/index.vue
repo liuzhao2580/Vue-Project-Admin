@@ -1,14 +1,16 @@
 <template>
   <el-popover
-    :width="240"
+    :width="260"
     trigger="click"
-    placement="bottom-start"
+    placement="bottom-end"
     popper-style="padding-bottom: 0px"
   >
     <template #reference>
       <span class="message-tip">
         <span class="tip-box">
-          <span :class="['iconbell', msgTotal === 0 && 'no-message']"><Bell /></span>
+          <span :class="['iconbell', msgTotal === 0 && 'no-message']"
+            ><Bell
+          /></span>
           <span class="message-num">{{ msgTotal }}</span>
         </span>
       </span>
@@ -19,16 +21,20 @@
           <template #label>
             <div class="label-box">
               <el-badge
-              :value="tab.list.filter(item => !item.readFlag).length"
-              :max="99"
-            >
-              <span class="label-title">{{ tab.label }}</span>
-            </el-badge>
+                :value="tab.list.filter(item => !item.readFlag).length"
+                :max="99"
+              >
+                <span class="label-title">{{ tab.label }}</span>
+              </el-badge>
             </div>
           </template>
           <MessageList :list="tab.list" @readed="messageReaded"></MessageList>
         </el-tab-pane>
       </el-tabs>
+      <footer class="list-footer">
+        <span @click="allRead">全部已读</span>
+        <span>清空</span>
+      </footer>
     </template>
   </el-popover>
 </template>
@@ -56,35 +62,35 @@ const tabData = ref([
     list: [
       {
         id: 1,
-        icon: "ri:message-3-line",
+        icon: "icon-happy",
         title: "你收到了5条新消息",
         date: "2022-06-17",
         readFlag: false
       },
       {
         id: 4,
-        icon: "ri:message-3-line",
+        icon: "icon-happy",
         title: "天青色等烟雨而我在等你",
         date: "2022-06-17",
         readFlag: false
       },
       {
         id: 2,
-        icon: "ri:message-3-line",
+        icon: "icon-happy",
         title: "雨下整夜我的爱溢出就像雨水",
         date: "2022-06-16",
         readFlag: false
       },
       {
         id: 3,
-        icon: "ri:message-3-line",
+        icon: "icon-happy",
         title: "刮风这天我试过握着你手",
         date: "2022-06-07",
         readFlag: false
       },
       {
         id: 5,
-        icon: "ri:message-3-line",
+        icon: "icon-happy",
         title:
           "你说把爱渐渐 放下会走更远 或许命运的签 只让我们遇见 只让我们相恋 这一季的秋天 飘落后才发现 这幸福的碎片要我怎么捡",
         date: "2022-06-17",
@@ -100,21 +106,21 @@ const tabData = ref([
     list: [
       {
         id: 1,
-        icon: "ri:calendar-todo-line",
+        icon: "icon-eat",
         title: "早上吃早餐",
         date: "2022-06-17",
         readFlag: false
       },
       {
         id: 2,
-        icon: "ri:calendar-todo-line",
+        icon: "icon-eat",
         title: "中午吃中餐",
         date: "2022-06-17",
         readFlag: false
       },
       {
         id: 3,
-        icon: "ri:calendar-todo-line",
+        icon: "icon-sleep",
         title: "晚上吃晚餐",
         date: "2022-06-17",
         readFlag: false
@@ -135,7 +141,7 @@ const tabData = ref([
       },
       {
         id: 6,
-        icon: "ri:calendar-todo-line",
+        icon: "icon-happy",
         title: "少看手机,多睡觉,打工人对自己好点,快快乐乐开开心心才是福",
         date: "2022-06-17",
         readFlag: false
@@ -157,6 +163,15 @@ const msgTotal = computed(() => {
 /** messageList 组件方法 */
 function messageReaded(list: IList) {
   list.readFlag = true
+}
+
+/** 全部已读 */
+function allRead() {
+  tabData.value.filter(item=> {
+    if(item.name === activeName.value) {
+      item.list.forEach(Iitem=> Iitem.readFlag = true)
+    }
+  })
 }
 </script>
 
@@ -202,6 +217,22 @@ export default {
   }
   :deep(.el-badge__content.is-fixed) {
     top: 10px;
+  }
+}
+
+.list-footer {
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 20px #eee;
+  margin-top: 10px;
+  > span {
+    width: 50%;
+    text-align: center;
+    padding: 8px 0;
+    cursor: pointer;
+    &:first-of-type {
+      border-right: 1px solid #eee;
+    }
   }
 }
 
