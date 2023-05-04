@@ -8,11 +8,6 @@
         <Navbar class="nav-bar" />
         <AppMain class="app-main" />
       </el-main>
-      <div
-        v-show="isMobile"
-        class="click-icon el-icon-s-operation"
-        @click="showORhidden"
-      ></div>
       <SettingCom />
     </el-container>
   </div>
@@ -53,11 +48,6 @@ const dynamicWidth = computed(() => {
   if (side_status.value) return "64px"
   return "200px"
 })
-
-// 在 mobile 移动端模式下显示隐藏 侧边栏按钮
-const showORhidden = () => {
-  store.unFlodSide()
-}
 
 const $_isMobile = () => {
   const react = body.getBoundingClientRect()
