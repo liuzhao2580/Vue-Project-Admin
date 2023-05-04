@@ -262,7 +262,7 @@ export default {
       margin-right: 5px;
       border-radius: 4px;
       position: relative;
-      background-color: #f4f4f5;
+      background-color: var(--lz-tag-bg-color);
       &.is-active {
         background-color: $standardColor;
         padding-left: 18px;

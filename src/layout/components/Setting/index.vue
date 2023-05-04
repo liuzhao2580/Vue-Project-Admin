@@ -1,9 +1,8 @@
 <template>
   <div class="setting-com-box">
     <div ref="settingIcon" class="setting-icon" @click="setClick">
-      <span
-        :class="['iconfont', !visible ? 'icon-setting' : 'icon-guanbi']"
-      ></span>
+      <el-icon v-if="visible"><Close /></el-icon>
+      <el-icon v-else><Setting /></el-icon>
     </div>
     <el-drawer
       @close="visible = false"
@@ -18,6 +17,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue"
+import { Setting, Close } from "@element-plus/icons-vue"
 import ThemeColorSelect from "./components/ThemeColorSelect/index.vue"
 
 const visible = ref(false)
@@ -30,7 +30,7 @@ const setClick = () => {
 
 watch(
   () => visible.value,
-  (flag) => {
+  flag => {
     if (flag) {
       settingIcon.value &&
         (settingIcon.value.style.transform = "translateX(-300px)")
@@ -55,13 +55,14 @@ export default {
     right: 0;
     top: 50%;
     background-color: var(--el-color-primary);
-    padding: 16px;
+    padding: 14px;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     cursor: pointer;
     z-index: $maxZIndex;
     transition: all 0.5s;
     color: var(--lz-text-color);
+    font-size: 18px;
   }
   :deep(.set-item) {
     display: flex;
