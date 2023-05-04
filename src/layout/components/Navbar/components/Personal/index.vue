@@ -1,5 +1,5 @@
 <template>
-  <div class="Personal-box">
+  <div class="personal-box">
     <!-- 切换全局样式 -->
     <el-tooltip content="主题样式" placement="bottom" effect="light">
       <ThemeChange class="icon-item" />
@@ -12,7 +12,7 @@
     </el-tooltip>
 
     <!-- 个人头像下拉选 -->
-    <el-dropdown @command="handleCommand" class="Personal-box-dropdown">
+    <el-dropdown @command="handleCommand" class="personal-box-dropdown">
       <span style="display: inline-block">
         <el-avatar :src="avatar"></el-avatar>
         <el-icon class="el-icon--right"><ArrowDown /></el-icon>
@@ -121,7 +121,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.Personal-box {
+.personal-box {
   margin-right: 10px;
   display: flex;
   .icon-item {
@@ -140,6 +140,7 @@ export default {
     height: 50px;
     img {
       width: 100%;
+      height: 100%;
     }
   }
   &-dropdown {

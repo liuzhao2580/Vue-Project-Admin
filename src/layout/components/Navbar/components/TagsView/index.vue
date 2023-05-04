@@ -1,22 +1,20 @@
 <template>
-  <div class="TagsView-box">
-    <el-scrollbar class="TagsView-scrollbar">
-      <div class="tag-container-box">
-        <el-tag
-          v-for="(tag, index) in tagsArray"
-          :key="index"
-          :closable="is_closable(tag)"
-          effect="dark"
-          @close="handleClose(tag)"
-          size="small"
-          @click="handleClick(tag)"
-          disable-transitions
-          :class="{ 'is-active': is_active(tag.meta?.title) }"
-          @contextmenu.prevent="tagContextmenu($event, tag, index)"
-          >{{ tag.meta?.title }}</el-tag
-        >
-      </div>
-    </el-scrollbar>
+  <div class="tags-view-box">
+    <div class="tag-container-box">
+      <el-tag
+        v-for="(tag, index) in tagsArray"
+        :key="index"
+        :closable="is_closable(tag)"
+        effect="dark"
+        @close="handleClose(tag)"
+        size="small"
+        @click="handleClick(tag)"
+        disable-transitions
+        :class="{ 'is-active': is_active(tag.meta?.title) }"
+        @contextmenu.prevent="tagContextmenu($event, tag, index)"
+        >{{ tag.meta?.title }}</el-tag
+      >
+    </div>
     <!-- 用来操作开启的 tag 标签 -->
     <ul
       v-show="state.operaTagFlag"
@@ -53,27 +51,25 @@ const route = useRoute()
 const router = useRouter()
 
 interface IState {
-  affixTags: ITagsView[];
+  affixTags: ITagsView[]
   /** tag 操作菜单的显示隐藏 */
-  operaTagFlag: boolean;
+  operaTagFlag: boolean
   /** tag 操作菜单的样式 */
   hideTagBox: {
-    left: number | string;
-    top: number | string;
-  };
+    left: number | string
+  }
   /** 记录当前右键的是哪个 tag */
   saveCurrentTag: {
-    currentIndex: number;
-    currentTag: any;
-  };
+    currentIndex: number
+    currentTag: any
+  }
 }
 
 const state = reactive<IState>({
   affixTags: [],
   operaTagFlag: false,
   hideTagBox: {
-    left: 0,
-    top: 0
+    left: 0
   },
   // 记录当前右键的是哪个 tag
   saveCurrentTag: {
@@ -111,7 +107,7 @@ const initTags = () => {
   const routes = sideBarList.value
   const affixTags: ITagsView[] = []
   routes.forEach(item => {
-    if (item.meta?.affix) {
+    if (item.meta) {
       affixTags.push({
         fullPath: item.path,
         meta: item.meta,
@@ -129,7 +125,7 @@ const changeStoreTags = (tags: ITagsView[]) => {
 /** 增加 tags */
 const insertTags = () => {
   // 说明存在外链,不存放到 tags 中
-  if(route.meta.outsideUrl) return
+  if (route.meta.outsideUrl) return
   const currentTag = {
     fullPath: route.fullPath,
     meta: route.meta,
@@ -163,25 +159,20 @@ const handleClick = (tag: ITagsView) => {
   })
 }
 /** 鼠标右键菜单 */
-const tagContextmenu = (e: Event, tag: ITagsView, index: number) => {
+const tagContextmenu = (
+  e: PointerEvent,
+  tag: ITagsView,
+  currentIndex: number
+) => {
   // 1.获取 tag-container-box html元素
   const getTagBoxDom = document.querySelector(
     ".tag-container-box"
   ) as HTMLElement
   // 2.将伪数组变成真实的数组
   const getRealArr = Array.prototype.slice.call(getTagBoxDom.children)
-  // 3.tag 的操作菜单需要left的 总长度
-  let getAllWidth = 0
-  getRealArr.forEach((item, Iindex) => {
-    // 4.如果当前鼠标右键的元素索引小于其他元素，说明右边的元素长度不考虑
-    if (Iindex >= index) return
-    // 5.计算每个元素的 宽度 并且 + margin-right的5个像素点
-    getAllWidth += item.offsetWidth + 5
-  })
-  state.hideTagBox.left = 20 + getAllWidth + "px"
-  state.hideTagBox.top = 40 + "px"
+  state.hideTagBox.left = getRealArr[currentIndex].offsetLeft + "px"
   state.operaTagFlag = true
-  state.saveCurrentTag.currentIndex = index
+  state.saveCurrentTag.currentIndex = currentIndex
   state.saveCurrentTag.currentTag = tag
 }
 /** 关闭当前 */
@@ -245,33 +236,68 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.TagsView-box {
-  position: relative;
-}
-.hide-tag-box {
-  position: absolute;
-  background-color: #fafafa;
-  box-shadow: 0px 0px 5px #a6a6a6;
-  z-index: 9999;
-  display: inline-block;
-  border-radius: 5px;
-  .hide-item,
-  .disabled-operation {
+.tags-view-box {
+  padding: 0 20px;
+  height: 40px;
+  line-height: 40px;
+  box-shadow: 0px 2px 2px #ccc;
+  white-space: nowrap;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  .el-tag {
     cursor: pointer;
-    height: 30px;
-    line-height: 30px;
-    padding: 0px 10px;
-    font-size: 14px;
-  }
-  .disabled-operation {
-    cursor: not-allowed;
-  }
-  .hide-item {
-    &:hover {
-      background-color: pink;
+    height: 28px;
+    line-height: 28px;
+    color: var(--lz-text-color);
+    border-color: var(--lz-border-color);
+    margin-right: 5px;
+    border-radius: 2px;
+    position: relative;
+    background-color: transparent;
+    &.is-active {
+      background-color: $standardColor;
+      padding-left: 18px;
       color: #fff;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #fff;
+        color: var(--lz-text-color);
+      }
+    }
+  }
+  .hide-tag-box {
+    position: fixed;
+    z-index: $maxZIndex;
+    top: $NavbarHeight;
+    background-color: #fafafa;
+    box-shadow: 0px 0px 5px #a6a6a6;
+    display: inline-block;
+    border-radius: 5px;
+    .hide-item,
+    .disabled-operation {
+      cursor: pointer;
+      height: 30px;
+      line-height: 30px;
+      padding: 0px 10px;
+      font-size: 14px;
+    }
+    .disabled-operation {
+      cursor: not-allowed;
+    }
+    .hide-item {
+      &:hover {
+        background-color: pink;
+        color: #fff;
+      }
     }
   }
 }
-
 </style>
