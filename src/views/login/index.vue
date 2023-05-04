@@ -31,15 +31,7 @@
       <!-- <DDScanLogin/> -->
       <!-- <DDAccountLogin /> -->
       <!-- 提示 -->
-      <div class="login-tip">
-        <ul>
-          <li class="user-item" v-for="user in userList" :key="user.id">
-            <span>用户名: <CopyContent :copy-text="user.userName" /></span>
-            <span>密码: {{ user.password }}</span>
-            <span>权限: {{ user.roleName }}</span>
-          </li>
-        </ul>
-      </div>
+      <LoginTip :userList="userList" />
     </div>
   </div>
 </template>
@@ -52,7 +44,8 @@ import { ElMessage } from "element-plus"
 import { useUserStore } from "@/store/user"
 import { userLogin, userInfoListAPI } from "@/api/modules/user"
 import { ResultCodeEnum } from "@/typescript/shared/enum"
-import CopyContent from "@/components/CopyContent/index.vue"
+import { IUserBaseInfo } from "@/typescript/shared/interface/user-interface"
+import LoginTip from "./components/LoginTip.vue"
 const userStore = useUserStore()
 
 const router = useRouter()
@@ -74,7 +67,7 @@ const rules = reactive<FormRules>({
 const loginLoading = ref(false)
 
 /** 用户列表 */
-const userList = ref<IUserBaseInfo[]>()
+const userList = ref<IUserBaseInfo[]>([])
 
 const formRef = ref<FormInstance>()
 
@@ -137,7 +130,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 
 <script lang="ts">
 import { RouterName, RouterPath } from "@/router/RouteConst"
-import { IUserBaseInfo } from "@/typescript/shared/interface/user-interface"
 export default {
   name: RouterName.LOGIN
 }
@@ -172,13 +164,6 @@ export default {
     }
     .loginBtn {
       width: 100%;
-    }
-    .login-tip {
-      .user-item {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        margin-bottom: 10px;
-      }
     }
   }
 }
