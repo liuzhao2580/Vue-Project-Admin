@@ -133,6 +133,7 @@ export default {
     padding: 0 8px;
     &:hover {
       background-color: #f6f6f6;
+      color: #333;
     }
   }
   :deep(.el-avatar) {
