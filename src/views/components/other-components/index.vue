@@ -37,9 +37,7 @@ import CssComponent from "./components/CssComponent/index.vue"
 import Calculator from "./components/Calculator.vue"
 import LoopListMouseScroll from "./components/LoopList-MouseScroll/index.vue"
 import LoopList from "./components/LoopList/index.vue"
-
 const num = ref(0)
-
 provide(
   "numberValue",
   computed(() => num.value)
