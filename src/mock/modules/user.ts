@@ -14,7 +14,7 @@ const userInfo: IUserBaseInfo[] = [
     nickName: "小火车况且况且",
     token: "admin-token",
     avatar:
-      "https://mp-59459393-e8b3-4748-81f4-a9150958c7dc.cdn.bspapp.com/cloudstorage/eafa8a43-f2b0-48c7-85b6-b536ae060e96.png"
+      "https://fastly.jsdelivr.net/npm/lz-npm-assets/images/400x400.jpg"
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const userInfo: IUserBaseInfo[] = [
     nickName: "小飞机呼哧呼哧",
     token: "admin-token",
     avatar:
-      "https://mp-59459393-e8b3-4748-81f4-a9150958c7dc.cdn.bspapp.com/cloudstorage/eafa8a43-f2b0-48c7-85b6-b536ae060e96.png"
+      "https://fastly.jsdelivr.net/npm/lz-npm-assets/images/400x400.jpg"
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const userInfo: IUserBaseInfo[] = [
     nickName: "小话痨吧啦吧啦",
     token: "user-token",
     avatar:
-      "https://mp-59459393-e8b3-4748-81f4-a9150958c7dc.cdn.bspapp.com/cloudstorage/eafa8a43-f2b0-48c7-85b6-b536ae060e96.png"
+      "https://fastly.jsdelivr.net/npm/lz-npm-assets/images/400x400.jpg"
   }
 ]
 
