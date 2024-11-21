@@ -34,6 +34,10 @@
 import { useAppStore } from "@/store/app"
 import { computed } from "vue"
 import { RouteRecordRaw } from "vue-router"
+
+defineOptions({
+  name: "SidebarItem"
+})
 // 引入 path 模块 用于拼接url地址
 
 const appStore = useAppStore()
@@ -59,12 +63,6 @@ const checkMoreRouter = (route: RouteRecordRaw) => {
   else return true
 }
 
-</script>
-
-<script lang="ts">
-export default {
-  name: "SidebarItem"
-}
 </script>
 
 <style lang="scss">

@@ -52,4 +52,14 @@ export interface IMetaRouter {
    * 点击之后开启新窗口跳转
    */
   outsideUrl?: string
+
+  /**
+   * 打开新的窗口
+   */
+  openBrowserWindow?: boolean
+
+  /**
+   * 是否是单独路由，不嵌套在 layout 中
+   */
+  aloneRouterFlag?: boolean
 }

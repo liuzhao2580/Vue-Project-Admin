@@ -105,7 +105,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, withDefaults } from "vue"
 import dayjs from "dayjs"
 import { TableConfigModel } from "@/typescript/shared/model/tableModel/table-config.model"
 import { PageModel } from "@/typescript/shared/model/tableModel/page-config.model"

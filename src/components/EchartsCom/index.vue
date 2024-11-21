@@ -3,7 +3,6 @@
 </template>
 
 <script lang="ts" setup>
-import { watch, withDefaults, ref, onMounted, nextTick } from "vue"
 import { init } from "echarts"
 import type { EChartsOption } from "echarts"
 import EchartMixins from "./mixins"

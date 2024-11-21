@@ -17,8 +17,14 @@ export const constantRoutes: RouteRecordRaw[] = [
     path: RouterPath.LOGIN,
     name: RouterName.LOGIN,
     meta: { hidden: true, title: "登录" },
-    component: () =>
-      import(/* webpackChunkName: "loginComponent" */ "@/views/login/index.vue")
+    component: () => import("@/views/login/index.vue")
+  },
+  // 地图
+  {
+    path: RouterPath.AMAP,
+    component: () => import("@/views/map/index.vue"),
+    meta: { title: "Mapbox", icon: "map", openBrowserWindow: true },
+    name: RouterName.AMAP
   },
   // 404
   {
@@ -27,10 +33,7 @@ export const constantRoutes: RouteRecordRaw[] = [
       hidden: true,
       title: "404"
     },
-    component: () =>
-      import(
-        /* webpackChunkName: "baseComponet" */ "@/views/error_page/404_page.vue"
-      )
+    component: () => import("@/views/error_page/404_page.vue")
   }
 ]
 // 需要权限的页面
@@ -193,16 +196,6 @@ export const asyncRoutes: RouteRecordRaw[] = [
           }
         ]
       },
-      // 地图
-      {
-        path: RouterPath.AMAP,
-        component: () =>
-          import(
-            /* webpackChunkName: "baseComponet" */ "@/views/map/index.vue"
-          ),
-        meta: { title: "地图", icon: "map", keepAlive: true },
-        name: RouterName.AMAP
-      },
       // 组件
       components,
       // 错误页
@@ -237,12 +230,13 @@ export const resetRouter = () => {
 /** 添加路由作为新的路由 */
 export const insertRouter = (routes: RouteRecordRaw) => {
   resetRouter()
+  console.log(routes)
   router.addRoute(routes)
 }
 
 // https://router.vuejs.org/zh/guide/advanced/meta.html#typescript
 declare module "vue-router" {
-  interface RouteMeta extends IMetaRouter {}
+  interface RouteMeta extends IMetaRouter { }
 }
 
 export default router

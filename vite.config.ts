@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from "vite"
 import vue from "@vitejs/plugin-vue"
 import viteCompression from "vite-plugin-compression"
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
+import AutoImport from 'unplugin-auto-import/vite'
 import { resolve } from "path"
 
 /** 生产环境需要的配置 plugins */
@@ -61,6 +62,7 @@ export default defineConfig(({ command, mode }) => {
         iconDirs: [resolve(process.cwd(), "src/icons/svg")],
         symbolId: "icon-[name]"
       }),
+      AutoImport({ imports: ["vue", "vue-router"] }),
       ...isBuildPlugins(command)
     ]
   }

@@ -1,25 +1,17 @@
 <template>
   <el-scrollbar>
-    <div
-      class="sidebar-title"
-      :style="{ paddingLeft: !side_status ? '20px' : '10px' }"
-      @click="sideBarTitleClick"
-    >
+    <div class="sidebar-title" :style="{ paddingLeft: !side_status ? '20px' : '10px' }" @click="sideBarTitleClick">
       <img :src="avatar" />
       <span v-show="!side_status">欢迎访问</span>
     </div>
-    <el-menu
-      class="sidebar-el-menu-box"
-      :collapse="side_status"
-      :default-active="activeMenu"
-      unique-opened
-      router
-    >
-      <SidebarItem
-        v-for="route in sideBarList"
-        :key="route.path"
-        :item="route"
-      />
+    <el-menu class="sidebar-el-menu-box" :collapse="side_status" :default-active="activeMenu" unique-opened router>
+      <SidebarItem v-for="route in sideBarList" :key="route.path" :item="route" />
+      <el-menu-item :index="RouterPath.AMAP">
+        <SvgIcon icon="map" />
+        <template #title>
+          <span class="menu-title">Mapbox</span>
+        </template>
+      </el-menu-item>
     </el-menu>
   </el-scrollbar>
 </template>
@@ -75,12 +67,14 @@ export default {
   cursor: pointer;
   display: flex;
   align-items: center;
+
   img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     vertical-align: bottom;
   }
+
   span {
     font-size: 20px;
     margin-left: 10px;
@@ -88,8 +82,10 @@ export default {
     transition: display 0.3s;
   }
 }
+
 .sidebar-el-menu-box {
   border: 0;
+
   :deep(.el-sub-menu) {
     &.is-active {
       .el-sub-menu__title {
