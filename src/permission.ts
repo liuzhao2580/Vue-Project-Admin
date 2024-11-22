@@ -49,7 +49,6 @@ router.beforeEach(
           next({ path: from.fullPath, replace: true, query: from.query })
           return
         }
-        console.log(to)
         if (to.meta.openBrowserWindow && from.fullPath !== RouterPath.LAYOUT) {
           const baseUrl = window.location.origin // 获取当前项目的基础 URL
           window.open(`${baseUrl}${to.fullPath}`, "_blank")

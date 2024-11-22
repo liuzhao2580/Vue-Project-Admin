@@ -10,7 +10,6 @@
     "build:pages": "vue-tsc --noEmit && vite build --mode pages"
   },
   "dependencies": {
-    "@amap/amap-jsapi-loader": "^1.0.1",
     "@antv/g6": "^4.8.1",
     "@bpmn-io/properties-panel": "^1.1.1",
     "@element-plus/icons-vue": "^1.1.4",
